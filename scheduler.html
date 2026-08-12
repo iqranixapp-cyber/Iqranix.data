@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B6E4F">
+<title>Iqranix Scheduler</title>
+<link rel="stylesheet" href="scheduler.css">
+</head>
+<body>
+<header>
+  <button id="backButton" type="button">←</button>
+  <div>
+    <h1>Iqranix Scheduler</h1>
+    <p>Prayer & reminder notifications</p>
+  </div>
+</header>
+
+<main>
+  <section class="card">
+    <h2>Create reminder</h2>
+
+    <label>Reminder name</label>
+    <input id="nameInput" type="text" placeholder="e.g. Fajr reminder">
+
+    <label>Time</label>
+    <input id="timeInput" type="time">
+
+    <label>Type</label>
+    <select id="typeInput">
+      <option value="prayer">Prayer</option>
+      <option value="dhikr">Dhikr</option>
+      <option value="quran">Quran</option>
+      <option value="custom">Custom</option>
+    </select>
+
+    <label>Days</label>
+    <div class="days">
+      <label><input type="checkbox" value="0"> Sun</label>
+      <label><input type="checkbox" value="1"> Mon</label>
+      <label><input type="checkbox" value="2"> Tue</label>
+      <label><input type="checkbox" value="3"> Wed</label>
+      <label><input type="checkbox" value="4"> Thu</label>
+      <label><input type="checkbox" value="5"> Fri</label>
+      <label><input type="checkbox" value="6"> Sat</label>
+    </div>
+
+    <button id="saveButton" class="primary">Save reminder</button>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <div>
+        <h2>Notification access</h2>
+        <p id="permissionStatus">Checking permission…</p>
+      </div>
+      <button id="permissionButton" class="secondary">Enable</button>
+    </div>
+
+    <button id="testButton" class="test">Send test notification</button>
+    <p class="hint">For browser testing, keep this page open. Browser JavaScript cannot reliably wake itself after the page is closed.</p>
+  </section>
+
+  <section class="card">
+    <div class="row">
+      <h2>Your reminders</h2>
+      <button id="clearButton" class="danger">Clear all</button>
+    </div>
+    <div id="reminderList"></div>
+  </section>
+
+  <section class="card status-card">
+    <h2>Scheduler status</h2>
+    <p id="schedulerStatus">Starting…</p>
+    <p id="nextStatus"></p>
+  </section>
+</main>
+
+<script src="scheduler.js"></script>
+</body>
+</html>
