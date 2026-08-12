@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B6E4F">
+    <meta name="description" content="Iqranix Prayer Scheduler — schedule prayer and custom reminders.">
+    <title>Prayer Scheduler • Iqranix</title>
+    <link rel="stylesheet" href="scheduler.css">
+</head>
+<body>
+
+<header class="scheduler-header">
+    <button id="backButton" class="back-button" type="button" aria-label="Back">←</button>
+    <div>
+        <p class="eyebrow">IQRANIX</p>
+        <h1>Prayer Scheduler</h1>
+        <p>Plan your salah reminders and daily dhikr.</p>
+    </div>
+</header>
+
+<main class="scheduler-main">
+
+    <section class="hero-card">
+        <div class="hero-icon">🕌</div>
+        <div>
+            <h2>Never miss a reminder</h2>
+            <p>Create prayer reminders now. These schedules are saved on this device and will later connect to native Android notifications.</p>
+        </div>
+    </section>
+
+    <section class="form-card">
+        <h2>New Reminder</h2>
+
+        <label for="reminderType">Reminder type</label>
+        <select id="reminderType">
+            <option value="prayer">Prayer</option>
+            <option value="custom">Custom</option>
+        </select>
+
+        <div id="prayerFields">
+            <label for="prayerName">Prayer</label>
+            <select id="prayerName">
+                <option value="Fajr">Fajr</option>
+                <option value="Sunrise">Sunrise</option>
+                <option value="Dhuhr">Dhuhr</option>
+                <option value="Asr">Asr</option>
+                <option value="Maghrib">Maghrib</option>
+                <option value="Isha">Isha</option>
+            </select>
+        </div>
+
+        <div id="customFields" class="hidden">
+            <label for="customName">Reminder name</label>
+            <input id="customName" type="text" maxlength="60" placeholder="e.g. Read Quran">
+        </div>
+
+        <label for="reminderTime">Time</label>
+        <input id="reminderTime" type="time">
+
+        <label>Days</label>
+        <div class="days-grid" id="daysGrid">
+            <label><input type="checkbox" value="0" checked><span>Sun</span></label>
+            <label><input type="checkbox" value="1" checked><span>Mon</span></label>
+            <label><input type="checkbox" value="2" checked><span>Tue</span></label>
+            <label><input type="checkbox" value="3" checked><span>Wed</span></label>
+            <label><input type="checkbox" value="4" checked><span>Thu</span></label>
+            <label><input type="checkbox" value="5" checked><span>Fri</span></label>
+            <label><input type="checkbox" value="6" checked><span>Sat</span></label>
+        </div>
+
+        <label class="switch-row">
+            <span>Reminder enabled</span>
+            <input id="enabledInput" type="checkbox" checked>
+        </label>
+
+        <button id="saveButton" class="primary-button" type="button">＋ Save Reminder</button>
+    </section>
+
+    <section class="schedule-card">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">YOUR SCHEDULE</p>
+                <h2>Saved reminders</h2>
+            </div>
+            <button id="clearAllButton" class="text-button" type="button">Clear all</button>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+            <div>🔔</div>
+            <h3>No reminders yet</h3>
+            <p>Create your first prayer or custom reminder above.</p>
+        </div>
+
+        <div id="scheduleList" class="schedule-list"></div>
+    </section>
+
+    <section class="info-card">
+        <div class="info-icon">📱</div>
+        <div>
+            <h3>Android notifications</h3>
+            <p>Your schedules are stored locally. The next stage will connect them to native Android scheduling so reminders can work reliably even when the app is not open.</p>
+        </div>
+    </section>
+
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="scheduler.js"></script>
+</body>
+</html>
