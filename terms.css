@@ -1,0 +1,795 @@
+/* =========================================================
+   IQRANIX — OFFICIAL TERMS & CONDITIONS
+   White Islamic Legal Document Design
+========================================================= */
+
+:root {
+    --iqranix-green: #0b6e4f;
+    --iqranix-green-dark: #07563e;
+    --iqranix-gold: #b08a24;
+    --iqranix-gold-light: #d4b85c;
+    --text: #30343b;
+    --muted: #72777d;
+    --line: #dfe3e1;
+    --soft-green: #f5faf7;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #ffffff;
+    color: var(--text);
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.legal-page {
+    width: 100%;
+    min-height: 100vh;
+    background: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.legal-nav {
+    width: 100%;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--line);
+    background: #ffffff;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--iqranix-green);
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: 0.25s ease;
+}
+
+.back-link:hover {
+    color: var(--iqranix-gold);
+    transform: translateX(-2px);
+}
+
+
+/* =========================================================
+   OFFICIAL HEADER
+========================================================= */
+
+.legal-header {
+    width: min(900px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 48px 20px 30px;
+    text-align: left;
+}
+
+.brand-mark {
+    width: 82px;
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid var(--iqranix-green);
+    border-radius: 50%;
+
+    margin-bottom: 20px;
+}
+
+.crescent {
+    color: var(--iqranix-green);
+    font-size: 43px;
+    line-height: 1;
+}
+
+.brand-information h1 {
+    color: var(--iqranix-green);
+
+    font-size: clamp(30px, 7vw, 46px);
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+}
+
+.brand-information p {
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.official-label {
+    margin-top: 34px;
+
+    color: var(--iqranix-gold);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    letter-spacing: 3px;
+}
+
+
+.legal-header h2 {
+    margin-top: 12px;
+
+    color: var(--iqranix-green);
+
+    font-size: clamp(26px, 6vw, 40px);
+    line-height: 1.25;
+
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.document-subtitle {
+    max-width: 720px;
+
+    margin-top: 18px;
+
+    color: var(--text);
+
+    font-size: 15px;
+    line-height: 1.9;
+}
+
+
+/* =========================================================
+   ORNAMENTAL DIVIDER
+========================================================= */
+
+.ornamental-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 35px;
+
+    color: var(--iqranix-gold);
+
+    font-size: 16px;
+}
+
+.ornamental-divider i {
+    display: block;
+    height: 1px;
+
+    flex: 1;
+
+    background: var(--line);
+}
+
+
+/* =========================================================
+   DOCUMENT INFORMATION
+========================================================= */
+
+.document-information {
+    width: min(820px, calc(100% - 40px));
+
+    margin: 10px auto 45px;
+
+    padding: 22px 24px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: #ffffff;
+}
+
+.document-information div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.document-information span {
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.document-information strong {
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   MAIN LEGAL CONTENT
+========================================================= */
+
+/*
+   IMPORTANT:
+   This creates generous side spacing so paragraphs
+   NEVER touch the edges of a phone screen.
+*/
+
+.legal-content {
+    width: min(820px, calc(100% - 40px));
+
+    margin: 0 auto;
+    padding: 0 20px 60px;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.legal-section {
+    margin-bottom: 52px;
+}
+
+.legal-section h2 {
+    position: relative;
+
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+
+    color: var(--iqranix-green);
+
+    font-size: clamp(20px, 5vw, 27px);
+    line-height: 1.35;
+
+    font-weight: 700;
+}
+
+.legal-section h2::after {
+    content: "";
+
+    display: block;
+
+    width: 100%;
+    height: 1px;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    background: var(--line);
+}
+
+.legal-section h2::before {
+    content: "✦";
+
+    margin-right: 8px;
+
+    color: var(--iqranix-gold);
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+========================================================= */
+
+.legal-section p {
+    margin: 0 8px 20px;
+
+    color: var(--text);
+
+    font-size: 15px;
+    line-height: 1.95;
+
+    font-weight: 400;
+
+    text-align: left;
+}
+
+
+/*
+   Extra comfortable paragraph width on phones.
+*/
+
+.legal-section p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+.legal-section ul {
+    margin: 15px 10px 0 28px;
+
+    padding-left: 18px;
+}
+
+.legal-section li {
+    margin-bottom: 12px;
+
+    padding-left: 5px;
+
+    color: var(--text);
+
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.legal-section li::marker {
+    color: var(--iqranix-gold);
+}
+
+
+/* =========================================================
+   STRONG TEXT
+========================================================= */
+
+.legal-section strong {
+    color: var(--iqranix-green-dark);
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CONTACT HIGHLIGHT
+========================================================= */
+
+.contact-highlight {
+    margin-top: 20px !important;
+    padding: 16px 18px;
+
+    border-left: 4px solid var(--iqranix-gold);
+
+    background: var(--soft-green);
+
+    border-radius: 0 10px 10px 0;
+}
+
+.contact-highlight strong {
+    color: var(--iqranix-green);
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CONTACT BOX
+========================================================= */
+
+.contact-section {
+    margin-top: 20px;
+}
+
+.contact-box {
+    margin: 25px 8px 0;
+
+    padding: 20px;
+
+    border: 1px solid var(--iqranix-gold-light);
+    border-radius: 12px;
+
+    background: #fffdf7;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-box span {
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-box strong {
+    color: var(--iqranix-green);
+
+    font-size: 16px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   FINAL STATEMENT
+========================================================= */
+
+.final-statement {
+    margin: 65px 8px 20px;
+
+    padding: 38px 25px;
+
+    text-align: center;
+
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+
+    background: #fcfdfc;
+}
+
+.final-symbol {
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--iqranix-gold);
+    border-radius: 50%;
+
+    color: var(--iqranix-green);
+
+    font-size: 30px;
+}
+
+.final-statement h2 {
+    margin-bottom: 18px;
+
+    color: var(--iqranix-green);
+
+    font-size: 22px;
+    line-height: 1.4;
+}
+
+.final-statement p {
+    max-width: 680px;
+
+    margin: 0 auto 18px;
+
+    color: var(--text);
+
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.final-statement .dua {
+    margin-top: 25px;
+
+    color: var(--iqranix-green-dark);
+
+    font-weight: 500;
+    font-style: italic;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.legal-footer {
+    width: 100%;
+
+    padding: 45px 25px 35px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border-top: 1px solid var(--line);
+}
+
+.footer-logo {
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    margin-bottom: 10px;
+}
+
+.legal-footer h2 {
+    color: var(--iqranix-green);
+
+    font-size: 20px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+.legal-footer > p {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.footer-divider {
+    width: 80px;
+    height: 1px;
+
+    margin: 22px auto;
+
+    background: var(--iqranix-gold);
+}
+
+.legal-footer small {
+    display: block;
+
+    max-width: 650px;
+
+    margin: 8px auto;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PRINT BUTTON
+========================================================= */
+
+.footer-actions {
+    margin-top: 25px;
+}
+
+.footer-actions button {
+    border: 1px solid var(--iqranix-green);
+
+    background: #ffffff;
+
+    color: var(--iqranix-green);
+
+    padding: 11px 20px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+}
+
+.footer-actions button:hover {
+    background: var(--iqranix-green);
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .legal-nav {
+        padding: 15px 20px;
+    }
+
+
+    .legal-header {
+        width: calc(100% - 32px);
+
+        padding: 35px 8px 25px;
+    }
+
+
+    .brand-mark {
+        width: 68px;
+        height: 68px;
+    }
+
+
+    .crescent {
+        font-size: 35px;
+    }
+
+
+    .official-label {
+        margin-top: 27px;
+
+        font-size: 11px;
+        letter-spacing: 2.2px;
+    }
+
+
+    .document-subtitle {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+
+    .document-information {
+        width: calc(100% - 32px);
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 18px;
+
+        padding: 20px 18px;
+
+        margin-bottom: 35px;
+    }
+
+
+    /*
+       Main content gets strong side margins.
+    */
+
+    .legal-content {
+        width: calc(100% - 32px);
+
+        padding: 0 8px 45px;
+    }
+
+
+    .legal-section {
+        margin-bottom: 42px;
+    }
+
+
+    .legal-section h2 {
+        font-size: 20px;
+
+        margin-bottom: 18px;
+    }
+
+
+    /*
+       Paragraphs are deliberately inset.
+    */
+
+    .legal-section p {
+        margin-left: 8px;
+        margin-right: 8px;
+
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+
+    .legal-section ul {
+        margin-left: 25px;
+        margin-right: 8px;
+
+        padding-left: 14px;
+    }
+
+
+    .legal-section li {
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+
+    .contact-box {
+        margin-left: 8px;
+        margin-right: 8px;
+    }
+
+
+    .final-statement {
+        margin-left: 8px;
+        margin-right: 8px;
+
+        padding: 30px 18px;
+    }
+
+
+    .final-statement h2 {
+        font-size: 20px;
+    }
+
+
+    .final-statement p {
+        font-size: 13px;
+    }
+
+
+    .legal-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .legal-header {
+        width: calc(100% - 24px);
+    }
+
+    .legal-content {
+        width: calc(100% - 24px);
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .legal-section p {
+        margin-left: 6px;
+        margin-right: 6px;
+
+        font-size: 13px;
+    }
+
+    .legal-section li {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT VERSION
+========================================================= */
+
+@media print {
+
+    body {
+        background: #ffffff;
+        color: #000000;
+    }
+
+    .legal-nav,
+    .footer-actions {
+        display: none !important;
+    }
+
+    .legal-header,
+    .legal-content,
+    .document-information {
+        width: 100%;
+        max-width: none;
+    }
+
+    .legal-section {
+        break-inside: avoid;
+    }
+
+    .legal-footer {
+        border-top: 1px solid #ccc;
+    }
+
+}
