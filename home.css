@@ -1,0 +1,2017 @@
+/* =========================================================
+   IQRANIX — HOME CSS
+   Premium Islamic Companion
+   Modern • Colorful • Responsive • PWA Friendly
+   ========================================================= */
+
+
+/* =========================================================
+   1. ROOT
+   ========================================================= */
+
+:root {
+
+    --green-1: #064e3b;
+    --green-2: #087f5b;
+    --green-3: #0aa875;
+    --green-4: #19c58a;
+
+    --gold-1: #b7791f;
+    --gold-2: #f6c453;
+    --gold-3: #ffe29a;
+
+    --purple-1: #5b21b6;
+    --purple-2: #8b5cf6;
+    --purple-3: #c4b5fd;
+
+    --blue-1: #075985;
+    --blue-2: #0ea5e9;
+    --blue-3: #bae6fd;
+
+    --rose-1: #9f1239;
+    --rose-2: #f43f5e;
+    --rose-3: #fecdd3;
+
+    --orange-1: #9a3412;
+    --orange-2: #f97316;
+    --orange-3: #fed7aa;
+
+    --text: #10231e;
+    --muted: #61736e;
+
+    --white: #ffffff;
+
+    --page-bg: #eef8f4;
+
+    --radius-xl: 32px;
+    --radius-lg: 27px;
+    --radius-md: 21px;
+
+    --shadow:
+        0 15px 40px rgba(6, 78, 59, 0.12);
+
+    --shadow-large:
+        0 25px 65px rgba(6, 78, 59, 0.20);
+}
+
+
+/* =========================================================
+   2. RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        "DM Sans",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        linear-gradient(
+            135deg,
+            #eefaf6,
+            #f8fcfb 45%,
+            #eaf7f2
+        );
+
+    overflow-x: hidden;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   3. FULL SCREEN BACKGROUND
+   =========================================================
+
+   Upload this image beside index.html:
+
+       mosque-sunset.jpg
+
+   The mosque + sunset image will automatically appear
+   behind the entire website.
+   ========================================================= */
+
+.page-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    background-image:
+        url("mosque-sunset.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   4. BACKGROUND OVERLAY
+   ========================================================= */
+
+.page-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -9;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(238, 250, 246, 0.82),
+            rgba(239, 249, 245, 0.74) 40%,
+            rgba(230, 245, 239, 0.84)
+        );
+
+    backdrop-filter:
+        blur(1.5px);
+}
+
+
+/* =========================================================
+   5. HEADER
+   ========================================================= */
+
+.app-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        14px
+        max(18px, calc((100vw - 1200px) / 2));
+
+    background:
+        rgba(255, 255, 255, 0.91);
+
+    border-bottom:
+        1px solid rgba(8, 127, 91, 0.10);
+
+    box-shadow:
+        0 8px 30px rgba(5, 75, 56, 0.08);
+
+    backdrop-filter:
+        blur(20px);
+}
+
+
+.brand-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.brand-icon {
+
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    color: white;
+
+    font-size: 27px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--green-3),
+            var(--green-1)
+        );
+
+    box-shadow:
+        0 12px 30px rgba(8, 127, 91, 0.25);
+}
+
+
+.brand-text h1 {
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.8px;
+
+    line-height: 1;
+}
+
+
+.brand-text p {
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    font-weight: 500;
+}
+
+
+.settings-button {
+
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: var(--green-2);
+
+    font-size: 21px;
+
+    border-radius: 50%;
+
+    background:
+        #e7f7f1;
+
+    transition:
+        0.25s ease;
+}
+
+
+.settings-button:hover {
+
+    color: white;
+
+    background:
+        var(--green-2);
+
+    transform:
+        rotate(20deg);
+}
+
+
+.settings-button:active {
+
+    transform:
+        scale(0.91);
+}
+
+
+/* =========================================================
+   6. MAIN
+   ========================================================= */
+
+.home-container {
+
+    width:
+        min(1200px, 100%);
+
+    margin:
+        0 auto;
+
+    padding:
+        28px
+        20px
+        70px;
+}
+
+
+/* =========================================================
+   7. HERO — MOSQUE + SUNSET
+   ========================================================= */
+
+.welcome-card {
+
+    position: relative;
+
+    min-height: 360px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    padding: 42px;
+
+    margin-bottom: 24px;
+
+    color: white;
+
+    border-radius:
+        var(--radius-xl);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(5, 78, 59, 0.55),
+            rgba(6, 78, 59, 0.25)
+        ),
+        url("mosque-sunset.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    box-shadow:
+        var(--shadow-large);
+}
+
+
+/* Dark cinematic layer */
+
+.welcome-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.04),
+            rgba(0,0,0,0.12) 35%,
+            rgba(0,35,25,0.82) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+/* Decorative glow */
+
+.welcome-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    right: -80px;
+    top: -100px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 214, 100, 0.22);
+
+    filter:
+        blur(5px);
+}
+
+
+.welcome-decoration {
+
+    position: absolute;
+
+    width: 155px;
+    height: 155px;
+
+    right: 45px;
+    top: 35px;
+
+    z-index: 2;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.25);
+
+    border-radius: 50%;
+}
+
+
+.welcome-decoration::after {
+
+    content: "☾";
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color:
+        rgba(255,255,255,0.45);
+
+    font-size: 78px;
+}
+
+
+.arabic-greeting {
+
+    position: absolute;
+
+    top: 30px;
+    right: 40px;
+
+    z-index: 5;
+
+    direction: rtl;
+
+    color: white;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 36px;
+
+    text-shadow:
+        0 3px 20px rgba(0,0,0,0.45);
+}
+
+
+.welcome-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 700px;
+}
+
+
+.welcome-small {
+
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding:
+        7px 12px;
+
+    color:
+        rgba(255,255,255,0.92);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    border-radius: 50px;
+
+    background:
+        rgba(255,255,255,0.13);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    backdrop-filter:
+        blur(8px);
+}
+
+
+.welcome-content h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(36px, 6vw, 60px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.5px;
+
+    text-shadow:
+        0 4px 25px rgba(0,0,0,0.35);
+}
+
+
+.welcome-content p {
+
+    max-width: 600px;
+
+    margin-top: 14px;
+
+    color:
+        rgba(255,255,255,0.90);
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   8. NEXT PRAYER
+   ========================================================= */
+
+.next-prayer-card {
+
+    position: relative;
+
+    min-height: 130px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 22px 25px;
+
+    margin-bottom: 55px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border:
+        1px solid rgba(255,255,255,0.8);
+
+    border-radius:
+        var(--radius-lg);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        0.25s ease;
+}
+
+
+.next-prayer-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        var(--shadow-large);
+}
+
+
+.next-prayer-icon {
+
+    width: 68px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 26px;
+
+    border-radius: 21px;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--green-3),
+            var(--green-1)
+        );
+
+    box-shadow:
+        0 10px 25px
+        rgba(8,127,91,0.22);
+}
+
+
+.next-prayer-content {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.section-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--green-2);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.next-prayer-content h2 {
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+.next-prayer-content p {
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+.next-prayer-content strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color:
+        var(--green-2);
+
+    font-size: 14px;
+}
+
+
+.next-prayer-time {
+
+    font-size: 26px;
+
+    font-weight: 800;
+
+    color:
+        var(--green-1);
+}
+
+
+.card-arrow {
+
+    width: 51px;
+    height: 51px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 17px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--green-3),
+            var(--green-1)
+        );
+
+    transition:
+        0.2s ease;
+}
+
+
+.next-prayer-card:hover .card-arrow {
+
+    transform:
+        translateX(5px);
+}
+
+
+/* =========================================================
+   9. EXPLORE
+   ========================================================= */
+
+.explore-section {
+
+    margin-bottom: 60px;
+}
+
+
+.section-heading {
+
+    margin-bottom: 25px;
+}
+
+
+.section-heading h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(32px, 5vw, 47px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+}
+
+
+.section-heading p {
+
+    margin-top: 8px;
+
+    color:
+        var(--muted);
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   10. CARD GRID
+   ========================================================= */
+
+.premium-card-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   11. PREMIUM CARDS
+   ========================================================= */
+
+.premium-card {
+
+    position: relative;
+
+    min-height: 270px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 27px;
+
+    border-radius:
+        var(--radius-xl);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.65);
+
+    box-shadow:
+        var(--shadow);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.premium-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    top: -80px;
+    right: -60px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.30);
+}
+
+
+.premium-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    bottom: -65px;
+    left: -35px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.17);
+}
+
+
+.premium-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--shadow-large);
+}
+
+
+.premium-card:active {
+
+    transform:
+        scale(0.985);
+}
+
+
+.card-icon {
+
+    position: relative;
+
+    z-index: 3;
+
+    width: 63px;
+    height: 63px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: currentColor;
+
+    font-size: 26px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.65);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.06);
+}
+
+
+.card-body {
+
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: auto;
+
+    padding-top: 25px;
+
+    max-width: 86%;
+}
+
+
+.card-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.6px;
+}
+
+
+.card-body h3 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 26px;
+
+    line-height: 1.15;
+}
+
+
+.card-body p {
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    opacity: 0.78;
+}
+
+
+.premium-card .card-arrow {
+
+    position: absolute;
+
+    right: 23px;
+    bottom: 22px;
+
+    z-index: 5;
+
+    width: 49px;
+    height: 49px;
+}
+
+
+/* =========================================================
+   12. CARD COLOURS
+   ========================================================= */
+
+.card-quran {
+
+    color: #075a43;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c9f8e7,
+            #72d9b5
+        );
+}
+
+
+.card-prayer {
+
+    color: #73500b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff2bf,
+            #f6c453
+        );
+}
+
+
+.card-duas {
+
+    color: #5b318d;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eee2ff,
+            #c5a7ef
+        );
+}
+
+
+.card-qibla {
+
+    color: #155b87;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d9f2ff,
+            #8bd2f4
+        );
+}
+
+
+.card-tasbih {
+
+    color: #11665b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d4f8ee,
+            #78d4c0
+        );
+}
+
+
+.card-calendar {
+
+    color: #8b431e;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe7d1,
+            #ffad79
+        );
+}
+
+
+.card-prophets {
+
+    color: #155b72;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d8f8ff,
+            #79d4e5
+        );
+}
+
+
+.card-seerah {
+
+    color: #28623c;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e1f6dc,
+            #91d18e
+        );
+}
+
+
+.card-fiqh {
+
+    color: #7c3b1d;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe1cc,
+            #f5a06e
+        );
+}
+
+
+.card-nasheeds {
+
+    color: #4b3a82;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e9e0ff,
+            #b9a2f0
+        );
+}
+
+
+.card-wallpapers {
+
+    color: #8b345b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe2ed,
+            #f39ab9
+        );
+}
+
+
+.card-ringtones {
+
+    color: #384b8b;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e1e8ff,
+            #a9b9f2
+        );
+}
+
+
+.card-mosques {
+
+    color: #126963;
+
+    background:
+        linear-gradient(
+            145deg,
+            #d5f8f2,
+            #7bd3c8
+        );
+}
+
+
+.card-reminders {
+
+    color: #853535;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe0e0,
+            #f5a1a1
+        );
+}
+
+
+.card-bookmarks {
+
+    color: #48417e;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e8e5ff,
+            #b9b3e8
+        );
+}
+
+
+/* =========================================================
+   13. ISLAMIC QUIZ
+   ========================================================= */
+
+.card-quiz {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #312e81,
+            #6d28d9,
+            #a855f7
+        );
+
+    box-shadow:
+        0 18px 45px
+        rgba(91,33,182,0.24);
+}
+
+
+.card-quiz .card-icon {
+
+    color: #6d28d9;
+
+    background:
+        rgba(255,255,255,0.85);
+}
+
+
+.card-quiz .card-label {
+
+    color:
+        rgba(255,255,255,0.72);
+}
+
+
+/* =========================================================
+   14. GO PREMIUM
+   ========================================================= */
+
+.premium-section {
+
+    margin-top: 15px;
+
+    margin-bottom: 55px;
+}
+
+
+.go-premium-card {
+
+    position: relative;
+
+    min-height: 310px;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 38px;
+
+    color: white;
+
+    border-radius:
+        var(--radius-xl);
+
+    background:
+        linear-gradient(
+            135deg,
+            #064e3b,
+            #087f5b 45%,
+            #0bbf83 100%
+        );
+
+    box-shadow:
+        0 25px 60px
+        rgba(6,78,59,0.30);
+
+    isolation: isolate;
+}
+
+
+/* Optional premium background image */
+
+.go-premium-card.has-image {
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,47,36,0.92),
+            rgba(4,78,59,0.68),
+            rgba(8,127,91,0.42)
+        ),
+        url("premium-bg.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+}
+
+
+.go-premium-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    right: -120px;
+    top: -180px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,211,87,0.18);
+
+    z-index: -1;
+}
+
+
+.go-premium-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    left: -100px;
+    bottom: -140px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    z-index: -1;
+}
+
+
+.premium-icon {
+
+    width: 92px;
+    height: 92px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color:
+        #8a5b00;
+
+    font-size: 36px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffe9a8,
+            #f6c453
+        );
+
+    box-shadow:
+        0 15px 35px
+        rgba(0,0,0,0.20);
+}
+
+
+.premium-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    flex: 1;
+
+    max-width: 700px;
+}
+
+
+.premium-label {
+
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color:
+        #ffe29a;
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+.premium-content h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(30px, 5vw, 45px);
+
+    line-height: 1.1;
+}
+
+
+.premium-content p {
+
+    margin-top: 10px;
+
+    color:
+        rgba(255,255,255,0.82);
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.premium-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    margin-top: 20px;
+
+    padding:
+        13px 20px;
+
+    color:
+        #075c44;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    border-radius: 50px;
+
+    background:
+        white;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0,0,0,0.15);
+
+    transition:
+        0.2s ease;
+}
+
+
+.premium-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #fff3c4;
+}
+
+
+.premium-button i {
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.premium-button:hover i {
+
+    transform:
+        translateX(4px);
+}
+
+
+/* =========================================================
+   15. FOOTER
+   ========================================================= */
+
+.home-footer {
+
+    padding:
+        30px 10px 20px;
+
+    text-align: center;
+
+    color:
+        rgba(25,55,47,0.75);
+}
+
+
+.footer-logo {
+
+    color:
+        var(--green-2);
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.home-footer > p {
+
+    margin-top: 5px;
+
+    font-size: 14px;
+}
+
+
+.footer-links {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+
+.footer-links a {
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        0.2s ease;
+}
+
+
+.footer-links a:hover {
+
+    color:
+        var(--green-2);
+}
+
+
+.copyright {
+
+    margin-top: 22px !important;
+
+    font-size: 12px !important;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .home-container {
+
+        padding:
+            24px
+            17px
+            60px;
+    }
+
+
+    .premium-card-grid {
+
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+
+        gap: 16px;
+    }
+
+
+    .premium-card {
+
+        min-height: 255px;
+
+        padding: 23px;
+    }
+
+
+    .welcome-card {
+
+        min-height: 330px;
+
+        padding: 32px;
+    }
+
+
+    .go-premium-card {
+
+        padding: 30px;
+    }
+
+}
+
+
+/* =========================================================
+   17. MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .app-header {
+
+        padding:
+            11px 14px;
+    }
+
+
+    .brand-icon {
+
+        width: 54px;
+        height: 54px;
+
+        border-radius: 17px;
+
+        font-size: 23px;
+    }
+
+
+    .brand-text h1 {
+
+        font-size: 22px;
+    }
+
+
+    .brand-text p {
+
+        font-size: 11px;
+    }
+
+
+    .settings-button {
+
+        width: 47px;
+        height: 47px;
+
+        font-size: 19px;
+    }
+
+
+    .home-container {
+
+        padding:
+            17px
+            13px
+            45px;
+    }
+
+
+    /* HERO */
+
+    .welcome-card {
+
+        min-height: 330px;
+
+        padding: 25px;
+
+        border-radius:
+            26px;
+
+        background-position:
+            center center;
+    }
+
+
+    .arabic-greeting {
+
+        top: 21px;
+
+        right: 22px;
+
+        font-size: 25px;
+    }
+
+
+    .welcome-decoration {
+
+        width: 105px;
+        height: 105px;
+
+        right: 20px;
+
+        top: 20px;
+    }
+
+
+    .welcome-decoration::after {
+
+        font-size: 52px;
+    }
+
+
+    .welcome-content h2 {
+
+        font-size: 33px;
+    }
+
+
+    .welcome-content p {
+
+        font-size: 14px;
+    }
+
+
+    /* PRAYER */
+
+    .next-prayer-card {
+
+        min-height: 115px;
+
+        padding: 17px;
+
+        gap: 11px;
+
+        border-radius: 22px;
+    }
+
+
+    .next-prayer-icon {
+
+        width: 55px;
+        height: 55px;
+
+        border-radius: 17px;
+
+        font-size: 22px;
+    }
+
+
+    .next-prayer-content h2 {
+
+        font-size: 18px;
+    }
+
+
+    .next-prayer-time {
+
+        font-size: 18px;
+
+        align-self:
+            flex-start;
+
+        margin-top: 4px;
+    }
+
+
+    .next-prayer-card .card-arrow {
+
+        position: absolute;
+
+        right: 14px;
+        bottom: 13px;
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 13px;
+    }
+
+
+    /* EXPLORE */
+
+    .section-heading {
+
+        margin-bottom: 18px;
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 30px;
+    }
+
+
+    .section-heading p {
+
+        font-size: 13px;
+    }
+
+
+    /* CARDS */
+
+    .premium-card-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 14px;
+    }
+
+
+    .premium-card {
+
+        min-height: 215px;
+
+        padding: 22px;
+
+        border-radius: 24px;
+    }
+
+
+    .card-icon {
+
+        width: 57px;
+        height: 57px;
+
+        border-radius: 18px;
+
+        font-size: 23px;
+    }
+
+
+    .card-body {
+
+        padding-top: 19px;
+
+        max-width: 82%;
+    }
+
+
+    .card-body h3 {
+
+        font-size: 23px;
+    }
+
+
+    .card-body p {
+
+        font-size: 13px;
+    }
+
+
+    .premium-card .card-arrow {
+
+        right: 18px;
+        bottom: 18px;
+
+        width: 45px;
+        height: 45px;
+    }
+
+
+    /* GO PREMIUM */
+
+    .premium-section {
+
+        margin-top: 5px;
+
+        margin-bottom: 42px;
+    }
+
+
+    .go-premium-card {
+
+        min-height: 360px;
+
+        display: block;
+
+        padding: 27px;
+
+        border-radius: 27px;
+    }
+
+
+    .premium-icon {
+
+        width: 67px;
+        height: 67px;
+
+        margin-bottom: 20px;
+
+        border-radius: 21px;
+
+        font-size: 28px;
+    }
+
+
+    .premium-content h2 {
+
+        font-size: 30px;
+    }
+
+
+    .premium-content p {
+
+        font-size: 14px;
+    }
+
+
+    .premium-button {
+
+        margin-top: 18px;
+
+        padding:
+            12px 17px;
+
+        font-size: 13px;
+    }
+
+
+    /* FOOTER */
+
+    .footer-links {
+
+        gap: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   18. VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .brand-text h1 {
+
+        font-size: 20px;
+    }
+
+
+    .brand-icon {
+
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .welcome-card {
+
+        min-height: 310px;
+
+        padding: 22px;
+    }
+
+
+    .welcome-content h2 {
+
+        font-size: 29px;
+    }
+
+
+    .arabic-greeting {
+
+        font-size: 22px;
+    }
+
+
+    .premium-card {
+
+        min-height: 205px;
+    }
+
+
+    .go-premium-card {
+
+        min-height: 350px;
+
+        padding: 23px;
+    }
+
+}
+
+
+/* =========================================================
+   19. ACCESSIBILITY
+   ========================================================= */
+
+a:focus-visible {
+
+    outline:
+        3px solid
+        rgba(8,127,91,0.45);
+
+    outline-offset:
+        4px;
+}
+
+
+/* =========================================================
+   20. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation: none !important;
+
+        transition: none !important;
+    }
+
+}

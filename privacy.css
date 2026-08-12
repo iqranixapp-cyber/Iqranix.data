@@ -1,0 +1,392 @@
+/* ==========================================
+   IQRANIX — OFFICIAL PRIVACY POLICY
+   ========================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --green: #0B6E4F;
+    --dark-green: #07543D;
+    --gold: #B88A32;
+    --dark: #202723;
+    --muted: #626D68;
+    --border: #DDE4E0;
+    --paper: #FFFFFF;
+    --background: #F2F4F3;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--dark);
+    font-family: "Poppins", sans-serif;
+    line-height: 1.8;
+}
+
+
+/* ==========================================
+   DOCUMENT
+   ========================================== */
+
+.document {
+    width: min(920px, calc(100% - 30px));
+    margin: 35px auto;
+    background: var(--paper);
+    padding: 55px 70px;
+    box-shadow: 0 8px 35px rgba(0, 0, 0, 0.07);
+    border-top: 7px solid var(--green);
+}
+
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+.document-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.brand-mark {
+    width: 58px;
+    height: 58px;
+    border: 2px solid var(--green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.crescent {
+    font-family: "Amiri", serif;
+    color: var(--green);
+    font-size: 35px;
+    line-height: 1;
+}
+
+
+.brand h1 {
+    color: var(--green);
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+.brand p {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+.document-label {
+    text-align: right;
+}
+
+
+.document-label span {
+    display: block;
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+.document-label strong {
+    display: block;
+    margin-top: 2px;
+    color: var(--dark-green);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+
+/* ==========================================
+   DIVIDER
+   ========================================== */
+
+.islamic-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 28px 0 38px;
+}
+
+
+.islamic-divider div {
+    height: 1px;
+    flex: 1;
+    background: var(--border);
+}
+
+
+.islamic-divider span {
+    color: var(--gold);
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   SECTIONS
+   ========================================== */
+
+section {
+    margin-bottom: 38px;
+}
+
+
+section h2 {
+    color: var(--green);
+    font-size: 20px;
+    margin-bottom: 13px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid var(--border);
+}
+
+
+section h3 {
+    color: var(--dark-green);
+    font-size: 15px;
+    margin-top: 21px;
+    margin-bottom: 6px;
+}
+
+
+section p {
+    font-size: 13px;
+    color: #39423E;
+    margin-bottom: 13px;
+    text-align: justify;
+}
+
+
+section strong {
+    color: var(--dark);
+}
+
+
+section em {
+    color: var(--green);
+}
+
+
+ul {
+    margin: 12px 0 16px 23px;
+}
+
+
+li {
+    margin-bottom: 8px;
+    padding-left: 5px;
+    color: #39423E;
+    font-size: 13px;
+}
+
+
+/* ==========================================
+   COPYRIGHT NOTICE
+   ========================================== */
+
+.notice-box {
+    margin-top: 22px;
+    padding: 24px;
+    background: #FAFCFB;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+}
+
+
+.notice-box > strong {
+    display: block;
+    color: var(--green);
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+
+.notice-box p {
+    font-size: 12.5px;
+}
+
+
+/* ==========================================
+   CONTACT
+   ========================================== */
+
+.contact-section {
+    padding: 25px;
+    background: #F7FAF8;
+    border: 1px solid var(--border);
+}
+
+
+.email {
+    display: inline-block;
+    color: var(--green);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid var(--green);
+    margin: 5px 0 13px;
+}
+
+
+.email:hover {
+    color: var(--dark-green);
+}
+
+
+.contact-note {
+    margin-bottom: 0;
+    font-size: 11px;
+}
+
+
+/* ==========================================
+   EFFECTIVE DATE
+   ========================================== */
+
+.effective-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    margin-top: 20px;
+}
+
+
+.effective-date strong {
+    color: var(--green);
+    font-size: 12px;
+}
+
+
+.effective-date span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.document-footer {
+    text-align: center;
+    margin-top: 45px;
+    padding-top: 25px;
+}
+
+
+.footer-symbol {
+    color: var(--gold);
+    font-size: 26px;
+    font-family: "Amiri", serif;
+}
+
+
+.document-footer p {
+    font-family: "Amiri", serif;
+    font-size: 17px;
+    color: var(--dark-green);
+    margin-top: 5px;
+}
+
+
+.document-footer small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+
+.footer-line {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 18px auto;
+}
+
+
+.document-footer strong {
+    display: block;
+    color: var(--green);
+    letter-spacing: 2px;
+    font-size: 13px;
+}
+
+
+.document-footer span {
+    display: block;
+    color: var(--muted);
+    font-size: 9px;
+    margin-top: 3px;
+}
+
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+
+@media (max-width: 700px) {
+
+    .document {
+        width: 100%;
+        margin: 0;
+        padding: 35px 22px;
+        border-top-width: 5px;
+        box-shadow: none;
+    }
+
+    .document-header {
+        grid-template-columns: auto 1fr;
+    }
+
+    .document-label {
+        grid-column: 1 / -1;
+        text-align: left;
+        padding-left: 76px;
+    }
+
+    .brand h1 {
+        font-size: 22px;
+    }
+
+    .brand p {
+        font-size: 9px;
+    }
+
+    section h2 {
+        font-size: 18px;
+    }
+
+    section p,
+    li {
+        font-size: 12px;
+    }
+
+    .notice-box {
+        padding: 18px;
+    }
+
+    .effective-date {
+        gap: 15px;
+    }
+
+}

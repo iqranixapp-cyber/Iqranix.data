@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0B6E4F"
+    >
+
+    <title>Ringtones • Iqranix</title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Ringtones CSS -->
+    <link
+        rel="stylesheet"
+        href="ringtones.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="top-header">
+
+        <a
+            href="settings.html"
+            class="back-button"
+            aria-label="Back"
+        >
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+
+        <div class="header-title">
+
+            <div class="header-icon">
+                <i class="fas fa-music"></i>
+            </div>
+
+            <div>
+
+                <h1>Ringtones</h1>
+
+                <p>
+                    Personalize your Iqranix notifications
+                </p>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         HERO
+    ====================================== -->
+
+    <section class="hero-card">
+
+        <div class="hero-icon">
+
+            <i class="fas fa-bell"></i>
+
+        </div>
+
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                IQRANIX AUDIO
+            </span>
+
+            <h2>
+                Choose Your Notification Sound
+            </h2>
+
+            <p>
+                Preview, download, and select a ringtone
+                for your Iqranix notifications.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         SELECTED RINGTONE
+    ====================================== -->
+
+    <section class="selected-card">
+
+        <div class="selected-icon">
+
+            <i class="fas fa-check"></i>
+
+        </div>
+
+
+        <div class="selected-info">
+
+            <span>
+                CURRENTLY SELECTED
+            </span>
+
+            <strong id="selectedRingtone">
+                Ringtone 1
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         RINGTONES
+    ====================================== -->
+
+    <main class="ringtones-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>
+                    AUDIO LIBRARY
+                </span>
+
+                <h2>
+                    Available Ringtones
+                </h2>
+
+            </div>
+
+            <div class="count-badge">
+                30
+            </div>
+
+        </div>
+
+
+        <!-- JavaScript creates all 30 cards here -->
+
+        <div
+            id="ringtonesList"
+            class="ringtones-list"
+        ></div>
+
+
+    </main>
+
+
+    <!-- =====================================
+         INFORMATION
+    ====================================== -->
+
+    <section class="info-card">
+
+        <div class="info-icon">
+
+            <i class="fas fa-circle-info"></i>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                How it works
+            </h3>
+
+            <p>
+                Tap <strong>Preview</strong> to listen,
+                <strong>Download</strong> to save a copy,
+                or <strong>Select</strong> to choose your
+                preferred Iqranix ringtone.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer class="footer">
+
+        <img
+            src="logo.png"
+            alt="Iqranix"
+            class="footer-logo"
+        >
+
+        <h3>
+            IQRANIX
+        </h3>
+
+        <p>
+            Your Complete Islamic Companion
+        </p>
+
+        <small>
+            © 2026 Iqranix. All Rights Reserved.
+        </small>
+
+    </footer>
+
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script src="ringtones.js"></script>
+
+</body>
+
+</html>

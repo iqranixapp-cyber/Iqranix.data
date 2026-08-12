@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#0B6E4F">
+
+    <meta name="description"
+          content="IQRANIX Qibla Finder — Find the accurate direction of the Kaaba.">
+
+    <title>IQRANIX — Qibla Finder</title>
+
+    <!-- Qibla CSS -->
+    <link rel="stylesheet" href="qibla.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+
+<body>
+
+    <main class="qibla-page">
+
+        <section class="qibla-card"
+                 id="app-container">
+
+            <!-- HEADER -->
+
+            <div class="qibla-header">
+
+                <div class="qibla-icon">
+                    🕋
+                </div>
+
+                <div>
+                    <p class="eyebrow">
+                        IQRANIX
+                    </p>
+
+                    <h1>
+                        Qibla Finder
+                    </h1>
+                </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="status-box">
+
+                <div class="status-dot"
+                     id="status-dot">
+                </div>
+
+                <p id="status-text">
+                    Tap the button below to start the compass.
+                </p>
+
+            </div>
+
+
+            <!-- COMPASS -->
+
+            <div class="compass-wrapper"
+                 id="compass-wrapper">
+
+                <div class="alignment-glow"
+                     id="alignment-glow">
+                </div>
+
+
+                <!-- FIXED CENTER -->
+
+                <div class="compass-center">
+
+                    <div class="center-kaaba">
+                        🕋
+                    </div>
+
+                </div>
+
+
+                <!-- ROTATING COMPASS DIAL -->
+
+                <div class="compass-ring"
+                     id="compass-ring">
+
+                    <div class="direction direction-n">
+                        N
+                    </div>
+
+                    <div class="direction direction-e">
+                        E
+                    </div>
+
+                    <div class="direction direction-s">
+                        S
+                    </div>
+
+                    <div class="direction direction-w">
+                        W
+                    </div>
+
+
+                    <!-- Tick marks -->
+
+                    <div class="tick tick-1"></div>
+                    <div class="tick tick-2"></div>
+                    <div class="tick tick-3"></div>
+                    <div class="tick tick-4"></div>
+                    <div class="tick tick-5"></div>
+                    <div class="tick tick-6"></div>
+                    <div class="tick tick-7"></div>
+                    <div class="tick tick-8"></div>
+
+                </div>
+
+
+                <!-- QIBLA POINTER -->
+
+                <div class="qibla-pointer-layer"
+                     id="qibla-layer">
+
+                    <div class="qibla-pointer">
+
+                        <div class="pointer-arrow">
+                            ↑
+                        </div>
+
+                        <span>
+                            QIBLA
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FIXED CENTER HUB -->
+
+                <div class="center-hub">
+                </div>
+
+            </div>
+
+
+            <!-- ALIGNMENT MESSAGE -->
+
+            <div class="alignment-message"
+                 id="alignment-message">
+
+                <span class="alignment-icon">
+                    🧭
+                </span>
+
+                <span id="alignment-text">
+                    Point your phone in the Qibla direction.
+                </span>
+
+            </div>
+
+
+            <!-- INFORMATION -->
+
+            <div class="info-grid">
+
+                <div class="info-card">
+
+                    <span>
+                        QIBLA ANGLE
+                    </span>
+
+                    <strong id="qibla-angle">
+                        --°
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>
+                        YOUR HEADING
+                    </span>
+
+                    <strong id="device-heading">
+                        --°
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>
+                        DISTANCE
+                    </span>
+
+                    <strong id="distance">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span>
+                        LOCATION
+                    </span>
+
+                    <strong id="location-status">
+                        Waiting
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- START BUTTON -->
+
+            <button type="button"
+                    class="start-button"
+                    id="start-btn">
+
+                <span id="button-icon">
+                    🧭
+                </span>
+
+                <span id="button-text">
+                    Start Compass
+                </span>
+
+            </button>
+
+
+            <!-- HELP -->
+
+            <div class="help-box">
+
+                <strong>
+                    How to use
+                </strong>
+
+                <p>
+                    Hold your phone flat and slowly rotate your body.
+                    Keep turning until the Qibla pointer points straight
+                    ahead and the alignment indicator turns green.
+                </p>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <p class="qibla-footer">
+                IQRANIX • Qibla Finder
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- QIBLA JAVASCRIPT -->
+
+    <script src="qibla.js"></script>
+
+</body>
+
+</html>
