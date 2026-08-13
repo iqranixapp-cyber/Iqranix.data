@@ -15,9 +15,16 @@
         content="#0B6E4F"
     >
 
+    <meta
+        name="description"
+        content="Choose and personalize your Iqranix notification sounds."
+    >
+
     <title>Ringtones • Iqranix</title>
 
+
     <!-- Google Font -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -34,16 +41,20 @@
         rel="stylesheet"
     >
 
+
     <!-- Font Awesome -->
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-    <!-- Ringtones CSS -->
+
+    <!-- Iqranix Ringtones CSS -->
+
     <link
         rel="stylesheet"
-        href="ringtones.css"
+        href="ringtones.css?v=3"
     >
 
 </head>
@@ -51,19 +62,18 @@
 
 <body>
 
+
 <div class="page">
 
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+    <!-- HEADER -->
 
     <header class="top-header">
 
         <a
             href="settings.html"
             class="back-button"
-            aria-label="Back"
+            aria-label="Back to Settings"
         >
             <i class="fas fa-arrow-left"></i>
         </a>
@@ -90,9 +100,8 @@
     </header>
 
 
-    <!-- =====================================
-         HERO
-    ====================================== -->
+
+    <!-- HERO -->
 
     <section class="hero-card">
 
@@ -114,8 +123,8 @@
             </h2>
 
             <p>
-                Preview, download, and select a ringtone
-                for your Iqranix notifications.
+                Listen to your available notification
+                sounds and choose your favorite.
             </p>
 
         </div>
@@ -123,9 +132,8 @@
     </section>
 
 
-    <!-- =====================================
-         SELECTED RINGTONE
-    ====================================== -->
+
+    <!-- CURRENT SELECTION -->
 
     <section class="selected-card">
 
@@ -151,9 +159,8 @@
     </section>
 
 
-    <!-- =====================================
-         RINGTONES
-    ====================================== -->
+
+    <!-- AUDIO LIBRARY -->
 
     <main class="ringtones-section">
 
@@ -171,27 +178,34 @@
 
             </div>
 
-            <div class="count-badge">
+
+            <div
+                class="count-badge"
+                id="ringtoneCount"
+            >
                 30
             </div>
 
         </div>
 
 
-        <!-- JavaScript creates all 30 cards here -->
+        <div
+            id="audioStatus"
+            class="audio-status"
+            aria-live="polite"
+        ></div>
+
 
         <div
             id="ringtonesList"
             class="ringtones-list"
         ></div>
 
-
     </main>
 
 
-    <!-- =====================================
-         INFORMATION
-    ====================================== -->
+
+    <!-- INFORMATION -->
 
     <section class="info-card">
 
@@ -209,10 +223,10 @@
             </h3>
 
             <p>
-                Tap <strong>Preview</strong> to listen,
-                <strong>Download</strong> to save a copy,
-                or <strong>Select</strong> to choose your
-                preferred Iqranix ringtone.
+                <strong>Preview</strong> a sound,
+                <strong>Download</strong> it,
+                or <strong>Select</strong> it as
+                your preferred Iqranix ringtone.
             </p>
 
         </div>
@@ -220,15 +234,14 @@
     </section>
 
 
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
+
+    <!-- FOOTER -->
 
     <footer class="footer">
 
         <img
             src="logo.png"
-            alt="Iqranix"
+            alt="Iqranix logo"
             class="footer-logo"
         >
 
@@ -250,11 +263,11 @@
 </div>
 
 
-<!-- =====================================
-     JAVASCRIPT
-====================================== -->
 
-<script src="ringtones.js"></script>
+<!-- RINGTONES JAVASCRIPT -->
+
+<script src="ringtones.js?v=3"></script>
+
 
 </body>
 
