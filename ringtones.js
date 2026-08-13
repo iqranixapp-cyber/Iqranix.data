@@ -1,37 +1,83 @@
 "use strict";
 
+/*
+========================================================
+ IQRANIX RINGTONES
+========================================================
+ Audio files:
+ https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/audio1.mp3
+ https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/audio2.mp3
+ ...
+ https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/audio30.mp3
+========================================================
+*/
+
 const RINGTONE_STORAGE_KEY = "iqranixSelectedRingtone";
 const TOTAL_RINGTONES = 30;
+
+const AUDIO_BASE_URL =
+    "https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/";
 
 let currentAudio = null;
 let currentPlayingButton = null;
 
-document.addEventListener("DOMContentLoaded", initializeRingtones);
 
-function initializeRingtones() {
+/* ======================================================
+   START
+====================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
     createRingtoneCards();
+
     loadSelectedRingtone();
+
+});
+
+
+/* ======================================================
+   AUDIO URL
+====================================================== */
+
+function getAudioPath(number) {
+
+    return `${AUDIO_BASE_URL}audio${number}.mp3`;
+
 }
 
-/* =========================================
+
+/* ======================================================
    CREATE RINGTONES
-========================================= */
+====================================================== */
 
 function createRingtoneCards() {
 
-    const container = document.getElementById("ringtonesList");
+    const container =
+        document.getElementById("ringtonesList");
 
-    if (!container) return;
+    if (!container) {
+
+        console.error(
+            "Iqranix: #ringtonesList was not found."
+        );
+
+        return;
+
+    }
 
     container.innerHTML = "";
 
-    for (let number = 1; number <= TOTAL_RINGTONES; number++) {
+    for (
+        let number = 1;
+        number <= TOTAL_RINGTONES;
+        number++
+    ) {
 
-        const audioFile = getAudioPath(number);
-
-        const card = document.createElement("div");
+        const card =
+            document.createElement("div");
 
         card.className = "ringtone-card";
+
         card.dataset.ringtone = number;
 
         card.innerHTML = `
@@ -80,6 +126,7 @@ function createRingtoneCards() {
             </div>
         `;
 
+
         const playButton =
             card.querySelector(".play-button");
 
@@ -89,50 +136,70 @@ function createRingtoneCards() {
         const selectButton =
             card.querySelector(".select-button");
 
-        playButton.addEventListener("click", () => {
 
-            togglePreview(
-                number,
-                playButton
-            );
+        /* Preview */
 
-        });
+        playButton.addEventListener(
+            "click",
+            () => {
 
-        downloadButton.addEventListener("click", () => {
+                togglePreview(
+                    number,
+                    playButton
+                );
 
-            downloadRingtone(
-                number
-            );
+            }
+        );
 
-        });
 
-        selectButton.addEventListener("click", () => {
+        /* Download */
 
-            selectRingtone(number);
+        downloadButton.addEventListener(
+            "click",
+            () => {
 
-        });
+                downloadRingtone(number);
+
+            }
+        );
+
+
+        /* Select */
+
+        selectButton.addEventListener(
+            "click",
+            () => {
+
+                selectRingtone(number);
+
+            }
+        );
+
 
         container.appendChild(card);
+
     }
+
 }
 
 
-/* =========================================
-   AUDIO PATH
-========================================= */
+/* ======================================================
+   PREVIEW RINGTONE
+====================================================== */
 
-function getAudioPath(number) {
-    return `https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/audio${number}.mp3`;
-}
+function togglePreview(
+    number,
+    button
+) {
+
+    const audioURL =
+        getAudioPath(number);
 
 
-/* =========================================
-   PREVIEW
-========================================= */
-
-function togglePreview(number, button) {
-
-    const audioPath = getAudioPath(number);
+    /*
+       If this same ringtone is already playing,
+       stop it.
+    */
 
     if (
         currentAudio &&
@@ -140,68 +207,137 @@ function togglePreview(number, button) {
     ) {
 
         stopPreview();
+
         return;
 
     }
 
+
+    /*
+       Stop any other ringtone.
+    */
+
     stopPreview();
 
-    currentAudio = new Audio(audioPath);
+
+    /*
+       Create new audio.
+    */
+
+    currentAudio =
+        new Audio();
+
+
+    currentAudio.preload = "auto";
+
+    currentAudio.src = audioURL;
+
+
     currentPlayingButton = button;
 
-    const icon = button.querySelector("i");
 
-    icon.className = "fas fa-stop";
+    const icon =
+        button.querySelector("i");
+
+
+    if (icon) {
+
+        icon.className =
+            "fas fa-stop";
+
+    }
+
+
+    /*
+       When audio finishes.
+    */
 
     currentAudio.addEventListener(
         "ended",
-        stopPreview
+        () => {
+
+            stopPreview();
+
+        }
     );
+
+
+    /*
+       Audio error.
+    */
 
     currentAudio.addEventListener(
         "error",
         () => {
 
+            console.error(
+                "Iqranix ringtone error:",
+                audioURL
+            );
+
             stopPreview();
 
             alert(
-                `Could not play ${audioPath}. Make sure the audio file is uploaded.`
+                `Could not play Ringtone ${number}.`
             );
 
         }
     );
+
+
+    /*
+       Play.
+    */
 
     currentAudio
         .play()
         .catch(error => {
 
             console.error(
-                "Audio playback error:",
+                "Iqranix audio playback error:",
                 error
             );
 
             stopPreview();
 
             alert(
-                "The ringtone could not be played."
+                `Could not play Ringtone ${number}.`
             );
 
         });
+
 }
 
 
-/* =========================================
+/* ======================================================
    STOP PREVIEW
-========================================= */
+====================================================== */
 
 function stopPreview() {
 
     if (currentAudio) {
 
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
+        try {
+
+            currentAudio.pause();
+
+            currentAudio.currentTime = 0;
+
+            currentAudio.removeAttribute("src");
+
+            currentAudio.load();
+
+        } catch (error) {
+
+            console.warn(
+                "Iqranix: Could not completely stop audio.",
+                error
+            );
+
+        }
 
     }
+
 
     if (currentPlayingButton) {
 
@@ -217,69 +353,100 @@ function stopPreview() {
 
     }
 
+
     currentAudio = null;
+
     currentPlayingButton = null;
+
 }
 
 
-/* =========================================
-   DOWNLOAD RINGTONE
-========================================= */
+/* ======================================================
+   DOWNLOAD
+====================================================== */
 
 function downloadRingtone(number) {
 
-    const audioFile =
+    const audioURL =
         getAudioPath(number);
 
-    const downloadLink =
+
+    const link =
         document.createElement("a");
 
-    downloadLink.href =
-        audioFile;
 
-    downloadLink.download =
+    link.href =
+        audioURL;
+
+
+    link.download =
         `Iqranix-Ringtone-${number}.mp3`;
 
-    downloadLink.rel =
+
+    link.target =
+        "_blank";
+
+
+    link.rel =
         "noopener";
 
-    document.body.appendChild(
-        downloadLink
-    );
 
-    downloadLink.click();
+    document.body.appendChild(link);
 
-    document.body.removeChild(
-        downloadLink
-    );
+    link.click();
+
+    document.body.removeChild(link);
 
 }
 
 
-/* =========================================
+/* ======================================================
    SELECT RINGTONE
-========================================= */
+====================================================== */
 
 function selectRingtone(number) {
+
+    if (
+        number < 1 ||
+        number > TOTAL_RINGTONES
+    ) {
+
+        return;
+
+    }
+
 
     localStorage.setItem(
         RINGTONE_STORAGE_KEY,
         String(number)
     );
 
+
     updateSelectedUI(number);
+
 
     showSelectedRingtone(
         `Ringtone ${number}`
     );
 
+
     stopPreview();
+
+
+    /*
+       Small confirmation.
+    */
+
+    console.log(
+        `Iqranix: Ringtone ${number} selected.`
+    );
+
 }
 
 
-/* =========================================
+/* ======================================================
    UPDATE SELECTED UI
-========================================= */
+====================================================== */
 
 function updateSelectedUI(number) {
 
@@ -288,6 +455,7 @@ function updateSelectedUI(number) {
             ".ringtone-card"
         );
 
+
     cards.forEach(card => {
 
         const cardNumber =
@@ -295,10 +463,19 @@ function updateSelectedUI(number) {
                 card.dataset.ringtone
             );
 
+
         const selectButton =
             card.querySelector(
                 ".select-button"
             );
+
+
+        if (!selectButton) {
+
+            return;
+
+        }
+
 
         if (cardNumber === number) {
 
@@ -306,8 +483,10 @@ function updateSelectedUI(number) {
                 "selected"
             );
 
+
             selectButton.textContent =
                 "Selected";
+
 
             selectButton.classList.add(
                 "selected-button"
@@ -319,8 +498,10 @@ function updateSelectedUI(number) {
                 "selected"
             );
 
+
             selectButton.textContent =
                 "Select";
+
 
             selectButton.classList.remove(
                 "selected-button"
@@ -329,12 +510,13 @@ function updateSelectedUI(number) {
         }
 
     });
+
 }
 
 
-/* =========================================
-   SELECTED RINGTONE DISPLAY
-========================================= */
+/* ======================================================
+   SHOW CURRENT RINGTONE
+====================================================== */
 
 function showSelectedRingtone(name) {
 
@@ -343,16 +525,23 @@ function showSelectedRingtone(name) {
             "selectedRingtone"
         );
 
-    if (!element) return;
 
-    element.textContent = name;
+    if (!element) {
+
+        return;
+
+    }
+
+
+    element.textContent =
+        name;
 
 }
 
 
-/* =========================================
+/* ======================================================
    LOAD SAVED RINGTONE
-========================================= */
+====================================================== */
 
 function loadSelectedRingtone() {
 
@@ -361,12 +550,15 @@ function loadSelectedRingtone() {
             RINGTONE_STORAGE_KEY
         );
 
+
     let number =
         saved
             ? Number(saved)
             : 1;
 
+
     if (
+        !Number.isInteger(number) ||
         number < 1 ||
         number > TOTAL_RINGTONES
     ) {
@@ -375,7 +567,9 @@ function loadSelectedRingtone() {
 
     }
 
+
     updateSelectedUI(number);
+
 
     showSelectedRingtone(
         `Ringtone ${number}`
@@ -384,9 +578,9 @@ function loadSelectedRingtone() {
 }
 
 
-/* =========================================
-   PUBLIC RINGTONE FUNCTION
-========================================= */
+/* ======================================================
+   GET SELECTED RINGTONE URL
+====================================================== */
 
 function getSelectedRingtone() {
 
@@ -395,23 +589,76 @@ function getSelectedRingtone() {
             RINGTONE_STORAGE_KEY
         );
 
-    const number =
+
+    let number =
         saved
             ? Number(saved)
             : 1;
+
+
+    if (
+        !Number.isInteger(number) ||
+        number < 1 ||
+        number > TOTAL_RINGTONES
+    ) {
+
+        number = 1;
+
+    }
+
 
     return getAudioPath(number);
 
 }
 
 
-/* =========================================
-   GLOBAL ACCESS
-========================================= */
+/* ======================================================
+   GET SELECTED RINGTONE NUMBER
+====================================================== */
+
+function getSelectedRingtoneNumber() {
+
+    const saved =
+        localStorage.getItem(
+            RINGTONE_STORAGE_KEY
+        );
+
+
+    let number =
+        saved
+            ? Number(saved)
+            : 1;
+
+
+    if (
+        !Number.isInteger(number) ||
+        number < 1 ||
+        number > TOTAL_RINGTONES
+    ) {
+
+        number = 1;
+
+    }
+
+
+    return number;
+
+}
+
+
+/* ======================================================
+   GLOBAL IQRANIX API
+====================================================== */
 
 window.IqranixRingtones = {
 
     getSelected:
+        getSelectedRingtone,
+
+    getSelectedNumber:
+        getSelectedRingtoneNumber,
+
+    getURL:
         getSelectedRingtone,
 
     select:
@@ -419,6 +666,9 @@ window.IqranixRingtones = {
 
     preview:
         togglePreview,
+
+    stop:
+        stopPreview,
 
     download:
         downloadRingtone
