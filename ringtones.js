@@ -122,9 +122,7 @@ function createRingtoneCards() {
 ========================================= */
 
 function getAudioPath(number) {
-
-    return `audio${number}.mp3`;
-
+    return `https://raw.githubusercontent.com/iqranixapp-cyber/Iqranix.data/main/audio${number}.mp3`;
 }
 
 
