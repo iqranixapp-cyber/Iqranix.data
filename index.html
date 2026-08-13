@@ -87,7 +87,25 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
         rel="stylesheet"
     >
+<!-- IQRANIX PWA -->
+<link rel="manifest" href="/Iqranix.data/manifest.json">
+<meta name="theme-color" content="#0B6E4F">
 
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/Iqranix.data/sw.js", {
+      scope: "/Iqranix.data/"
+    })
+    .then(reg => {
+      console.log("Iqranix Service Worker registered:", reg.scope);
+    })
+    .catch(err => {
+      console.error("Iqranix Service Worker registration failed:", err);
+    });
+  });
+}
+</script>
 </head>
 
 
