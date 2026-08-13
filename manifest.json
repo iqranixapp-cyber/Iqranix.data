@@ -1,27 +1,139 @@
 {
   "id": "/Iqranix.data/",
-  "name": "Iqranix",
+  "name": "Iqranix - Your Complete Islamic Companion",
   "short_name": "Iqranix",
-  "description": "Iqranix - Your Complete Islamic Companion",
+  "description": "Iqranix is your complete Islamic companion for prayer times, Quran, Qibla, Adhkar, Duas, Tasbih, Hijri calendar, prayer reminders and more.",
+  "lang": "en",
+  "dir": "ltr",
+
   "start_url": "/Iqranix.data/",
   "scope": "/Iqranix.data/",
+
   "display": "standalone",
-  "background_color": "#f3f9f7",
-  "theme_color": "#0B6E4F",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+
   "orientation": "portrait-primary",
+
+  "background_color": "#F3F9F7",
+  "theme_color": "#0B6E4F",
+
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+
   "prefer_related_applications": false,
+
   "icons": [
     {
       "src": "icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Prayer Times",
+      "short_name": "Prayer Times",
+      "url": "prayer-times.html",
+      "icons": [
+        {
+          "src": "icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Holy Quran",
+      "short_name": "Quran",
+      "url": "quran.html",
+      "icons": [
+        {
+          "src": "icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Tasbih",
+      "short_name": "Tasbih",
+      "url": "tasbih.html",
+      "icons": [
+        {
+          "src": "icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Duas",
+      "short_name": "Duas",
+      "url": "duas.html",
+      "icons": [
+        {
+          "src": "icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+
+  "protocol_handlers": [
+    {
+      "protocol": "web+iqranix",
+      "url": "/Iqranix.data/?protocol=%s"
+    }
+  ],
+
+  "share_target": {
+    "action": "/Iqranix.data/share-target.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+
+  "related_applications": [],
+
+  "scope_extensions": [
+    {
+      "origin": "https://iqranixapp-cyber.github.io"
     }
   ]
 }
