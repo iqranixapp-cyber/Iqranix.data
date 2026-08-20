@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080B1A"
+    >
+
+    <meta
+        name="description"
+        content="IQRANIX Group Leaderboard"
+    >
+
+    <title>IQRANIX Leaderboard</title>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="leaderboard.css"
+    >
+</head>
+
+
+<body>
+
+<div class="leaderboard-app">
+
+
+    <!-- HEADER -->
+
+    <header class="leaderboard-header">
+
+        <button
+            class="header-btn"
+            id="backBtn"
+            type="button"
+            aria-label="Back"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="header-title">
+
+            <span>IQRANIX</span>
+
+            <h1>Leaderboard</h1>
+
+        </div>
+
+        <button
+            class="header-btn"
+            id="refreshBtn"
+            type="button"
+            aria-label="Refresh"
+        >
+            <i class="fa-solid fa-rotate"></i>
+        </button>
+
+    </header>
+
+
+    <!-- GROUP -->
+
+    <section class="group-card">
+
+        <div class="group-symbol">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
+
+        <div class="group-info">
+
+            <span>YOUR GROUP</span>
+
+            <strong id="groupName">
+                Loading group...
+            </strong>
+
+            <small id="memberCount">
+                Loading members...
+            </small>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATUS -->
+
+    <div
+        class="status-message"
+        id="statusMessage"
+    >
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        <span>
+            Loading your leaderboard...
+        </span>
+    </div>
+
+
+    <!-- PERIOD -->
+
+    <nav class="period-tabs">
+
+        <button
+            class="period-tab active"
+            data-period="weekly"
+            type="button"
+        >
+            Weekly
+        </button>
+
+        <button
+            class="period-tab"
+            data-period="monthly"
+            type="button"
+        >
+            Monthly
+        </button>
+
+        <button
+            class="period-tab"
+            data-period="all"
+            type="button"
+        >
+            All Time
+        </button>
+
+    </nav>
+
+
+    <!-- PODIUM -->
+
+    <section class="podium-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>TOP MEMBERS</span>
+
+                <h2 id="periodTitle">
+                    This Week
+                </h2>
+
+            </div>
+
+            <div class="trophy">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+
+        </div>
+
+
+        <div class="podium">
+
+
+            <!-- SECOND -->
+
+            <article class="podium-card second">
+
+                <div class="place">
+                    #2
+                </div>
+
+                <div
+                    class="podium-avatar"
+                    id="secondAvatar"
+                >
+                    —
+                </div>
+
+                <strong id="secondName">
+                    —
+                </strong>
+
+                <span id="secondUsername">
+                    —
+                </span>
+
+                <div class="podium-points">
+
+                    <b id="secondPoints">
+                        0
+                    </b>
+
+                    <small>
+                        pts
+                    </small>
+
+                </div>
+
+            </article>
+
+
+            <!-- FIRST -->
+
+            <article class="podium-card first">
+
+                <div class="crown">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+
+                <div class="place">
+                    #1
+                </div>
+
+                <div
+                    class="podium-avatar"
+                    id="firstAvatar"
+                >
+                    —
+                </div>
+
+                <strong id="firstName">
+                    —
+                </strong>
+
+                <span id="firstUsername">
+                    —
+                </span>
+
+                <div class="podium-points">
+
+                    <b id="firstPoints">
+                        0
+                    </b>
+
+                    <small>
+                        pts
+                    </small>
+
+                </div>
+
+            </article>
+
+
+            <!-- THIRD -->
+
+            <article class="podium-card third">
+
+                <div class="place">
+                    #3
+                </div>
+
+                <div
+                    class="podium-avatar"
+                    id="thirdAvatar"
+                >
+                    —
+                </div>
+
+                <strong id="thirdName">
+                    —
+                </strong>
+
+                <span id="thirdUsername">
+                    —
+                </span>
+
+                <div class="podium-points">
+
+                    <b id="thirdPoints">
+                        0
+                    </b>
+
+                    <small>
+                        pts
+                    </small>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ALL MEMBERS -->
+
+    <section class="members-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>GROUP RANKING</span>
+
+                <h2>Members</h2>
+
+            </div>
+
+            <span
+                class="member-total"
+                id="memberTotal"
+            >
+                0
+            </span>
+
+        </div>
+
+
+        <div
+            class="members-list"
+            id="membersList"
+        >
+
+            <div class="empty-state">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <strong>
+                    Loading members
+                </strong>
+
+                <span>
+                    Please wait...
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- YOUR POSITION -->
+
+    <section class="your-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span>YOUR POSITION</span>
+
+                <h2>My Ranking</h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="your-card">
+
+            <div class="your-rank">
+
+                <small>#</small>
+
+                <strong id="yourRank">
+                    —
+                </strong>
+
+            </div>
+
+            <div
+                class="your-avatar"
+                id="yourAvatar"
+            >
+                —
+            </div>
+
+            <div class="your-info">
+
+                <strong id="yourName">
+                    —
+                </strong>
+
+                <span id="yourUsername">
+                    —
+                </span>
+
+            </div>
+
+            <div class="your-points">
+
+                <strong id="yourPoints">
+                    0
+                </strong>
+
+                <span>
+                    points
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <p
+            class="next-rank"
+            id="nextRankText"
+        >
+            —
+
+        </p>
+
+    </section>
+
+
+    <!-- EMPTY / ERROR -->
+
+    <section
+        class="page-message hidden"
+        id="pageMessage"
+    >
+
+        <div class="message-icon">
+            <i class="fa-solid fa-people-group"></i>
+        </div>
+
+        <h2 id="messageTitle">
+            No group found
+        </h2>
+
+        <p id="messageText">
+            Create or join a group to see its leaderboard.
+        </p>
+
+        <button
+            id="messageButton"
+            type="button"
+        >
+            Go to Groups
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+
+    </section>
+
+
+    <footer>
+
+        <div>﷽</div>
+
+        <strong>
+            Compete in goodness.
+        </strong>
+
+        <span>
+            Inspire. Remind. Connect.
+        </span>
+
+    </footer>
+
+
+</div>
+
+
+<script
+    type="module"
+    src="leaderboard.js"
+></script>
+
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#0B6E4F">
+    <meta name="description" content="IQRANIX Islamic Names">
+
+    <title>IQRANIX - Islamic Names</title>
+
+    <link rel="stylesheet" href="islamic-names.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+        <button
+            type="button"
+            id="backButton"
+            class="back-button"
+            aria-label="Go back"
+        >
+            <span>‹</span>
+        </button>
+
+        <div class="top-title">
+            <span>IQRANIX</span>
+            <h1>Islamic Names</h1>
+        </div>
+
+        <div class="top-icon">
+            ☪
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HOME / GENDER SELECTION
+    ========================== -->
+
+    <main id="homePage">
+
+        <section class="hero">
+
+            <div class="hero-symbol">
+                ☪
+            </div>
+
+            <div class="hero-label">
+                ISLAMIC NAME COLLECTION
+            </div>
+
+            <h2>
+                A beautiful name
+                <br>
+                <em>carries meaning.</em>
+            </h2>
+
+            <p>
+                Discover meaningful Islamic names
+                for boys and girls.
+            </p>
+
+        </section>
+
+
+        <section class="choose-section">
+
+            <div class="section-label">
+                EXPLORE
+            </div>
+
+            <h2>
+                Choose a collection
+            </h2>
+
+
+            <!-- BOYS -->
+
+            <button
+                type="button"
+                id="boysButton"
+                class="gender-card boys-card"
+            >
+
+                <div class="gender-icon">
+                    ♂
+                </div>
+
+                <div class="gender-info">
+
+                    <small>
+                        FOR BOYS
+                    </small>
+
+                    <strong>
+                        Islamic Boys' Names
+                    </strong>
+
+                    <p>
+                        Beautiful and meaningful names
+                    </p>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </button>
+
+
+            <!-- GIRLS -->
+
+            <button
+                type="button"
+                id="girlsButton"
+                class="gender-card girls-card"
+            >
+
+                <div class="gender-icon">
+                    ♀
+                </div>
+
+                <div class="gender-info">
+
+                    <small>
+                        FOR GIRLS
+                    </small>
+
+                    <strong>
+                        Islamic Girls' Names
+                    </strong>
+
+                    <p>
+                        Beautiful and meaningful names
+                    </p>
+
+                </div>
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </button>
+
+        </section>
+
+
+        <section class="info-card">
+
+            <div class="info-icon">
+                ✦
+            </div>
+
+            <div>
+                <strong>
+                    Choose a name with meaning
+                </strong>
+
+                <p>
+                    Explore Islamic names together
+                    with their meanings.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         NAMES PAGE
+    ========================== -->
+
+    <main
+        id="namesPage"
+        class="hidden"
+    >
+
+        <section class="collection-header">
+
+            <div
+                id="collectionIcon"
+                class="collection-icon"
+            >
+                ♂
+            </div>
+
+            <div class="collection-info">
+
+                <small id="collectionType">
+                    BOYS
+                </small>
+
+                <h2 id="collectionTitle">
+                    Islamic Boys' Names
+                </h2>
+
+                <p id="collectionCount">
+                    0 names
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SEARCH -->
+
+        <section class="search-section">
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    id="searchInput"
+                    type="search"
+                    placeholder="Search a name..."
+                    autocomplete="off"
+                >
+
+                <button
+                    id="clearButton"
+                    type="button"
+                    class="clear-button hidden"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="search-count">
+
+                <span id="resultCount">
+                    0
+                </span>
+
+                names found
+
+            </div>
+
+        </section>
+
+
+        <!-- NAMES -->
+
+        <section class="names-container">
+
+            <div class="names-heading">
+
+                <span>
+                    NAME
+                </span>
+
+                <span>
+                    MEANING
+                </span>
+
+            </div>
+
+            <div id="namesList"></div>
+
+        </section>
+
+
+        <!-- EMPTY SEARCH -->
+
+        <section
+            id="emptyState"
+            class="empty-state hidden"
+        >
+
+            <div class="empty-symbol">
+                ⌕
+            </div>
+
+            <h3>
+                No names found
+            </h3>
+
+            <p>
+                Try searching for another name.
+            </p>
+
+        </section>
+
+
+        <footer class="footer">
+            ☪
+            <span>IQRANIX Islamic Names</span>
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script src="islamic-names.js"></script>
+</body>
+</html>

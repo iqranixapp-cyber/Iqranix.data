@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Messages • Iqranix</title>
+
+    <link rel="stylesheet" href="messages.css">
+
+    <script type="module" src="messages.js"></script>
+</head>
+
+<body>
+
+<div id="messagesPage" class="messages-page">
+
+    <!-- =====================================================
+         MAIN MESSAGES PAGE
+    ====================================================== -->
+
+    <header class="messages-header">
+
+        <button id="backBtn" class="icon-button" aria-label="Back">
+            <svg viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+
+        <div class="header-title">
+            <h1>Messages</h1>
+            <span>Iqranix</span>
+        </div>
+
+        <button id="newMessageBtn" class="new-message-button">
+            +
+        </button>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <section class="search-section">
+
+        <div class="search-box">
+
+            <svg viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7"/>
+                <path d="M20 20l-4-4"/>
+            </svg>
+
+            <input
+                id="usernameSearch"
+                type="search"
+                placeholder="Search Iqranix username"
+                autocomplete="off"
+            >
+
+            <button
+                id="clearSearchBtn"
+                class="clear-search hidden"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div id="searchStatus" class="search-status"></div>
+
+        <div
+            id="usernameResults"
+            class="username-results hidden"
+        ></div>
+
+    </section>
+
+
+    <!-- TABS -->
+
+    <div class="message-tabs">
+
+        <button class="message-tab active">
+            All
+        </button>
+
+        <button class="message-tab">
+            Unread
+        </button>
+
+        <button class="message-tab">
+            Requests
+        </button>
+
+    </div>
+
+
+    <!-- CONVERSATIONS -->
+
+    <main id="conversationList" class="conversation-list">
+
+        <div class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading conversations...</p>
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     CHAT PAGE
+========================================================== -->
+
+<div id="chatPage" class="chat-page">
+
+    <header class="chat-header">
+
+        <button
+            id="closeChatBtn"
+            class="chat-back-button"
+            aria-label="Back"
+        >
+            <svg viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+
+
+        <img
+            id="chatAvatar"
+            class="chat-avatar"
+            src=""
+            alt=""
+        >
+
+
+        <button
+            id="chatProfileButton"
+            class="chat-user-info"
+        >
+
+            <strong id="chatName">
+                Iqranix Member
+            </strong>
+
+            <span id="chatUsername">
+                @username
+            </span>
+
+            <span
+                id="chatOnlineDot"
+                class="online-status hidden"
+            >
+                ● online
+            </span>
+
+        </button>
+
+
+        <!-- CALL -->
+
+        <button
+            id="callButton"
+            class="chat-action-button"
+            aria-label="Call"
+        >
+            <svg viewBox="0 0 24 24">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                19.79 19.79 0 0 1-8.63-3.07
+                19.5 19.5 0 0 1-6-6
+                A19.79 19.79 0 0 1 2.12 4.18
+                2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72
+                12.84 12.84 0 0 0 .7 2.81
+                2 2 0 0 1-.45 2.11L8.09 9.91
+                a16 16 0 0 0 6 6l1.27-1.27
+                a2 2 0 0 1 2.11-.45
+                12.84 12.84 0 0 0 2.81.7
+                A2 2 0 0 1 22 16.92z"/>
+            </svg>
+        </button>
+
+
+        <!-- THREE DOTS -->
+
+        <button
+            id="chatMenuButton"
+            class="chat-action-button"
+            aria-label="More options"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+
+    <!-- CHAT MENU -->
+
+    <div id="chatMenu" class="chat-menu hidden">
+
+        <button id="viewProfileOption">
+            <span>👤</span>
+            View profile
+        </button>
+
+        <button id="searchConversationOption">
+            <span>🔎</span>
+            Search in conversation
+        </button>
+
+        <button id="muteConversationOption">
+            <span>🔕</span>
+            Mute notifications
+        </button>
+
+        <button id="clearConversationOption">
+            <span>🗑</span>
+            Clear conversation
+        </button>
+
+        <div class="menu-divider"></div>
+
+        <button id="reportUserOption" class="danger-option">
+            <span>⚠</span>
+            Report user
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGES -->
+
+    <main
+        id="chatMessages"
+        class="chat-messages"
+    ></main>
+
+
+    <!-- MESSAGE COMPOSER -->
+
+    <div class="message-composer">
+
+        <button
+            id="emojiBtn"
+            class="composer-button"
+        >
+            ☺
+        </button>
+
+        <textarea
+            id="messageInput"
+            rows="1"
+            placeholder="Message..."
+            maxlength="4000"
+        ></textarea>
+
+        <button
+            id="sendMessageBtn"
+            class="send-button"
+            aria-label="Send"
+        >
+            <svg viewBox="0 0 24 24">
+                <path d="M22 2L11 13"/>
+                <path d="M22 2l-7 20-4-9-9-4z"/>
+            </svg>
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     CALL SCREEN
+========================================================== -->
+
+<div id="callScreen" class="call-screen hidden">
+
+    <div class="call-background"></div>
+
+    <div class="call-content">
+
+        <img
+            id="callAvatar"
+            class="call-avatar"
+            src=""
+            alt=""
+        >
+
+        <h2 id="callName">
+            Iqranix Member
+        </h2>
+
+        <p id="callStatus">
+            Calling...
+        </p>
+
+        <div class="remote-video-wrapper">
+
+            <video
+                id="remoteVideo"
+                autoplay
+                playsinline
+            ></video>
+
+            <div
+                id="audioCallAvatar"
+                class="audio-call-avatar"
+            ></div>
+
+        </div>
+
+        <video
+            id="localVideo"
+            class="local-video"
+            autoplay
+            muted
+            playsinline
+        ></video>
+
+        <div class="call-controls">
+
+            <button
+                id="muteCallButton"
+                class="call-control"
+            >
+                🎤
+            </button>
+
+            <button
+                id="cameraCallButton"
+                class="call-control"
+            >
+                📷
+            </button>
+
+            <button
+                id="endCallButton"
+                class="call-control end-call"
+            >
+                ☎
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     INCOMING CALL
+========================================================== -->
+
+<div
+    id="incomingCall"
+    class="incoming-call hidden"
+>
+
+    <div class="incoming-card">
+
+        <img
+            id="incomingAvatar"
+            class="incoming-avatar"
+            src=""
+            alt=""
+        >
+
+        <h2 id="incomingName">
+            Iqranix Member
+        </h2>
+
+        <p id="incomingType">
+            Incoming call
+        </p>
+
+        <div class="incoming-buttons">
+
+            <button
+                id="rejectCallButton"
+                class="reject-call"
+            >
+                ☎
+            </button>
+
+            <button
+                id="acceptCallButton"
+                class="accept-call"
+            >
+                ☎
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROFILE POPUP -->
+
+<div
+    id="profilePopup"
+    class="profile-popup hidden"
+>
+
+    <div class="profile-card">
+
+        <button
+            id="closeProfilePopup"
+            class="close-profile"
+        >
+            ×
+        </button>
+
+        <img
+            id="profilePopupAvatar"
+            src=""
+            alt=""
+        >
+
+        <h2 id="profilePopupName">
+            Iqranix Member
+        </h2>
+
+        <p id="profilePopupUsername">
+            @username
+        </p>
+
+        <div class="profile-line">
+            Iqranix member
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

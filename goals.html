@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta
+        name="theme-color"
+        content="#071c15"
+    >
+
+    <title>Daily Goals | Iqranix</title>
+
+    <!-- IQRANIX GOALS CSS -->
+    <link
+        rel="stylesheet"
+        href="goals.css"
+    >
+
+    <!-- GOOGLE FONTS -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="goals-app">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="goals-header">
+
+        <button
+            class="goals-back-btn"
+            id="goalsBackBtn"
+            aria-label="Go back"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+
+        <div class="goals-brand">
+
+            <span class="goals-brand-mark">
+                ﷽
+            </span>
+
+            <div>
+
+                <strong>
+                    IQRANIX
+                </strong>
+
+                <small>
+                    Daily Goals
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="goals-menu-btn"
+            id="goalsMenuBtn"
+            aria-label="Goal settings"
+        >
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main class="goals-main">
+
+
+        <section class="goals-hero">
+
+
+            <div class="hero-glow"></div>
+
+
+            <div class="hero-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        TODAY'S JOURNEY
+                    </span>
+
+                    <h1>
+                        Daily Goals
+                    </h1>
+
+                    <p>
+                        Small consistent deeds.
+                        A stronger connection with Allah.
+                    </p>
+
+                </div>
+
+
+                <div class="streak-badge">
+
+                    <i class="fa-solid fa-fire"></i>
+
+                    <strong id="streakCount">
+                        0
+                    </strong>
+
+                    <span>
+                        day streak
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROGRESS
+            ================================================== -->
+
+            <div class="overall-progress">
+
+
+                <div class="progress-heading">
+
+                    <span>
+                        Today's progress
+                    </span>
+
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-fill"
+                        id="overallProgress"
+                        style="width: 0%;"
+                    ></div>
+
+                </div>
+
+
+                <div class="progress-footer">
+
+                    <span id="completedGoals">
+                        0 of 5 goals completed
+                    </span>
+
+                    <span>
+                        Keep going
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             DATE CARD
+        ====================================================== -->
+
+        <section class="date-card">
+
+
+            <div class="date-icon">
+
+                <i class="fa-regular fa-calendar"></i>
+
+            </div>
+
+
+            <div class="date-info">
+
+                <span>
+                    TODAY
+                </span>
+
+                <strong id="currentDate">
+                    Loading date...
+                </strong>
+
+            </div>
+
+
+            <div class="date-status">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                    Active
+                </span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             GOALS SECTION
+        ====================================================== -->
+
+        <section class="goals-section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <span>
+                        YOUR ROUTINE
+                    </span>
+
+                    <h2>
+                        Today's Goals
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="edit-goals-btn"
+                    id="editGoalsBtn"
+                >
+
+                    <i class="fa-solid fa-sliders"></i>
+
+                    Customize
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SALAH
+            ================================================== -->
+
+            <article
+                class="goal-card"
+                data-goal="salah"
+            >
+
+
+                <div class="goal-icon salah-icon">
+
+                    <i class="fa-solid fa-mosque"></i>
+
+                </div>
+
+
+                <div class="goal-content">
+
+                    <div class="goal-heading">
+
+                        <div>
+
+                            <span class="goal-category">
+                                WORSHIP
+                            </span>
+
+                            <h3>
+                                Pray 5 Daily Salah
+                            </h3>
+
+                        </div>
+
+
+                        <span class="goal-status">
+                            0/5
+                        </span>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="goal-progress-track">
+
+                            <div
+                                class="goal-progress-fill"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="goal-footer">
+
+                        <span>
+                            Complete all five prayers
+                        </span>
+
+                        <button
+                            class="goal-action"
+                            data-action="salah"
+                        >
+                            View
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 QURAN
+            ================================================== -->
+
+            <article
+                class="goal-card"
+                data-goal="quran"
+            >
+
+
+                <div class="goal-icon quran-icon">
+
+                    <i class="fa-solid fa-book-quran"></i>
+
+                </div>
+
+
+                <div class="goal-content">
+
+                    <div class="goal-heading">
+
+                        <div>
+
+                            <span class="goal-category">
+                                QURAN
+                            </span>
+
+                            <h3>
+                                Read the Quran
+                            </h3>
+
+                        </div>
+
+
+                        <span class="goal-status">
+                            0/10 min
+                        </span>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="goal-progress-track">
+
+                            <div
+                                class="goal-progress-fill"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="goal-footer">
+
+                        <span>
+                            Spend at least 10 minutes reading
+                        </span>
+
+                        <button
+                            class="goal-action"
+                            data-action="quran"
+                        >
+                            Read
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 DHIKR
+            ================================================== -->
+
+            <article
+                class="goal-card"
+                data-goal="dhikr"
+            >
+
+
+                <div class="goal-icon dhikr-icon">
+
+                    <i class="fa-solid fa-circle-dot"></i>
+
+                </div>
+
+
+                <div class="goal-content">
+
+                    <div class="goal-heading">
+
+                        <div>
+
+                            <span class="goal-category">
+                                DHIKR
+                            </span>
+
+                            <h3>
+                                Complete Daily Dhikr
+                            </h3>
+
+                        </div>
+
+
+                        <span class="goal-status">
+                            0/100
+                        </span>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="goal-progress-track">
+
+                            <div
+                                class="goal-progress-fill"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="goal-footer">
+
+                        <span>
+                            Complete 100 dhikr
+                        </span>
+
+                        <button
+                            class="goal-action"
+                            data-action="dhikr"
+                        >
+                            Start
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 DUA
+            ================================================== -->
+
+            <article
+                class="goal-card"
+                data-goal="dua"
+            >
+
+
+                <div class="goal-icon dua-icon">
+
+                    <i class="fa-solid fa-hands-praying"></i>
+
+                </div>
+
+
+                <div class="goal-content">
+
+                    <div class="goal-heading">
+
+                        <div>
+
+                            <span class="goal-category">
+                                DUA
+                            </span>
+
+                            <h3>
+                                Make Your Daily Dua
+                            </h3>
+
+                        </div>
+
+
+                        <span class="goal-status">
+                            0/1
+                        </span>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="goal-progress-track">
+
+                            <div
+                                class="goal-progress-fill"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="goal-footer">
+
+                        <span>
+                            Take a moment to make dua
+                        </span>
+
+                        <button
+                            class="goal-action"
+                            data-action="dua"
+                        >
+                            Open
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 GOOD DEED
+            ================================================== -->
+
+            <article
+                class="goal-card"
+                data-goal="deed"
+            >
+
+
+                <div class="goal-icon deed-icon">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                </div>
+
+
+                <div class="goal-content">
+
+                    <div class="goal-heading">
+
+                        <div>
+
+                            <span class="goal-category">
+                                GOOD DEED
+                            </span>
+
+                            <h3>
+                                Do One Good Deed
+                            </h3>
+
+                        </div>
+
+
+                        <span class="goal-status">
+                            0/1
+                        </span>
+
+                    </div>
+
+
+                    <div class="goal-progress">
+
+                        <div class="goal-progress-track">
+
+                            <div
+                                class="goal-progress-fill"
+                                style="width: 0%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="goal-footer">
+
+                        <span>
+                            Help someone or spread khayr
+                        </span>
+
+                        <button
+                            class="goal-action"
+                            data-action="deed"
+                        >
+                            Done
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </article>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             MOTIVATION CARD
+        ====================================================== -->
+
+        <section class="motivation-card">
+
+
+            <div class="motivation-decoration">
+                ✦
+            </div>
+
+
+            <div class="motivation-icon">
+
+                <i class="fa-solid fa-star-and-crescent"></i>
+
+            </div>
+
+
+            <div class="motivation-content">
+
+                <span>
+                    DAILY REMINDER
+                </span>
+
+                <h2>
+                    Consistency matters.
+                </h2>
+
+                <p>
+                    Your small acts of worship can become
+                    a beautiful daily habit.
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             STREAK SECTION
+        ====================================================== -->
+
+        <section class="streak-section">
+
+
+            <div class="streak-heading">
+
+                <div>
+
+                    <span>
+                        YOUR PROGRESS
+                    </span>
+
+                    <h2>
+                        Keep Your Streak
+                    </h2>
+
+                </div>
+
+                <i class="fa-solid fa-fire"></i>
+
+            </div>
+
+
+            <div class="streak-days">
+
+
+                <div class="streak-day completed">
+
+                    <span>
+                        M
+                    </span>
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+
+                <div class="streak-day completed">
+
+                    <span>
+                        T
+                    </span>
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+
+                <div class="streak-day completed">
+
+                    <span>
+                        W
+                    </span>
+
+                    <i class="fa-solid fa-check"></i>
+
+                </div>
+
+
+                <div class="streak-day current">
+
+                    <span>
+                        T
+                    </span>
+
+                    <i class="fa-solid fa-fire"></i>
+
+                </div>
+
+
+                <div class="streak-day">
+
+                    <span>
+                        F
+                    </span>
+
+                </div>
+
+
+                <div class="streak-day">
+
+                    <span>
+                        S
+                    </span>
+
+                </div>
+
+
+                <div class="streak-day">
+
+                    <span>
+                        S
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             RESET / INFO
+        ====================================================== -->
+
+        <p class="goals-note">
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+            Your daily progress is saved on this device.
+
+        </p>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         CUSTOMIZE GOALS SHEET
+    ====================================================== -->
+
+    <div
+        class="goals-overlay hidden"
+        id="goalsOverlay"
+    >
+
+
+        <div class="goals-sheet">
+
+
+            <div class="sheet-handle"></div>
+
+
+            <div class="sheet-header">
+
+                <div>
+
+                    <span>
+                        PERSONALIZE
+                    </span>
+
+                    <h2>
+                        Customize Goals
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="closeGoalsSheet"
+                    aria-label="Close"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <p class="sheet-description">
+
+                Choose the habits you want to focus on
+                each day.
+
+            </p>
+
+
+            <div class="custom-goal-list">
+
+
+                <label class="custom-goal-option">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        data-custom-goal="salah"
+                    >
+
+                    <span class="custom-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="custom-goal-text">
+
+                        <strong>
+                            Daily Salah
+                        </strong>
+
+                        <small>
+                            Five daily prayers
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="custom-goal-option">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        data-custom-goal="quran"
+                    >
+
+                    <span class="custom-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="custom-goal-text">
+
+                        <strong>
+                            Quran
+                        </strong>
+
+                        <small>
+                            Daily Quran reading
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="custom-goal-option">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        data-custom-goal="dhikr"
+                    >
+
+                    <span class="custom-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="custom-goal-text">
+
+                        <strong>
+                            Dhikr
+                        </strong>
+
+                        <small>
+                            Daily remembrance
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="custom-goal-option">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        data-custom-goal="dua"
+                    >
+
+                    <span class="custom-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="custom-goal-text">
+
+                        <strong>
+                            Dua
+                        </strong>
+
+                        <small>
+                            Daily personal dua
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+                <label class="custom-goal-option">
+
+                    <input
+                        type="checkbox"
+                        checked
+                        data-custom-goal="deed"
+                    >
+
+                    <span class="custom-check">
+                        <i class="fa-solid fa-check"></i>
+                    </span>
+
+                    <span class="custom-goal-text">
+
+                        <strong>
+                            Good Deed
+                        </strong>
+
+                        <small>
+                            One beneficial action
+                        </small>
+
+                    </span>
+
+                </label>
+
+
+            </div>
+
+
+            <button
+                class="save-goals-btn"
+                id="saveGoalsBtn"
+            >
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Goals
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script
+    src="goals.js"
+></script>
+
+
+</body>
+
+</html>

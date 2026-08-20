@@ -1,0 +1,1040 @@
+:root {
+    --bg: #050507;
+    --surface: #111116;
+    --surface2: #19191f;
+
+    --gold: #e6bd62;
+    --gold-light: #f8d987;
+
+    --white: #ffffff;
+    --muted: #a8a8b2;
+
+    --border: rgba(255,255,255,.14);
+    --glass: rgba(8,8,11,.58);
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+body {
+    background: var(--bg);
+    color: var(--white);
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+button {
+    font: inherit;
+    border: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.reels-page {
+    width: 100%;
+    height: 100dvh;
+
+    position: relative;
+
+    background: #050507;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.reels-header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 92px;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        12px
+        22px
+        0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(5,5,7,.96),
+            rgba(5,5,7,.78),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+.brand {
+
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    letter-spacing: -.6px;
+}
+
+
+.brand strong {
+    color: var(--gold);
+}
+
+
+.header-btn {
+
+    position: absolute;
+
+    left: 22px;
+    top: 22px;
+
+    width: 62px;
+    height: 62px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(38,38,45,.92),
+            rgba(13,13,17,.88)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.08);
+
+    pointer-events: auto;
+
+    transition:
+        transform .18s ease,
+        background .18s ease;
+}
+
+
+.header-btn:active {
+    transform: scale(.92);
+}
+
+
+.header-btn svg {
+
+    width: 30px;
+    height: 30px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 2;
+
+    stroke-linecap: round;
+}
+
+
+/* =========================================================
+   FEED
+========================================================= */
+
+.reels-feed {
+
+    position: absolute;
+
+    inset: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scroll-snap-type: y mandatory;
+
+    scrollbar-width: none;
+
+    background: #050507;
+}
+
+
+.reels-feed::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================================================
+   REEL CARD
+========================================================= */
+
+.reel-card {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100dvh;
+
+    background: #000;
+
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   DIRECT VIDEO PLAYBACK
+========================================================= */
+
+.reel-video {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    background: #000;
+
+    z-index: 1;
+
+    display: block;
+}
+
+
+/*
+    IMPORTANT:
+
+    The video remains a real HTML5 video element.
+    We do not replace the working Bunny playback system.
+
+    When Bunny's MP4 rendition is not ready yet,
+    reels.js switches to the Bunny Stream player iframe.
+*/
+
+
+/* =========================================================
+   BUNNY FALLBACK PLAYER
+========================================================= */
+
+.bunny-player {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+
+    z-index: 2;
+
+    background: #000;
+
+    display: none;
+}
+
+
+.reel-card.bunny-fallback .bunny-player {
+    display: block;
+}
+
+
+.reel-card.bunny-fallback .reel-video {
+    visibility: hidden;
+}
+
+
+/* =========================================================
+   VIDEO SHADE
+========================================================= */
+
+.video-shade {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.18),
+            transparent 30%,
+            transparent 55%,
+            rgba(0,0,0,.88) 100%
+        );
+}
+
+
+/* =========================================================
+   TAP FOR SOUND
+========================================================= */
+
+.sound-hint {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 8;
+
+    padding:
+        11px
+        17px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(0,0,0,.58);
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    backdrop-filter: blur(12px);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .25s ease;
+}
+
+
+.sound-hint.visible {
+    opacity: 1;
+}
+
+
+/* =========================================================
+   PROCESSING STATE
+========================================================= */
+
+.processing-state {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 4;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+
+.processing-state.visible {
+    display: flex;
+}
+
+
+.processing-icon {
+
+    width: 72px;
+    height: 72px;
+
+    border-radius: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    backdrop-filter: blur(12px);
+}
+
+
+.processing-icon svg {
+
+    width: 34px;
+    height: 34px;
+
+    fill: none;
+
+    stroke: white;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.processing-state span {
+
+    font-size: 16px;
+
+    color: white;
+
+    text-shadow:
+        0 2px 12px rgba(0,0,0,.8);
+}
+
+
+/* =========================================================
+   REEL INFO
+========================================================= */
+
+.reel-info {
+
+    position: absolute;
+
+    left: 28px;
+    right: 105px;
+
+    bottom:
+        calc(
+            34px +
+            env(safe-area-inset-bottom)
+        );
+
+    z-index: 10;
+}
+
+
+.reel-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 0;
+
+    margin-bottom: 12px;
+}
+
+
+.reel-avatar {
+
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        2px solid
+        var(--gold);
+
+    padding: 2px;
+
+    background: #08080a;
+
+    box-shadow:
+        0 0 0 2px rgba(230,189,98,.12),
+        0 8px 24px rgba(0,0,0,.35);
+}
+
+
+.reel-user-details {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-width: 0;
+}
+
+
+.reel-user-name {
+
+    max-width: 180px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 20px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.65);
+}
+
+
+.follow-btn {
+
+    flex-shrink: 0;
+
+    min-height: 38px;
+
+    padding:
+        0
+        16px;
+
+    border-radius: 999px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,.45);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.follow-btn.following {
+
+    background:
+        rgba(230,189,98,.16);
+
+    border-color:
+        rgba(230,189,98,.65);
+
+    color:
+        var(--gold-light);
+}
+
+
+.reel-caption {
+
+    max-width: 500px;
+
+    line-height: 1.48;
+
+    font-size: 15px;
+
+    color: rgba(255,255,255,.95);
+
+    white-space: pre-wrap;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,.75);
+}
+
+
+/* =========================================================
+   ACTION COLUMN
+========================================================= */
+
+.reel-actions {
+
+    position: absolute;
+
+    right: 18px;
+
+    bottom:
+        calc(
+            32px +
+            env(safe-area-inset-bottom)
+        );
+
+    z-index: 15;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 16px;
+}
+
+
+.action-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.reel-action {
+
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(26,27,31,.88),
+            rgba(5,5,7,.82)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.17);
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    backdrop-filter: blur(14px);
+
+    transition:
+        transform .16s ease,
+        border-color .16s ease,
+        background .16s ease;
+}
+
+
+.reel-action:active {
+    transform: scale(.90);
+}
+
+
+.reel-action.active {
+
+    color: var(--gold-light);
+
+    border-color:
+        rgba(230,189,98,.65);
+
+    background:
+        rgba(230,189,98,.13);
+}
+
+
+.reel-action svg {
+
+    width: 27px;
+    height: 27px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.action-count {
+
+    min-width: 20px;
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 7px rgba(0,0,0,.9);
+}
+
+
+/* =========================================================
+   PLAY INDICATOR
+========================================================= */
+
+.center-play {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 72px;
+    height: 72px;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 9;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(0,0,0,.48);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    backdrop-filter: blur(10px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity .2s ease;
+}
+
+
+.center-play.visible {
+    opacity: 1;
+}
+
+
+.center-play svg {
+
+    width: 31px;
+    height: 31px;
+
+    fill: white;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING STATE
+========================================================= */
+
+.state {
+
+    min-height: 100dvh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+.state-icon {
+
+    width: 100px;
+    height: 100px;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(230,189,98,.14),
+            rgba(230,189,98,.04)
+        );
+
+    border:
+        1px solid
+        rgba(230,189,98,.18);
+
+    margin-bottom: 25px;
+}
+
+
+.state-icon svg {
+
+    width: 45px;
+    height: 45px;
+
+    fill: none;
+
+    stroke: var(--gold-light);
+
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+}
+
+
+.state h2 {
+
+    font-size: 27px;
+
+    margin-bottom: 10px;
+}
+
+
+.state p {
+
+    color: var(--muted);
+
+    line-height: 1.5;
+
+    max-width: 340px;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.video-error-state {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 7;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    text-align: center;
+
+    padding: 30px;
+}
+
+
+.video-error-state.visible {
+    display: flex;
+}
+
+
+.video-error-state strong {
+    font-size: 17px;
+}
+
+
+.video-error-state span {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    max-width: 280px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .reels-header {
+        height: 82px;
+        padding-top: 8px;
+    }
+
+
+    .header-btn {
+
+        left: 20px;
+        top: 18px;
+
+        width: 58px;
+        height: 58px;
+    }
+
+
+    .brand {
+        font-size: 23px;
+    }
+
+
+    .reel-info {
+
+        left: 24px;
+        right: 96px;
+
+        bottom:
+            calc(
+                28px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+
+    .reel-avatar {
+
+        width: 55px;
+        height: 55px;
+
+        flex-basis: 55px;
+    }
+
+
+    .reel-user-name {
+        max-width: 145px;
+        font-size: 18px;
+    }
+
+
+    .follow-btn {
+
+        min-height: 36px;
+
+        padding: 0 14px;
+
+        font-size: 13px;
+    }
+
+
+    .reel-actions {
+
+        right: 15px;
+
+        bottom:
+            calc(
+                27px +
+                env(safe-area-inset-bottom)
+            );
+
+        gap: 13px;
+    }
+
+
+    .reel-action {
+
+        width: 55px;
+        height: 55px;
+    }
+
+
+    .reel-action svg {
+        width: 26px;
+        height: 26px;
+    }
+
+
+    .reel-caption {
+        font-size: 14px;
+    }
+}
+
+
+@media (max-height: 700px) {
+
+    .reel-actions {
+        gap: 8px;
+    }
+
+
+    .reel-action {
+
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .reel-action svg {
+
+        width: 23px;
+        height: 23px;
+    }
+}

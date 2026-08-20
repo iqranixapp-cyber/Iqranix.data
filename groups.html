@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080B1A"
+    >
+
+    <meta
+        name="description"
+        content="IQRANIX Groups — Build a beneficial community."
+    >
+
+    <title>IQRANIX Groups</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ICONS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="groups.css"
+    >
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         ACCESS LOADER
+    ====================================================== -->
+
+    <div class="access-loader" id="accessLoader">
+
+        <div class="loader-orbit">
+            <i class="fa-solid fa-users"></i>
+        </div>
+
+        <strong>Opening Groups</strong>
+
+        <span>Preparing your IQRANIX circle...</span>
+
+    </div>
+
+
+    <!-- =====================================================
+         APP
+    ====================================================== -->
+
+    <div class="groups-app" id="groupsApp">
+
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <header class="groups-header">
+
+            <button
+                class="header-button"
+                id="backBtn"
+                aria-label="Go back"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+
+            <div class="header-title">
+
+                <span>COMMUNITY</span>
+
+                <h1>Groups</h1>
+
+            </div>
+
+
+            <div class="header-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             MAIN
+        ================================================== -->
+
+        <main class="groups-main">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="groups-hero">
+
+                <div class="hero-glow hero-glow-one"></div>
+                <div class="hero-glow hero-glow-two"></div>
+
+                <div class="hero-icon">
+                    <i class="fa-solid fa-people-group"></i>
+                </div>
+
+                <span class="hero-label">
+                    BUILD YOUR CIRCLE
+                </span>
+
+                <h2>
+                    Bring your people<br>
+                    <em>together.</em>
+                </h2>
+
+                <p>
+                    Create a beneficial IQRANIX group and invite
+                    people by their username.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 ISLAMIC COMMUNITY NOTICE
+            ================================================== -->
+
+            <section class="community-notice">
+
+                <div class="notice-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <div class="notice-content">
+
+                    <strong>
+                        Keep this space beneficial
+                    </strong>
+
+                    <p>
+                        IQRANIX is an Islamic community. Please
+                        share content that is respectful, beneficial
+                        and appropriate for the Ummah.
+                    </p>
+
+                    <small>
+                        Accounts that repeatedly share inappropriate
+                        content may be disabled, and serious or
+                        continued violations may result in permanent
+                        account disablement.
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 GROUP DETAILS
+            ================================================== -->
+
+            <section class="group-details">
+
+                <div class="section-label">
+                    <span>01</span>
+                    GROUP DETAILS
+                </div>
+
+
+                <div class="input-card">
+
+                    <label for="groupName">
+                        Group name
+                    </label>
+
+                    <div class="input-wrap">
+
+                        <i class="fa-solid fa-layer-group"></i>
+
+                        <input
+                            id="groupName"
+                            type="text"
+                            maxlength="50"
+                            placeholder="e.g. Quran Memorization Circle"
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+                    <div class="input-counter">
+                        <span id="groupNameCount">0</span>/50
+                    </div>
+
+                </div>
+
+
+                <div class="input-card">
+
+                    <label for="groupDescription">
+                        Description
+                    </label>
+
+                    <div class="textarea-wrap">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                        <textarea
+                            id="groupDescription"
+                            maxlength="180"
+                            rows="3"
+                            placeholder="What will your group be about?"
+                        ></textarea>
+
+                    </div>
+
+                    <div class="input-counter">
+                        <span id="groupDescriptionCount">0</span>/180
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ADD PEOPLE
+            ================================================== -->
+
+            <section class="members-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <div class="section-label">
+                            <span>02</span>
+                            ADD PEOPLE
+                        </div>
+
+                        <h2>
+                            Find your people
+                        </h2>
+
+                        <p>
+                            Search using their exact IQRANIX username.
+                        </p>
+
+                    </div>
+
+                    <div
+                        class="member-count"
+                        id="memberCount"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="username-search">
+
+                    <i class="fa-solid fa-at"></i>
+
+                    <input
+                        id="usernameSearch"
+                        type="search"
+                        placeholder="Search @username..."
+                        autocomplete="off"
+                        spellcheck="false"
+                    >
+
+                    <button
+                        id="clearSearchBtn"
+                        class="clear-search hidden"
+                        aria-label="Clear search"
+                    >
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+
+                    <div
+                        class="search-spinner hidden"
+                        id="searchSpinner"
+                    ></div>
+
+                </div>
+
+
+                <!-- SEARCH RESULTS -->
+
+                <div
+                    class="search-results"
+                    id="searchResults"
+                >
+
+                    <div class="search-empty">
+
+                        <div class="search-empty-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+
+                        <strong>
+                            Search for someone
+                        </strong>
+
+                        <span>
+                            Enter at least 2 characters of a username.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SELECTED PEOPLE -->
+
+                <div
+                    class="selected-section hidden"
+                    id="selectedSection"
+                >
+
+                    <div class="selected-heading">
+
+                        <span>
+                            SELECTED MEMBERS
+                        </span>
+
+                        <button
+                            id="clearMembersBtn"
+                        >
+                            Clear all
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="selected-members"
+                        id="selectedMembers"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CREATE
+            ================================================== -->
+
+            <section class="create-section">
+
+                <button
+                    class="create-group-btn"
+                    id="createGroupBtn"
+                    disabled
+                >
+
+                    <span class="create-icon">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </span>
+
+                    <span class="create-button-text">
+
+                        <strong>
+                            Create Group
+                        </strong>
+
+                        <small>
+                            Add at least one person
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+                <p class="create-hint">
+                    You can add more members to your group later.
+                </p>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- =================================================
+             TOAST
+        ================================================== -->
+
+        <div
+            class="groups-toast"
+            id="groupsToast"
+        >
+
+            <div id="toastIcon"></div>
+
+            <span id="toastMessage"></span>
+
+        </div>
+
+
+        <!-- =================================================
+             SUCCESS MODAL
+        ================================================== -->
+
+        <div
+            class="modal-overlay hidden"
+            id="successModal"
+        >
+
+            <div class="success-modal">
+
+                <div class="success-symbol">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <span class="success-label">
+                    GROUP CREATED
+                </span>
+
+                <h2>
+                    Your circle is ready.
+                </h2>
+
+                <p>
+                    Your IQRANIX group has been created successfully.
+                </p>
+
+                <button id="openCreatedGroup">
+                    Open Group
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+                <button
+                    class="secondary-modal-btn"
+                    id="closeSuccessModal"
+                >
+                    Back to Groups
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <script
+        type="module"
+        src="groups.js"
+    ></script>
+
+</body>
+</html>

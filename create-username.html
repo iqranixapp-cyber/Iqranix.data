@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>IQRANIX • Create Username</title>
+
+  <link rel="stylesheet" href="create-username.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <main class="username-page">
+
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+
+    <section class="username-card">
+
+      <div class="brand">
+        <div class="brand-symbol">﷽</div>
+        <div class="brand-name">IQRANIX</div>
+        <div class="brand-tagline">Inspire • Remind • Connect</div>
+      </div>
+
+      <div class="welcome">
+        <h1>Create your username</h1>
+        <p>
+          Choose a unique username for your IQRANIX identity.
+        </p>
+      </div>
+
+      <div class="username-field">
+
+        <span class="at">@</span>
+
+        <input
+          id="usernameInput"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          maxlength="20"
+          placeholder="yourusername"
+        >
+
+      </div>
+
+      <div id="usernameStatus" class="status"></div>
+
+      <div class="username-rules">
+        <div>✓ 3–20 characters</div>
+        <div>✓ Letters, numbers and underscores</div>
+        <div>✓ No spaces</div>
+      </div>
+
+      <button id="continueBtn" class="continue-btn" disabled>
+        <span id="buttonText">Continue</span>
+        <span id="buttonSpinner" class="button-spinner hidden"></span>
+      </button>
+
+      <button id="logoutBtn" class="logout-btn">
+        Sign out
+      </button>
+
+      <div id="errorBox" class="error-box hidden"></div>
+
+      <p class="secure-text">
+        🔒 Your username is securely connected to your IQRANIX account.
+      </p>
+
+    </section>
+
+  </main>
+
+  <script type="module" src="create-username.js"></script>
+
+</body>
+</html>

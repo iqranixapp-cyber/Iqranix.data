@@ -1,0 +1,687 @@
+/* =========================================================
+   IQRANIX LEADERBOARD
+========================================================= */
+
+:root {
+    --bg: #080B1A;
+    --card: #10152A;
+    --card-2: #141A31;
+    --border: rgba(255,255,255,.08);
+    --text: #F4F6FF;
+    --muted: #8F97B3;
+    --purple: #A77BFF;
+    --purple-soft: rgba(167,123,255,.15);
+    --gold: #FFD76A;
+    --silver: #C9D0DF;
+    --bronze: #D79A68;
+    --success: #61D9A0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at 20% 0%,
+            rgba(167,123,255,.12),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 100% 30%,
+            rgba(75,92,180,.10),
+            transparent 30%
+        ),
+        var(--bg);
+    color: var(--text);
+    font-family: "DM Sans", sans-serif;
+}
+
+button {
+    font: inherit;
+}
+
+.leaderboard-app {
+    width: 100%;
+    max-width: 760px;
+    margin: auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.leaderboard-header {
+    height: 76px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(8,11,26,.88);
+    backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.header-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+    color: white;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.header-btn:active {
+    transform: scale(.94);
+}
+
+.header-title {
+    text-align: center;
+}
+
+.header-title span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--purple);
+    font-weight: 800;
+}
+
+.header-title h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 23px;
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   GROUP CARD
+========================================================= */
+
+.group-card {
+    margin: 20px 16px;
+    padding: 17px;
+    border-radius: 22px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(167,123,255,.16),
+            rgba(255,255,255,.035)
+        );
+    border: 1px solid rgba(167,123,255,.18);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.group-symbol {
+    width: 54px;
+    height: 54px;
+    border-radius: 17px;
+    background: var(--purple-soft);
+    color: var(--purple);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.group-info {
+    min-width: 0;
+}
+
+.group-info span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 800;
+}
+
+.group-info strong {
+    display: block;
+    margin-top: 4px;
+    font-size: 17px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.group-info small {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status-message {
+    margin: 0 16px 14px;
+    padding: 11px 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.035);
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 13px;
+}
+
+.status-message i {
+    color: var(--purple);
+}
+
+
+/* =========================================================
+   PERIOD TABS
+========================================================= */
+
+.period-tabs {
+    margin: 0 16px 25px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.period-tab {
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 5px;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.period-tab.active {
+    background: var(--purple);
+    color: white;
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.podium-section,
+.members-section,
+.your-section {
+    margin: 0 16px 28px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+}
+
+.section-heading span {
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 2px;
+    font-weight: 800;
+}
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin-top: 3px;
+}
+
+.trophy {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    color: var(--gold);
+    background: rgba(255,215,106,.10);
+}
+
+.member-total {
+    background: var(--purple-soft);
+    color: var(--purple) !important;
+    border-radius: 30px;
+    padding: 8px 12px;
+    letter-spacing: 0 !important;
+    font-size: 13px !important;
+}
+
+
+/* =========================================================
+   PODIUM
+========================================================= */
+
+.podium {
+    display: grid;
+    grid-template-columns: 1fr 1.12fr 1fr;
+    align-items: end;
+    gap: 9px;
+}
+
+.podium-card {
+    position: relative;
+    min-width: 0;
+    padding: 18px 7px 20px;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    background: var(--card);
+    text-align: center;
+}
+
+.podium-card.first {
+    padding-top: 27px;
+    border-color: rgba(255,215,106,.25);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,215,106,.09),
+            var(--card)
+        );
+}
+
+.podium-card.second {
+    border-color: rgba(201,208,223,.16);
+}
+
+.podium-card.third {
+    border-color: rgba(215,154,104,.16);
+}
+
+.crown {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    background: var(--gold);
+    color: #322300;
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+}
+
+.place {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 9px;
+}
+
+.podium-avatar,
+.your-avatar {
+    width: 56px;
+    height: 56px;
+    margin: auto;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: #202642;
+    border: 2px solid rgba(255,255,255,.08);
+    color: white;
+    font-weight: 800;
+    font-size: 19px;
+    background-size: cover;
+    background-position: center;
+}
+
+.first .podium-avatar {
+    width: 64px;
+    height: 64px;
+    border-color: rgba(255,215,106,.55);
+}
+
+.podium-card > strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.podium-card > span {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.podium-points {
+    margin-top: 10px;
+}
+
+.podium-points b {
+    font-size: 17px;
+}
+
+.podium-points small {
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   MEMBERS
+========================================================= */
+
+.members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.member-row {
+    min-height: 70px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.member-rank {
+    width: 32px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.member-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: #202642;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.member-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.member-info strong {
+    display: block;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.member-info span {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.member-points {
+    text-align: right;
+}
+
+.member-points strong {
+    display: block;
+    font-size: 15px;
+}
+
+.member-points span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   YOUR POSITION
+========================================================= */
+
+.your-card {
+    padding: 13px;
+    border-radius: 20px;
+    border: 1px solid rgba(97,217,160,.18);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(97,217,160,.08),
+            var(--card)
+        );
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.your-rank {
+    min-width: 35px;
+    text-align: center;
+}
+
+.your-rank small {
+    color: var(--muted);
+}
+
+.your-rank strong {
+    display: block;
+    font-size: 18px;
+}
+
+.your-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 14px;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.your-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.your-info strong {
+    display: block;
+    font-size: 14px;
+}
+
+.your-info span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.your-points {
+    text-align: right;
+}
+
+.your-points strong {
+    display: block;
+    font-size: 18px;
+}
+
+.your-points span {
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.next-rank {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty-state {
+    padding: 35px 20px;
+    border: 1px dashed var(--border);
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.empty-state i {
+    color: var(--purple);
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.empty-state strong {
+    font-size: 15px;
+}
+
+.empty-state span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ERROR / NO GROUP
+========================================================= */
+
+.page-message {
+    margin: 25px 16px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: var(--card);
+}
+
+.page-message.hidden {
+    display: none;
+}
+
+.message-icon {
+    width: 64px;
+    height: 64px;
+    margin: auto;
+    border-radius: 20px;
+    background: var(--purple-soft);
+    color: var(--purple);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+}
+
+.page-message h2 {
+    font-family: "Playfair Display", serif;
+    margin-top: 16px;
+}
+
+.page-message p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 8px;
+}
+
+.page-message button {
+    margin-top: 18px;
+    border: 0;
+    border-radius: 14px;
+    padding: 12px 18px;
+    background: var(--purple);
+    color: white;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    text-align: center;
+    padding: 35px 20px;
+    color: var(--muted);
+}
+
+footer div {
+    font-size: 24px;
+    color: var(--purple);
+    margin-bottom: 10px;
+}
+
+footer strong {
+    display: block;
+    color: white;
+    font-size: 14px;
+}
+
+footer span {
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .podium {
+        gap: 6px;
+    }
+
+    .podium-card {
+        border-radius: 18px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .podium-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .first .podium-avatar {
+        width: 58px;
+        height: 58px;
+    }
+
+}

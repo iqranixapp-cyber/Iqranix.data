@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#080A18"
+    >
+
+    <meta
+        name="description"
+        content="Your IQRANIX profile — manage your account, worship progress, achievements and Islamic journey."
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="IQRANIX"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
+    >
+
+    <!-- Premium fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Profile CSS -->
+
+    <link
+        rel="stylesheet"
+        href="profile.css"
+    >
+
+    <title>IQRANIX — My Profile</title>
+
+</head>
+
+
+<body>
+
+<div class="profile-app">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="profile-topbar">
+
+        <a
+            href="index.html"
+            class="back-button"
+            aria-label="Back to Home"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+
+        <div class="topbar-title">
+
+            <span>
+                IQRANIX
+            </span>
+
+            <strong>
+                My Profile
+            </strong>
+
+        </div>
+
+
+        <a
+            href="settings.html"
+            class="settings-button"
+            aria-label="Settings"
+        >
+            <i class="fa-solid fa-gear"></i>
+        </a>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         PROFILE HERO
+    ====================================================== -->
+
+    <main>
+
+
+        <section class="profile-hero">
+
+            <div class="profile-glow"></div>
+
+
+            <!-- Avatar -->
+
+            <div class="avatar-wrapper">
+
+                <div
+                    class="profile-avatar"
+                    id="profile-avatar"
+                >
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+
+                <button
+                    type="button"
+                    class="avatar-edit"
+                    id="avatar-edit-button"
+                    aria-label="Change profile picture"
+                >
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+
+            </div>
+
+
+            <!-- User information -->
+
+            <div class="profile-main-info">
+
+                <h1 id="profile-name">
+                    Loading...
+                </h1>
+
+                <p id="profile-email">
+                    Loading account...
+                </p>
+
+                <span
+                    class="account-badge"
+                    id="account-badge"
+                >
+                    <i class="fa-solid fa-shield-halved"></i>
+                    IQRANIX Member
+                </span>
+
+            </div>
+
+
+            <!-- Edit button -->
+
+            <button
+                type="button"
+                class="edit-profile-button"
+                id="edit-profile-button"
+            >
+                <i class="fa-solid fa-pen"></i>
+                Edit Profile
+            </button>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACCOUNT INFORMATION
+        ================================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    ACCOUNT
+                </span>
+
+                <h2>
+                    Personal Information
+                </h2>
+
+            </div>
+
+
+            <div class="information-card">
+
+
+                <div class="information-row">
+
+                    <div class="information-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div class="information-content">
+
+                        <span>
+                            Display Name
+                        </span>
+
+                        <strong id="info-name">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right row-arrow"></i>
+
+                </div>
+
+
+
+                <div class="information-row">
+
+                    <div class="information-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div class="information-content">
+
+                        <span>
+                            Email Address
+                        </span>
+
+                        <strong id="info-email">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right row-arrow"></i>
+
+                </div>
+
+
+
+                <div class="information-row">
+
+                    <div class="information-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+
+                    <div class="information-content">
+
+                        <span>
+                            Member Since
+                        </span>
+
+                        <strong id="member-since">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right row-arrow"></i>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             SPIRITUAL PROGRESS
+        ================================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    YOUR JOURNEY
+                </span>
+
+                <h2>
+                    Spiritual Progress
+                </h2>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+
+                <!-- Streak -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon gold">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+
+                    <span>
+                        CURRENT STREAK
+                    </span>
+
+                    <strong>
+                        <span id="profile-streak">
+                            0
+                        </span>
+                        days
+                    </strong>
+
+                    <small>
+                        Keep your consistency
+                    </small>
+
+                </div>
+
+
+
+                <!-- Quran -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-book-quran"></i>
+                    </div>
+
+                    <span>
+                        QURAN
+                    </span>
+
+                    <strong>
+                        <span id="quran-progress">
+                            0
+                        </span>%
+                    </strong>
+
+                    <small>
+                        Reading progress
+                    </small>
+
+                </div>
+
+
+
+                <!-- Dhikr -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon violet">
+                        <i class="fa-solid fa-circle-dot"></i>
+                    </div>
+
+                    <span>
+                        DHIKR
+                    </span>
+
+                    <strong>
+                        <span id="dhikr-progress">
+                            0
+                        </span>
+                    </strong>
+
+                    <small>
+                        Today
+                    </small>
+
+                </div>
+
+
+
+                <!-- Achievements -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon gold">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+
+                    <span>
+                        ACHIEVEMENTS
+                    </span>
+
+                    <strong>
+                        <span id="achievement-count">
+                            0
+                        </span>
+                    </strong>
+
+                    <small>
+                        Unlocked
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             QURAN PROGRESS
+        ================================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    QURAN JOURNEY
+                </span>
+
+                <h2>
+                    Continue Reading
+                </h2>
+
+            </div>
+
+
+            <div class="quran-progress-card">
+
+
+                <div class="quran-icon">
+
+                    <i class="fa-solid fa-book-quran"></i>
+
+                </div>
+
+
+                <div class="quran-progress-content">
+
+                    <span>
+                        LAST READ
+                    </span>
+
+                    <h3 id="last-surah">
+                        Begin your Quran journey
+                    </h3>
+
+                    <p id="last-ayah">
+                        Your reading progress will appear here.
+                    </p>
+
+
+                    <div class="progress-track">
+
+                        <div
+                            class="progress-fill"
+                            id="quran-progress-bar"
+                            style="width: 0%;"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="progress-label">
+
+                        <span>
+                            Progress
+                        </span>
+
+                        <strong id="quran-progress-label">
+                            0%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    href="quran.html"
+                    class="continue-button"
+                >
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACHIEVEMENTS
+        ================================================== -->
+
+        <section class="profile-section">
+
+            <div class="section-heading-row">
+
+                <div>
+
+                    <span class="section-eyebrow">
+                        ACHIEVEMENTS
+                    </span>
+
+                    <h2>
+                        Your Milestones
+                    </h2>
+
+                </div>
+
+                <a href="achievements.html">
+                    View All
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+
+            <div class="achievement-grid">
+
+
+                <div class="profile-achievement unlocked">
+
+                    <div>
+                        🧠
+                    </div>
+
+                    <strong>
+                        First Steps
+                    </strong>
+
+                    <span>
+                        Journey started
+                    </span>
+
+                </div>
+
+
+
+                <div class="profile-achievement locked">
+
+                    <div>
+                        🔥
+                    </div>
+
+                    <strong>
+                        Consistent
+                    </strong>
+
+                    <span>
+                        7 day streak
+                    </span>
+
+                </div>
+
+
+
+                <div class="profile-achievement locked">
+
+                    <div>
+                        📖
+                    </div>
+
+                    <strong>
+                        Quran Reader
+                    </strong>
+
+                    <span>
+                        Read 10 Surahs
+                    </span>
+
+                </div>
+
+
+
+                <div class="profile-achievement locked">
+
+                    <div>
+                        🏆
+                    </div>
+
+                    <strong>
+                        Community
+                    </strong>
+
+                    <span>
+                        Join a group
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMMUNITY
+        ================================================== -->
+
+        <section class="profile-section">
+
+            <div class="community-profile-card">
+
+                <div class="community-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        COMMUNITY
+                    </span>
+
+                    <h2>
+                        Grow together.
+                    </h2>
+
+                    <p>
+                        Join Quran circles, connect with
+                        Muslims and grow through beneficial
+                        knowledge.
+                    </p>
+
+                </div>
+
+
+                <a href="community.html">
+
+                    Explore Community
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACCOUNT ACTIONS
+        ================================================== -->
+
+        <section class="profile-section account-actions-section">
+
+            <div class="section-heading">
+
+                <span class="section-eyebrow">
+                    ACCOUNT
+                </span>
+
+                <h2>
+                    Account Actions
+                </h2>
+
+            </div>
+
+
+            <div class="account-action-card">
+
+
+                <a
+                    href="settings.html"
+                    class="account-action"
+                >
+
+                    <div class="action-icon">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Settings
+                        </strong>
+
+                        <span>
+                            Manage your IQRANIX preferences
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <a
+                    href="privacy.html"
+                    class="account-action"
+                >
+
+                    <div class="action-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Privacy
+                        </strong>
+
+                        <span>
+                            Manage your privacy and data
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+
+
+                <button
+                    type="button"
+                    class="account-action logout-action"
+                    id="logout-button"
+                >
+
+                    <div class="action-icon">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Sign Out
+                        </strong>
+
+                        <span>
+                            Sign out of your IQRANIX account
+                        </span>
+
+                    </div>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             VERSION
+        ================================================== -->
+
+        <div class="profile-footer">
+
+            <strong>
+                IQRANIX
+            </strong>
+
+            <span>
+                Your Islamic journey
+            </span>
+
+            <small>
+                Version 1.0
+            </small>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         EDIT PROFILE MODAL
+    ====================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="edit-modal"
+        hidden
+    >
+
+        <div class="edit-modal">
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="close-modal"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <div class="modal-icon">
+
+                <i class="fa-solid fa-user-pen"></i>
+
+            </div>
+
+
+            <span class="section-eyebrow">
+                PROFILE
+            </span>
+
+            <h2>
+                Edit Your Profile
+            </h2>
+
+            <p>
+                Update the name displayed throughout
+                your IQRANIX account.
+            </p>
+
+
+            <form id="profile-form">
+
+                <label for="display-name">
+                    Display Name
+                </label>
+
+                <input
+                    type="text"
+                    id="display-name"
+                    name="displayName"
+                    placeholder="Enter your name"
+                    maxlength="40"
+                    autocomplete="name"
+                    required
+                >
+
+
+                <button
+                    type="submit"
+                    class="save-profile-button"
+                    id="save-profile-button"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Save Changes
+                </button>
+
+            </form>
+
+
+            <p
+                class="form-message"
+                id="form-message"
+            ></p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="profile-toast"
+        id="profile-toast"
+        role="status"
+        aria-live="polite"
+    >
+        <i class="fa-solid fa-circle-check"></i>
+
+        <span id="toast-message">
+            Saved successfully.
+        </span>
+
+    </div>
+
+
+
+</div>
+
+
+<!-- =========================================================
+     FIREBASE + PROFILE JAVASCRIPT
+========================================================== -->
+
+<script
+    type="module"
+    src="profile.js"
+></script>
+
+
+</body>
+
+</html>

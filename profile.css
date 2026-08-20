@@ -1,0 +1,1468 @@
+/* ============================================================
+   IQRANIX — PREMIUM PROFILE
+   Deep Islamic Green Edition
+============================================================ */
+
+:root {
+    --bg: #061510;
+    --bg-soft: #0a1d16;
+    --surface: #0d251c;
+    --surface-2: #112d22;
+    --surface-3: #153629;
+
+    --green: #0b6e4f;
+    --green-light: #19a878;
+    --green-soft: #1bc98c;
+
+    --mint: #9ce8c9;
+    --gold: #d9b76c;
+    --gold-light: #f0d898;
+
+    --white: #f7fbf9;
+    --text: #eaf5f0;
+    --muted: #91aaa0;
+    --muted-2: #698278;
+
+    --danger: #ef7777;
+
+    --border: rgba(156, 232, 201, 0.10);
+    --border-light: rgba(156, 232, 201, 0.17);
+
+    --shadow:
+        0 18px 50px rgba(0, 0, 0, 0.30);
+
+    --radius-lg: 26px;
+    --radius-md: 19px;
+    --radius-sm: 14px;
+}
+
+
+/* ============================================================
+   RESET
+============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(11, 110, 79, 0.22),
+            transparent 38%
+        ),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    border: 0;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ============================================================
+   APP
+============================================================ */
+
+.profile-app {
+    width: 100%;
+    max-width: 760px;
+    min-height: 100vh;
+    margin: 0 auto;
+
+    padding-bottom: 45px;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   TOP BAR
+============================================================ */
+
+.profile-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    display: grid;
+    grid-template-columns: 46px 1fr 46px;
+    align-items: center;
+
+    min-height: 74px;
+
+    padding:
+        max(12px, env(safe-area-inset-top))
+        18px
+        12px;
+
+    background: rgba(6, 21, 16, 0.90);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.back-button,
+.settings-button {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    color: var(--mint);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.back-button:active,
+.settings-button:active {
+    transform: scale(0.94);
+}
+
+.back-button:hover,
+.settings-button:hover {
+    background: rgba(27, 201, 140, 0.10);
+}
+
+.topbar-title {
+    text-align: center;
+}
+
+.topbar-title span {
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+.topbar-title strong {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 20px;
+}
+
+
+/* ============================================================
+   PROFILE HERO
+============================================================ */
+
+.profile-hero {
+    position: relative;
+
+    margin: 18px;
+
+    padding: 34px 22px 27px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-lg);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(27, 201, 140, 0.18),
+            transparent 48%
+        ),
+        linear-gradient(
+            145deg,
+            #0c2a1f,
+            #081a14
+        );
+
+    box-shadow: var(--shadow);
+}
+
+.profile-glow {
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    top: -120px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    border-radius: 50%;
+
+    background: rgba(27, 201, 140, 0.13);
+
+    filter: blur(35px);
+
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   AVATAR
+============================================================ */
+
+.avatar-wrapper {
+    position: relative;
+
+    width: 104px;
+    height: 104px;
+
+    margin: 0 auto 18px;
+}
+
+.profile-avatar {
+    width: 104px;
+    height: 104px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(217, 183, 108, 0.70);
+
+    background:
+        linear-gradient(
+            145deg,
+            #174b37,
+            #0a2118
+        );
+
+    color: var(--mint);
+
+    font-size: 36px;
+
+    box-shadow:
+        0 0 0 6px rgba(27, 201, 140, 0.06),
+        0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.avatar-edit {
+    position: absolute;
+
+    right: -2px;
+    bottom: -2px;
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--gold);
+
+    color: #172014;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ============================================================
+   PROFILE INFORMATION
+============================================================ */
+
+.profile-main-info h1 {
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: clamp(27px, 7vw, 36px);
+
+    line-height: 1.15;
+}
+
+.profile-main-info p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    word-break: break-word;
+}
+
+.account-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-top: 14px;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(217, 183, 108, 0.20);
+
+    border-radius: 999px;
+
+    background: rgba(217, 183, 108, 0.07);
+
+    color: var(--gold-light);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.4px;
+}
+
+.edit-profile-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 20px;
+
+    padding: 11px 17px;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    color: var(--mint);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.edit-profile-button:hover {
+    background: rgba(27, 201, 140, 0.10);
+}
+
+.edit-profile-button:active {
+    transform: scale(0.97);
+}
+
+
+/* ============================================================
+   SECTIONS
+============================================================ */
+
+.profile-section {
+    margin: 30px 18px 0;
+}
+
+.section-heading {
+    margin-bottom: 14px;
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+.section-eyebrow {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 2.2px;
+}
+
+.section-heading h2,
+.section-heading-row h2 {
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 22px;
+}
+
+.section-heading-row > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--mint);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   INFORMATION CARD
+============================================================ */
+
+.information-card,
+.account-action-card {
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--surface);
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.information-row {
+    min-height: 74px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.information-row:last-child {
+    border-bottom: 0;
+}
+
+.information-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(27, 201, 140, 0.08);
+
+    color: var(--green-light);
+}
+
+.information-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.information-content span {
+    display: block;
+
+    color: var(--muted-2);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.information-content strong {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--text);
+
+    font-size: 14px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.row-arrow {
+    color: #4c675c;
+
+    font-size: 12px;
+}
+
+
+/* ============================================================
+   STATISTICS
+============================================================ */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+.stat-card {
+    min-height: 158px;
+
+    padding: 17px;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 45, 34, 0.95),
+            rgba(9, 27, 20, 0.95)
+        );
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.17);
+}
+
+.stat-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 14px;
+
+    border-radius: 13px;
+
+    font-size: 17px;
+}
+
+.stat-icon.gold {
+    background: rgba(217, 183, 108, 0.10);
+    color: var(--gold);
+}
+
+.stat-icon.purple,
+.stat-icon.violet {
+    background: rgba(27, 201, 140, 0.09);
+    color: var(--green-light);
+}
+
+.stat-card > span {
+    display: block;
+
+    color: var(--muted-2);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+}
+
+.stat-card > strong {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+}
+
+.stat-card small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* ============================================================
+   QURAN PROGRESS
+============================================================ */
+
+.quran-progress-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-lg);
+
+    background:
+        radial-gradient(
+            circle at 0% 50%,
+            rgba(27, 201, 140, 0.13),
+            transparent 45%
+        ),
+        var(--surface);
+
+    box-shadow: var(--shadow);
+}
+
+.quran-icon {
+    width: 52px;
+    height: 52px;
+
+    flex: 0 0 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #126e4f,
+            #0b3d2d
+        );
+
+    color: var(--mint);
+
+    font-size: 21px;
+}
+
+.quran-progress-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.quran-progress-content > span {
+    color: var(--gold);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.quran-progress-content h3 {
+    margin-top: 4px;
+
+    color: var(--white);
+
+    font-size: 16px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.quran-progress-content p {
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+.progress-track {
+    width: 100%;
+    height: 6px;
+
+    margin-top: 13px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--green),
+            var(--green-soft)
+        );
+
+    transition: width 0.5s ease;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.progress-label strong {
+    color: var(--mint);
+}
+
+.continue-button {
+    width: 39px;
+    height: 39px;
+
+    flex: 0 0 39px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(27, 201, 140, 0.09);
+
+    color: var(--mint);
+
+    transition: 0.2s ease;
+}
+
+.continue-button:active {
+    transform: scale(0.92);
+}
+
+
+/* ============================================================
+   ACHIEVEMENTS
+============================================================ */
+
+.achievement-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+.profile-achievement {
+    min-height: 135px;
+
+    padding: 15px;
+
+    text-align: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--surface);
+}
+
+.profile-achievement > div {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 10px;
+
+    border-radius: 16px;
+
+    background: rgba(217, 183, 108, 0.08);
+
+    font-size: 24px;
+}
+
+.profile-achievement strong {
+    display: block;
+
+    color: var(--text);
+
+    font-size: 13px;
+}
+
+.profile-achievement span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.profile-achievement.locked {
+    opacity: 0.50;
+}
+
+.profile-achievement.unlocked {
+    border-color: rgba(217, 183, 108, 0.20);
+}
+
+
+/* ============================================================
+   COMMUNITY
+============================================================ */
+
+.community-profile-card {
+    position: relative;
+
+    padding: 23px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d3325,
+            #091d16
+        );
+
+    box-shadow: var(--shadow);
+}
+
+.community-profile-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -65px;
+    top: -65px;
+
+    border-radius: 50%;
+
+    background: rgba(217, 183, 108, 0.06);
+}
+
+.community-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 16px;
+
+    background: rgba(27, 201, 140, 0.10);
+
+    color: var(--mint);
+
+    font-size: 20px;
+}
+
+.community-profile-card span {
+    color: var(--gold);
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 1.7px;
+}
+
+.community-profile-card h2 {
+    margin-top: 5px;
+
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+}
+
+.community-profile-card p {
+    max-width: 550px;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+.community-profile-card > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 18px;
+
+    color: var(--mint);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   ACCOUNT ACTIONS
+============================================================ */
+
+.account-action {
+    width: 100%;
+    min-height: 74px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: transparent;
+
+    color: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.account-action:last-child {
+    border-bottom: 0;
+}
+
+.account-action:hover {
+    background: rgba(27, 201, 140, 0.045);
+}
+
+.action-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: rgba(27, 201, 140, 0.08);
+
+    color: var(--green-light);
+}
+
+.account-action > div:nth-child(2) {
+    min-width: 0;
+    flex: 1;
+}
+
+.account-action strong {
+    display: block;
+
+    color: var(--text);
+
+    font-size: 14px;
+}
+
+.account-action span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.account-action > i {
+    color: #4c675c;
+
+    font-size: 12px;
+}
+
+.logout-action .action-icon {
+    background: rgba(239, 119, 119, 0.08);
+    color: var(--danger);
+}
+
+.logout-action strong {
+    color: #f0a0a0;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.profile-footer {
+    padding: 40px 20px 15px;
+
+    text-align: center;
+}
+
+.profile-footer strong {
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 13px;
+
+    letter-spacing: 3px;
+}
+
+.profile-footer span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.profile-footer small {
+    display: block;
+
+    margin-top: 8px;
+
+    color: #49645a;
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   EDIT PROFILE MODAL
+============================================================ */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 15px;
+
+    background: rgba(0, 0, 0, 0.70);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal-overlay[hidden] {
+    display: none;
+}
+
+.edit-modal {
+    position: relative;
+
+    width: min(100%, 520px);
+
+    padding: 28px 22px 24px;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #102d22,
+            #081b14
+        );
+
+    box-shadow: 0 -10px 60px rgba(0, 0, 0, 0.45);
+
+    animation: modalUp 0.25s ease;
+}
+
+@keyframes modalUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-close {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: var(--muted);
+
+    cursor: pointer;
+}
+
+.modal-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 17px;
+
+    border-radius: 16px;
+
+    background: rgba(27, 201, 140, 0.09);
+
+    color: var(--mint);
+
+    font-size: 20px;
+}
+
+.edit-modal h2 {
+    color: var(--white);
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 25px;
+}
+
+.edit-modal > p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+#profile-form {
+    margin-top: 22px;
+}
+
+#profile-form label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--mint);
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+#display-name {
+    width: 100%;
+
+    height: 51px;
+
+    padding: 0 15px;
+
+    outline: none;
+
+    border: 1px solid var(--border-light);
+
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.18);
+
+    color: var(--white);
+
+    font-size: 14px;
+
+    transition: border 0.2s ease;
+}
+
+#display-name::placeholder {
+    color: #526d62;
+}
+
+#display-name:focus {
+    border-color: rgba(27, 201, 140, 0.55);
+}
+
+.save-profile-button {
+    width: 100%;
+
+    height: 51px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 13px;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0b8b63,
+            #0b6e4f
+        );
+
+    color: white;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(11, 110, 79, 0.25);
+}
+
+.save-profile-button:active {
+    transform: scale(0.98);
+}
+
+.form-message {
+    min-height: 17px;
+
+    margin-top: 10px !important;
+
+    text-align: center;
+
+    color: var(--mint) !important;
+
+    font-size: 11px !important;
+}
+
+
+/* ============================================================
+   TOAST
+============================================================ */
+
+.profile-toast {
+    position: fixed;
+
+    left: 50%;
+    bottom: 22px;
+
+    z-index: 200;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    max-width: calc(100% - 35px);
+
+    padding: 12px 17px;
+
+    border: 1px solid rgba(156, 232, 201, 0.15);
+
+    border-radius: 14px;
+
+    background: #102a20;
+
+    color: var(--text);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+
+    transform:
+        translate(-50%, 120px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.profile-toast.show {
+    transform:
+        translate(-50%, 0);
+
+    opacity: 1;
+}
+
+.profile-toast i {
+    color: var(--green-light);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (min-width: 600px) {
+
+    .profile-app {
+        padding-bottom: 70px;
+    }
+
+    .profile-hero {
+        margin-top: 25px;
+    }
+
+    .profile-section {
+        margin-left: 22px;
+        margin-right: 22px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-card {
+        min-height: 175px;
+    }
+
+    .achievement-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .profile-achievement {
+        min-height: 150px;
+    }
+
+    .modal-overlay {
+        align-items: center;
+    }
+
+    .edit-modal {
+        border-radius: 27px;
+    }
+}
+
+
+/* ============================================================
+   SMALL PHONES
+============================================================ */
+
+@media (max-width: 360px) {
+
+    .profile-hero {
+        margin: 12px;
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .profile-section {
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+
+    .stats-grid,
+    .achievement-grid {
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 13px;
+    }
+
+    .quran-progress-card {
+        padding: 15px;
+    }
+
+    .quran-icon {
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

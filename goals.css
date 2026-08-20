@@ -1,0 +1,1609 @@
+/* =========================================================
+   IQRANIX — DAILY GOALS
+   PREMIUM UI
+========================================================= */
+
+:root {
+    --bg: #050b09;
+    --bg-soft: #081510;
+    --surface: rgba(15, 31, 25, 0.88);
+    --surface-2: rgba(20, 39, 31, 0.72);
+
+    --gold: #f4cf70;
+    --gold-light: #ffe9a8;
+    --gold-dark: #b88a32;
+
+    --emerald: #19c889;
+    --emerald-light: #55e2ac;
+
+    --text: #f7f2e5;
+    --text-soft: #b6b9b2;
+    --text-muted: #747d76;
+
+    --border: rgba(244, 207, 112, 0.16);
+    --border-light: rgba(255, 255, 255, 0.07);
+
+    --shadow:
+        0 25px 70px rgba(0, 0, 0, 0.38);
+
+    --gold-glow:
+        0 0 35px rgba(244, 207, 112, 0.13);
+
+    --green-glow:
+        0 0 35px rgba(25, 200, 137, 0.12);
+
+    --radius-xl: 30px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 15% 0%,
+            rgba(244, 207, 112, 0.08),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 18%,
+            rgba(25, 200, 137, 0.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #030806 0%,
+            #07120e 45%,
+            #040907 100%
+        );
+
+    color: var(--text);
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+
+button {
+    font: inherit;
+    border: 0;
+    cursor: pointer;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.goals-app {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+
+.goals-main {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 0 18px 60px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.goals-header {
+    height: 76px;
+
+    width: min(100%, 760px);
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(5, 11, 9, 0.96),
+            rgba(5, 11, 9, 0.80)
+        );
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-bottom: 1px solid rgba(255,255,255,0.045);
+}
+
+
+.goals-back-btn,
+.goals-menu-btn {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 15px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--text);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,0.07),
+            rgba(255,255,255,0.025)
+        );
+
+    border: 1px solid var(--border-light);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        background .2s ease;
+}
+
+
+.goals-back-btn:active,
+.goals-menu-btn:active {
+    transform: scale(.92);
+}
+
+
+.goals-back-btn:hover,
+.goals-menu-btn:hover {
+    border-color: var(--border);
+}
+
+
+.goals-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.goals-brand-mark {
+    color: var(--gold-light);
+    font-size: 25px;
+
+    text-shadow:
+        0 0 18px rgba(244,207,112,.20);
+}
+
+
+.goals-brand strong {
+    display: block;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+
+.goals-brand small {
+    display: block;
+
+    margin-top: 1px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.goals-hero {
+    position: relative;
+
+    overflow: hidden;
+
+    margin-top: 18px;
+    padding: 28px 22px 24px;
+
+    border-radius: var(--radius-xl);
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(244,207,112,.17),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(25,200,137,.12),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #10281f,
+            #081611 58%,
+            #0c1914
+        );
+
+    border: 1px solid rgba(244,207,112,.22);
+
+    box-shadow:
+        var(--shadow),
+        var(--gold-glow);
+}
+
+
+.goals-hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 25%,
+            rgba(255,255,255,.035) 45%,
+            transparent 65%
+        );
+}
+
+
+.hero-glow {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -75px;
+    top: -75px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(244,207,112,.18),
+            transparent 68%
+        );
+
+    filter: blur(4px);
+}
+
+
+.hero-top {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+
+.eyebrow,
+.section-title > div > span,
+.streak-heading > div > span {
+    color: var(--gold);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2.2px;
+}
+
+
+.hero-top h1 {
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: clamp(30px, 8vw, 43px);
+
+    line-height: 1.05;
+
+    letter-spacing: -.8px;
+}
+
+
+.hero-top p {
+    max-width: 300px;
+
+    margin-top: 10px;
+
+    color: var(--text-soft);
+
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   STREAK BADGE
+========================================================= */
+
+.streak-badge {
+    flex-shrink: 0;
+
+    min-width: 82px;
+    height: 92px;
+
+    padding: 12px 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(244,207,112,.15),
+            rgba(244,207,112,.045)
+        );
+
+    border: 1px solid rgba(244,207,112,.25);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.06),
+        0 10px 30px rgba(0,0,0,.18);
+}
+
+
+.streak-badge i {
+    color: var(--gold);
+
+    font-size: 18px;
+
+    filter:
+        drop-shadow(
+            0 0 8px rgba(244,207,112,.35)
+        );
+}
+
+
+.streak-badge strong {
+    margin-top: 3px;
+
+    color: var(--gold-light);
+
+    font-size: 22px;
+}
+
+
+.streak-badge span {
+    color: var(--text-muted);
+
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+
+/* =========================================================
+   OVERALL PROGRESS
+========================================================= */
+
+.overall-progress {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 28px;
+
+    padding-top: 21px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+}
+
+
+.progress-heading,
+.progress-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.progress-heading span {
+    color: var(--text-soft);
+    font-size: 12px;
+}
+
+
+.progress-heading strong {
+    color: var(--gold-light);
+    font-size: 18px;
+}
+
+
+.progress-track {
+    width: 100%;
+    height: 9px;
+
+    margin-top: 11px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(0,0,0,.35);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+}
+
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a87828,
+            #f4cf70,
+            #fff0af
+        );
+
+    box-shadow:
+        0 0 18px rgba(244,207,112,.35);
+
+    transition:
+        width .5s ease;
+}
+
+
+.progress-footer {
+    margin-top: 9px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   DATE CARD
+========================================================= */
+
+.date-card {
+    margin-top: 14px;
+
+    min-height: 72px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 12px 15px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    border:
+        1px solid var(--border-light);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.035);
+}
+
+
+.date-icon {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 15px;
+
+    color: var(--gold);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(244,207,112,.13),
+            rgba(244,207,112,.035)
+        );
+
+    border:
+        1px solid rgba(244,207,112,.14);
+}
+
+
+.date-info {
+    flex: 1;
+}
+
+
+.date-info span {
+    display: block;
+
+    color: var(--gold);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1.7px;
+}
+
+
+.date-info strong {
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 13px;
+}
+
+
+.date-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    color: var(--emerald-light);
+
+    font-size: 10px;
+}
+
+
+.date-status i {
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.goals-section {
+    margin-top: 34px;
+}
+
+
+.section-title {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+
+.section-title h2,
+.streak-heading h2 {
+    margin-top: 4px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+}
+
+
+.edit-goals-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 9px 12px;
+
+    color: var(--gold-light);
+
+    border-radius: 12px;
+
+    background:
+        rgba(244,207,112,.07);
+
+    border:
+        1px solid rgba(244,207,112,.14);
+
+    font-size: 10px;
+}
+
+
+.edit-goals-btn i {
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   GOAL CARDS
+========================================================= */
+
+.goal-card {
+    position: relative;
+
+    display: flex;
+    gap: 14px;
+
+    margin-bottom: 12px;
+
+    padding: 17px;
+
+    border-radius: var(--radius-lg);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(22,42,34,.88),
+            rgba(10,22,17,.88)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.065);
+
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.18),
+        inset 0 1px rgba(255,255,255,.035);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease;
+}
+
+
+.goal-card:hover {
+    border-color:
+        rgba(244,207,112,.16);
+}
+
+
+.goal-card:active {
+    transform: scale(.985);
+}
+
+
+.goal-icon {
+    flex-shrink: 0;
+
+    width: 49px;
+    height: 49px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 17px;
+
+    font-size: 18px;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        inset 0 1px rgba(255,255,255,.07);
+}
+
+
+.salah-icon {
+    color: #f4cf70;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(244,207,112,.17),
+            rgba(244,207,112,.035)
+        );
+}
+
+
+.quran-icon {
+    color: #78dfbd;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,200,137,.16),
+            rgba(25,200,137,.035)
+        );
+}
+
+
+.dhikr-icon {
+    color: #c6a8ff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(145,108,220,.17),
+            rgba(145,108,220,.035)
+        );
+}
+
+
+.dua-icon {
+    color: #f4a9c8;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(220,105,155,.16),
+            rgba(220,105,155,.035)
+        );
+}
+
+
+.deed-icon {
+    color: #ffb56d;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,160,70,.16),
+            rgba(255,160,70,.035)
+        );
+}
+
+
+.goal-content {
+    min-width: 0;
+    flex: 1;
+}
+
+
+.goal-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 10px;
+}
+
+
+.goal-category {
+    color: var(--text-muted);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.goal-heading h3 {
+    margin-top: 3px;
+
+    color: var(--text);
+
+    font-size: 15px;
+    line-height: 1.25;
+}
+
+
+.goal-status {
+    flex-shrink: 0;
+
+    color: var(--gold-light);
+
+    font-size: 10px;
+    font-weight: 700;
+}
+
+
+.goal-progress {
+    margin-top: 12px;
+}
+
+
+.goal-progress-track {
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 99px;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+
+.goal-progress-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #bb8b38,
+            #f4cf70
+        );
+
+    box-shadow:
+        0 0 12px rgba(244,207,112,.28);
+
+    transition:
+        width .4s ease;
+}
+
+
+.goal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-top: 9px;
+}
+
+
+.goal-footer > span {
+    color: var(--text-muted);
+
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+
+.goal-action {
+    flex-shrink: 0;
+
+    padding: 6px 11px;
+
+    border-radius: 9px;
+
+    color: var(--gold-light);
+
+    background:
+        rgba(244,207,112,.07);
+
+    border:
+        1px solid rgba(244,207,112,.13);
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MOTIVATION CARD
+========================================================= */
+
+.motivation-card {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    overflow: hidden;
+
+    margin-top: 28px;
+    padding: 22px;
+
+    border-radius: var(--radius-xl);
+
+    background:
+        radial-gradient(
+            circle at 100% 0%,
+            rgba(244,207,112,.15),
+            transparent 40%
+        ),
+        linear-gradient(
+            135deg,
+            #18241d,
+            #0b1510
+        );
+
+    border:
+        1px solid rgba(244,207,112,.17);
+
+    box-shadow:
+        var(--gold-glow);
+}
+
+
+.motivation-decoration {
+    position: absolute;
+
+    right: 12px;
+    bottom: -30px;
+
+    font-size: 120px;
+
+    color: rgba(244,207,112,.035);
+
+    pointer-events: none;
+}
+
+
+.motivation-icon {
+    flex-shrink: 0;
+
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 16px;
+
+    color: var(--gold);
+
+    background:
+        rgba(244,207,112,.08);
+
+    border:
+        1px solid rgba(244,207,112,.15);
+}
+
+
+.motivation-content {
+    position: relative;
+    z-index: 1;
+}
+
+
+.motivation-content > span {
+    color: var(--gold);
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+
+.motivation-content h2 {
+    margin-top: 3px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 20px;
+}
+
+
+.motivation-content p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   STREAK SECTION
+========================================================= */
+
+.streak-section {
+    margin-top: 28px;
+
+    padding: 21px;
+
+    border-radius: var(--radius-xl);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.015)
+        );
+
+    border:
+        1px solid rgba(255,255,255,.065);
+}
+
+
+.streak-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.streak-heading > i {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 15px;
+
+    color: var(--gold);
+
+    background:
+        rgba(244,207,112,.08);
+
+    box-shadow:
+        var(--gold-glow);
+}
+
+
+.streak-days {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+
+    gap: 7px;
+
+    margin-top: 20px;
+}
+
+
+.streak-day {
+    min-height: 54px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 4px;
+
+    border-radius: 14px;
+
+    color: var(--text-muted);
+
+    background:
+        rgba(255,255,255,.025);
+
+    border:
+        1px solid rgba(255,255,255,.05);
+}
+
+
+.streak-day span {
+    font-size: 9px;
+    font-weight: 700;
+}
+
+
+.streak-day i {
+    font-size: 10px;
+}
+
+
+.streak-day.completed {
+    color: var(--gold-light);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(244,207,112,.13),
+            rgba(244,207,112,.035)
+        );
+
+    border-color:
+        rgba(244,207,112,.16);
+}
+
+
+.streak-day.current {
+    color: var(--emerald-light);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,200,137,.14),
+            rgba(25,200,137,.035)
+        );
+
+    border-color:
+        rgba(25,200,137,.18);
+
+    box-shadow:
+        0 0 18px rgba(25,200,137,.08);
+}
+
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.goals-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    margin-top: 25px;
+
+    color: var(--text-muted);
+
+    text-align: center;
+
+    font-size: 9px;
+}
+
+
+.goals-note i {
+    color: var(--emerald);
+}
+
+
+/* =========================================================
+   CUSTOMIZE OVERLAY
+========================================================= */
+
+.goals-overlay {
+    position: fixed;
+    inset: 0;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,.72);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        opacity .25s ease;
+}
+
+
+.goals-overlay.hidden {
+    display: none;
+}
+
+
+.goals-sheet {
+    width: min(100%, 760px);
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    padding: 10px 20px 28px;
+
+    border-radius:
+        30px 30px 0 0;
+
+    background:
+        radial-gradient(
+            circle at 90% 0%,
+            rgba(244,207,112,.09),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #0e2119,
+            #07120e
+        );
+
+    border-top:
+        1px solid rgba(244,207,112,.22);
+
+    box-shadow:
+        0 -30px 80px rgba(0,0,0,.55);
+}
+
+
+.sheet-handle {
+    width: 42px;
+    height: 4px;
+
+    margin: 3px auto 23px;
+
+    border-radius: 99px;
+
+    background:
+        rgba(255,255,255,.18);
+}
+
+
+.sheet-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.sheet-header > div > span {
+    color: var(--gold);
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+.sheet-header h2 {
+    margin-top: 5px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 25px;
+}
+
+
+.sheet-header button {
+    width: 42px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    color: var(--text);
+
+    background:
+        rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+}
+
+
+.sheet-description {
+    margin-top: 10px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CUSTOM GOALS
+========================================================= */
+
+.custom-goal-list {
+    margin-top: 20px;
+}
+
+
+.custom-goal-option {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    min-height: 68px;
+
+    padding: 10px 12px;
+
+    margin-bottom: 8px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid rgba(255,255,255,.055);
+}
+
+
+.custom-goal-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.custom-check {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+
+    color: transparent;
+
+    background:
+        rgba(255,255,255,.04);
+
+    border:
+        1px solid rgba(255,255,255,.09);
+}
+
+
+.custom-check i {
+    font-size: 12px;
+}
+
+
+.custom-goal-option input:checked
+~ .custom-check {
+    color: #07120e;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--gold-light),
+            var(--gold)
+        );
+
+    border-color:
+        transparent;
+
+    box-shadow:
+        0 0 15px rgba(244,207,112,.18);
+}
+
+
+.custom-goal-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.custom-goal-text strong {
+    font-size: 13px;
+}
+
+
+.custom-goal-text small {
+    color: var(--text-muted);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.save-goals-btn {
+    width: 100%;
+
+    min-height: 52px;
+
+    margin-top: 14px;
+
+    border-radius: 16px;
+
+    color: #07120e;
+
+    font-weight: 700;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8a1,
+            #f4cf70 48%,
+            #c8993e
+        );
+
+    box-shadow:
+        0 12px 30px rgba(244,207,112,.17);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+.save-goals-btn:active {
+    transform: scale(.98);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .goals-main {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+
+    .goals-header {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+
+    .goals-hero {
+        padding: 24px 18px 21px;
+        border-radius: 26px;
+    }
+
+
+    .hero-top h1 {
+        font-size: 31px;
+    }
+
+
+    .hero-top p {
+        font-size: 11px;
+        max-width: 225px;
+    }
+
+
+    .streak-badge {
+        min-width: 70px;
+        height: 82px;
+    }
+
+
+    .goal-card {
+        padding: 14px;
+        gap: 11px;
+    }
+
+
+    .goal-icon {
+        width: 44px;
+        height: 44px;
+
+        border-radius: 14px;
+    }
+
+
+    .goal-heading h3 {
+        font-size: 14px;
+    }
+
+
+    .goal-footer > span {
+        max-width: 150px;
+    }
+
+
+    .section-title h2,
+    .streak-heading h2 {
+        font-size: 22px;
+    }
+
+
+    .edit-goals-btn {
+        padding: 8px 9px;
+
+        font-size: 9px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL DEVICES
+========================================================= */
+
+@media (max-width: 360px) {
+
+    .hero-top {
+        flex-direction: column;
+    }
+
+
+    .streak-badge {
+        width: 100%;
+        height: 55px;
+
+        flex-direction: row;
+        gap: 7px;
+    }
+
+
+    .streak-badge span {
+        margin-left: 2px;
+    }
+
+
+    .goal-card {
+        padding: 12px;
+    }
+
+
+    .goal-footer {
+        align-items: flex-end;
+    }
+
+
+    .goal-footer > span {
+        max-width: 125px;
+    }
+
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 761px) {
+
+    .goals-main {
+        padding-bottom: 100px;
+    }
+
+
+    .goals-hero {
+        margin-top: 28px;
+    }
+
+
+    .goal-card:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 20px 45px rgba(0,0,0,.25),
+            0 0 25px rgba(244,207,112,.035);
+    }
+
+}
