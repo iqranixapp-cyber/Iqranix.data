@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
 
@@ -9,16 +8,12 @@
         content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     >
 
-    <meta name="theme-color" content="#0B6E4F">
-
     <meta
-        name="description"
-        content="Iqranix precision Qibla Finder."
+        name="theme-color"
+        content="#0B6E4F"
     >
 
-    <title>Qibla Finder • Iqranix</title>
-
-    <link rel="stylesheet" href="qibla.css">
+    <title>Qibla — Iqranix</title>
 
     <link
         rel="preconnect"
@@ -26,252 +21,409 @@
     >
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        href="qibla.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 </head>
 
 <body>
 
-<header class="qibla-header">
+<div class="qibla-page">
 
-    <a href="index.html" class="back-button">
-        <i class="fa-solid fa-arrow-left"></i>
-    </a>
+    <!-- HEADER -->
+    <header class="qibla-header">
 
-    <div class="header-content">
+        <button
+            class="header-button"
+            id="backButton"
+            type="button"
+            aria-label="Go back"
+        >
+            <i class="fas fa-arrow-left"></i>
+        </button>
 
-        <div class="header-icon">
-            <i class="fa-solid fa-compass"></i>
+        <div class="header-title">
+            <strong>Qibla</strong>
+            <span>Find the direction of the Kaaba</span>
         </div>
 
-        <div>
-            <h1>Qibla Finder</h1>
-            <p>Precision direction to the Kaaba</p>
+        <button
+            class="header-button"
+            id="infoButton"
+            type="button"
+            aria-label="Qibla information"
+        >
+            <i class="fas fa-circle-info"></i>
+        </button>
+
+    </header>
+
+
+    <!-- LOCATION STATUS -->
+    <section class="location-card">
+
+        <div class="location-icon">
+            <i class="fas fa-location-dot"></i>
+        </div>
+
+        <div class="location-content">
+            <strong id="locationTitle">
+                Detecting location...
+            </strong>
+
+            <span id="locationDetails">
+                High-accuracy location is required
+            </span>
+        </div>
+
+        <button
+            id="refreshLocation"
+            class="refresh-button"
+            type="button"
+            aria-label="Refresh location"
+        >
+            <i class="fas fa-rotate"></i>
+        </button>
+
+    </section>
+
+
+    <!-- MAIN COMPASS -->
+    <main class="compass-section">
+
+        <div class="compass-heading">
+            <span>QIBLA DIRECTION</span>
+
+            <strong id="bearingValue">
+                --°
+            </strong>
+        </div>
+
+
+        <div
+            class="compass"
+            id="compass"
+        >
+
+            <!-- Compass degree markings -->
+            <div
+                class="compass-ring"
+                id="compassRing"
+            >
+
+                <span class="direction north">
+                    N
+                </span>
+
+                <span class="direction east">
+                    E
+                </span>
+
+                <span class="direction south">
+                    S
+                </span>
+
+                <span class="direction west">
+                    W
+                </span>
+
+                <div class="degree-mark mark-1"></div>
+                <div class="degree-mark mark-2"></div>
+                <div class="degree-mark mark-3"></div>
+                <div class="degree-mark mark-4"></div>
+                <div class="degree-mark mark-5"></div>
+                <div class="degree-mark mark-6"></div>
+                <div class="degree-mark mark-7"></div>
+                <div class="degree-mark mark-8"></div>
+
+            </div>
+
+
+            <!-- QIBLA POINTER -->
+            <div
+                class="qibla-pointer"
+                id="qiblaPointer"
+            >
+
+                <div class="pointer-glow"></div>
+
+                <div class="pointer-arrow">
+                    <i class="fas fa-kaaba"></i>
+                </div>
+
+            </div>
+
+
+            <!-- CENTER -->
+            <div class="compass-center">
+
+                <div class="kaaba-symbol">
+                    <i class="fas fa-kaaba"></i>
+                </div>
+
+                <span id="alignmentText">
+                    Waiting for compass
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ALIGNMENT STATUS -->
+        <div
+            class="alignment-card"
+            id="alignmentCard"
+        >
+
+            <div
+                class="status-dot"
+                id="statusDot"
+            ></div>
+
+            <div>
+                <strong id="statusTitle">
+                    Calibrating compass
+                </strong>
+
+                <span id="statusMessage">
+                    Move your phone slowly if necessary.
+                </span>
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- QIBLA INFORMATION -->
+    <section class="details-card">
+
+        <div class="detail-item">
+
+            <div class="detail-icon">
+                <i class="fas fa-compass"></i>
+            </div>
+
+            <div>
+                <span>Qibla bearing</span>
+                <strong id="qiblaBearing">
+                    --°
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <div class="detail-icon">
+                <i class="fas fa-location-crosshairs"></i>
+            </div>
+
+            <div>
+                <span>Your coordinates</span>
+                <strong id="coordinates">
+                    Detecting...
+                </strong>
+            </div>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <div class="detail-icon">
+                <i class="fas fa-route"></i>
+            </div>
+
+            <div>
+                <span>Distance to Kaaba</span>
+                <strong id="distance">
+                    Calculating...
+                </strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CALIBRATION -->
+    <section
+        class="calibration-card"
+        id="calibrationCard"
+    >
+
+        <div class="calibration-icon">
+            <i class="fas fa-mobile-screen-button"></i>
+        </div>
+
+        <div class="calibration-content">
+
+            <strong>
+                Compass accuracy
+            </strong>
+
+            <p id="accuracyText">
+                Waiting for device compass...
+            </p>
+
+            <button
+                id="calibrateButton"
+                type="button"
+            >
+                <i class="fas fa-compass"></i>
+                Calibrate Compass
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOCATION BUTTON -->
+    <button
+        class="primary-button"
+        id="enableLocation"
+        type="button"
+    >
+        <i class="fas fa-location-crosshairs"></i>
+        Enable Precise Location
+    </button>
+
+
+    <!-- SENSOR PERMISSION -->
+    <button
+        class="secondary-button"
+        id="enableCompass"
+        type="button"
+        hidden
+    >
+        <i class="fas fa-compass"></i>
+        Enable Compass
+    </button>
+
+
+    <!-- INSTRUCTIONS -->
+    <section class="tips-card">
+
+        <div class="tips-header">
+            <i class="fas fa-lightbulb"></i>
+            <strong>For better accuracy</strong>
+        </div>
+
+        <ul>
+
+            <li>
+                Keep your phone flat and level.
+            </li>
+
+            <li>
+                Keep it away from magnets,
+                speakers and metal objects.
+            </li>
+
+            <li>
+                If the direction jumps,
+                slowly move your phone in a
+                figure-eight motion.
+            </li>
+
+            <li>
+                GPS determines your position;
+                the compass sensor determines
+                the direction your phone is facing.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- INFO MODAL -->
+    <div
+        class="modal"
+        id="infoModal"
+        hidden
+    >
+
+        <div class="modal-overlay" id="closeInfo"></div>
+
+        <div class="modal-card">
+
+            <button
+                class="modal-close"
+                id="closeInfoButton"
+                type="button"
+                aria-label="Close"
+            >
+                <i class="fas fa-xmark"></i>
+            </button>
+
+            <div class="modal-icon">
+                <i class="fas fa-kaaba"></i>
+            </div>
+
+            <h2>
+                Accurate Qibla
+            </h2>
+
+            <p>
+                Iqranix calculates the initial bearing
+                from your precise location to the
+                Kaaba using spherical-earth
+                navigation mathematics.
+            </p>
+
+            <p>
+                Your device's compass sensors are
+                then used to determine which direction
+                your phone is facing.
+            </p>
+
+            <p>
+                For the best result, keep your phone
+                level and away from magnetic
+                interference.
+            </p>
+
+            <button
+                class="primary-button"
+                id="understandButton"
+                type="button"
+            >
+                Understood
+            </button>
+
         </div>
 
     </div>
 
-</header>
 
+    <!-- FOOTER -->
+    <footer>
+        <strong>Iqranix</strong>
+        <span>Find your way to the Qibla</span>
+    </footer>
 
-<main class="qibla-main">
-
-    <section class="intro-card">
-
-        <span class="eyebrow">
-            <i class="fa-solid fa-kaaba"></i>
-            PRECISION QIBLA
-        </span>
-
-        <h2>Find the Sacred Direction</h2>
-
-        <p>
-            Allow location and compass access. Hold your phone
-            horizontally and rotate slowly until the Qibla arrow
-            points straight ahead.
-        </p>
-
-    </section>
-
-
-    <section class="compass-card">
-
-        <div class="sensor-status">
-
-            <span id="statusDot"></span>
-
-            <span id="statusText">
-                Waiting for calibration
-            </span>
-
-        </div>
-
-
-        <div class="compass-wrapper">
-
-            <div
-                id="compassDial"
-                class="compass-dial"
-            >
-
-                <div class="north">N</div>
-                <div class="east">E</div>
-                <div class="south">S</div>
-                <div class="west">W</div>
-
-                <div class="degree d0">0°</div>
-                <div class="degree d90">90°</div>
-                <div class="degree d180">180°</div>
-                <div class="degree d270">270°</div>
-
-                <div class="dial-ring"></div>
-
-                <div class="center-kaaba">
-                    <i class="fa-solid fa-kaaba"></i>
-                </div>
-
-            </div>
-
-
-            <div
-                id="qiblaArrow"
-                class="qibla-arrow"
-            >
-
-                <div class="arrow-head">
-                    <i class="fa-solid fa-location-arrow"></i>
-                </div>
-
-                <span>QIBLA</span>
-
-            </div>
-
-        </div>
-
-
-        <div class="bearing">
-
-            <span>TRUE QIBLA BEARING</span>
-
-            <strong id="qiblaBearing">
-                --.--
-            </strong>
-
-            <small>
-                degrees clockwise from true North
-            </small>
-
-        </div>
-
-
-        <div class="alignment">
-
-            <span>ALIGNMENT</span>
-
-            <strong id="alignmentValue">
-                --
-            </strong>
-
-        </div>
-
-
-        <button
-            id="startButton"
-            class="primary-button"
-        >
-
-            <i class="fa-solid fa-location-crosshairs"></i>
-
-            Start Precision Finder
-
-        </button>
-
-
-        <button
-            id="calibrateButton"
-            class="secondary-button"
-            hidden
-        >
-
-            <i class="fa-solid fa-arrows-rotate"></i>
-
-            Recalibrate
-
-        </button>
-
-    </section>
-
-
-    <section class="details-card">
-
-        <div class="detail">
-
-            <i class="fa-solid fa-location-dot"></i>
-
-            <div>
-
-                <span>LOCATION</span>
-
-                <strong id="locationText">
-                    Not detected
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <i class="fa-solid fa-compass"></i>
-
-            <div>
-
-                <span>DEVICE HEADING</span>
-
-                <strong id="headingText">
-                    --
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <div class="detail">
-
-            <i class="fa-solid fa-signal"></i>
-
-            <div>
-
-                <span>SENSOR STATUS</span>
-
-                <strong id="sensorText">
-                    Waiting
-                </strong>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <section class="instructions">
-
-        <h3>
-            For best accuracy
-        </h3>
-
-        <p>
-            Hold the phone flat, keep it away from magnets,
-            metal objects and wireless charging equipment,
-            and rotate slowly. If the compass appears unstable,
-            move the phone gently in a figure-eight motion.
-        </p>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <strong>🕌 IQRANIX</strong>
-
-    <p>Your Complete Islamic Companion</p>
-
-    <small>
-        Qibla calculated toward the Kaaba in Makkah.
-    </small>
-
-</footer>
+</div>
 
 
 <script src="qibla.js"></script>
