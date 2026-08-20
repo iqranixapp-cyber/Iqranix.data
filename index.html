@@ -12,12 +12,12 @@
 
     <meta
         name="theme-color"
-        content="#0B6E4F"
+        content="#071a14"
     >
 
     <meta
         name="description"
-        content="IQRANIX — Your complete Islamic companion for Quran, prayer, duas, Qibla, Fiqh, Seerah and more."
+        content="IQRANIX — A complete Islamic companion for worship, knowledge, community and spiritual growth."
     >
 
     <meta
@@ -27,7 +27,7 @@
 
     <meta
         name="apple-mobile-web-app-status-bar-style"
-        content="default"
+        content="black-translucent"
     >
 
     <meta
@@ -35,47 +35,16 @@
         content="IQRANIX"
     >
 
-    <title>IQRANIX — Islamic Companion</title>
+    <link rel="manifest" href="manifest.json">
 
-
-    <!-- =====================================================
-         MANIFEST
-    ====================================================== -->
-
-    <link
-        rel="manifest"
-        href="manifest.json"
-    >
-
-
-    <!-- =====================================================
-         HOME CSS
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="home.css"
-    >
-
-
-    <!-- =====================================================
-         FONT AWESOME
-    ====================================================== -->
+    <link rel="stylesheet" href="home.css">
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
 
-
-    <!-- =====================================================
-         GOOGLE FONTS
-    ====================================================== -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -87,975 +56,437 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
         rel="stylesheet"
     >
-<!-- IQRANIX PWA -->
-<link rel="manifest" href="/Iqranix.data/manifest.json">
-<meta name="theme-color" content="#0B6E4F">
 
-<script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/Iqranix.data/sw.js", {
-      scope: "/Iqranix.data/"
-    })
-    .then(reg => {
-      console.log("Iqranix Service Worker registered:", reg.scope);
-    })
-    .catch(err => {
-      console.error("Iqranix Service Worker registration failed:", err);
-    });
-  });
-}
-</script>
+    <title>IQRANIX — Islamic Companion</title>
+
 </head>
 
 
 <body>
 
-
-    <!-- =====================================================
-         TERMS CHECK
-    ====================================================== -->
-
-    <script>
-
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
-
-                const accepted =
-                    localStorage.getItem(
-                        "iqranix_terms_accepted"
-                    );
-
-                if (accepted !== "true") {
-
-                    window.location.replace(
-                        "welcome.html"
-                    );
-
-                }
-
-            }
-        );
-
-    </script>
-
+<div class="app-shell">
 
 
     <!-- =====================================================
-         FULL PAGE BACKGROUND
+         TOP BAR
     ====================================================== -->
 
-    <div class="page-background"></div>
+    <header class="topbar">
 
-    <div class="page-overlay"></div>
+        <div class="brand">
 
-
-
-    <!-- =====================================================
-         APP HEADER
-    ====================================================== -->
-
-    <header class="app-header">
-
-        <div class="brand-area">
-
-            <div class="brand-icon">
-
-                <i class="fa-solid fa-mosque"></i>
-
+            <div class="brand-mark">
+                <i class="fa-solid fa-moon"></i>
             </div>
-
 
             <div class="brand-text">
 
-                <h1>
-                    IQRANIX
-                </h1>
+                <strong>IQRANIX</strong>
 
-                <p>
-                    Your Islamic companion
-                </p>
+                <span>
+                    Your Islamic journey
+                </span>
 
             </div>
 
         </div>
 
 
-        <a
-            href="settings.html"
-            class="settings-button"
-            aria-label="Open Settings"
-        >
+        <div class="top-actions">
 
-            <i class="fa-solid fa-gear"></i>
+            <button
+                type="button"
+                class="icon-button"
+                id="menuButton"
+                aria-label="Open menu"
+                aria-expanded="false"
+            >
 
-        </a>
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <a
+                href="notifications.html"
+                class="icon-button notification-button"
+                aria-label="Notifications"
+            >
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="notification-dot"></span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="profile-button"
+                aria-label="Profile"
+            >
+
+                <i class="fa-solid fa-user"></i>
+
+            </a>
+
+        </div>
 
     </header>
 
 
 
     <!-- =====================================================
-         MAIN CONTENT
+         SIDE MENU
     ====================================================== -->
 
-    <main class="home-container">
+    <aside
+        class="home-menu"
+        id="homeMenu"
+        aria-hidden="true"
+    >
 
+        <div class="home-menu-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    IQRANIX
+                </span>
+
+                <h2>
+                    Menu
+                </h2>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="menu-close"
+                id="closeMenu"
+                aria-label="Close menu"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <nav class="home-menu-links">
+
+            <a href="profile.html">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="activity.html">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    My Activity
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="achievements.html">
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <span>
+                    Achievements
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="goals.html">
+
+                <i class="fa-solid fa-bullseye"></i>
+
+                <span>
+                    Daily Goals
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="settings.html">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <div
+        class="menu-backdrop"
+        id="menuBackdrop"
+        hidden
+    ></div>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main>
 
 
         <!-- =================================================
-             WELCOME / MOSQUE SUNSET HERO
-             
-             IMAGE REQUIRED:
-             mosque-sunset.jpg
-
-             Put it in the SAME folder as index.html.
+             WELCOME HERO
         ================================================== -->
 
-        <section class="welcome-card">
+        <section class="hero-section image-ready welcome-banner">
+
+            <div class="hero-image"></div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-glow"></div>
 
 
-            <div class="welcome-image"></div>
+            <div class="hero-content">
 
-            <div class="welcome-image-overlay"></div>
-
-
-            <div class="welcome-decoration"></div>
-
-
-            <div class="arabic-greeting">
-
-                السَّلَامُ عَلَيْكُمْ
-
-            </div>
-
-
-            <div class="welcome-content">
-
-
-                <span class="welcome-small">
-
-                    ASSALAMU ALAIKUM 👋
-
+                <span class="eyebrow">
+                    ASSALAMU ALAIKUM
                 </span>
 
-
-                <h2>
-
-                    Welcome to IQRANIX
-
-                </h2>
-
+                <h1>
+                    Welcome back,
+                    <span id="user-name">
+                        Friend
+                    </span>
+                </h1>
 
                 <p>
-
-                    May Allah bless your day with
-                    peace, guidance and barakah.
-
+                    May Allah fill your day with
+                    iman, peace and barakah.
                 </p>
 
 
-                <a
-                    href="quran.html"
-                    class="hero-button"
-                >
+                <div class="hero-date">
 
-                    <span>
-                        Begin Your Journey
+                    <span id="gregorian-date">
+                        Loading date...
                     </span>
 
-                    <i class="fa-solid fa-arrow-right"></i>
+                    <span class="date-divider">
+                        •
+                    </span>
 
-                </a>
+                    <span id="hijri-date">
+                        Loading Hijri date...
+                    </span>
 
+                </div>
 
             </div>
 
+
+            <div class="hero-moon">
+
+                <div class="moon-glow">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                </div>
+
+            </div>
 
         </section>
 
 
 
         <!-- =================================================
-             NEXT PRAYER
+             WORSHIP
         ================================================== -->
 
-        <a
-            href="prayer.html"
-            class="next-prayer-card"
-        >
+        <section class="worship-card">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        TODAY
+                    </span>
+
+                    <h2>
+                        Your Worship
+                    </h2>
+
+                </div>
 
 
-            <div class="next-prayer-icon">
+                <a href="activity.html">
 
-                <i class="fa-solid fa-mosque"></i>
+                    View activity
 
-            </div>
-
-
-            <div class="next-prayer-content">
-
-
-                <span class="section-label">
-                    PRAYER
-                </span>
-
-
-                <h2>
-                    Prayer Times
-                </h2>
-
-
-                <p id="home-location">
-                    Your location
-                </p>
-
-
-                <strong id="home-next-prayer">
-                    Next Prayer
-                </strong>
-
-            </div>
-
-
-            <div
-                class="next-prayer-time"
-                id="home-prayer-time"
-            >
-                --:--
-            </div>
-
-
-            <div class="card-arrow">
-
-                <i class="fa-solid fa-arrow-right"></i>
-
-            </div>
-
-
-        </a>
-
-
-
-        <!-- =================================================
-             EXPLORE
-        ================================================== -->
-
-        <section class="explore-section">
-
-
-            <div class="section-heading">
-
-                <span class="section-label">
-                    DISCOVER
-                </span>
-
-
-                <h2>
-                    Explore IQRANIX
-                </h2>
-
-
-                <p>
-                    Everything you need for your Islamic journey.
-                </p>
-
-            </div>
-
-
-
-            <div class="premium-card-grid">
-
-
-
-                <!-- QURAN -->
-
-                <a
-                    href="quran.html"
-                    class="premium-card card-quran"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-book-quran"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            QURAN
-                        </span>
-
-
-                        <h3>
-                            Holy Quran
-                        </h3>
-
-
-                        <p>
-                            Read and listen to all 114 Surahs.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
+                    <i class="fa-solid fa-arrow-right"></i>
 
                 </a>
 
+            </div>
 
 
-                <!-- PRAYER -->
+            <div class="worship-grid">
+
 
                 <a
                     href="prayer.html"
-                    class="premium-card card-prayer"
+                    class="worship-item"
                 >
 
-                    <div class="card-icon">
+                    <div class="worship-icon prayer-icon">
 
                         <i class="fa-solid fa-kaaba"></i>
 
                     </div>
 
 
-                    <div class="card-body">
+                    <div>
 
-                        <span class="card-label">
-                            WORSHIP
+                        <span>
+                            Prayer
                         </span>
 
-
-                        <h3>
-                            Prayer Times
-                        </h3>
-
-
-                        <p>
-                            View today's Salah schedule.
-                        </p>
+                        <strong id="next-prayer">
+                            Loading...
+                        </strong>
 
                     </div>
 
 
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
 
                 </a>
 
 
-
-                <!-- DUAS -->
-
-                <a
-                    href="duas.html"
-                    class="premium-card card-duas"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-hands-praying"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            SUPPLICATIONS
-                        </span>
-
-
-                        <h3>
-                            Daily Duas
-                        </h3>
-
-
-                        <p>
-                            Authentic supplications for everyday life.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- QIBLA -->
-
-                <a
-                    href="qibla.html"
-                    class="premium-card card-qibla"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-compass"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            DIRECTION
-                        </span>
-
-
-                        <h3>
-                            Qibla
-                        </h3>
-
-
-                        <p>
-                            Find the direction of the Kaaba.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- TASBIH -->
 
                 <a
                     href="tasbih.html"
-                    class="premium-card card-tasbih"
+                    class="worship-item"
                 >
 
-                    <div class="card-icon">
+                    <div class="worship-icon dhikr-icon">
 
                         <i class="fa-solid fa-circle-dot"></i>
 
                     </div>
 
 
-                    <div class="card-body">
+                    <div>
 
-                        <span class="card-label">
-                            DHIKR
+                        <span>
+                            Dhikr
                         </span>
 
-
-                        <h3>
-                            Tasbih
-                        </h3>
-
-
-                        <p>
-                            Count your dhikr and remembrance.
-                        </p>
+                        <strong>
+                            <span id="dhikr-count">
+                                0
+                            </span>
+                            today
+                        </strong>
 
                     </div>
 
 
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
 
                 </a>
 
 
-
-                <!-- HIJRI CALENDAR -->
 
                 <a
-                    href="hijri-calendar.html"
-                    class="premium-card card-calendar"
+                    href="goals.html"
+                    class="worship-item"
                 >
 
-                    <div class="card-icon">
+                    <div class="worship-icon goal-icon">
 
-                        <i class="fa-solid fa-calendar-days"></i>
+                        <i class="fa-solid fa-bullseye"></i>
 
                     </div>
 
 
-                    <div class="card-body">
+                    <div>
 
-                        <span class="card-label">
-                            CALENDAR
+                        <span>
+                            Daily Goals
                         </span>
 
-
-                        <h3>
-                            Hijri Calendar
-                        </h3>
-
-
-                        <p>
-                            Explore Islamic dates and occasions.
-                        </p>
+                        <strong>
+                            <span id="goal-progress">
+                                0
+                            </span>%
+                        </strong>
 
                     </div>
 
 
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
 
                 </a>
 
 
-
-                <!-- PROPHETS -->
-
-                <a
-                    href="prophets.html"
-                    class="premium-card card-prophets"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-star-and-crescent"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            STORIES
-                        </span>
-
-
-                        <h3>
-                            Prophets & Messengers
-                        </h3>
-
-
-                        <p>
-                            Discover the stories and lessons of the Prophets.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- SEERAH -->
-
-                <a
-                    href="seerah.html"
-                    class="premium-card card-seerah"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-book-open"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            SEERAH
-                        </span>
-
-
-                        <h3>
-                            Life of the Prophet ﷺ
-                        </h3>
-
-
-                        <p>
-                            Explore the life, character and lessons.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- FIQH -->
-
-                <a
-                    href="fiqh.html"
-                    class="premium-card card-fiqh"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-scale-balanced"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            KNOWLEDGE
-                        </span>
-
-
-                        <h3>
-                            Fiqh
-                        </h3>
-
-
-                        <p>
-                            Explore Islamic rulings and guidance.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- NASHEEDS -->
-
-                <a
-                    href="nasheeds.html"
-                    class="premium-card card-nasheeds"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-music"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            AUDIO
-                        </span>
-
-
-                        <h3>
-                            Islamic Nasheeds
-                        </h3>
-
-
-                        <p>
-                            Listen to Islamic audio and reminders.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- WALLPAPERS -->
-
-                <a
-                    href="wallpapers.html"
-                    class="premium-card card-wallpapers"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-image"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            MEDIA
-                        </span>
-
-
-                        <h3>
-                            Islamic Wallpapers
-                        </h3>
-
-
-                        <p>
-                            Beautiful Islamic wallpapers for your device.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- RINGTONES -->
-
-                <a
-                    href="ringtones.html"
-                    class="premium-card card-ringtones"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-bell"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            AUDIO
-                        </span>
-
-
-                        <h3>
-                            Islamic Ringtones
-                        </h3>
-
-
-                        <p>
-                            Discover Islamic sounds and reminders.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- ISLAMIC QUIZ -->
-
-                <a
-                    href="quiz.html"
-                    class="premium-card card-quiz"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-brain"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            KNOWLEDGE
-                        </span>
-
-
-                        <h3>
-                            Islamic Quiz
-                        </h3>
-
-
-                        <p>
-                            Challenge yourself with Islamic questions.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- MOSQUES -->
-
-                <a
-                    href="mosques.html"
-                    class="premium-card card-mosques"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            COMMUNITY
-                        </span>
-
-
-                        <h3>
-                            Nearby Mosques
-                        </h3>
-
-
-                        <p>
-                            Find mosques and Islamic places around you.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
-
-                <!-- REMINDERS -->
 
                 <a
                     href="reminders.html"
-                    class="premium-card card-reminders"
+                    class="worship-item"
                 >
 
-                    <div class="card-icon">
+                    <div class="worship-icon reminder-icon">
 
                         <i class="fa-solid fa-bell"></i>
 
                     </div>
 
 
-                    <div class="card-body">
+                    <div>
 
-                        <span class="card-label">
-                            REMINDERS
+                        <span>
+                            Reminder
                         </span>
 
-
-                        <h3>
-                            Daily Reminders
-                        </h3>
-
-
-                        <p>
-                            Stay connected with beneficial reminders.
-                        </p>
+                        <strong>
+                            Stay mindful
+                        </strong>
 
                     </div>
 
 
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
+                    <i class="fa-solid fa-chevron-right"></i>
 
                 </a>
-
-
-
-                <!-- BOOKMARKS -->
-
-                <a
-                    href="bookmarks.html"
-                    class="premium-card card-bookmarks"
-                >
-
-                    <div class="card-icon">
-
-                        <i class="fa-solid fa-bookmark"></i>
-
-                    </div>
-
-
-                    <div class="card-body">
-
-                        <span class="card-label">
-                            SAVED
-                        </span>
-
-
-                        <h3>
-                            Bookmarks
-                        </h3>
-
-
-                        <p>
-                            Quickly return to your saved content.
-                        </p>
-
-                    </div>
-
-
-                    <div class="card-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-                </a>
-
-
 
             </div>
 
@@ -1063,47 +494,705 @@ if ("serviceWorker" in navigator) {
 
 
 
-        <!-- =====================================================
-             GO PREMIUM
-        ====================================================== -->
+        <!-- =================================================
+             STREAK
+        ================================================== -->
 
-        <section class="premium-section">
+        <a
+            href="activity.html"
+            class="streak-card"
+        >
+
+            <div class="streak-fire">
+
+                <i class="fa-solid fa-fire"></i>
+
+            </div>
 
 
-            
-            <a
-    href="premium.html"
-    class="go-premium-card has-image"
->
+            <div class="streak-info">
+
+                <span>
+                    YOUR STREAK
+                </span>
+
+                <strong>
+                    <span id="streak-days">
+                        0
+                    </span>
+                    days
+                </strong>
+
+                <small>
+                    Keep going. Consistency is beloved.
+                </small>
+
+            </div>
 
 
-                <div class="premium-glow"></div>
+            <div class="streak-week">
+
+                <div class="day"><span>M</span></div>
+                <div class="day"><span>T</span></div>
+                <div class="day"><span>W</span></div>
+                <div class="day"><span>T</span></div>
+                <div class="day"><span>F</span></div>
+                <div class="day"><span>S</span></div>
+                <div class="day"><span>S</span></div>
+
+            </div>
+
+        </a>
 
 
-                <div class="premium-icon">
 
-                    <i class="fa-solid fa-crown"></i>
+        <!-- =================================================
+             QUICK ACCESS
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        QUICK ACCESS
+                    </span>
+
+                    <h2>
+                        Continue Your Journey
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-grid">
+
+
+                <a
+                    href="quran.html"
+                    class="quick-card image-card quran-card"
+                >
+
+                    <div class="card-image"></div>
+
+                    <div class="card-overlay"></div>
+
+
+                    <div class="quick-card-content">
+
+                        <div class="quick-icon">
+
+                            <i class="fa-solid fa-book-quran"></i>
+
+                        </div>
+
+                        <span>
+                            QURAN
+                        </span>
+
+                        <strong>
+                            Continue Reading
+                        </strong>
+
+                        <small>
+                            Your Quran journey
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="duas.html"
+                    class="quick-card image-card duas-card"
+                >
+
+                    <div class="card-image"></div>
+
+                    <div class="card-overlay"></div>
+
+
+                    <div class="quick-card-content">
+
+                        <div class="quick-icon">
+
+                            <i class="fa-solid fa-hands-praying"></i>
+
+                        </div>
+
+                        <span>
+                            DUAS
+                        </span>
+
+                        <strong>
+                            Daily Supplications
+                        </strong>
+
+                        <small>
+                            Strengthen your connection
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="hijri-calendar.html"
+                    class="quick-card image-card calendar-card"
+                >
+
+                    <div class="card-image"></div>
+
+                    <div class="card-overlay"></div>
+
+
+                    <div class="quick-card-content">
+
+                        <div class="quick-icon">
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                        </div>
+
+                        <span>
+                            CALENDAR
+                        </span>
+
+                        <strong>
+                            Islamic Calendar
+                        </strong>
+
+                        <small>
+                            Important Islamic dates
+                        </small>
+
+                    </div>
+
+                </a>
+
+
+
+                <a
+                    href="qibla.html"
+                    class="quick-card image-card qibla-card"
+                >
+
+                    <div class="card-image"></div>
+
+                    <div class="card-overlay"></div>
+
+
+                    <div class="quick-card-content">
+
+                        <div class="quick-icon">
+
+                            <i class="fa-solid fa-compass"></i>
+
+                        </div>
+
+                        <span>
+                            QIBLA
+                        </span>
+
+                        <strong>
+                            Find Qibla
+                        </strong>
+
+                        <small>
+                            Direction of the Kaaba
+                        </small>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             COMMUNITY
+        ================================================== -->
+
+        <section class="leaderboard-section">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        COMMUNITY
+                    </span>
+
+                    <h2>
+                        Quran Community
+                    </h2>
 
                 </div>
 
 
-                <div class="premium-content">
+                <a href="leaderboard.html">
+
+                    Full leaderboard
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </div>
 
 
-                    <span class="premium-label">
-                        IQRANIX PREMIUM
-                    </span>
+            <div class="leaderboard-card">
+
+                <div class="leaderboard-header">
+
+                    <div>
+
+                        <span>
+                            GLOBAL READING LEAGUE
+                        </span>
+
+                        <strong>
+                            Your community journey
+                        </strong>
+
+                    </div>
 
 
-                    <h2>
-                        Go Premium
-                    </h2>
+                    <div class="trophy">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="community-empty">
+
+                    <div class="community-empty-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Your community leaderboard
+                    </h3>
 
 
                     <p>
-                        Unlock a richer IQRANIX experience
-                        with premium features, exclusive
-                        content and more.
+                        Join the IQRANIX community to see
+                        real rankings, reading progress and
+                        friendly competition.
+                    </p>
+
+
+                    <a
+                        href="community.html"
+                        class="community-button"
+                    >
+
+                        Explore Community
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DAILY GOAL
+        ================================================== -->
+
+        <a
+            href="goals.html"
+            class="goal-card"
+        >
+
+            <div class="goal-icon-large">
+
+                <i class="fa-solid fa-star"></i>
+
+            </div>
+
+
+            <div class="goal-content">
+
+                <span>
+                    TODAY'S CHALLENGE
+                </span>
+
+                <h2>
+                    Make today meaningful.
+                </h2>
+
+                <p>
+                    Complete your worship goals and
+                    build a stronger daily routine.
+                </p>
+
+
+                <span class="goal-link">
+
+                    View My Goals
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </span>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- =================================================
+             FORGOTTEN UMMAH
+        ================================================== -->
+
+        <section class="forgotten-ummah-section">
+
+            <a
+                href="https://fundraise.matwproject.org/the-forgotten-ummah-bilal-athman"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="forgotten-ummah-card image-ready"
+            >
+
+                <div class="forgotten-image"></div>
+
+                <div class="forgotten-overlay"></div>
+
+
+                <div class="forgotten-ummah-content">
+
+                    <span class="eyebrow">
+                        SADAQAH • SUPPORT
+                    </span>
+
+                    <h2>
+                        The Forgotten Ummah
+                    </h2>
+
+                    <p>
+                        Stand with those in need and help
+                        make a difference.
+                    </p>
+
+
+                    <span class="forgotten-ummah-button">
+
+                        Support the Ummah
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+                </div>
+
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DISCOVER
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        DISCOVER
+                    </span>
+
+                    <h2>
+                        Islamic Knowledge
+                    </h2>
+
+                </div>
+
+
+                <a href="discover.html">
+                    See all
+                </a>
+
+            </div>
+
+
+            <div class="discovery-grid">
+
+
+                <a
+                    href="seerah.html"
+                    class="discovery-card"
+                >
+
+                    <div>
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>
+                        SEERAH
+                    </span>
+
+                    <strong>
+                        Life of the Prophet ﷺ
+                    </strong>
+
+                </a>
+
+
+
+                <a
+                    href="prophets.html"
+                    class="discovery-card"
+                >
+
+                    <div>
+                        <i class="fa-solid fa-star-and-crescent"></i>
+                    </div>
+
+                    <span>
+                        STORIES
+                    </span>
+
+                    <strong>
+                        Prophets & Messengers
+                    </strong>
+
+                </a>
+
+
+
+                <a
+                    href="fiqh.html"
+                    class="discovery-card"
+                >
+
+                    <div>
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+
+                    <span>
+                        FIQH
+                    </span>
+
+                    <strong>
+                        Islamic Guidance
+                    </strong>
+
+                </a>
+
+
+
+                <a
+                    href="quiz.html"
+                    class="discovery-card"
+                >
+
+                    <div>
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+
+                    <span>
+                        CHALLENGE
+                    </span>
+
+                    <strong>
+                        Islamic Knowledge Quiz
+                    </strong>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             ACHIEVEMENTS
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-top">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACHIEVEMENTS
+                    </span>
+
+                    <h2>
+                        Your Journey
+                    </h2>
+
+                </div>
+
+
+                <a href="achievements.html">
+                    See all
+                </a>
+
+            </div>
+
+
+            <div class="achievement-scroll">
+
+
+                <a
+                    href="achievements.html"
+                    class="achievement-card unlocked"
+                >
+
+                    <div class="achievement-image">
+                        🧠
+                    </div>
+
+                    <strong>
+                        First Steps
+                    </strong>
+
+                    <span>
+                        Start your journey
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="achievements.html"
+                    class="achievement-card"
+                >
+
+                    <div class="achievement-image">
+                        🔥
+                    </div>
+
+                    <strong>
+                        Consistent
+                    </strong>
+
+                    <span>
+                        7 day streak
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="achievements.html"
+                    class="achievement-card"
+                >
+
+                    <div class="achievement-image">
+                        📖
+                    </div>
+
+                    <strong>
+                        Reader
+                    </strong>
+
+                    <span>
+                        Read 10 Surahs
+                    </span>
+
+                </a>
+
+
+
+                <a
+                    href="achievements.html"
+                    class="achievement-card"
+                >
+
+                    <div class="achievement-image">
+                        🏆
+                    </div>
+
+                    <strong>
+                        Community
+                    </strong>
+
+                    <span>
+                        Join a group
+                    </span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PREMIUM
+        ================================================== -->
+
+        <section class="premium-section">
+
+            <a
+                href="premium.html"
+                class="premium-card image-ready"
+            >
+
+                <div class="premium-image"></div>
+
+                <div class="premium-overlay"></div>
+
+
+                <div class="premium-content">
+
+                    <div class="premium-stars">
+                        ✦ ✧ ✦
+                    </div>
+
+                    <div class="premium-crown">
+
+                        <i class="fa-solid fa-crown"></i>
+
+                    </div>
+
+
+                    <span class="eyebrow">
+                        IQRANIX PREMIUM
+                    </span>
+
+                    <h2>
+                        Go beyond the ordinary.
+                    </h2>
+
+                    <p>
+                        Unlock advanced spiritual tools,
+                        deeper insights, exclusive content
+                        and a richer IQRANIX experience.
                     </p>
 
 
@@ -1117,115 +1206,358 @@ if ("serviceWorker" in navigator) {
 
                 </div>
 
-
-                <div class="premium-stars">
-
-                    ✦
-
-                </div>
-
-
             </a>
-
 
         </section>
 
 
 
-        <!-- =====================================================
-             FOOTER
-        ====================================================== -->
+        <!-- =================================================
+             ACCOUNT
+        ================================================== -->
 
-        <footer class="home-footer">
+        <section
+            class="account-card"
+            id="account-card"
+        >
 
+            <div class="account-icon">
 
-            <div class="footer-logo">
-                IQRANIX
-            </div>
-
-
-            <p>
-                Your Islamic companion
-            </p>
-
-
-            <div class="footer-links">
-
-
-                <a href="privacy.html">
-                    Privacy
-                </a>
-
-
-                <a href="disclaimer.html">
-                    Disclaimer
-                </a>
-
-
-                <a href="contact.html">
-                    Contact
-                </a>
-
-
-                <a href="about.html">
-                    About
-                </a>
-
+                <i class="fa-solid fa-user-shield"></i>
 
             </div>
 
 
-            <p class="copyright">
+            <div class="account-main">
 
-                ©
-                <span id="current-year"></span>
-                IQRANIX.
-                All rights reserved.
+                <span class="eyebrow">
+                    YOUR IQRANIX ACCOUNT
+                </span>
 
-            </p>
+                <h2 id="account-title">
+                    Take your journey with you.
+                </h2>
+
+                <p id="account-description">
+                    Create an IQRANIX account or sign in
+                    to sync your goals, achievements,
+                    groups and progress across devices.
+                </p>
+
+            </div>
 
 
-        </footer>
+            <div
+                class="account-user"
+                id="account-user"
+                hidden
+            >
 
+                <img
+                    id="account-avatar"
+                    src="logo.png"
+                    alt="Profile"
+                >
+
+                <div>
+
+                    <strong id="account-user-name">
+                        Iqranix User
+                    </strong>
+
+                    <span id="account-user-email">
+                        user@example.com
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="account-actions">
+
+                <a
+                    href="login.html"
+                    class="primary-button"
+                    id="signin-link"
+                >
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                    Sign In
+
+                </a>
+
+
+                <a
+                    href="register.html"
+                    class="secondary-button"
+                    id="register-link"
+                >
+                    Create Account
+                </a>
+
+
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="signout-button"
+                    hidden
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Sign Out
+
+                </button>
+
+            </div>
+
+        </section>
 
     </main>
 
 
 
     <!-- =====================================================
-         HOME JAVASCRIPT
+         BOTTOM NAVIGATION
     ====================================================== -->
 
-    <script src="home.js"></script>
+    <nav class="bottom-nav">
+
+        <a
+            href="index.html"
+            class="active"
+        >
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>
+                Home
+            </span>
+
+        </a>
+
+
+        <a href="quran.html">
+
+            <i class="fa-solid fa-book-quran"></i>
+
+            <span>
+                Quran
+            </span>
+
+        </a>
+
+
+        <a href="community.html">
+
+            <i class="fa-solid fa-users"></i>
+
+            <span>
+                Community
+            </span>
+
+        </a>
+
+
+        <a href="discover.html">
+
+            <i class="fa-solid fa-compass"></i>
+
+            <span>
+                Discover
+            </span>
+
+        </a>
+
+
+        <a href="profile.html">
+
+            <i class="fa-solid fa-user"></i>
+
+            <span>
+                Profile
+            </span>
+
+        </a>
+
+    </nav>
+
+</div>
 
 
 
-    <!-- =====================================================
-         CURRENT YEAR
-    ====================================================== -->
+<script src="home.js"></script>
 
-    <script>
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            function () {
 
-                const year =
-                    document.getElementById(
-                        "current-year"
-                    );
+<!-- =====================================================
+     FIREBASE AUTHENTICATION
+====================================================== -->
 
-                if (year) {
+<script type="module">
 
-                    year.textContent =
-                        new Date().getFullYear();
+import {
+    auth
+} from "./firebase-config.js";
 
-                }
+import {
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
 
-            }
-        );
 
-    </script>
+const userName =
+    document.getElementById("user-name");
+
+const profileButton =
+    document.querySelector(".profile-button");
+
+const accountTitle =
+    document.getElementById("account-title");
+
+const accountDescription =
+    document.getElementById("account-description");
+
+const accountUser =
+    document.getElementById("account-user");
+
+const accountAvatar =
+    document.getElementById("account-avatar");
+
+const accountUserName =
+    document.getElementById("account-user-name");
+
+const accountUserEmail =
+    document.getElementById("account-user-email");
+
+const signinLink =
+    document.getElementById("signin-link");
+
+const registerLink =
+    document.getElementById("register-link");
+
+const signoutButton =
+    document.getElementById("signout-button");
+
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if (user) {
+
+            const displayName =
+                user.displayName ||
+                user.email?.split("@")[0] ||
+                "Friend";
+
+
+            userName.textContent =
+                displayName;
+
+
+            accountTitle.textContent =
+                `Welcome, ${displayName}.`;
+
+
+            accountDescription.textContent =
+                "Your Iqranix account is connected. Your journey can now be synced across your devices.";
+
+
+            accountUser.hidden = false;
+
+
+            accountUserName.textContent =
+                displayName;
+
+
+            accountUserEmail.textContent =
+                user.email || "";
+
+
+            accountAvatar.src =
+                user.photoURL ||
+                "logo.png";
+
+
+            signinLink.hidden = true;
+
+            registerLink.hidden = true;
+
+            signoutButton.hidden = false;
+
+
+            profileButton.href =
+                "profile.html";
+
+        }
+
+        else {
+
+            userName.textContent =
+                "Friend";
+
+
+            accountTitle.textContent =
+                "Take your journey with you.";
+
+
+            accountDescription.textContent =
+                "Create an IQRANIX account or sign in to sync your goals, achievements, groups and progress across devices.";
+
+
+            accountUser.hidden = true;
+
+
+            signinLink.hidden = false;
+
+            registerLink.hidden = false;
+
+            signoutButton.hidden = true;
+
+        }
+
+    }
+);
+
+
+signoutButton.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            signoutButton.disabled =
+                true;
+
+            await signOut(auth);
+
+            window.location.reload();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "IQRANIX sign-out error:",
+                error
+            );
+
+            signoutButton.disabled =
+                false;
+
+            alert(
+                "Unable to sign out right now. Please try again."
+            );
+
+        }
+
+    }
+);
+
+</script>
 
 
 </body>
