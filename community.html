@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#07131F">
+    <meta name="description" content="IQRANIX Community — Connect, learn and grow together.">
+
+    <title>IQRANIX Community</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <link rel="stylesheet" href="community.css">
+
+    <style>
+        html.community-lock,
+        html.community-lock body {
+            overflow: hidden;
+        }
+
+        #communityAccessLoader {
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(48,214,163,.16), transparent 35%),
+                #07131F;
+            color: white;
+        }
+
+        .access-loader-inner {
+            text-align: center;
+        }
+
+        .access-loader-symbol {
+            width: 82px;
+            height: 82px;
+            margin: 0 auto 20px;
+            display: grid;
+            place-items: center;
+            border-radius: 26px;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.055);
+            box-shadow: 0 0 50px rgba(48,214,163,.15);
+            font-size: 28px;
+            animation: accessPulse 1.7s infinite;
+        }
+
+        .access-loader-inner strong {
+            display: block;
+            font-size: 17px;
+        }
+
+        .access-loader-inner span {
+            display: block;
+            margin-top: 8px;
+            color: rgba(255,255,255,.55);
+            font-size: 13px;
+        }
+
+        @keyframes accessPulse {
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body class="community-locked">
+
+<div id="communityAccessLoader">
+    <div class="access-loader-inner">
+        <div class="access-loader-symbol">﷽</div>
+        <strong>Securing Community</strong>
+        <span>Checking your IQRANIX identity...</span>
+    </div>
+</div>
+
+
+<div class="community-app" id="communityApp" aria-hidden="true">
+
+    <!-- HEADER -->
+    <header class="community-header">
+
+        <div class="header-left">
+
+            <button class="icon-button" id="menuBtn" aria-label="Open menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="brand">
+                <div class="brand-symbol">﷽</div>
+
+                <div class="brand-text">
+                    <strong>IQRA<span>NIX</span></strong>
+                    <small>Community</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <button class="icon-button" id="communitySearchBtn" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+
+            <button class="icon-button notification-button" id="notificationBtn" aria-label="Notifications">
+                <i class="fa-regular fa-bell"></i>
+                <span class="notification-dot" id="notificationDot"></span>
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- SEARCH -->
+    <section class="community-search" id="communitySearch">
+
+        <div class="search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                id="communitySearchInput"
+                type="search"
+                placeholder="Search people, groups and posts..."
+                autocomplete="off"
+            >
+
+            <button id="closeSearchBtn" aria-label="Close search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+    </section>
+
+
+    <main class="community-main">
+
+        <!-- WELCOME -->
+        <section class="community-welcome">
+
+            <div class="welcome-copy">
+
+                <span class="welcome-label">
+                    ASSALAMU ALAIKUM
+                </span>
+
+                <h1>
+                    Welcome,
+                    <span id="welcomeUsername">Member</span>
+                </h1>
+
+                <p>
+                    A place to connect, learn and grow together
+                    for the sake of Allah.
+                </p>
+
+                <div class="welcome-meta">
+                    <span>
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Islamic community
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-heart"></i>
+                        Beneficial content
+                    </span>
+                </div>
+
+            </div>
+
+            <button class="profile-mini" id="profileMiniBtn" aria-label="Open profile">
+
+                <div class="profile-mini-avatar" id="profileAvatar">
+                    I
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+        </section>
+
+
+        <!-- COMMUNITY CODE -->
+        <section class="community-code">
+
+            <div class="code-icon">
+                <i class="fa-solid fa-moon"></i>
+            </div>
+
+            <div class="code-content">
+
+                <div class="code-title-row">
+                    <span class="code-label">COMMUNITY CODE</span>
+
+                    <span class="code-badge">
+                        <i class="fa-solid fa-check"></i>
+                        IQRANIX
+                    </span>
+                </div>
+
+                <h2>
+                    Keep this space beneficial.
+                </h2>
+
+                <p>
+                    IQRANIX is an Islamic community. Please share
+                    content that is respectful, beneficial and
+                    appropriate for the Ummah.
+                </p>
+
+                <p class="code-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Inappropriate or harmful content may result in
+                    account suspension. Serious or repeated violations
+                    may lead to permanent account disablement without
+                    reinstatement.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- STORIES -->
+        <section class="stories-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span>COMMUNITY STORIES</span>
+                    <h2>Moments from the Ummah</h2>
+                </div>
+
+                <button class="text-button" id="watchStories">
+                    View all
+                </button>
+
+            </div>
+
+            <div class="stories-row" id="storiesContainer"></div>
+
+        </section>
+
+
+        <!-- QUICK ACTIONS -->
+        <section class="community-actions">
+
+            <button class="action-card action-groups" id="groupsBtn">
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <div>
+                    <span>CONNECT</span>
+                    <strong>Groups</strong>
+                    <small>Grow together</small>
+                </div>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <button class="action-card action-leaderboard" id="leaderboardBtn">
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                    <span>GOODNESS</span>
+                    <strong>Leaderboard</strong>
+                    <small>See the rankings</small>
+                </div>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </section>
+
+
+        <!-- GROUPS -->
+        <section class="community-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span>FIND YOUR COMMUNITY</span>
+                    <h2>Groups</h2>
+                </div>
+
+                <button class="text-button" id="viewGroupsBtn">
+                    See all
+                </button>
+
+            </div>
+
+            <div class="groups-grid" id="communityGroups"></div>
+
+        </section>
+
+
+        <!-- FEED -->
+        <section class="community-section feed-section">
+
+            <div class="section-heading feed-heading">
+
+                <div>
+                    <span>UMMAH FEED</span>
+                    <h2>Beneficial moments</h2>
+                </div>
+
+                <button class="filter-button" id="filterBtn" aria-label="Filter feed">
+                    <i class="fa-solid fa-sliders"></i>
+                </button>
+
+            </div>
+
+
+            <div class="feed-tabs">
+
+                <button class="feed-tab active" data-tab="for-you">
+                    For You
+                </button>
+
+                <button class="feed-tab" data-tab="following">
+                    Following
+                </button>
+
+                <button class="feed-tab" data-tab="groups">
+                    Groups
+                </button>
+
+            </div>
+
+
+            <div class="community-filter-panel" id="communityFilterPanel">
+
+                <button data-filter="all">
+                    <i class="fa-solid fa-layer-group"></i>
+                    All
+                </button>
+
+                <button data-filter="groups">
+                    <i class="fa-solid fa-users"></i>
+                    Groups
+                </button>
+
+                <button data-filter="following">
+                    <i class="fa-solid fa-user-group"></i>
+                    Following
+                </button>
+
+            </div>
+
+
+            <div class="community-feed" id="communityFeed"></div>
+
+        </section>
+
+
+        <!-- REELS -->
+        <section class="reels-promo">
+
+            <div class="reels-promo-art">
+                <i class="fa-solid fa-play"></i>
+            </div>
+
+            <div class="reels-promo-content">
+
+                <span>WATCH & REFLECT</span>
+
+                <h2>IQRANIX Reels</h2>
+
+                <p>
+                    Short beneficial videos from the community.
+                </p>
+
+            </div>
+
+            <button id="reelsBtn">
+                Open Reels
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </section>
+
+
+        <!-- CREATE -->
+        <button class="floating-create" id="bottomCreate" aria-label="Create">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+    </main>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="community-bottom-nav">
+
+        <a href="index.html" class="bottom-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="community.html" class="bottom-item active">
+            <i class="fa-solid fa-users"></i>
+            <span>Community</span>
+        </a>
+
+        <a href="discover.html" class="bottom-item">
+            <div class="nav-orb">
+                <i class="fa-solid fa-compass"></i>
+            </div>
+            <span>Discover</span>
+        </a>
+
+        <a href="quran.html" class="bottom-item">
+            <i class="fa-solid fa-book-quran"></i>
+            <span>Quran</span>
+        </a>
+
+        <button class="bottom-item bottom-profile" id="bottomProfileBtn">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
+        </button>
+
+    </nav>
+
+
+    <!-- CREATE SHEET -->
+    <div class="sheet-overlay hidden" id="actionOverlay">
+
+        <div class="create-sheet">
+
+            <div class="sheet-handle"></div>
+
+            <div class="sheet-header">
+
+                <div>
+                    <span>CREATE</span>
+                    <h2>Share with the Ummah</h2>
+                </div>
+
+                <button id="closeActions" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+            <p class="sheet-note">
+                Share something beneficial, respectful and suitable
+                for an Islamic community.
+            </p>
+
+            <div class="create-options">
+
+                <button id="addStoryOption" class="create-option story-option">
+
+                    <div>
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </div>
+
+                    <span>Story</span>
+                    <small>Share a moment</small>
+
+                </button>
+
+
+                <button id="addPostOption" class="create-option post-option">
+
+                    <div>
+                        <i class="fa-solid fa-pen"></i>
+                    </div>
+
+                    <span>Post</span>
+                    <small>Share beneficial words</small>
+
+                </button>
+
+
+                <button id="createReelOption" class="create-option reel-option">
+
+                    <div>
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+
+                    <span>Reel</span>
+                    <small>Create a short video</small>
+
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- MENU -->
+    <div class="menu-overlay" id="communityMenuOverlay">
+
+        <aside class="community-menu">
+
+            <div class="menu-top">
+
+                <div class="menu-brand">
+
+                    <div class="menu-brand-symbol">﷽</div>
+
+                    <div>
+                        <strong>IQRANIX</strong>
+                        <span>Community</span>
+                    </div>
+
+                </div>
+
+                <button id="communityMenuClose" class="menu-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+            </div>
+
+
+            <button class="menu-profile" id="menuProfileBtn">
+
+                <div class="menu-avatar" id="menuAvatar">
+                    I
+                </div>
+
+                <div>
+                    <strong id="menuUsername">IQRANIX Member</strong>
+                    <span id="menuHandle">@member</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+
+            <div class="menu-links">
+
+                <button id="menuGroups">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Groups</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="menuMessages">
+                    <i class="fa-solid fa-message"></i>
+                    <span>Messages</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="menuReels">
+                    <i class="fa-solid fa-film"></i>
+                    <span>Reels</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="menuLeaderboard">
+                    <i class="fa-solid fa-trophy"></i>
+                    <span>Leaderboard</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="savedPostsMenu">
+                    <i class="fa-solid fa-bookmark"></i>
+                    <span>Saved Posts</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="notificationsMenu">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>Notifications</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+
+            <div class="menu-divider"></div>
+
+
+            <div class="menu-links">
+
+                <button id="menuSettings">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <button id="menuHelp">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <span>Help & Support</span>
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+            </div>
+
+
+            <button class="logout-button" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sign out
+            </button>
+
+        </aside>
+    </div>
+
+
+    <!-- TOAST -->
+    <div class="community-toast" id="communityToast">
+        <i id="toastIcon"></i>
+        <span id="toastMessage"></span>
+    </div>
+
+</div>
+
+
+<script type="module" src="community.js"></script>
+
+</body>
+</html>
