@@ -1,83 +1,77 @@
 "use strict";
 
 /*
-=========================================================
- IQRANIX PRECISION QIBLA ENGINE
-=========================================================
+===========================================================
+ IQRANIX QIBLA
+ Accurate GPS + Device Compass Qibla Finder
 
- Kaaba coordinates:
- latitude  = 21.422487°
- longitude = 39.826206°
-
- The geographic bearing is calculated using the
- initial great-circle bearing between the user's
- position and the Kaaba.
-
- The sensor portion deliberately does NOT assume that
- event.alpha is automatically a magnetic compass heading.
-=========================================================
+ Features:
+ - High accuracy GPS
+ - Great-circle bearing to Kaaba
+ - Distance to Kaaba
+ - Android/iOS compass support
+ - iOS motion permission
+ - Screen orientation correction
+ - Compass smoothing
+ - Qibla alignment detection
+ - Calibration guidance
+===========================================================
 */
 
 
-const KAABA = {
-    lat: 21.422487,
-    lon: 39.826206
-};
+/* =========================================================
+   CONSTANTS
+========================================================= */
 
+const KAABA_LAT = 21.422487;
+const KAABA_LON = 39.826206;
 
-const startButton =
-    document.getElementById("startButton");
+const EARTH_RADIUS_KM = 6371.0088;
 
-const calibrateButton =
-    document.getElementById("calibrateButton");
-
-const compassDial =
-    document.getElementById("compassDial");
-
-const qiblaArrow =
-    document.getElementById("qiblaArrow");
-
-const qiblaBearingElement =
-    document.getElementById("qiblaBearing");
-
-const alignmentElement =
-    document.getElementById("alignmentValue");
-
-const statusText =
-    document.getElementById("statusText");
-
-const statusDot =
-    document.getElementById("statusDot");
-
-const locationElement =
-    document.getElementById("locationText");
-
-const headingElement =
-    document.getElementById("headingText");
-
-const sensorElement =
-    document.getElementById("sensorText");
-
+let userLatitude = null;
+let userLongitude = null;
+let userAltitude = null;
 
 let qiblaBearing = null;
+let currentHeading = null;
+
+let compassStarted = false;
+let locationStarted = false;
+
+let lastRawHeading = null;
 let smoothedHeading = null;
-let sensorSamples = [];
-let running = false;
+
+let locationWatchId = null;
 
 
-/* =====================================================
-   ANGLE UTILITIES
-===================================================== */
+/* =========================================================
+   DOM HELPER
+========================================================= */
 
-function normalize(angle) {
+function $(id) {
+    return document.getElementById(id);
+}
 
-    angle %= 360;
 
-    if (angle < 0) {
-        angle += 360;
+/* =========================================================
+   NUMBER HELPERS
+========================================================= */
+
+function normalizeDegrees(value) {
+
+    value = Number(value);
+
+    if (!Number.isFinite(value)) {
+        return null;
     }
 
-    return angle;
+    value %= 360;
+
+    if (value < 0) {
+        value += 360;
+    }
+
+    return value;
 }
 
 
@@ -89,212 +83,466 @@ function shortestAngleDifference(a, b) {
 }
 
 
-/*
- Circular interpolation.
+/* =========================================================
+   DISTANCE
+========================================================= */
 
- This is important because 359° and 1° are
- only 2° apart, not 358° apart.
-*/
+function calculateDistance(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+) {
 
-function circularSmooth(previous, next, factor) {
+    const toRad =
+        Math.PI / 180;
 
-    if (previous === null) {
-        return normalize(next);
-    }
+    const φ1 =
+        lat1 * toRad;
 
-    const difference =
-        shortestAngleDifference(next, previous);
+    const φ2 =
+        lat2 * toRad;
 
-    return normalize(
-        previous + difference * factor
-    );
+    const Δφ =
+        (lat2 - lat1) * toRad;
+
+    const Δλ =
+        (lon2 - lon1) * toRad;
+
+    const a =
+        Math.sin(Δφ / 2) ** 2 +
+        Math.cos(φ1) *
+        Math.cos(φ2) *
+        Math.sin(Δλ / 2) ** 2;
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+    return EARTH_RADIUS_KM * c;
 }
 
 
-/* =====================================================
-   PRECISE GREAT-CIRCLE QIBLA BEARING
-===================================================== */
+/* =========================================================
+   QIBLA BEARING
+   Great-circle initial bearing
+========================================================= */
 
-function calculateQiblaBearing(latitude, longitude) {
+function calculateQiblaBearing(
+    latitude,
+    longitude
+) {
 
     const φ1 =
-        latitude * Math.PI / 180;
-
-    const φ2 =
-        KAABA.lat * Math.PI / 180;
-
-    const Δλ =
-        (KAABA.lon - longitude) *
+        latitude *
         Math.PI / 180;
 
+    const φ2 =
+        KAABA_LAT *
+        Math.PI / 180;
 
-    /*
-      Initial bearing formula:
-
-      θ =
-      atan2(
-          sin Δλ · cos φ2,
-          cos φ1 · sin φ2
-          -
-          sin φ1 · cos φ2 · cos Δλ
-      )
-    */
+    const Δλ =
+        (
+            KAABA_LON -
+            longitude
+        ) *
+        Math.PI / 180;
 
     const y =
         Math.sin(Δλ) *
         Math.cos(φ2);
 
-
     const x =
         Math.cos(φ1) *
-        Math.sin(φ2)
-        -
+        Math.sin(φ2) -
         Math.sin(φ1) *
         Math.cos(φ2) *
         Math.cos(Δλ);
 
+    const bearing =
+        Math.atan2(y, x) *
+        180 /
+        Math.PI;
 
-    const θ =
-        Math.atan2(y, x);
-
-
-    return normalize(
-        θ * 180 / Math.PI
+    return normalizeDegrees(
+        bearing
     );
 }
 
 
-/* =====================================================
-   STATUS
-===================================================== */
+/* =========================================================
+   CARDINAL DIRECTION
+========================================================= */
 
-function setStatus(message, active = false) {
+function getDirection(degrees) {
 
-    statusText.textContent = message;
+    degrees =
+        normalizeDegrees(degrees);
 
-    statusDot.classList.toggle(
-        "active",
-        active
-    );
+    if (degrees === null) {
+        return "--";
+    }
+
+    if (
+        degrees >= 337.5 ||
+        degrees < 22.5
+    ) {
+        return "N";
+    }
+
+    if (degrees < 67.5) {
+        return "NE";
+    }
+
+    if (degrees < 112.5) {
+        return "E";
+    }
+
+    if (degrees < 157.5) {
+        return "SE";
+    }
+
+    if (degrees < 202.5) {
+        return "S";
+    }
+
+    if (degrees < 247.5) {
+        return "SW";
+    }
+
+    if (degrees < 292.5) {
+        return "W";
+    }
+
+    return "NW";
 }
 
 
-/* =====================================================
+/* =========================================================
    LOCATION
-===================================================== */
+========================================================= */
 
 function requestLocation() {
 
-    return new Promise(
-        (resolve, reject) => {
+    if (!navigator.geolocation) {
 
-            if (!navigator.geolocation) {
-
-                reject(
-                    new Error(
-                        "Geolocation unavailable."
-                    )
-                );
-
-                return;
-            }
-
-
-            navigator.geolocation.getCurrentPosition(
-
-                resolve,
-
-                reject,
-
-                {
-                    enableHighAccuracy: true,
-                    timeout: 20000,
-                    maximumAge: 0
-                }
-
-            );
-
-        }
-    );
-}
-
-
-/* =====================================================
-   START
-===================================================== */
-
-async function startQibla() {
-
-    startButton.disabled = true;
-
-    setStatus(
-        "Acquiring precise GPS location..."
-    );
-
-
-    try {
-
-        const position =
-            await requestLocation();
-
-
-        const latitude =
-            position.coords.latitude;
-
-        const longitude =
-            position.coords.longitude;
-
-
-        qiblaBearing =
-            calculateQiblaBearing(
-                latitude,
-                longitude
-            );
-
-
-        qiblaBearingElement.textContent =
-            `${qiblaBearing.toFixed(2)}°`;
-
-
-        locationElement.textContent =
-            `${latitude.toFixed(5)}°, ${longitude.toFixed(5)}°`;
-
-
-        setStatus(
-            "Location acquired. Requesting compass..."
+        updateLocationUI(
+            "Location unavailable",
+            "This browser does not support GPS location."
         );
 
-
-        await requestCompass();
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        startButton.disabled = false;
-
-        setStatus(
-            "Unable to obtain your location."
-        );
-
-        sensorElement.textContent =
-            "Location unavailable";
-
+        return;
     }
 
+
+    updateLocationUI(
+        "Finding your location...",
+        "Requesting high-accuracy GPS position"
+    );
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        handleLocation,
+
+        handleLocationError,
+
+        {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 0
+        }
+
+    );
 }
 
 
-/* =====================================================
-   REQUEST COMPASS
-===================================================== */
+/* =========================================================
+   CONTINUOUS LOCATION
+========================================================= */
 
-async function requestCompass() {
+function startLocationWatch() {
+
+    if (!navigator.geolocation) {
+        return;
+    }
+
+    if (locationWatchId !== null) {
+        navigator.geolocation.clearWatch(
+            locationWatchId
+        );
+    }
+
+    locationWatchId =
+        navigator.geolocation.watchPosition(
+
+            handleLocation,
+
+            handleLocationError,
+
+            {
+                enableHighAccuracy: true,
+                timeout: 20000,
+                maximumAge: 5000
+            }
+
+        );
+
+    locationStarted = true;
+}
+
+
+/* =========================================================
+   LOCATION RESULT
+========================================================= */
+
+function handleLocation(position) {
+
+    const coords =
+        position.coords;
+
+    userLatitude =
+        Number(coords.latitude);
+
+    userLongitude =
+        Number(coords.longitude);
+
+    userAltitude =
+        Number.isFinite(
+            Number(coords.altitude)
+        )
+            ? Number(coords.altitude)
+            : null;
+
+
+    if (
+        !Number.isFinite(userLatitude) ||
+        !Number.isFinite(userLongitude)
+    ) {
+
+        updateLocationUI(
+            "Invalid location",
+            "Unable to read your GPS coordinates."
+        );
+
+        return;
+    }
+
+
+    qiblaBearing =
+        calculateQiblaBearing(
+            userLatitude,
+            userLongitude
+        );
+
+
+    const distance =
+        calculateDistance(
+            userLatitude,
+            userLongitude,
+            KAABA_LAT,
+            KAABA_LON
+        );
+
+
+    updateLocationUI(
+        "Location detected",
+        getLocationAccuracyText(
+            coords.accuracy
+        )
+    );
+
+
+    updateCoordinates();
+
+    updateQiblaDetails(
+        distance
+    );
+
+    updateBearingDisplay();
+
+    updatePointer();
+
+
+    if (!compassStarted) {
+
+        updateStatus(
+            "warning",
+            "Location found",
+            "Enable the compass to find Qibla."
+        );
+
+    }
+}
+
+
+/* =========================================================
+   LOCATION ERROR
+========================================================= */
+
+function handleLocationError(error) {
+
+    console.warn(
+        "Location error:",
+        error
+    );
+
+
+    let message =
+        "Unable to determine your location.";
+
+
+    if (error.code === 1) {
+
+        message =
+            "Location permission was denied.";
+
+    } else if (error.code === 2) {
+
+        message =
+            "Your location could not be determined.";
+
+    } else if (error.code === 3) {
+
+        message =
+            "Location request timed out.";
+    }
+
+
+    updateLocationUI(
+        "Location required",
+        message
+    );
+
+
+    updateStatus(
+        "warning",
+        "Location required",
+        "Enable precise location to calculate Qibla."
+    );
+}
+
+
+/* =========================================================
+   LOCATION UI
+========================================================= */
+
+function updateLocationUI(
+    title,
+    details
+) {
+
+    if ($("locationTitle")) {
+        $("locationTitle").textContent =
+            title;
+    }
+
+    if ($("locationDetails")) {
+        $("locationDetails").textContent =
+            details;
+    }
+}
+
+
+function getLocationAccuracyText(
+    accuracy
+) {
+
+    accuracy =
+        Number(accuracy);
+
+    if (!Number.isFinite(accuracy)) {
+        return "GPS location detected";
+    }
+
+    return (
+        `GPS accuracy ±${Math.round(accuracy)} m`
+    );
+}
+
+
+/* =========================================================
+   COORDINATES
+========================================================= */
+
+function updateCoordinates() {
+
+    if (!$("coordinates")) {
+        return;
+    }
+
+    $("coordinates").textContent =
+        `${userLatitude.toFixed(5)}, ${userLongitude.toFixed(5)}`;
+}
+
+
+/* =========================================================
+   QIBLA DETAILS
+========================================================= */
+
+function updateQiblaDetails(
+    distance
+) {
+
+    if ($("qiblaBearing")) {
+
+        $("qiblaBearing").textContent =
+            `${Math.round(qiblaBearing)}°`;
+    }
+
+
+    if ($("distance")) {
+
+        if (distance < 1) {
+
+            $("distance").textContent =
+                `${Math.round(distance * 1000)} m`;
+
+        } else {
+
+            $("distance").textContent =
+                `${distance.toFixed(1)} km`;
+        }
+    }
+}
+
+
+/* =========================================================
+   BEARING DISPLAY
+========================================================= */
+
+function updateBearingDisplay() {
+
+    if (!$("bearingValue")) {
+        return;
+    }
+
+    if (qiblaBearing === null) {
+
+        $("bearingValue").textContent =
+            "--°";
+
+        return;
+    }
+
+    $("bearingValue").textContent =
+        `${Math.round(qiblaBearing)}°`;
+}
+
+
+/* =========================================================
+   COMPASS PERMISSION
+========================================================= */
+
+async function requestCompassPermission() {
 
     /*
-      iOS Safari has an explicit permission API.
-    */
+     * iPhone/iPad Safari requires explicit
+     * DeviceOrientation permission.
+     */
 
     if (
         typeof DeviceOrientationEvent !==
@@ -306,351 +554,1068 @@ async function requestCompass() {
         try {
 
             const permission =
-                await DeviceOrientationEvent.requestPermission();
+                await DeviceOrientationEvent
+                    .requestPermission(
+                        true
+                    );
 
 
-            if (permission !== "granted") {
+            if (
+                permission !==
+                "granted"
+            ) {
 
-                throw new Error(
-                    "Compass permission denied."
+                updateStatus(
+                    "warning",
+                    "Compass permission denied",
+                    "Allow motion/orientation access in your browser."
                 );
 
+                return false;
             }
 
         } catch (error) {
 
-            console.error(error);
-
-            setStatus(
-                "Compass permission denied."
+            console.error(
+                "Compass permission:",
+                error
             );
 
-            startButton.disabled = false;
+            updateStatus(
+                "warning",
+                "Compass permission required",
+                "Please allow motion and orientation access."
+            );
 
-            return;
+            return false;
         }
     }
 
-
-    /*
-      Prefer absolute orientation.
-    */
-
-    window.addEventListener(
-        "deviceorientationabsolute",
-        processOrientation,
-        true
-    );
-
-
-    /*
-      Standard fallback.
-    */
-
-    window.addEventListener(
-        "deviceorientation",
-        processOrientation,
-        true
-    );
-
-
-    running = true;
-
-    startButton.hidden = true;
-
-    calibrateButton.hidden = false;
-
-    sensorElement.textContent =
-        "Listening";
-
-    setStatus(
-        "Compass active — hold phone flat.",
-        true
-    );
-
+    return true;
 }
 
 
-/* =====================================================
-   ORIENTATION PROCESSING
-===================================================== */
+/* =========================================================
+   START COMPASS
+========================================================= */
 
-function processOrientation(event) {
+async function startCompass() {
 
-    if (
-        !running ||
-        qiblaBearing === null
-    ) {
+    if (compassStarted) {
         return;
     }
 
 
-    let heading = null;
+    const permission =
+        await requestCompassPermission();
+
+
+    if (!permission) {
+        return;
+    }
+
+
+    if (
+        !window.DeviceOrientationEvent
+    ) {
+
+        updateStatus(
+            "warning",
+            "Compass unavailable",
+            "Your device/browser does not provide a compass sensor."
+        );
+
+        return;
+    }
 
 
     /*
-    -----------------------------------------------------
-    METHOD 1 — iOS / Safari calibrated heading
-    -----------------------------------------------------
-    */
+     * Prefer absolute orientation.
+     *
+     * This is important because ordinary
+     * DeviceOrientation can be relative.
+     */
+
+    window.addEventListener(
+        "deviceorientationabsolute",
+        handleOrientation,
+        true
+    );
+
+
+    /*
+     * Some browsers do not fire
+     * deviceorientationabsolute.
+     */
+
+    window.addEventListener(
+        "deviceorientation",
+        handleOrientationFallback,
+        true
+    );
+
+
+    compassStarted = true;
+
+
+    if ($("enableCompass")) {
+        $("enableCompass").hidden = true;
+    }
+
+
+    updateStatus(
+        "warning",
+        "Compass starting...",
+        "Keep your phone flat and away from magnetic objects."
+    );
+
+
+    setTimeout(
+        checkCompass,
+        2500
+    );
+}
+
+
+/* =========================================================
+   ORIENTATION FALLBACK
+========================================================= */
+
+let absoluteOrientationReceived =
+    false;
+
+
+function handleOrientation(
+    event
+) {
+
+    absoluteOrientationReceived =
+        true;
+
+    processOrientation(
+        event,
+        true
+    );
+}
+
+
+function handleOrientationFallback(
+    event
+) {
+
+    if (
+        absoluteOrientationReceived
+    ) {
+        return;
+    }
+
+    processOrientation(
+        event,
+        false
+    );
+}
+
+
+/* =========================================================
+   PROCESS ORIENTATION
+========================================================= */
+
+function processOrientation(
+    event,
+    absolute
+) {
+
+    let heading =
+        null;
+
+
+    /*
+     * iOS Safari exposes a much more useful
+     * compass heading.
+     */
 
     if (
         typeof event.webkitCompassHeading ===
-        "number" &&
-        Number.isFinite(event.webkitCompassHeading)
+        "number"
     ) {
 
         heading =
             event.webkitCompassHeading;
 
-        sensorElement.textContent =
-            "Calibrated compass";
-
-    }
-
-
-    /*
-    -----------------------------------------------------
-    METHOD 2 — absolute orientation
-    -----------------------------------------------------
-    */
-
-    else if (
-        event.absolute === true &&
-        typeof event.alpha === "number"
-    ) {
-
-        heading =
-            normalize(
-                360 - event.alpha
-            );
-
-        sensorElement.textContent =
-            "Absolute orientation";
-
-    }
-
-
-    /*
-    -----------------------------------------------------
-    METHOD 3 — ordinary orientation
-    -----------------------------------------------------
-    */
-
-    else if (
-        typeof event.alpha === "number"
+    } else if (
+        typeof event.alpha ===
+        "number"
     ) {
 
         /*
-          This is NOT guaranteed to be true North.
-
-          We still expose it as a fallback, but the UI
-          should not pretend it has the same confidence
-          as a calibrated compass heading.
-        */
+         * For absolute orientation:
+         *
+         * alpha = rotation around Z axis.
+         *
+         * Convert to compass heading.
+         */
 
         heading =
-            normalize(
-                360 - event.alpha
-            );
-
-        sensorElement.textContent =
-            "Browser orientation";
+            360 -
+            event.alpha;
 
     }
 
 
-    if (heading === null) {
-
-        sensorElement.textContent =
-            "No heading";
-
+    if (
+        heading === null ||
+        !Number.isFinite(heading)
+    ) {
         return;
     }
 
 
     /*
-    -----------------------------------------------------
-    Screen orientation correction
-    -----------------------------------------------------
+     * Screen orientation correction.
+     */
 
-    When the phone rotates between portrait and landscape,
-    the browser's sensor frame and visual screen frame can
-    differ.
-    */
+    const screenAngle =
+        getScreenOrientation();
 
-    let screenAngle = 0;
 
+    /*
+     * iOS webkitCompassHeading is already
+     * screen-adjusted in many implementations.
+     * Android absolute alpha generally needs
+     * orientation correction.
+     */
 
     if (
-        screen.orientation &&
-        typeof screen.orientation.angle === "number"
+        typeof event.webkitCompassHeading !==
+        "number"
     ) {
 
-        screenAngle =
-            screen.orientation.angle;
-
+        heading =
+            heading +
+            screenAngle;
     }
 
 
     heading =
-        normalize(
-            heading + screenAngle
+        normalizeDegrees(
+            heading
         );
 
 
     /*
-    -----------------------------------------------------
-    Circular sensor smoothing
-    -----------------------------------------------------
-    */
+     * Smooth sensor noise.
+     */
 
     smoothedHeading =
-        circularSmooth(
-            smoothedHeading,
-            heading,
-            0.18
+        smoothHeading(
+            heading
         );
 
 
-    headingElement.textContent =
-        `${smoothedHeading.toFixed(1)}°`;
+    currentHeading =
+        smoothedHeading;
+
+
+    updateCompassUI();
+
+    updatePointer();
+
+    updateAlignment();
+}
+
+
+/* =========================================================
+   SCREEN ORIENTATION
+========================================================= */
+
+function getScreenOrientation() {
+
+    if (
+        screen.orientation &&
+        typeof screen.orientation.angle ===
+        "number"
+    ) {
+
+        return screen.orientation.angle;
+    }
+
+
+    if (
+        typeof window.orientation ===
+        "number"
+    ) {
+
+        return normalizeDegrees(
+            window.orientation
+        );
+    }
+
+
+    return 0;
+}
+
+
+/* =========================================================
+   SMOOTH HEADING
+========================================================= */
+
+function smoothHeading(
+    newHeading
+) {
+
+    if (
+        lastRawHeading === null
+    ) {
+
+        lastRawHeading =
+            newHeading;
+
+        return newHeading;
+    }
+
+
+    const difference =
+        shortestAngleDifference(
+            newHeading,
+            lastRawHeading
+        );
 
 
     /*
-    -----------------------------------------------------
-    Rotate the dial so North represents true
-    compass north relative to the phone.
-    -----------------------------------------------------
-    */
+     * Ignore very large sudden jumps
+     * caused by bad sensor readings.
+     */
 
-    compassDial.style.transform =
-        `rotate(${-smoothedHeading}deg)`;
+    if (
+        Math.abs(difference) >
+        100
+    ) {
+
+        lastRawHeading =
+            newHeading;
+
+        return newHeading;
+    }
+
+
+    const smoothing =
+        0.22;
+
+
+    let result =
+        lastRawHeading +
+        difference *
+        smoothing;
+
+
+    result =
+        normalizeDegrees(
+            result
+        );
+
+
+    lastRawHeading =
+        result;
+
+
+    return result;
+}
+
+
+/* =========================================================
+   COMPASS UI
+========================================================= */
+
+function updateCompassUI() {
+
+    if (
+        currentHeading === null
+    ) {
+        return;
+    }
+
+
+    if ($("compassRing")) {
+
+        /*
+         * Rotate the compass so North
+         * stays aligned with the real world.
+         */
+
+        $("compassRing").style.transform =
+            `rotate(${-currentHeading}deg)`;
+    }
 
 
     /*
-    -----------------------------------------------------
-    Relative Qibla direction
-    -----------------------------------------------------
-    */
+     * Keep cardinal labels readable.
+     */
+
+    document
+        .querySelectorAll(
+            ".direction"
+        )
+        .forEach(
+            element => {
+
+                element.style.transform =
+                    getLabelTransform(
+                        element
+                    );
+
+            }
+        );
+
+
+    if ($("accuracyText")) {
+
+        $("accuracyText").textContent =
+            `Compass heading ${Math.round(currentHeading)}°`;
+    }
+}
+
+
+/* =========================================================
+   CARDINAL LABEL TRANSFORM
+========================================================= */
+
+function getLabelTransform(
+    element
+) {
+
+    const classes =
+        element.classList;
+
+    let base =
+        "";
+
+
+    if (
+        classes.contains("north") ||
+        classes.contains("south")
+    ) {
+
+        base =
+            "translateX(-50%)";
+
+    } else {
+
+        base =
+            "translateY(-50%)";
+    }
+
+
+    return (
+        `${base} rotate(${currentHeading}deg)`
+    );
+}
+
+
+/* =========================================================
+   QIBLA POINTER
+========================================================= */
+
+function updatePointer() {
+
+    if (
+        qiblaBearing === null ||
+        currentHeading === null
+    ) {
+        return;
+    }
+
 
     const relative =
-        normalize(
-            qiblaBearing -
-            smoothedHeading
+        shortestAngleDifference(
+            qiblaBearing,
+            currentHeading
         );
 
 
-    qiblaArrow.style.transform =
-        `rotate(${relative}deg)`;
+    if ($("qiblaPointer")) {
+
+        $("qiblaPointer").style.transform =
+            `rotate(${relative}deg)`;
+    }
+}
 
 
-    /*
-    -----------------------------------------------------
-    Angular error from perfect alignment
-    -----------------------------------------------------
-    */
+/* =========================================================
+   ALIGNMENT
+========================================================= */
 
-    const error =
+function updateAlignment() {
+
+    if (
+        qiblaBearing === null ||
+        currentHeading === null
+    ) {
+        return;
+    }
+
+
+    const difference =
         Math.abs(
             shortestAngleDifference(
-                relative,
-                0
+                qiblaBearing,
+                currentHeading
             )
         );
 
 
-    alignmentElement.textContent =
-        `${error.toFixed(1)}° off`;
+    /*
+     * Alignment tolerance:
+     *
+     * <= 3°  = excellent
+     * <= 7°  = aligned
+     * <= 15° = close
+     */
 
+    if (
+        difference <= 3
+    ) {
 
-    if (error <= 3) {
-
-        alignmentElement.textContent =
-            "✓ Facing Qibla";
-
-        alignmentElement.style.color =
-            "#0B6E4F";
-
-        setStatus(
-            "✓ You are facing the Qibla",
-            true
+        updateStatus(
+            "good",
+            "Qibla aligned",
+            "You are facing the Qibla."
         );
 
-    }
 
-    else if (error <= 10) {
+        if ($("alignmentText")) {
+            $("alignmentText").textContent =
+                "Qibla aligned";
+        }
 
-        alignmentElement.textContent =
-            `${error.toFixed(1)}° — almost aligned`;
+    } else if (
+        difference <= 7
+    ) {
 
-        alignmentElement.style.color =
-            "#b17a16";
-
-        setStatus(
-            "Almost aligned with the Qibla",
-            true
+        updateStatus(
+            "good",
+            "Almost aligned",
+            `Turn ${getTurnDirection(difference)} ${Math.round(difference)}°`
         );
 
-    }
 
-    else {
+        if ($("alignmentText")) {
+            $("alignmentText").textContent =
+                "Almost there";
+        }
 
-        alignmentElement.textContent =
-            `${error.toFixed(1)}° off`;
+    } else if (
+        difference <= 15
+    ) {
 
-        alignmentElement.style.color =
-            "#8b5757";
-
-        setStatus(
-            "Rotate toward the Qibla",
-            true
+        updateStatus(
+            "warning",
+            "Nearly aligned",
+            `Turn ${getTurnDirection(difference)} ${Math.round(difference)}°`
         );
 
-    }
 
+        if ($("alignmentText")) {
+            $("alignmentText").textContent =
+                "Nearly aligned";
+        }
+
+    } else {
+
+        updateStatus(
+            "warning",
+            "Turn toward the Qibla",
+            `Turn ${getTurnDirection(difference)} ${Math.round(difference)}°`
+        );
+
+
+        if ($("alignmentText")) {
+            $("alignmentText").textContent =
+                "Turn toward Qibla";
+        }
+    }
 }
 
 
-/* =====================================================
-   CALIBRATION
-===================================================== */
+/* =========================================================
+   TURN DIRECTION
+========================================================= */
 
-calibrateButton.addEventListener(
-    "click",
-    () => {
+function getTurnDirection(
+    absoluteDifference
+) {
 
-        smoothedHeading = null;
-
-        sensorSamples = [];
-
-        setStatus(
-            "Calibrating… rotate your phone slowly.",
-            true
+    const difference =
+        shortestAngleDifference(
+            qiblaBearing,
+            currentHeading
         );
 
 
-        setTimeout(
+    if (Math.abs(difference) < 1) {
+        return "forward";
+    }
+
+
+    return difference > 0
+        ? "right"
+        : "left";
+}
+
+
+/* =========================================================
+   STATUS UI
+========================================================= */
+
+function updateStatus(
+    type,
+    title,
+    message
+) {
+
+    const dot =
+        $("statusDot");
+
+    const titleElement =
+        $("statusTitle");
+
+    const messageElement =
+        $("statusMessage");
+
+
+    if (dot) {
+
+        dot.classList.remove(
+            "good",
+            "warning"
+        );
+
+
+        if (type === "good") {
+
+            dot.classList.add(
+                "good"
+            );
+
+        } else {
+
+            dot.classList.add(
+                "warning"
+            );
+        }
+    }
+
+
+    if (titleElement) {
+
+        titleElement.textContent =
+            title;
+    }
+
+
+    if (messageElement) {
+
+        messageElement.textContent =
+            message;
+    }
+
+
+    if ($("statusText")) {
+
+        $("statusText").textContent =
+            title;
+    }
+}
+
+
+/* =========================================================
+   COMPASS CHECK
+========================================================= */
+
+function checkCompass() {
+
+    if (
+        currentHeading === null
+    ) {
+
+        updateStatus(
+            "warning",
+            "Compass not detected",
+            "Your phone may not have a compass sensor, or permission may be blocked."
+        );
+
+        if ($("accuracyText")) {
+
+            $("accuracyText").textContent =
+                "No compass heading detected.";
+        }
+
+        return;
+    }
+
+
+    updateStatus(
+        "warning",
+        "Compass active",
+        "Keep your phone level for the best result."
+    );
+}
+
+
+/* =========================================================
+   CALIBRATION
+========================================================= */
+
+function calibrateCompass() {
+
+    lastRawHeading = null;
+    smoothedHeading = null;
+
+    updateStatus(
+        "warning",
+        "Calibrating compass",
+        "Slowly move your phone in a large figure-eight."
+    );
+
+
+    if ($("accuracyText")) {
+
+        $("accuracyText").textContent =
+            "Move your phone slowly in a figure-eight, then keep it flat.";
+    }
+
+
+    /*
+     * Do not fake a calibration value.
+     *
+     * The actual magnetic sensor calibration
+     * is handled by the operating system/device.
+     *
+     * This simply resets our smoothing filter
+     * and guides the user.
+     */
+
+    setTimeout(
+        () => {
+
+            if (
+                currentHeading !== null
+            ) {
+
+                updateStatus(
+                    "warning",
+                    "Compass ready",
+                    "Keep the phone flat and away from magnetic interference."
+                );
+            }
+
+        },
+        4000
+    );
+}
+
+
+/* =========================================================
+   BUTTON SETUP
+========================================================= */
+
+function setupButtons() {
+
+    $("enableLocation")
+        ?.addEventListener(
+            "click",
             () => {
 
-                setStatus(
-                    "Compass active — hold phone flat.",
-                    true
-                );
+                requestLocation();
 
-            },
-            3500
+                startLocationWatch();
+            }
         );
 
+
+    $("refreshLocation")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                requestLocation();
+
+                startLocationWatch();
+            }
+        );
+
+
+    $("enableCompass")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                startCompass();
+            }
+        );
+
+
+    $("calibrateButton")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                calibrateCompass();
+            }
+        );
+
+
+    $("backButton")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    history.length > 1
+                ) {
+
+                    history.back();
+
+                } else {
+
+                    location.href =
+                        "index.html";
+                }
+            }
+        );
+
+
+    $("infoButton")
+        ?.addEventListener(
+            "click",
+            () => {
+
+                if ($("infoModal")) {
+
+                    $("infoModal").hidden =
+                        false;
+                }
+            }
+        );
+
+
+    $("closeInfo")
+        ?.addEventListener(
+            "click",
+            closeInfo
+        );
+
+
+    $("closeInfoButton")
+        ?.addEventListener(
+            "click",
+            closeInfo
+        );
+
+
+    $("understandButton")
+        ?.addEventListener(
+            "click",
+            closeInfo
+        );
+}
+
+
+/* =========================================================
+   CLOSE INFO
+========================================================= */
+
+function closeInfo() {
+
+    if ($("infoModal")) {
+
+        $("infoModal").hidden =
+            true;
+    }
+}
+
+
+/* =========================================================
+   SCREEN ROTATION
+========================================================= */
+
+function setupScreenOrientation() {
+
+    if (
+        screen.orientation
+    ) {
+
+        screen.orientation.addEventListener(
+            "change",
+            () => {
+
+                if (
+                    currentHeading !== null
+                ) {
+
+                    updateCompassUI();
+                    updatePointer();
+                    updateAlignment();
+                }
+            }
+        );
+    }
+
+    window.addEventListener(
+        "orientationchange",
+        () => {
+
+            setTimeout(
+                () => {
+
+                    updateCompassUI();
+                    updatePointer();
+                    updateAlignment();
+
+                },
+                200
+            );
+        }
+    );
+}
+
+
+/* =========================================================
+   VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        /*
+         * Some browsers stop orientation
+         * events when the page is hidden.
+         */
+
+        if (
+            !document.hidden &&
+            compassStarted
+        ) {
+
+            setTimeout(
+                () => {
+
+                    updateCompassUI();
+                    updatePointer();
+                    updateAlignment();
+
+                },
+                300
+            );
+        }
     }
 );
 
 
-/* =====================================================
-   START BUTTON
-===================================================== */
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-startButton.addEventListener(
-    "click",
-    startQibla
-);
+async function initQibla() {
+
+    console.log(
+        "Iqranix Qibla starting..."
+    );
+
+
+    setupButtons();
+
+    setupScreenOrientation();
+
+
+    /*
+     * Calculate location immediately.
+     */
+
+    requestLocation();
+
+    startLocationWatch();
+
+
+    /*
+     * Do not request motion permission
+     * automatically on iOS.
+     *
+     * It must happen after a user gesture.
+     */
+
+    if (
+        typeof DeviceOrientationEvent !==
+        "undefined" &&
+        typeof DeviceOrientationEvent.requestPermission ===
+        "function"
+    ) {
+
+        if ($("enableCompass")) {
+            $("enableCompass").hidden = false;
+        }
+
+        updateStatus(
+            "warning",
+            "Compass permission needed",
+            "Tap Enable Compass to start the Qibla compass."
+        );
+
+    } else {
+
+        /*
+         * Android browsers normally allow
+         * orientation access without a separate
+         * permission dialog.
+         */
+
+        startCompass();
+    }
+
+
+    updateBearingDisplay();
+
+
+    console.log(
+        "Iqranix Qibla ready."
+    );
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initQibla
+    );
+
+} else {
+
+    initQibla();
+}
+
+
+/* =========================================================
+   PUBLIC API
+========================================================= */
+
+window.IqranixQibla = {
+
+    requestLocation,
+
+    startCompass,
+
+    calculateQiblaBearing,
+
+    calculateDistance,
+
+    calibrateCompass
+
+};
