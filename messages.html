@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#0B6E4F">
+
+    <title>Messages • Iqranix</title>
+
+    <link
+        rel="stylesheet"
+        href="messages.css"
+    >
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- =====================================================
+         MESSAGES HOME
+    ====================================================== -->
+
+    <section
+        id="messagesPage"
+        class="page active"
+    >
+
+        <header class="messages-header">
+
+            <div>
+                <div class="brand-small">
+                    IQRANIX
+                </div>
+
+                <h1>Messages</h1>
+            </div>
+
+            <button
+                id="newMessageBtn"
+                class="icon-button"
+                aria-label="New message"
+            >
+                +
+            </button>
+
+        </header>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-wrapper">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+                id="usernameSearch"
+                type="search"
+                placeholder="Search username"
+                autocomplete="off"
+            >
+
+            <button
+                id="clearSearchBtn"
+                class="clear-search"
+                type="button"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div
+            id="searchStatus"
+            class="search-status"
+        ></div>
+
+
+        <!-- SEARCH RESULTS -->
+
+        <div
+            id="usernameResults"
+            class="username-results hidden"
+        ></div>
+
+
+        <!-- CONVERSATIONS -->
+
+        <main
+            id="conversationList"
+            class="conversation-list"
+        >
+
+            <div class="loading-state">
+                <div class="loader"></div>
+                <p>Loading messages...</p>
+            </div>
+
+        </main>
+
+    </section>
+
+
+    <!-- =====================================================
+         CHAT PAGE
+    ====================================================== -->
+
+    <section
+        id="chatPage"
+        class="page chat-page hidden"
+    >
+
+        <header class="chat-header">
+
+            <button
+                id="backBtn"
+                class="header-button"
+                aria-label="Back"
+            >
+                ‹
+            </button>
+
+
+            <button
+                id="chatProfileButton"
+                class="chat-user-button"
+                type="button"
+            >
+
+                <img
+                    id="chatAvatar"
+                    class="chat-header-avatar"
+                    src=""
+                    alt=""
+                >
+
+                <div class="chat-user-info">
+
+                    <strong id="chatName">
+                        Iqranix Member
+                    </strong>
+
+                    <span id="chatUsername">
+                        @member
+                    </span>
+
+                </div>
+
+            </button>
+
+
+            <div class="chat-actions">
+
+                <button
+                    id="audioCallButton"
+                    class="header-call-button"
+                    aria-label="Audio call"
+                    type="button"
+                >
+                    ☎
+                </button>
+
+                <button
+                    id="videoCallButton"
+                    class="header-call-button"
+                    aria-label="Video call"
+                    type="button"
+                >
+                    ▣
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- CHAT MESSAGES -->
+
+        <main
+            id="chatMessages"
+            class="chat-messages"
+        >
+
+            <div class="chat-empty">
+
+                <div class="chat-empty-icon">
+                    ☾
+                </div>
+
+                <h3>
+                    Start your conversation
+                </h3>
+
+                <p>
+                    Send a message to begin.
+                </p>
+
+            </div>
+
+        </main>
+
+
+        <!-- COMPOSER -->
+
+        <div
+            id="composer"
+            class="composer"
+        >
+
+            <button
+                id="plusBtn"
+                class="composer-button"
+                type="button"
+                aria-label="Add"
+            >
+                +
+            </button>
+
+
+            <input
+                id="imageFileInput"
+                type="file"
+                accept="image/*"
+                hidden
+            >
+
+
+            <button
+                id="emojiBtn"
+                class="composer-button"
+                type="button"
+                aria-label="Emoji"
+            >
+                ☺
+            </button>
+
+
+            <textarea
+                id="messageInput"
+                rows="1"
+                maxlength="2000"
+                placeholder="Message..."
+            ></textarea>
+
+
+            <button
+                id="voiceMessageBtn"
+                class="composer-button"
+                type="button"
+                aria-label="Voice message"
+            >
+                🎙
+            </button>
+
+
+            <button
+                id="sendMessageBtn"
+                class="send-button"
+                type="button"
+                aria-label="Send"
+            >
+                ↑
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INCOMING CALL
+    ====================================================== -->
+
+    <div
+        id="incomingCall"
+        class="call-overlay hidden"
+    >
+
+        <div class="incoming-card">
+
+            <div class="incoming-label">
+                IQRANIX CALL
+            </div>
+
+            <img
+                id="incomingAvatar"
+                class="incoming-avatar"
+                src=""
+                alt=""
+            >
+
+            <h2 id="incomingName">
+                Iqranix Member
+            </h2>
+
+            <p id="incomingType">
+                Incoming call
+            </p>
+
+
+            <div class="incoming-actions">
+
+                <button
+                    id="rejectCallButton"
+                    class="call-action reject"
+                    type="button"
+                >
+                    <span>✕</span>
+                    Decline
+                </button>
+
+                <button
+                    id="acceptCallButton"
+                    class="call-action accept"
+                    type="button"
+                >
+                    <span>✓</span>
+                    Answer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         ACTIVE CALL
+    ====================================================== -->
+
+    <div
+        id="callScreen"
+        class="call-screen hidden"
+    >
+
+        <!-- VIDEO -->
+
+        <div
+            id="videoCallView"
+            class="video-call-view hidden"
+        >
+
+            <video
+                id="remoteVideo"
+                class="remote-video"
+                autoplay
+                playsinline
+            ></video>
+
+
+            <video
+                id="localVideo"
+                class="local-video"
+                autoplay
+                muted
+                playsinline
+            ></video>
+
+
+            <div class="video-call-top">
+
+                <div>
+
+                    <span
+                        id="activeCallType"
+                        class="call-type"
+                    >
+                        Video call
+                    </span>
+
+                    <h2 id="videoCallName">
+                        Iqranix Member
+                    </h2>
+
+                    <span
+                        id="callStatus"
+                        class="call-status"
+                    >
+                        Connecting...
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- AUDIO -->
+
+        <div
+            id="audioCallView"
+            class="audio-call-view hidden"
+        >
+
+            <div class="audio-call-content">
+
+                <div class="audio-label">
+                    IQRANIX
+                </div>
+
+                <img
+                    id="callAvatar"
+                    class="call-avatar"
+                    src=""
+                    alt=""
+                >
+
+                <h2 id="callName">
+                    Iqranix Member
+                </h2>
+
+                <p id="audioCallStatus">
+                    <span id="audioStatusText">
+                        Connecting...
+                    </span>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- CALL CONTROLS -->
+
+        <div class="call-controls">
+
+            <button
+                id="muteCallButton"
+                class="call-control"
+                type="button"
+            >
+                🎙
+            </button>
+
+
+            <button
+                id="speakerCallButton"
+                class="call-control"
+                type="button"
+            >
+                🔊
+            </button>
+
+
+            <button
+                id="cameraCallButton"
+                class="call-control"
+                type="button"
+            >
+                ▣
+            </button>
+
+
+            <button
+                id="endCallButton"
+                class="call-control end"
+                type="button"
+            >
+                ✕
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         PROFILE POPUP
+    ====================================================== -->
+
+    <div
+        id="profilePopup"
+        class="popup-overlay hidden"
+    >
+
+        <div class="profile-card">
+
+            <button
+                id="closeProfilePopup"
+                class="popup-close"
+                type="button"
+            >
+                ×
+            </button>
+
+            <img
+                id="profilePopupAvatar"
+                class="profile-popup-avatar"
+                src=""
+                alt=""
+            >
+
+            <h2 id="profilePopupName">
+                Iqranix Member
+            </h2>
+
+            <p id="profilePopupUsername">
+                @member
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     FIREBASE + APPLICATION
+====================================================== -->
+
+<script type="module" src="messages.js"></script>
+
+</body>
+</html>
