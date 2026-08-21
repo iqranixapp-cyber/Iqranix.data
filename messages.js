@@ -1,511 +1,487 @@
-/* ============================================================
-   IQRANIX — MESSAGES + WEBRTC CALLING
-   FULL REPLACEMENT
-============================================================ */
-
-import { auth, db } from "./firebase-config.js";
-
-import {
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
-
-import {
-    collection,
-    addDoc,
-    getDocs,
-    setDoc,
-    doc,
-    query,
-    where,
-    limit,
-    serverTimestamp,
-    updateDoc,
-    deleteDoc,
-    onSnapshot,
-    orderBy
-} from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+/* =========================================================
+   IQRANIX MESSAGES
+   PeerJS audio/video calling
+========================================================= */
 
 
-/* ============================================================
+/* =========================================================
    ELEMENTS
-============================================================ */
+========================================================= */
 
-const usernameSearch = document.getElementById("usernameSearch");
-const clearSearchBtn = document.getElementById("clearSearchBtn");
-const usernameResults = document.getElementById("usernameResults");
-const searchStatus = document.getElementById("searchStatus");
-const conversationList = document.getElementById("conversationList");
+const messagesPage =
+    document.getElementById("messagesPage");
 
-const chatPage = document.getElementById("chatPage");
-const backBtn = document.getElementById("backBtn");
-const newMessageBtn = document.getElementById("newMessageBtn");
-const closeChatBtn = document.getElementById("closeChatBtn");
+const chatPage =
+    document.getElementById("chatPage");
 
-const chatAvatar = document.getElementById("chatAvatar");
-const chatName = document.getElementById("chatName");
-const chatUsername = document.getElementById("chatUsername");
-const chatOnlineDot = document.getElementById("chatOnlineDot");
+const newChatBtn =
+    document.getElementById("newChatBtn");
 
-const chatMessages = document.getElementById("chatMessages");
-const messageInput = document.getElementById("messageInput");
-const sendMessageBtn = document.getElementById("sendMessageBtn");
-const emojiBtn = document.getElementById("emojiBtn");
+const startChatBtn =
+    document.getElementById("startChatBtn");
 
-const callButton = document.getElementById("callButton");
+const newChatModal =
+    document.getElementById("newChatModal");
 
-const callScreen = document.getElementById("callScreen");
-const callAvatar = document.getElementById("callAvatar");
-const callName = document.getElementById("callName");
-const callStatus = document.getElementById("callStatus");
+const closeModal =
+    document.getElementById("closeModal");
 
-const remoteVideo = document.getElementById("remoteVideo");
-const localVideo = document.getElementById("localVideo");
+const peerIdInput =
+    document.getElementById("peerIdInput");
 
-const muteCallButton = document.getElementById("muteCallButton");
-const cameraCallButton = document.getElementById("cameraCallButton");
-const endCallButton = document.getElementById("endCallButton");
+const connectPeerBtn =
+    document.getElementById("connectPeerBtn");
 
-const incomingCall = document.getElementById("incomingCall");
-const incomingAvatar = document.getElementById("incomingAvatar");
-const incomingName = document.getElementById("incomingName");
-const incomingType = document.getElementById("incomingType");
+const backChat =
+    document.getElementById("backChat");
 
-const acceptCallButton = document.getElementById("acceptCallButton");
-const rejectCallButton = document.getElementById("rejectCallButton");
+const messageInput =
+    document.getElementById("messageInput");
 
-const chatMenuButton = document.getElementById("chatMenuButton");
-const chatMenu = document.getElementById("chatMenu");
+const sendBtn =
+    document.getElementById("sendBtn");
 
-const chatProfileButton = document.getElementById("chatProfileButton");
+const chatMessages =
+    document.getElementById("chatMessages");
 
-const profilePopup = document.getElementById("profilePopup");
-const closeProfilePopup = document.getElementById("closeProfilePopup");
-const profilePopupAvatar = document.getElementById("profilePopupAvatar");
-const profilePopupName = document.getElementById("profilePopupName");
-const profilePopupUsername = document.getElementById("profilePopupUsername");
+const attachBtn =
+    document.getElementById("attachBtn");
 
-const viewProfileOption = document.getElementById("viewProfileOption");
-const clearConversationOption =
-    document.getElementById("clearConversationOption");
-const searchConversationOption =
-    document.getElementById("searchConversationOption");
-const muteConversationOption =
-    document.getElementById("muteConversationOption");
-const reportUserOption =
-    document.getElementById("reportUserOption");
+const attachmentMenu =
+    document.getElementById("attachmentMenu");
+
+const chooseImage =
+    document.getElementById("chooseImage");
+
+const imageInput =
+    document.getElementById("imageInput");
+
+const emojiBtn =
+    document.getElementById("emojiBtn");
+
+const emojiPanel =
+    document.getElementById("emojiPanel");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const clearSearch =
+    document.getElementById("clearSearch");
 
 
-/* ============================================================
+/* =========================================================
+   CHAT USER
+========================================================= */
+
+const chatName =
+    document.getElementById("chatName");
+
+const chatUsername =
+    document.getElementById("chatUsername");
+
+const chatAvatar =
+    document.getElementById("chatAvatar");
+
+
+/* =========================================================
+   CALL ELEMENTS
+========================================================= */
+
+const callScreen =
+    document.getElementById("callScreen");
+
+const remoteVideo =
+    document.getElementById("remoteVideo");
+
+const localVideo =
+    document.getElementById("localVideo");
+
+const audioCallBackground =
+    document.getElementById("audioCallBackground");
+
+const callAvatar =
+    document.getElementById("callAvatar");
+
+const callName =
+    document.getElementById("callName");
+
+const callStatus =
+    document.getElementById("callStatus");
+
+const callType =
+    document.getElementById("callType");
+
+const audioCallBtn =
+    document.getElementById("audioCallBtn");
+
+const videoCallBtn =
+    document.getElementById("videoCallBtn");
+
+const endCallBtn =
+    document.getElementById("endCallBtn");
+
+const muteBtn =
+    document.getElementById("muteBtn");
+
+const cameraBtn =
+    document.getElementById("cameraBtn");
+
+const speakerBtn =
+    document.getElementById("speakerBtn");
+
+
+/* =========================================================
+   INCOMING CALL
+========================================================= */
+
+const incomingCall =
+    document.getElementById("incomingCall");
+
+const incomingName =
+    document.getElementById("incomingName");
+
+const incomingCallType =
+    document.getElementById("incomingCallType");
+
+const incomingAvatar =
+    document.getElementById("incomingAvatar");
+
+const acceptCallBtn =
+    document.getElementById("acceptCallBtn");
+
+const rejectCallBtn =
+    document.getElementById("rejectCallBtn");
+
+
+/* =========================================================
    STATE
-============================================================ */
+========================================================= */
 
-let currentUser = null;
-let currentChatUser = null;
-let currentConversationId = null;
+let peer = null;
 
-let searchTimer = null;
-
-let messagesUnsubscribe = null;
-let callsUnsubscribe = null;
-
-let callDocumentUnsubscribe = null;
-let candidateUnsubscribe = null;
-
-let peerConnection = null;
 let localStream = null;
 
-let activeCallId = null;
-let activeCallType = null;
+let currentCall = null;
 
-let pendingIncomingCall = null;
+let incomingCallObject = null;
 
-let isMuted = false;
-let isCameraOff = false;
-let conversationMuted = false;
+let currentConnection = null;
 
+let currentPeerId = null;
 
-/* ============================================================
-   WEBRTC
-============================================================ */
+let currentCallMode = "video";
 
-const ICE_SERVERS = {
-    iceServers: [
-        {
-            urls: "stun:stun.l.google.com:19302"
-        },
-        {
-            urls: "stun:stun1.l.google.com:19302"
-        }
-    ]
-};
+let microphoneEnabled = true;
 
+let cameraEnabled = true;
 
-/* ============================================================
-   HELPER
-============================================================ */
 
-function exists(element) {
-    return !!element;
-}
+/* =========================================================
+   DEFAULT AVATAR
+========================================================= */
 
+const DEFAULT_AVATAR =
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="200"
+             height="200"
+             viewBox="0 0 200 200">
 
-/* ============================================================
-   AUTH
-============================================================ */
+            <rect width="200" height="200"
+                  fill="#E9F6F0"/>
 
-onAuthStateChanged(auth, async user => {
+            <circle cx="100"
+                    cy="76"
+                    r="38"
+                    fill="#0B6E4F"/>
 
-    currentUser = user || null;
+            <path
+                d="M35 180
+                   C40 130 160 130 165 180"
+                fill="#0B6E4F"/>
+        </svg>
+    `);
 
-    if (!currentUser) {
-        showLoginState();
-        return;
-    }
 
-    await loadConversations();
-    listenForIncomingCalls();
+/* =========================================================
+   INITIAL UI
+========================================================= */
 
-});
+chatAvatar.src = DEFAULT_AVATAR;
 
+callAvatar.src = DEFAULT_AVATAR;
 
-/* ============================================================
-   LOGIN
-============================================================ */
+incomingAvatar.src = DEFAULT_AVATAR;
 
-function showLoginState() {
 
-    if (!conversationList)
-        return;
+/* =========================================================
+   PEERJS
+========================================================= */
 
-    conversationList.innerHTML = `
-        <div class="loading-state">
-            <h2>Sign in required</h2>
-            <p>Sign in to message Iqranix members.</p>
-        </div>
-    `;
+function initializePeer() {
 
-}
-
-
-/* ============================================================
-   SEARCH
-============================================================ */
-
-usernameSearch?.addEventListener("input", () => {
-
-    const value =
-        usernameSearch.value
-            .trim()
-            .replace(/^@/, "")
-            .toLowerCase();
-
-    clearSearchBtn?.classList.toggle(
-        "hidden",
-        !value
-    );
-
-    clearTimeout(searchTimer);
-
-    if (!value) {
-
-        usernameResults?.classList.add("hidden");
-
-        if (usernameResults)
-            usernameResults.innerHTML = "";
-
-        if (searchStatus)
-            searchStatus.textContent = "";
-
-        return;
-    }
-
-    usernameResults?.classList.remove("hidden");
-
-    if (searchStatus)
-        searchStatus.textContent =
-            "Searching Iqranix members...";
-
-    if (usernameResults)
-        usernameResults.innerHTML = `
-            <div class="search-message">
-                Searching...
-            </div>
-        `;
-
-    searchTimer =
-        setTimeout(
-            () => searchUsers(value),
-            350
-        );
-
-});
-
-
-async function searchUsers(searchText) {
-
-    if (!currentUser)
-        return;
-
-    const username =
-        searchText
-            .trim()
-            .replace(/^@/, "")
-            .toLowerCase();
-
-    if (!username)
-        return;
-
-    try {
-
-        const usersRef = collection(db, "users");
-        const results = [];
-
-        try {
-
-            const lowerQuery =
-                query(
-                    usersRef,
-                    where(
-                        "usernameLower",
-                        ">=",
-                        username
-                    ),
-                    where(
-                        "usernameLower",
-                        "<=",
-                        username + "\uf8ff"
-                    ),
-                    limit(20)
-                );
-
-            const snapshot =
-                await getDocs(lowerQuery);
-
-            snapshot.forEach(item => {
-
-                if (item.id !== currentUser.uid) {
-
-                    results.push({
-                        uid: item.id,
-                        ...item.data()
-                    });
-
-                }
-
-            });
-
-        } catch (error) {
-
-            console.warn(
-                "Username query failed:",
-                error
-            );
-
-        }
-
-        if (!results.length) {
-
-            const snapshot =
-                await getDocs(
-                    query(
-                        usersRef,
-                        limit(100)
-                    )
-                );
-
-            snapshot.forEach(item => {
-
-                if (item.id === currentUser.uid)
-                    return;
-
-                const data = item.data();
-
-                const stored =
-                    String(data.username || "")
-                        .replace(/^@/, "")
-                        .toLowerCase();
-
-                if (stored.startsWith(username)) {
-
-                    results.push({
-                        uid: item.id,
-                        ...data
-                    });
-
-                }
-
-            });
-
-        }
-
-        const unique =
-            Array.from(
-                new Map(
-                    results.map(user => [
-                        user.uid,
-                        user
-                    ])
-                ).values()
-            );
-
-        renderSearchResults(unique);
-
-        if (searchStatus)
-            searchStatus.textContent = "";
-
-    } catch (error) {
+    if (typeof Peer === "undefined") {
 
         console.error(
-            "Search error:",
+            "PeerJS failed to load."
+        );
+
+        return;
+
+    }
+
+
+    peer = new Peer();
+
+
+    peer.on("open", id => {
+
+        currentPeerId = id;
+
+        console.log(
+            "Your Peer ID:",
+            id
+        );
+
+        localStorage.setItem(
+            "iqranix_peer_id",
+            id
+        );
+
+    });
+
+
+    peer.on("error", error => {
+
+        console.error(
+            "PeerJS error:",
             error
         );
 
-        if (usernameResults)
-            usernameResults.innerHTML = `
-                <div class="search-message">
-                    Couldn't search usernames.
-                </div>
-            `;
+        if (
+            error.type ===
+            "peer-unavailable"
+        ) {
 
-    }
-
-}
-
-
-/* ============================================================
-   SEARCH RESULTS
-============================================================ */
-
-function renderSearchResults(users) {
-
-    if (!usernameResults)
-        return;
-
-    usernameResults.innerHTML = "";
-
-    if (!users.length) {
-
-        usernameResults.innerHTML = `
-            <div class="search-message">
-                No Iqranix member found.
-            </div>
-        `;
-
-        return;
-    }
-
-    users.forEach(user => {
-
-        const button =
-            document.createElement("button");
-
-        button.className = "search-result";
-
-        const avatar =
-            document.createElement("img");
-
-        avatar.className = "result-avatar";
-
-        avatar.src =
-            user.photoURL ||
-            createAvatar(
-                user.displayName ||
-                user.username ||
-                "I"
+            alert(
+                "That Peer ID could not be found."
             );
 
-        avatar.onerror = () => {
-            avatar.src =
-                createAvatar(
-                    user.displayName ||
-                    user.username ||
-                    "I"
-                );
-        };
+        }
 
-        const info =
-            document.createElement("div");
+    });
 
-        info.className = "result-info";
+
+    /*
+     * INCOMING CALL
+     */
+
+    peer.on("call", call => {
+
+        incomingCallObject = call;
+
+        const metadata =
+            call.metadata || {};
+
+        const type =
+            metadata.type || "video";
 
         const name =
-            document.createElement("span");
-
-        name.className = "result-name";
-
-        name.textContent =
-            user.displayName ||
+            metadata.name ||
             "Iqranix Member";
 
-        const username =
-            document.createElement("span");
 
-        username.className = "result-username";
+        incomingName.textContent =
+            name;
 
-        username.textContent =
-            "@" +
-            (
-                user.username ||
-                user.usernameLower ||
-                "username"
-            );
+        incomingCallType.textContent =
+            type === "audio"
+                ? "Incoming audio call"
+                : "Incoming video call";
 
-        info.append(name, username);
 
-        button.append(avatar, info);
+        incomingAvatar.src =
+            metadata.avatar ||
+            DEFAULT_AVATAR;
 
-        button.addEventListener(
-            "click",
-            () => openConversation(user)
+
+        incomingCall.classList.add(
+            "show"
         );
 
-        usernameResults.appendChild(button);
+    });
+
+
+    /*
+     * DATA CONNECTION
+     */
+
+    peer.on("connection", connection => {
+
+        connection.on("open", () => {
+
+            currentConnection =
+                connection;
+
+            console.log(
+                "Data connection established."
+            );
+
+        });
+
+
+        connection.on("data", data => {
+
+            handleIncomingData(data);
+
+        });
 
     });
 
 }
 
 
-/* ============================================================
-   OPEN CONVERSATION
-============================================================ */
+/* =========================================================
+   REQUEST MICROPHONE
+========================================================= */
 
-async function openConversation(user) {
-
-    if (!currentUser)
-        return;
-
-    currentChatUser = user;
+async function getAudioStream() {
 
     try {
 
-        currentConversationId =
-            await findOrCreateConversation(user);
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: false
+            });
 
-        setChatHeader(user);
-
-        usernameResults?.classList.add("hidden");
-
-        await loadChatMessages(
-            currentConversationId
-        );
-
-        chatPage?.classList.add("active");
-
-        document.body.style.overflow = "hidden";
-
-        messageInput?.focus();
+        return stream;
 
     } catch (error) {
 
         console.error(
-            "OPEN CONVERSATION:",
+            "Microphone permission error:",
             error
         );
 
+        throw error;
+
+    }
+
+}
+
+
+/* =========================================================
+   REQUEST CAMERA + MICROPHONE
+========================================================= */
+
+async function getVideoStream() {
+
+    try {
+
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+                video: {
+                    facingMode: "user"
+                },
+                audio: true
+            });
+
+        return stream;
+
+    } catch (error) {
+
+        console.error(
+            "Camera/microphone error:",
+            error
+        );
+
+        throw error;
+
+    }
+
+}
+
+
+/* =========================================================
+   START AUDIO CALL
+========================================================= */
+
+async function startAudioCall() {
+
+    if (!currentPeerId) {
+
         alert(
-            "Could not open conversation.\n\n" +
-            error.message
+            "Your calling connection is still starting. Please wait a moment."
+        );
+
+        return;
+
+    }
+
+
+    const target =
+        peerIdInput.value.trim() ||
+        currentPeerIdForChat();
+
+
+    if (!target) {
+
+        openNewChatModal();
+
+        return;
+
+    }
+
+
+    try {
+
+        localStream =
+            await getAudioStream();
+
+        currentCallMode =
+            "audio";
+
+
+        localVideo.srcObject = null;
+
+        audioCallBackground.classList.add(
+            "show"
+        );
+
+        callType.textContent =
+            "Audio call";
+
+        callStatus.textContent =
+            "Calling...";
+
+
+        showCallScreen();
+
+
+        currentCall =
+            peer.call(
+                target,
+                localStream,
+                {
+                    metadata: {
+                        type: "audio",
+                        name:
+                            chatName.textContent,
+                        avatar:
+                            chatAvatar.src
+                    }
+                }
+            );
+
+
+        setupCall(currentCall);
+
+    } catch (error) {
+
+        alert(
+            "Microphone permission is required for an audio call."
         );
 
     }
@@ -513,273 +489,963 @@ async function openConversation(user) {
 }
 
 
-/* ============================================================
-   FIND / CREATE CONVERSATION
-============================================================ */
+/* =========================================================
+   START VIDEO CALL
+========================================================= */
 
-async function findOrCreateConversation(otherUser) {
+async function startVideoCall() {
 
-    const conversationsRef =
-        collection(db, "conversations");
+    if (!currentPeerId) {
 
-    const q =
-        query(
-            conversationsRef,
-            where(
-                "participants",
-                "array-contains",
-                currentUser.uid
-            ),
-            limit(100)
+        alert(
+            "Your calling connection is still starting. Please wait a moment."
         );
 
-    const snapshot =
-        await getDocs(q);
+        return;
 
-    for (const item of snapshot.docs) {
+    }
 
-        const data = item.data();
 
-        if (
-            Array.isArray(data.participants) &&
-            data.participants.includes(
-                otherUser.uid
-            )
-        ) {
+    const target =
+        currentPeerIdForChat();
 
-            return item.id;
+
+    if (!target) {
+
+        openNewChatModal();
+
+        return;
+
+    }
+
+
+    try {
+
+        localStream =
+            await getVideoStream();
+
+        currentCallMode =
+            "video";
+
+
+        localVideo.srcObject =
+            localStream;
+
+
+        audioCallBackground.classList.remove(
+            "show"
+        );
+
+
+        callType.textContent =
+            "Video call";
+
+        callStatus.textContent =
+            "Calling...";
+
+
+        showCallScreen();
+
+
+        currentCall =
+            peer.call(
+                target,
+                localStream,
+                {
+                    metadata: {
+                        type: "video",
+                        name:
+                            chatName.textContent,
+                        avatar:
+                            chatAvatar.src
+                    }
+                }
+            );
+
+
+        setupCall(currentCall);
+
+    } catch (error) {
+
+        alert(
+            "Camera and microphone permission is required for a video call."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   SETUP CALL
+========================================================= */
+
+function setupCall(call) {
+
+    if (!call) return;
+
+
+    currentCall = call;
+
+
+    call.on("stream", remoteStream => {
+
+        remoteVideo.srcObject =
+            remoteStream;
+
+        callStatus.textContent =
+            "Connected";
+
+    });
+
+
+    call.on("close", () => {
+
+        endCurrentCall(false);
+
+    });
+
+
+    call.on("error", error => {
+
+        console.error(
+            "Call error:",
+            error
+        );
+
+        endCurrentCall(false);
+
+    });
+
+}
+
+
+/* =========================================================
+   ACCEPT CALL
+========================================================= */
+
+acceptCallBtn.addEventListener(
+    "click",
+    async () => {
+
+        if (!incomingCallObject) return;
+
+
+        const call =
+            incomingCallObject;
+
+        const metadata =
+            call.metadata || {};
+
+        const type =
+            metadata.type || "video";
+
+
+        try {
+
+            if (type === "audio") {
+
+                localStream =
+                    await getAudioStream();
+
+                currentCallMode =
+                    "audio";
+
+                localVideo.srcObject =
+                    null;
+
+                audioCallBackground.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                localStream =
+                    await getVideoStream();
+
+                currentCallMode =
+                    "video";
+
+                localVideo.srcObject =
+                    localStream;
+
+                audioCallBackground.classList.remove(
+                    "show"
+                );
+
+            }
+
+
+            incomingCall.classList.remove(
+                "show"
+            );
+
+
+            callType.textContent =
+                type === "audio"
+                    ? "Audio call"
+                    : "Video call";
+
+
+            callStatus.textContent =
+                "Connecting...";
+
+
+            showCallScreen();
+
+
+            call.answer(
+                localStream
+            );
+
+
+            setupCall(call);
+
+
+            incomingCallObject =
+                null;
+
+        } catch (error) {
+
+            alert(
+                "Camera or microphone permission was not granted."
+            );
 
         }
 
     }
+);
 
-    const conversation =
-        await addDoc(
-            conversationsRef,
-            {
-                participants: [
-                    currentUser.uid,
-                    otherUser.uid
-                ],
 
-                participantNames: {
-                    [currentUser.uid]:
-                        currentUser.displayName ||
-                        "Iqranix Member",
+/* =========================================================
+   REJECT CALL
+========================================================= */
 
-                    [otherUser.uid]:
-                        otherUser.displayName ||
-                        "Iqranix Member"
-                },
+rejectCallBtn.addEventListener(
+    "click",
+    () => {
 
-                participantUsernames: {
-                    [currentUser.uid]:
-                        currentUser.username || "",
+        if (incomingCallObject) {
 
-                    [otherUser.uid]:
-                        otherUser.username || ""
-                },
+            incomingCallObject.close();
 
-                participantPhotos: {
-                    [currentUser.uid]:
-                        currentUser.photoURL || "",
+            incomingCallObject =
+                null;
 
-                    [otherUser.uid]:
-                        otherUser.photoURL || ""
-                },
+        }
 
-                lastMessage: "",
-
-                lastMessageAt:
-                    serverTimestamp(),
-
-                createdAt:
-                    serverTimestamp()
-            }
+        incomingCall.classList.remove(
+            "show"
         );
 
-    return conversation.id;
+    }
+);
+
+
+/* =========================================================
+   END CALL
+========================================================= */
+
+endCallBtn.addEventListener(
+    "click",
+    () => {
+
+        endCurrentCall(true);
+
+    }
+);
+
+
+function endCurrentCall(closePeerCall = true) {
+
+    if (
+        closePeerCall &&
+        currentCall
+    ) {
+
+        try {
+
+            currentCall.close();
+
+        } catch {}
+
+    }
+
+
+    if (localStream) {
+
+        localStream
+            .getTracks()
+            .forEach(track => {
+
+                track.stop();
+
+            });
+
+    }
+
+
+    if (remoteVideo) {
+
+        remoteVideo.srcObject =
+            null;
+
+    }
+
+
+    if (localVideo) {
+
+        localVideo.srcObject =
+            null;
+
+    }
+
+
+    localStream =
+        null;
+
+    currentCall =
+        null;
+
+
+    hideCallScreen();
 
 }
 
 
-/* ============================================================
-   HEADER
-============================================================ */
+/* =========================================================
+   CALL SCREEN
+========================================================= */
 
-function setChatHeader(user) {
+function showCallScreen() {
 
-    if (chatName)
-        chatName.textContent =
-            user.displayName ||
-            "Iqranix Member";
+    callScreen.classList.add(
+        "show"
+    );
 
-    if (chatUsername)
-        chatUsername.textContent =
-            "@" +
-            (
-                user.username ||
-                user.usernameLower ||
-                "username"
-            );
+}
 
-    if (chatAvatar) {
 
-        chatAvatar.src =
-            user.photoURL ||
-            createAvatar(
-                user.displayName ||
-                user.username ||
-                "I"
-            );
+function hideCallScreen() {
+
+    callScreen.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   MUTE
+========================================================= */
+
+muteBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!localStream) return;
+
+
+        const audioTracks =
+            localStream.getAudioTracks();
+
+
+        audioTracks.forEach(track => {
+
+            track.enabled =
+                !track.enabled;
+
+            microphoneEnabled =
+                track.enabled;
+
+        });
+
+
+        muteBtn.textContent =
+            microphoneEnabled
+                ? "🎙"
+                : "🔇";
+
+    }
+);
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+cameraBtn.addEventListener(
+    "click",
+    () => {
+
+        if (!localStream) return;
+
+
+        const videoTracks =
+            localStream.getVideoTracks();
+
+
+        if (!videoTracks.length) {
+
+            return;
+
+        }
+
+
+        videoTracks.forEach(track => {
+
+            track.enabled =
+                !track.enabled;
+
+            cameraEnabled =
+                track.enabled;
+
+        });
+
+
+        cameraBtn.textContent =
+            cameraEnabled
+                ? "▣"
+                : "🚫";
+
+    }
+);
+
+
+/* =========================================================
+   SPEAKER
+========================================================= */
+
+speakerBtn.addEventListener(
+    "click",
+    () => {
+
+        remoteVideo.muted =
+            !remoteVideo.muted;
+
+
+        speakerBtn.textContent =
+            remoteVideo.muted
+                ? "🔇"
+                : "🔊";
+
+    }
+);
+
+
+/* =========================================================
+   CHAT CONNECTION
+========================================================= */
+
+function connectToPeer(peerId) {
+
+    if (!peer) {
+
+        alert(
+            "Calling system is still loading."
+        );
+
+        return;
+
+    }
+
+
+    if (!peerId) return;
+
+
+    const connection =
+        peer.connect(
+            peerId,
+            {
+                reliable: true
+            }
+        );
+
+
+    connection.on("open", () => {
+
+        currentConnection =
+            connection;
+
+        console.log(
+            "Connected to:",
+            peerId
+        );
+
+        addSystemMessage(
+            "Connected."
+        );
+
+    });
+
+
+    connection.on("data", data => {
+
+        handleIncomingData(data);
+
+    });
+
+
+    connection.on("close", () => {
+
+        currentConnection =
+            null;
+
+    });
+
+
+    connection.on("error", error => {
+
+        console.error(
+            error
+        );
+
+    });
+
+}
+
+
+/* =========================================================
+   SEND MESSAGE
+========================================================= */
+
+function sendMessage() {
+
+    const text =
+        messageInput.value.trim();
+
+
+    if (!text) return;
+
+
+    addMessage(
+        text,
+        "sent"
+    );
+
+
+    if (currentConnection) {
+
+        currentConnection.send({
+
+            type: "text",
+
+            text: text,
+
+            time:
+                Date.now()
+
+        });
+
+    } else {
+
+        addSystemMessage(
+            "Message shown locally. Connect to the other member's Peer ID to send it."
+        );
+
+    }
+
+
+    messageInput.value = "";
+
+    autoResizeTextarea();
+
+    scrollToBottom();
+
+}
+
+
+/* =========================================================
+   RECEIVE DATA
+========================================================= */
+
+function handleIncomingData(data) {
+
+    if (!data) return;
+
+
+    if (
+        typeof data === "object" &&
+        data.type === "text"
+    ) {
+
+        addMessage(
+            data.text,
+            "received",
+            data.time
+        );
+
+    }
+
+
+    if (
+        typeof data === "object" &&
+        data.type === "image"
+    ) {
+
+        addImageMessage(
+            data.data,
+            "received"
+        );
 
     }
 
 }
 
 
-/* ============================================================
-   MESSAGES
-============================================================ */
+/* =========================================================
+   MESSAGE UI
+========================================================= */
 
-async function loadChatMessages(conversationId) {
+function addMessage(
+    text,
+    direction,
+    timestamp = Date.now()
+) {
 
-    if (!chatMessages)
-        return;
-
-    if (messagesUnsubscribe)
-        messagesUnsubscribe();
-
-    const messagesRef =
-        collection(
-            db,
-            "conversations",
-            conversationId,
-            "messages"
+    const empty =
+        chatMessages.querySelector(
+            ".chat-start"
         );
 
-    const q =
-        query(
-            messagesRef,
-            orderBy("createdAt", "asc"),
-            limit(100)
+    if (empty) {
+
+        empty.remove();
+
+    }
+
+
+    const bubble =
+        document.createElement(
+            "div"
         );
 
-    messagesUnsubscribe =
-        onSnapshot(
-            q,
-            snapshot => {
+    bubble.className =
+        `message ${direction}`;
 
-                chatMessages.innerHTML = "";
 
-                if (snapshot.empty) {
+    const content =
+        document.createElement(
+            "div"
+        );
 
-                    showChatEmpty();
-                    return;
+    content.textContent =
+        text;
+
+
+    const time =
+        document.createElement(
+            "span"
+        );
+
+    time.className =
+        "message-time";
+
+
+    time.textContent =
+        new Date(timestamp)
+            .toLocaleTimeString(
+                [],
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+    bubble.appendChild(
+        content
+    );
+
+    bubble.appendChild(
+        time
+    );
+
+
+    chatMessages.appendChild(
+        bubble
+    );
+
+
+    scrollToBottom();
+
+}
+
+
+/* =========================================================
+   IMAGE MESSAGE
+========================================================= */
+
+function addImageMessage(
+    src,
+    direction
+) {
+
+    const bubble =
+        document.createElement(
+            "div"
+        );
+
+    bubble.className =
+        `message ${direction}`;
+
+
+    const image =
+        document.createElement(
+            "img"
+        );
+
+    image.src =
+        src;
+
+    image.style.width =
+        "220px";
+
+    image.style.maxWidth =
+        "100%";
+
+    image.style.borderRadius =
+        "14px";
+
+
+    bubble.appendChild(
+        image
+    );
+
+
+    chatMessages.appendChild(
+        bubble
+    );
+
+
+    scrollToBottom();
+
+}
+
+
+/* =========================================================
+   SYSTEM MESSAGE
+========================================================= */
+
+function addSystemMessage(text) {
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+    element.style.textAlign =
+        "center";
+
+    element.style.fontSize =
+        "12px";
+
+    element.style.color =
+        "#718078";
+
+    element.style.padding =
+        "8px";
+
+
+    element.textContent =
+        text;
+
+
+    chatMessages.appendChild(
+        element
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE SELECTION
+========================================================= */
+
+chooseImage.addEventListener(
+    "click",
+    () => {
+
+        imageInput.click();
+
+    }
+);
+
+
+imageInput.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            imageInput.files[0];
+
+        if (!file) return;
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            event => {
+
+                const imageData =
+                    event.target.result;
+
+
+                /*
+                 * Show immediately.
+                 */
+
+                addImageMessage(
+                    imageData,
+                    "sent"
+                );
+
+
+                /*
+                 * Send through PeerJS.
+                 *
+                 * This is intended for testing.
+                 * Large images should eventually
+                 * use Firebase Storage.
+                 */
+
+                if (currentConnection) {
+
+                    currentConnection.send({
+
+                        type: "image",
+
+                        data: imageData
+
+                    });
 
                 }
 
-                snapshot.forEach(item => {
 
-                    renderMessage(
-                        item.data()
-                    );
+                imageInput.value = "";
 
-                });
+            };
 
-                scrollChatToBottom();
 
-            },
-            error => {
+        reader.readAsDataURL(file);
 
-                console.error(
-                    "Message listener:",
-                    error
+    }
+);
+
+
+/* =========================================================
+   ATTACHMENT MENU
+========================================================= */
+
+attachBtn.addEventListener(
+    "click",
+    () => {
+
+        emojiPanel.classList.remove(
+            "show"
+        );
+
+        attachmentMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   EMOJI
+========================================================= */
+
+emojiBtn.addEventListener(
+    "click",
+    () => {
+
+        attachmentMenu.classList.remove(
+            "show"
+        );
+
+        emojiPanel.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+emojiPanel
+    .querySelectorAll("button")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                insertEmoji(
+                    button.textContent
                 );
 
             }
         );
 
-}
+    });
 
 
-function showChatEmpty() {
+function insertEmoji(emoji) {
 
-    if (!chatMessages)
-        return;
+    const start =
+        messageInput.selectionStart;
 
-    chatMessages.innerHTML = `
-        <div class="chat-empty">
-            <div class="chat-empty-icon">✦</div>
-            <h2>Start a beneficial conversation</h2>
-            <p>
-                Keep your conversation respectful,
-                beneficial and Islamic.
-            </p>
-        </div>
-    `;
-
-}
-
-
-function renderMessage(message) {
-
-    if (!chatMessages)
-        return;
-
-    const row =
-        document.createElement("div");
-
-    const mine =
-        message.senderId === currentUser.uid;
-
-    row.className =
-        mine
-            ? "message-row mine"
-            : "message-row theirs";
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "message-bubble";
+    const end =
+        messageInput.selectionEnd;
 
     const text =
-        document.createElement("div");
+        messageInput.value;
 
-    text.textContent =
-        message.text || "";
 
-    const time =
-        document.createElement("span");
-
-    time.className =
-        "message-time";
-
-    time.textContent =
-        formatMessageTime(
-            message.createdAt
+    messageInput.value =
+        text.substring(
+            0,
+            start
+        ) +
+        emoji +
+        text.substring(
+            end
         );
 
-    bubble.append(text, time);
 
-    row.appendChild(bubble);
+    messageInput.focus();
 
-    chatMessages.appendChild(row);
+
+    messageInput.selectionStart =
+        start + emoji.length;
+
+    messageInput.selectionEnd =
+        start + emoji.length;
+
+
+    autoResizeTextarea();
 
 }
 
 
-/* ============================================================
-   SEND MESSAGE
-============================================================ */
+/* =========================================================
+   SEND BUTTON
+========================================================= */
 
-sendMessageBtn?.addEventListener(
+sendBtn.addEventListener(
     "click",
     sendMessage
 );
 
-messageInput?.addEventListener(
+
+/* =========================================================
+   ENTER TO SEND
+========================================================= */
+
+messageInput.addEventListener(
     "keydown",
     event => {
 
@@ -798,1179 +1464,171 @@ messageInput?.addEventListener(
 );
 
 
-async function sendMessage() {
+/* =========================================================
+   AUTO RESIZE TEXTAREA
+========================================================= */
 
-    const text =
-        messageInput?.value.trim();
+function autoResizeTextarea() {
 
-    if (
-        !text ||
-        !currentUser ||
-        !currentChatUser ||
-        !currentConversationId
-    )
-        return;
+    messageInput.style.height =
+        "auto";
 
-    try {
 
-        await addDoc(
-            collection(
-                db,
-                "conversations",
-                currentConversationId,
-                "messages"
-            ),
-            {
-                senderId:
-                    currentUser.uid,
-
-                receiverId:
-                    currentChatUser.uid,
-
-                text,
-
-                createdAt:
-                    serverTimestamp()
-            }
+    const height =
+        Math.min(
+            messageInput.scrollHeight,
+            130
         );
 
-        await updateDoc(
-            doc(
-                db,
-                "conversations",
-                currentConversationId
-            ),
-            {
-                lastMessage: text,
-                lastMessageAt:
-                    serverTimestamp()
-            }
-        );
 
-        messageInput.value = "";
-
-    } catch (error) {
-
-        console.error(
-            "Send message:",
-            error
-        );
-
-        alert(
-            "Message could not be sent.\n\n" +
-            error.message
-        );
-
-    }
+    messageInput.style.height =
+        `${height}px`;
 
 }
 
 
-/* ============================================================
-   CALL BUTTON
-============================================================ */
-
-callButton?.addEventListener(
-    "click",
-    () => {
-
-        if (!currentChatUser) {
-
-            alert(
-                "Open a conversation first."
-            );
-
-            return;
-
-        }
-
-        const video =
-            confirm(
-                "Start a video call?\n\n" +
-                "Press Cancel for an audio call."
-            );
-
-        startCall(
-            video
-                ? "video"
-                : "audio"
-        );
-
-    }
+messageInput.addEventListener(
+    "input",
+    autoResizeTextarea
 );
 
 
-/* ============================================================
-   CHECK MEDIA SUPPORT
-============================================================ */
+/* =========================================================
+   KEYBOARD FIX
+   The composer follows the visual viewport.
+========================================================= */
 
-function checkMediaSupport() {
+function handleKeyboard() {
 
-    if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ) {
-
-        alert(
-            "Camera and microphone calling is not available here.\n\n" +
-            "Please open Iqranix from HTTPS or your installed PWA."
-        );
-
-        return false;
-
-    }
-
-    return true;
-
-}
+    if (!window.visualViewport) return;
 
 
-/* ============================================================
-   REQUEST MICROPHONE
-============================================================ */
+    const viewport =
+        window.visualViewport;
 
-async function requestMicrophone() {
 
-    if (!checkMediaSupport())
-        throw new Error(
-            "Your browser does not support microphone access."
-        );
+    function update() {
 
-    try {
-
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: false
-            });
-
-        return stream;
-
-    } catch (error) {
-
-        console.error(
-            "MICROPHONE ERROR:",
-            error.name,
-            error.message
-        );
-
-        if (error.name === "NotAllowedError") {
-
-            throw new Error(
-                "Microphone access was blocked. Open your Android browser/site settings and allow Microphone for Iqranix, then try again."
+        const keyboardHeight =
+            Math.max(
+                0,
+                window.innerHeight -
+                viewport.height -
+                viewport.offsetTop
             );
 
-        }
 
-        if (error.name === "NotFoundError") {
+        /*
+         * Move the composer upward
+         * with the keyboard.
+         */
 
-            throw new Error(
-                "No microphone was found on this device."
+        const composer =
+            document.getElementById(
+                "composer"
             );
 
-        }
 
-        throw new Error(
-            "Could not access the microphone: " +
-            error.message
-        );
+        if (composer) {
 
-    }
-
-}
-
-
-/* ============================================================
-   REQUEST CAMERA + MICROPHONE
-============================================================ */
-
-async function requestCameraAndMicrophone() {
-
-    if (!checkMediaSupport())
-        throw new Error(
-            "Your browser does not support camera access."
-        );
-
-    try {
-
-        const stream =
-            await navigator.mediaDevices
-                .getUserMedia({
-                    audio: true,
-                    video: {
-                        facingMode: "user"
-                    }
-                });
-
-        return stream;
-
-    } catch (error) {
-
-        console.error(
-            "CAMERA/MIC ERROR:",
-            error.name,
-            error.message
-        );
-
-        if (error.name === "NotAllowedError") {
-
-            throw new Error(
-                "Camera or microphone access was blocked. Open your Android browser/site settings and allow Camera and Microphone for Iqranix, then try again."
-            );
-
-        }
-
-        if (error.name === "NotFoundError") {
-
-            throw new Error(
-                "A camera or microphone could not be found."
-            );
-
-        }
-
-        if (error.name === "NotReadableError") {
-
-            throw new Error(
-                "The camera or microphone is currently being used by another app."
-            );
-
-        }
-
-        throw new Error(
-            "Could not access camera/microphone: " +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* ============================================================
-   START CALL
-============================================================ */
-
-async function startCall(type) {
-
-    if (
-        !currentUser ||
-        !currentChatUser
-    )
-        return;
-
-    if (activeCallId) {
-
-        alert(
-            "You are already in a call."
-        );
-
-        return;
-
-    }
-
-    try {
-
-        activeCallType = type;
-
-        /* ----------------------------------------------------
-           GET MEDIA
-        ---------------------------------------------------- */
-
-        if (type === "video") {
-
-            localStream =
-                await requestCameraAndMicrophone();
-
-        } else {
-
-            localStream =
-                await requestMicrophone();
+            composer.style.transform =
+                keyboardHeight > 0
+                    ? `translateY(-${keyboardHeight}px)`
+                    : "translateY(0)";
 
         }
 
 
-        /* ----------------------------------------------------
-           CREATE CALL DOCUMENT FIRST
-        ---------------------------------------------------- */
-
-        const callRef =
-            doc(
-                collection(db, "calls")
-            );
-
-        activeCallId =
-            callRef.id;
-
-        await setDoc(
-            callRef,
-            {
-                callerId:
-                    currentUser.uid,
-
-                receiverId:
-                    currentChatUser.uid,
-
-                callerName:
-                    currentUser.displayName ||
-                    "Iqranix Member",
-
-                callerUsername:
-                    currentUser.username || "",
-
-                callerPhoto:
-                    currentUser.photoURL || "",
-
-                receiverName:
-                    currentChatUser.displayName ||
-                    "Iqranix Member",
-
-                receiverUsername:
-                    currentChatUser.username || "",
-
-                receiverPhoto:
-                    currentChatUser.photoURL || "",
-
-                type: type,
-
-                status: "ringing",
-
-                createdAt:
-                    serverTimestamp()
-            }
-        );
-
-
-        /* ----------------------------------------------------
-           PEER CONNECTION
-        ---------------------------------------------------- */
-
-        peerConnection =
-            createPeerConnection();
-
-        localStream
-            .getTracks()
-            .forEach(track => {
-
-                peerConnection.addTrack(
-                    track,
-                    localStream
-                );
-
-            });
-
-
-        /* ----------------------------------------------------
-           ICE COLLECTIONS
-        ---------------------------------------------------- */
-
-        const callerCandidates =
-            collection(
-                callRef,
-                "callerCandidates"
-            );
-
-        const calleeCandidates =
-            collection(
-                callRef,
-                "calleeCandidates"
-            );
-
-
-        /* ----------------------------------------------------
-           SEND ICE
-        ---------------------------------------------------- */
-
-        peerConnection.onicecandidate =
-            async event => {
-
-                if (!event.candidate)
-                    return;
-
-                try {
-
-                    await addDoc(
-                        callerCandidates,
-                        event.candidate.toJSON()
-                    );
-
-                } catch (error) {
-
-                    console.error(
-                        "Caller ICE:",
-                        error
-                    );
-
-                }
-
-            };
-
-
-        /* ----------------------------------------------------
-           REMOTE VIDEO
-        ---------------------------------------------------- */
-
-        peerConnection.ontrack =
-            event => {
-
-                if (
-                    event.streams &&
-                    event.streams[0] &&
-                    remoteVideo
-                ) {
-
-                    remoteVideo.srcObject =
-                        event.streams[0];
-
-                    remoteVideo.play()
-                        .catch(() => {});
-
-                }
-
-            };
-
-
-        /* ----------------------------------------------------
-           LOCAL VIDEO
-        ---------------------------------------------------- */
+        /*
+         * Keep newest message visible.
+         */
 
         if (
-            type === "video" &&
-            localVideo
+            document.activeElement ===
+            messageInput
         ) {
 
-            localVideo.srcObject =
-                localStream;
-
-            localVideo.style.display =
-                "block";
-
-            localVideo.muted = true;
-
-            localVideo.play()
-                .catch(() => {});
-
-        } else if (localVideo) {
-
-            localVideo.srcObject = null;
-
-            localVideo.style.display =
-                "none";
+            requestAnimationFrame(
+                scrollToBottom
+            );
 
         }
 
-
-        /* ----------------------------------------------------
-           SHOW CALL SCREEN
-        ---------------------------------------------------- */
-
-        showCallScreen(
-            currentChatUser,
-            type,
-            "Calling..."
-        );
-
-
-        /* ----------------------------------------------------
-           OFFER
-        ---------------------------------------------------- */
-
-        const offer =
-            await peerConnection
-                .createOffer();
-
-        await peerConnection
-            .setLocalDescription(offer);
-
-
-        await updateDoc(
-            callRef,
-            {
-                offer: {
-                    type:
-                        offer.type,
-
-                    sdp:
-                        offer.sdp
-                }
-            }
-        );
-
-
-        /* ----------------------------------------------------
-           LISTEN FOR ANSWER
-        ---------------------------------------------------- */
-
-        callDocumentUnsubscribe =
-            onSnapshot(
-                callRef,
-                async snapshot => {
-
-                    const data =
-                        snapshot.data();
-
-                    if (!data)
-                        return;
-
-
-                    if (
-                        data.answer &&
-                        peerConnection &&
-                        !peerConnection
-                            .currentRemoteDescription
-                    ) {
-
-                        try {
-
-                            await peerConnection
-                                .setRemoteDescription(
-                                    new RTCSessionDescription(
-                                        data.answer
-                                    )
-                                );
-
-                            if (callStatus)
-                                callStatus.textContent =
-                                    "Connecting...";
-
-                        } catch (error) {
-
-                            console.error(
-                                "Remote answer:",
-                                error
-                            );
-
-                        }
-
-                    }
-
-
-                    if (
-                        data.status ===
-                        "accepted"
-                    ) {
-
-                        if (callStatus)
-                            callStatus.textContent =
-                                "Connecting...";
-
-                    }
-
-
-                    if (
-                        data.status ===
-                        "rejected"
-                    ) {
-
-                        if (callStatus)
-                            callStatus.textContent =
-                                "Call declined";
-
-                        setTimeout(
-                            () => endCall(false),
-                            700
-                        );
-
-                    }
-
-
-                    if (
-                        data.status ===
-                        "ended"
-                    ) {
-
-                        endCall(false);
-
-                    }
-
-                }
-            );
-
-
-        /* ----------------------------------------------------
-           RECEIVE CALLEE ICE
-        ---------------------------------------------------- */
-
-        candidateUnsubscribe =
-            onSnapshot(
-                calleeCandidates,
-                snapshot => {
-
-                    snapshot.docChanges()
-                        .forEach(change => {
-
-                            if (
-                                change.type !==
-                                "added"
-                            )
-                                return;
-
-                            if (!peerConnection)
-                                return;
-
-                            peerConnection
-                                .addIceCandidate(
-                                    new RTCIceCandidate(
-                                        change.doc.data()
-                                    )
-                                )
-                                .catch(error => {
-
-                                    console.warn(
-                                        "Callee ICE:",
-                                        error
-                                    );
-
-                                });
-
-                        });
-
-                }
-            );
-
-
-    } catch (error) {
-
-        console.error(
-            "START CALL ERROR:",
-            error
-        );
-
-        await endCall(false);
-
-        alert(
-            "Could not start the call.\n\n" +
-            error.message
-        );
-
     }
+
+
+    viewport.addEventListener(
+        "resize",
+        update
+    );
+
+
+    viewport.addEventListener(
+        "scroll",
+        update
+    );
+
+
+    update();
 
 }
 
 
-/* ============================================================
-   PEER CONNECTION
-============================================================ */
+handleKeyboard();
 
-function createPeerConnection() {
 
-    const pc =
-        new RTCPeerConnection(
-            ICE_SERVERS
-        );
+/* =========================================================
+   SCROLL
+========================================================= */
 
-    pc.onconnectionstatechange =
+function scrollToBottom() {
+
+    requestAnimationFrame(
         () => {
 
-            console.log(
-                "Connection:",
-                pc.connectionState
-            );
-
-            if (
-                pc.connectionState ===
-                "connected"
-            ) {
-
-                if (callStatus)
-                    callStatus.textContent =
-                        "Connected";
-
-            }
-
-            if (
-                pc.connectionState ===
-                "connecting"
-            ) {
-
-                if (callStatus)
-                    callStatus.textContent =
-                        "Connecting...";
-
-            }
-
-            if (
-                pc.connectionState ===
-                "failed"
-            ) {
-
-                if (callStatus)
-                    callStatus.textContent =
-                        "Connection failed";
-
-            }
-
-            if (
-                pc.connectionState ===
-                "disconnected"
-            ) {
-
-                if (callStatus)
-                    callStatus.textContent =
-                        "Connection interrupted";
-
-            }
-
-        };
-
-
-    pc.oniceconnectionstatechange =
-        () => {
-
-            console.log(
-                "ICE:",
-                pc.iceConnectionState
-            );
-
-        };
-
-
-    return pc;
-
-}
-
-
-/* ============================================================
-   INCOMING CALLS
-============================================================ */
-
-function listenForIncomingCalls() {
-
-    if (!currentUser)
-        return;
-
-    if (callsUnsubscribe)
-        callsUnsubscribe();
-
-    const q =
-        query(
-            collection(db, "calls"),
-
-            where(
-                "receiverId",
-                "==",
-                currentUser.uid
-            ),
-
-            where(
-                "status",
-                "==",
-                "ringing"
-            ),
-
-            limit(10)
-        );
-
-    callsUnsubscribe =
-        onSnapshot(
-            q,
-            snapshot => {
-
-                snapshot.docChanges()
-                    .forEach(change => {
-
-                        if (
-                            change.type !==
-                            "added"
-                        )
-                            return;
-
-                        pendingIncomingCall = {
-                            id:
-                                change.doc.id,
-                            ...change.doc.data()
-                        };
-
-                        showIncomingCall(
-                            pendingIncomingCall
-                        );
-
-                    });
-
-            },
-            error => {
-
-                console.error(
-                    "Incoming calls:",
-                    error
-                );
-
-            }
-        );
-
-}
-
-
-/* ============================================================
-   INCOMING UI
-============================================================ */
-
-function showIncomingCall(call) {
-
-    if (!call)
-        return;
-
-    if (incomingName)
-        incomingName.textContent =
-            call.callerName ||
-            "Iqranix Member";
-
-    if (incomingType)
-        incomingType.textContent =
-            call.type === "video"
-                ? "Incoming video call"
-                : "Incoming audio call";
-
-    if (incomingAvatar) {
-
-        incomingAvatar.src =
-            call.callerPhoto ||
-            createAvatar(
-                call.callerName ||
-                "I"
-            );
-
-    }
-
-    incomingCall?.classList.remove(
-        "hidden"
-    );
-
-}
-
-
-/* ============================================================
-   ACCEPT
-============================================================ */
-
-acceptCallButton?.addEventListener(
-    "click",
-    acceptIncomingCall
-);
-
-
-async function acceptIncomingCall() {
-
-    const call =
-        pendingIncomingCall;
-
-    if (!call)
-        return;
-
-    incomingCall?.classList.add(
-        "hidden"
-    );
-
-    currentChatUser = {
-        uid:
-            call.callerId,
-
-        displayName:
-            call.callerName,
-
-        username:
-            call.callerUsername,
-
-        photoURL:
-            call.callerPhoto
-    };
-
-    activeCallId =
-        call.id;
-
-    activeCallType =
-        call.type;
-
-    try {
-
-        /* ----------------------------------------------------
-           MEDIA
-        ---------------------------------------------------- */
-
-        if (call.type === "video") {
-
-            localStream =
-                await requestCameraAndMicrophone();
-
-        } else {
-
-            localStream =
-                await requestMicrophone();
+            chatMessages.scrollTop =
+                chatMessages.scrollHeight;
 
         }
+    );
 
+}
 
-        /* ----------------------------------------------------
-           CALL REF
-        ---------------------------------------------------- */
 
-        const callRef =
-            doc(
-                db,
-                "calls",
-                call.id
-            );
+/* =========================================================
+   OPEN CHAT
+========================================================= */
 
-        const callerCandidates =
-            collection(
-                callRef,
-                "callerCandidates"
-            );
+function openChat(peerId) {
 
-        const calleeCandidates =
-            collection(
-                callRef,
-                "calleeCandidates"
-            );
+    currentPeerId =
+        peerId;
 
 
-        /* ----------------------------------------------------
-           PEER
-        ---------------------------------------------------- */
+    messagesPage.classList.remove(
+        "active"
+    );
 
-        peerConnection =
-            createPeerConnection();
+    chatPage.classList.add(
+        "active"
+    );
 
-        localStream
-            .getTracks()
-            .forEach(track => {
 
-                peerConnection.addTrack(
-                    track,
-                    localStream
-                );
+    chatName.textContent =
+        "Iqranix Member";
 
-            });
+    chatUsername.textContent =
+        `@${peerId.slice(0, 12)}`;
 
 
-        /* ----------------------------------------------------
-           ICE
-        ---------------------------------------------------- */
+    chatAvatar.src =
+        DEFAULT_AVATAR;
 
-        peerConnection.onicecandidate =
-            async event => {
 
-                if (!event.candidate)
-                    return;
+    if (peerId) {
 
-                await addDoc(
-                    calleeCandidates,
-                    event.candidate.toJSON()
-                );
-
-            };
-
-
-        /* ----------------------------------------------------
-           REMOTE
-        ---------------------------------------------------- */
-
-        peerConnection.ontrack =
-            event => {
-
-                if (
-                    event.streams &&
-                    event.streams[0] &&
-                    remoteVideo
-                ) {
-
-                    remoteVideo.srcObject =
-                        event.streams[0];
-
-                    remoteVideo.play()
-                        .catch(() => {});
-
-                }
-
-            };
-
-
-        /* ----------------------------------------------------
-           LOCAL
-        ---------------------------------------------------- */
-
-        if (
-            call.type === "video" &&
-            localVideo
-        ) {
-
-            localVideo.srcObject =
-                localStream;
-
-            localVideo.style.display =
-                "block";
-
-            localVideo.muted = true;
-
-            localVideo.play()
-                .catch(() => {});
-
-        } else if (localVideo) {
-
-            localVideo.srcObject = null;
-
-            localVideo.style.display =
-                "none";
-
-        }
-
-
-        showCallScreen(
-            currentChatUser,
-            call.type,
-            "Connecting..."
-        );
-
-
-        /* ----------------------------------------------------
-           RECEIVE OFFER
-        ---------------------------------------------------- */
-
-        if (!call.offer) {
-
-            throw new Error(
-                "The caller's offer was not found."
-            );
-
-        }
-
-        await peerConnection
-            .setRemoteDescription(
-                new RTCSessionDescription(
-                    call.offer
-                )
-            );
-
-
-        /* ----------------------------------------------------
-           CREATE ANSWER
-        ---------------------------------------------------- */
-
-        const answer =
-            await peerConnection
-                .createAnswer();
-
-        await peerConnection
-            .setLocalDescription(answer);
-
-
-        await updateDoc(
-            callRef,
-            {
-                answer: {
-                    type:
-                        answer.type,
-
-                    sdp:
-                        answer.sdp
-                },
-
-                status:
-                    "accepted"
-            }
-        );
-
-
-        /* ----------------------------------------------------
-           RECEIVE CALLER ICE
-        ---------------------------------------------------- */
-
-        candidateUnsubscribe =
-            onSnapshot(
-                callerCandidates,
-                snapshot => {
-
-                    snapshot.docChanges()
-                        .forEach(change => {
-
-                            if (
-                                change.type !==
-                                "added"
-                            )
-                                return;
-
-                            if (!peerConnection)
-                                return;
-
-                            peerConnection
-                                .addIceCandidate(
-                                    new RTCIceCandidate(
-                                        change.doc.data()
-                                    )
-                                )
-                                .catch(error => {
-
-                                    console.warn(
-                                        "Caller ICE:",
-                                        error
-                                    );
-
-                                });
-
-                        });
-
-                }
-            );
-
-
-        /* ----------------------------------------------------
-           CALL LISTENER
-        ---------------------------------------------------- */
-
-        callDocumentUnsubscribe =
-            onSnapshot(
-                callRef,
-                snapshot => {
-
-                    const data =
-                        snapshot.data();
-
-                    if (!data)
-                        return;
-
-                    if (
-                        data.status ===
-                        "ended"
-                    ) {
-
-                        endCall(false);
-
-                    }
-
-                }
-            );
-
-
-    } catch (error) {
-
-        console.error(
-            "ACCEPT CALL ERROR:",
-            error
-        );
-
-        try {
-
-            await updateDoc(
-                doc(
-                    db,
-                    "calls",
-                    call.id
-                ),
-                {
-                    status: "ended"
-                }
-            );
-
-        } catch (e) {
-
-            console.warn(e);
-
-        }
-
-        await endCall(false);
-
-        alert(
-            "Could not answer the call.\n\n" +
-            error.message
+        connectToPeer(
+            peerId
         );
 
     }
@@ -1978,810 +1636,184 @@ async function acceptIncomingCall() {
 }
 
 
-/* ============================================================
-   REJECT
-============================================================ */
+/* =========================================================
+   CURRENT CHAT PEER
+========================================================= */
 
-rejectCallButton?.addEventListener(
-    "click",
-    rejectIncomingCall
-);
+function currentPeerIdForChat() {
 
-
-async function rejectIncomingCall() {
-
-    const call =
-        pendingIncomingCall;
-
-    if (!call)
-        return;
-
-    try {
-
-        await updateDoc(
-            doc(
-                db,
-                "calls",
-                call.id
-            ),
-            {
-                status: "rejected"
-            }
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Reject call:",
-            error
-        );
-
-    }
-
-    incomingCall?.classList.add(
-        "hidden"
-    );
-
-    pendingIncomingCall = null;
+    return currentPeerId;
 
 }
 
 
-/* ============================================================
-   CALL SCREEN
-============================================================ */
+/* =========================================================
+   BACK
+========================================================= */
 
-function showCallScreen(
-    user,
-    type,
-    status
-) {
-
-    if (callName)
-        callName.textContent =
-            user.displayName ||
-            "Iqranix Member";
-
-    if (callStatus)
-        callStatus.textContent =
-            status;
-
-    if (callAvatar) {
-
-        callAvatar.src =
-            user.photoURL ||
-            createAvatar(
-                user.displayName ||
-                user.username ||
-                "I"
-            );
-
-    }
-
-    callScreen?.classList.remove(
-        "hidden"
-    );
-
-}
-
-
-/* ============================================================
-   END CALL
-============================================================ */
-
-endCallButton?.addEventListener(
-    "click",
-    () => endCall(true)
-);
-
-
-async function endCall(updateFirebase = true) {
-
-    const callId =
-        activeCallId;
-
-    if (
-        updateFirebase &&
-        callId
-    ) {
-
-        try {
-
-            await updateDoc(
-                doc(
-                    db,
-                    "calls",
-                    callId
-                ),
-                {
-                    status: "ended"
-                }
-            );
-
-        } catch (error) {
-
-            console.warn(
-                "End call Firebase:",
-                error
-            );
-
-        }
-
-    }
-
-
-    if (callDocumentUnsubscribe) {
-
-        callDocumentUnsubscribe();
-        callDocumentUnsubscribe = null;
-
-    }
-
-    if (candidateUnsubscribe) {
-
-        candidateUnsubscribe();
-        candidateUnsubscribe = null;
-
-    }
-
-
-    if (peerConnection) {
-
-        try {
-            peerConnection.close();
-        } catch (e) {}
-
-        peerConnection = null;
-
-    }
-
-
-    if (localStream) {
-
-        localStream
-            .getTracks()
-            .forEach(track => {
-
-                try {
-                    track.stop();
-                } catch (e) {}
-
-            });
-
-        localStream = null;
-
-    }
-
-
-    if (remoteVideo)
-        remoteVideo.srcObject = null;
-
-    if (localVideo)
-        localVideo.srcObject = null;
-
-
-    callScreen?.classList.add(
-        "hidden"
-    );
-
-    incomingCall?.classList.add(
-        "hidden"
-    );
-
-
-    activeCallId = null;
-    activeCallType = null;
-
-    pendingIncomingCall = null;
-
-    isMuted = false;
-    isCameraOff = false;
-
-}
-
-
-/* ============================================================
-   MUTE
-============================================================ */
-
-muteCallButton?.addEventListener(
+backChat.addEventListener(
     "click",
     () => {
 
-        if (!localStream)
-            return;
-
-        const tracks =
-            localStream.getAudioTracks();
-
-        if (!tracks.length)
-            return;
-
-        isMuted = !isMuted;
-
-        tracks.forEach(track => {
-            track.enabled = !isMuted;
-        });
-
-        if (muteCallButton)
-            muteCallButton.textContent =
-                isMuted
-                    ? "🔇"
-                    : "🎤";
-
-    }
-);
-
-
-/* ============================================================
-   CAMERA
-============================================================ */
-
-cameraCallButton?.addEventListener(
-    "click",
-    () => {
-
-        if (!localStream)
-            return;
-
-        const tracks =
-            localStream.getVideoTracks();
-
-        if (!tracks.length)
-            return;
-
-        isCameraOff =
-            !isCameraOff;
-
-        tracks.forEach(track => {
-            track.enabled =
-                !isCameraOff;
-        });
-
-        if (cameraCallButton)
-            cameraCallButton.textContent =
-                isCameraOff
-                    ? "🚫"
-                    : "📷";
-
-    }
-);
-
-
-/* ============================================================
-   CHAT MENU
-============================================================ */
-
-chatMenuButton?.addEventListener(
-    "click",
-    event => {
-
-        event.stopPropagation();
-
-        chatMenu?.classList.toggle(
-            "hidden"
-        );
-
-    }
-);
-
-
-document.addEventListener(
-    "click",
-    event => {
-
-        if (
-            chatMenu &&
-            !chatMenu.contains(event.target) &&
-            event.target !== chatMenuButton
-        ) {
-
-            chatMenu.classList.add(
-                "hidden"
-            );
-
-        }
-
-    }
-);
-
-
-/* ============================================================
-   PROFILE
-============================================================ */
-
-chatProfileButton?.addEventListener(
-    "click",
-    showProfile
-);
-
-viewProfileOption?.addEventListener(
-    "click",
-    showProfile
-);
-
-
-function showProfile() {
-
-    if (!currentChatUser)
-        return;
-
-    if (profilePopupAvatar)
-        profilePopupAvatar.src =
-            currentChatUser.photoURL ||
-            createAvatar(
-                currentChatUser.displayName ||
-                "I"
-            );
-
-    if (profilePopupName)
-        profilePopupName.textContent =
-            currentChatUser.displayName ||
-            "Iqranix Member";
-
-    if (profilePopupUsername)
-        profilePopupUsername.textContent =
-            "@" +
-            (
-                currentChatUser.username ||
-                "username"
-            );
-
-    profilePopup?.classList.remove(
-        "hidden"
-    );
-
-    chatMenu?.classList.add(
-        "hidden"
-    );
-
-}
-
-
-closeProfilePopup?.addEventListener(
-    "click",
-    () => {
-
-        profilePopup?.classList.add(
-            "hidden"
-        );
-
-    }
-);
-
-
-/* ============================================================
-   CLOSE CHAT
-============================================================ */
-
-closeChatBtn?.addEventListener(
-    "click",
-    () => {
-
-        if (messagesUnsubscribe) {
-
-            messagesUnsubscribe();
-            messagesUnsubscribe = null;
-
-        }
-
-        chatPage?.classList.remove(
+        chatPage.classList.remove(
             "active"
         );
 
-        document.body.style.overflow = "";
-
-        currentChatUser = null;
-        currentConversationId = null;
-
-        loadConversations();
-
-    }
-);
-
-
-/* ============================================================
-   BACK
-============================================================ */
-
-backBtn?.addEventListener(
-    "click",
-    () => {
-
-        window.location.href =
-            "index.html";
-
-    }
-);
-
-
-/* ============================================================
-   NEW MESSAGE
-============================================================ */
-
-newMessageBtn?.addEventListener(
-    "click",
-    () => {
-
-        usernameSearch?.focus();
-
-    }
-);
-
-
-/* ============================================================
-   CLEAR SEARCH
-============================================================ */
-
-clearSearchBtn?.addEventListener(
-    "click",
-    () => {
-
-        if (usernameSearch)
-            usernameSearch.value = "";
-
-        clearSearchBtn?.classList.add(
-            "hidden"
+        messagesPage.classList.add(
+            "active"
         );
 
-        usernameResults?.classList.add(
-            "hidden"
-        );
+        if (currentConnection) {
 
-    }
-);
+            try {
 
+                currentConnection.close();
 
-/* ============================================================
-   EMOJI
-============================================================ */
+            } catch {}
 
-emojiBtn?.addEventListener(
-    "click",
-    () => {
-
-        if (!messageInput)
-            return;
-
-        messageInput.value += " 😊";
-
-        messageInput.focus();
-
-    }
-);
-
-
-/* ============================================================
-   LOAD CONVERSATIONS
-============================================================ */
-
-async function loadConversations() {
-
-    if (!currentUser || !conversationList)
-        return;
-
-    try {
-
-        const q =
-            query(
-                collection(
-                    db,
-                    "conversations"
-                ),
-                where(
-                    "participants",
-                    "array-contains",
-                    currentUser.uid
-                ),
-                limit(50)
-            );
-
-        const snapshot =
-            await getDocs(q);
-
-        const conversations =
-            snapshot.docs.map(item => ({
-                id: item.id,
-                ...item.data()
-            }));
-
-        conversations.sort((a, b) => {
-
-            const at =
-                a.lastMessageAt
-                    ?.toMillis?.() || 0;
-
-            const bt =
-                b.lastMessageAt
-                    ?.toMillis?.() || 0;
-
-            return bt - at;
-
-        });
-
-        renderConversations(
-            conversations
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Conversations:",
-            error
-        );
-
-    }
-
-}
-
-
-function renderConversations(conversations) {
-
-    if (!conversationList)
-        return;
-
-    conversationList.innerHTML = "";
-
-    if (!conversations.length) {
-
-        conversationList.innerHTML = `
-            <div class="loading-state">
-                <h2>No conversations yet</h2>
-                <p>
-                    Search a username above
-                    to start a conversation.
-                </p>
-            </div>
-        `;
-
-        return;
-    }
-
-    conversations.forEach(conversation => {
-
-        const otherUid =
-            conversation.participants?.find(
-                uid =>
-                    uid !== currentUser.uid
-            );
-
-        if (!otherUid)
-            return;
-
-        const name =
-            conversation
-                .participantNames?.[otherUid] ||
-            "Iqranix Member";
-
-        const username =
-            conversation
-                .participantUsernames?.[otherUid] ||
-            "";
-
-        const photo =
-            conversation
-                .participantPhotos?.[otherUid] ||
-            "";
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "conversation";
-
-        const avatar =
-            document.createElement("img");
-
-        avatar.className =
-            "conversation-avatar";
-
-        avatar.src =
-            photo ||
-            createAvatar(name);
-
-        const info =
-            document.createElement("div");
-
-        info.className =
-            "conversation-info";
-
-        const top =
-            document.createElement("div");
-
-        top.className =
-            "conversation-top";
-
-        const nameElement =
-            document.createElement("span");
-
-        nameElement.className =
-            "conversation-name";
-
-        nameElement.textContent =
-            name;
-
-        const time =
-            document.createElement("span");
-
-        time.className =
-            "conversation-time";
-
-        time.textContent =
-            formatConversationTime(
-                conversation.lastMessageAt
-            );
-
-        top.append(
-            nameElement,
-            time
-        );
-
-        const preview =
-            document.createElement("div");
-
-        preview.className =
-            "conversation-preview";
-
-        preview.textContent =
-            conversation.lastMessage ||
-            (
-                username
-                    ? "@" + username
-                    : "Start a conversation"
-            );
-
-        info.append(
-            top,
-            preview
-        );
-
-        button.append(
-            avatar,
-            info
-        );
-
-        button.addEventListener(
-            "click",
-            () => openConversation({
-                uid: otherUid,
-                displayName: name,
-                username,
-                photoURL: photo
-            })
-        );
-
-        conversationList.appendChild(
-            button
-        );
-
-    });
-
-}
-
-
-/* ============================================================
-   TIME
-============================================================ */
-
-function formatMessageTime(timestamp) {
-
-    if (
-        !timestamp ||
-        typeof timestamp.toDate !==
-        "function"
-    )
-        return "";
-
-    return timestamp
-        .toDate()
-        .toLocaleTimeString(
-            [],
-            {
-                hour: "2-digit",
-                minute: "2-digit"
-            }
-        );
-
-}
-
-
-function formatConversationTime(timestamp) {
-
-    if (
-        !timestamp ||
-        typeof timestamp.toDate !==
-        "function"
-    )
-        return "";
-
-    const date =
-        timestamp.toDate();
-
-    const diff =
-        new Date() - date;
-
-    const minutes =
-        Math.floor(
-            diff / 60000
-        );
-
-    if (minutes < 1)
-        return "now";
-
-    if (minutes < 60)
-        return `${minutes}m`;
-
-    const hours =
-        Math.floor(
-            minutes / 60
-        );
-
-    if (hours < 24)
-        return `${hours}h`;
-
-    return date.toLocaleDateString(
-        [],
-        {
-            day: "numeric",
-            month: "short"
         }
-    );
 
-}
+        currentConnection =
+            null;
 
-
-/* ============================================================
-   AVATAR
-============================================================ */
-
-function createAvatar(name) {
-
-    const letter =
-        String(name || "I")
-            .trim()
-            .charAt(0)
-            .toUpperCase();
-
-    const svg = `
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="100"
-            height="100"
-            viewBox="0 0 100 100"
-        >
-            <circle
-                cx="50"
-                cy="50"
-                r="50"
-                fill="#0b6e4f"
-            />
-
-            <text
-                x="50"
-                y="63"
-                text-anchor="middle"
-                font-family="Arial"
-                font-size="42"
-                font-weight="700"
-                fill="#ffffff"
-            >
-                ${letter}
-            </text>
-        </svg>
-    `;
-
-    return (
-        "data:image/svg+xml;charset=UTF-8," +
-        encodeURIComponent(svg)
-    );
-
-}
-
-
-/* ============================================================
-   DONE
-============================================================ */
-
-console.log(
-    "Iqranix Messages + WebRTC Calling loaded."
+    }
 );
+
+
+/* =========================================================
+   NEW CHAT MODAL
+========================================================= */
+
+function openNewChatModal() {
+
+    newChatModal.classList.add(
+        "show"
+    );
+
+}
+
+
+function closeNewChatModal() {
+
+    newChatModal.classList.remove(
+        "show"
+    );
+
+}
+
+
+newChatBtn.addEventListener(
+    "click",
+    openNewChatModal
+);
+
+
+startChatBtn.addEventListener(
+    "click",
+    openNewChatModal
+);
+
+
+closeModal.addEventListener(
+    "click",
+    closeNewChatModal
+);
+
+
+connectPeerBtn.addEventListener(
+    "click",
+    () => {
+
+        const id =
+            peerIdInput.value.trim();
+
+
+        if (!id) {
+
+            alert(
+                "Enter the other person's Peer ID."
+            );
+
+            return;
+
+        }
+
+
+        closeNewChatModal();
+
+        openChat(id);
+
+    }
+);
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    () => {
+
+        clearSearch.style.display =
+            searchInput.value
+                ? "block"
+                : "none";
+
+    }
+);
+
+
+clearSearch.addEventListener(
+    "click",
+    () => {
+
+        searchInput.value = "";
+
+        clearSearch.style.display =
+            "none";
+
+        searchInput.focus();
+
+    }
+);
+
+
+/* =========================================================
+   CALL BUTTONS
+========================================================= */
+
+audioCallBtn.addEventListener(
+    "click",
+    startAudioCall
+);
+
+
+videoCallBtn.addEventListener(
+    "click",
+    startVideoCall
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+initializePeer();
+
+
+/* =========================================================
+   DISPLAY YOUR PEER ID
+========================================================= */
+
+setTimeout(() => {
+
+    if (currentPeerId) {
+
+        addSystemMessage(
+            `Your calling ID: ${currentPeerId}`
+        );
+
+    }
+
+}, 3000);

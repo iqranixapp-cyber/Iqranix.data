@@ -2,316 +2,346 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#0B6E4F">
 
     <title>Messages • Iqranix</title>
 
     <link rel="stylesheet" href="messages.css">
+
+    <!-- PeerJS -->
+    <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 
     <script type="module" src="messages.js"></script>
 </head>
 
 <body>
 
-<div id="messagesPage" class="messages-page">
+<div class="app">
 
-    <!-- =====================================================
-         MAIN MESSAGES PAGE
-    ====================================================== -->
+    <!-- =================================================
+         MESSAGES PAGE
+    ================================================== -->
 
-    <header class="messages-header">
+    <section id="messagesPage" class="page active">
 
-        <button id="backBtn" class="icon-button" aria-label="Back">
-            <svg viewBox="0 0 24 24">
-                <path d="M15 18l-6-6 6-6"/>
-            </svg>
-        </button>
+        <header class="main-header">
 
-        <div class="header-title">
-            <h1>Messages</h1>
-            <span>Iqranix</span>
-        </div>
+            <div>
+                <h1>Messages</h1>
+                <p>Stay connected</p>
+            </div>
 
-        <button id="newMessageBtn" class="new-message-button">
-            +
-        </button>
+            <button id="newChatBtn" class="header-button">
+                ＋
+            </button>
 
-    </header>
+        </header>
 
 
-    <!-- SEARCH -->
+        <!-- SEARCH -->
 
-    <section class="search-section">
+        <div class="search-wrapper">
 
-        <div class="search-box">
-
-            <svg viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7"/>
-                <path d="M20 20l-4-4"/>
-            </svg>
+            <span>⌕</span>
 
             <input
-                id="usernameSearch"
-                type="search"
-                placeholder="Search Iqranix username"
+                id="searchInput"
+                type="text"
+                placeholder="Search username..."
                 autocomplete="off"
             >
 
-            <button
-                id="clearSearchBtn"
-                class="clear-search hidden"
-            >
+            <button id="clearSearch" class="clear-button">
                 ×
             </button>
 
         </div>
 
-        <div id="searchStatus" class="search-status"></div>
 
-        <div
-            id="usernameResults"
-            class="username-results hidden"
-        ></div>
+        <!-- TABS -->
+
+        <div class="tabs">
+
+            <button class="tab active">
+                All
+            </button>
+
+            <button class="tab">
+                Unread
+            </button>
+
+            <button class="tab">
+                Requests
+            </button>
+
+        </div>
+
+
+        <!-- CONVERSATIONS -->
+
+        <main id="conversationList" class="conversation-list">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    💬
+                </div>
+
+                <h2>No conversations yet</h2>
+
+                <p>
+                    Start a conversation with another Iqranix member.
+                </p>
+
+                <button id="startChatBtn">
+                    Start a conversation
+                </button>
+
+            </div>
+
+        </main>
 
     </section>
 
 
-    <!-- TABS -->
 
-    <div class="message-tabs">
+    <!-- =================================================
+         CHAT PAGE
+    ================================================== -->
 
-        <button class="message-tab active">
-            All
-        </button>
+    <section id="chatPage" class="page chat-page">
 
-        <button class="message-tab">
-            Unread
-        </button>
+        <header class="chat-header">
 
-        <button class="message-tab">
-            Requests
-        </button>
-
-    </div>
+            <button id="backChat" class="back-button">
+                ‹
+            </button>
 
 
-    <!-- CONVERSATIONS -->
+            <div class="chat-user">
 
-    <main id="conversationList" class="conversation-list">
+                <div class="avatar-container">
 
-        <div class="loading-state">
-            <div class="loading-spinner"></div>
-            <p>Loading conversations...</p>
+                    <img
+                        id="chatAvatar"
+                        src=""
+                        alt=""
+                    >
+
+                    <span class="online-dot"></span>
+
+                </div>
+
+                <div>
+
+                    <strong id="chatName">
+                        Iqranix Member
+                    </strong>
+
+                    <small id="chatUsername">
+                        @member
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="call-buttons">
+
+                <button
+                    id="audioCallBtn"
+                    title="Audio call"
+                >
+                    ☎
+                </button>
+
+                <button
+                    id="videoCallBtn"
+                    title="Video call"
+                >
+                    ▣
+                </button>
+
+                <button id="chatMoreBtn">
+                    ⋮
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- MESSAGES -->
+
+        <main
+            id="chatMessages"
+            class="chat-messages"
+        >
+
+            <div class="chat-start">
+
+                <div class="chat-start-avatar">
+                    💚
+                </div>
+
+                <h3>Start chatting</h3>
+
+                <p>
+                    Messages between you and this member will appear here.
+                </p>
+
+            </div>
+
+        </main>
+
+
+
+        <!-- ATTACHMENT MENU -->
+
+        <div
+            id="attachmentMenu"
+            class="attachment-menu"
+        >
+
+            <button id="chooseImage">
+                <span>🖼️</span>
+                Photo
+            </button>
+
+            <button id="chooseFile">
+                <span>📎</span>
+                File
+            </button>
+
         </div>
 
-    </main>
 
-</div>
-
-
-<!-- =========================================================
-     CHAT PAGE
-========================================================== -->
-
-<div id="chatPage" class="chat-page">
-
-    <header class="chat-header">
-
-        <button
-            id="closeChatBtn"
-            class="chat-back-button"
-            aria-label="Back"
-        >
-            <svg viewBox="0 0 24 24">
-                <path d="M15 18l-6-6 6-6"/>
-            </svg>
-        </button>
-
-
-        <img
-            id="chatAvatar"
-            class="chat-avatar"
-            src=""
-            alt=""
+        <input
+            id="imageInput"
+            type="file"
+            accept="image/*"
+            hidden
         >
 
 
-        <button
-            id="chatProfileButton"
-            class="chat-user-info"
+        <!-- EMOJI PANEL -->
+
+        <div
+            id="emojiPanel"
+            class="emoji-panel"
         >
 
-            <strong id="chatName">
-                Iqranix Member
-            </strong>
+            <button>😀</button>
+            <button>😂</button>
+            <button>😍</button>
+            <button>🥰</button>
+            <button>😊</button>
+            <button>❤️</button>
+            <button>🤲</button>
+            <button>🕌</button>
+            <button>☪️</button>
+            <button>✨</button>
+            <button>👍</button>
+            <button>🙏</button>
 
-            <span id="chatUsername">
-                @username
-            </span>
+        </div>
 
-            <span
-                id="chatOnlineDot"
-                class="online-status hidden"
+
+
+        <!-- COMPOSER -->
+
+        <div
+            id="composer"
+            class="composer"
+        >
+
+            <button
+                id="attachBtn"
+                class="composer-button"
+                type="button"
             >
-                ● online
-            </span>
-
-        </button>
+                ＋
+            </button>
 
 
-        <!-- CALL -->
-
-        <button
-            id="callButton"
-            class="chat-action-button"
-            aria-label="Call"
-        >
-            <svg viewBox="0 0 24 24">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2
-                19.79 19.79 0 0 1-8.63-3.07
-                19.5 19.5 0 0 1-6-6
-                A19.79 19.79 0 0 1 2.12 4.18
-                2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72
-                12.84 12.84 0 0 0 .7 2.81
-                2 2 0 0 1-.45 2.11L8.09 9.91
-                a16 16 0 0 0 6 6l1.27-1.27
-                a2 2 0 0 1 2.11-.45
-                12.84 12.84 0 0 0 2.81.7
-                A2 2 0 0 1 22 16.92z"/>
-            </svg>
-        </button>
+            <textarea
+                id="messageInput"
+                rows="1"
+                maxlength="4000"
+                placeholder="Message..."
+                autocomplete="off"
+            ></textarea>
 
 
-        <!-- THREE DOTS -->
-
-        <button
-            id="chatMenuButton"
-            class="chat-action-button"
-            aria-label="More options"
-        >
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-    </header>
+            <button
+                id="emojiBtn"
+                class="composer-button"
+                type="button"
+            >
+                ☺
+            </button>
 
 
-    <!-- CHAT MENU -->
-
-    <div id="chatMenu" class="chat-menu hidden">
-
-        <button id="viewProfileOption">
-            <span>👤</span>
-            View profile
-        </button>
-
-        <button id="searchConversationOption">
-            <span>🔎</span>
-            Search in conversation
-        </button>
-
-        <button id="muteConversationOption">
-            <span>🔕</span>
-            Mute notifications
-        </button>
-
-        <button id="clearConversationOption">
-            <span>🗑</span>
-            Clear conversation
-        </button>
-
-        <div class="menu-divider"></div>
-
-        <button id="reportUserOption" class="danger-option">
-            <span>⚠</span>
-            Report user
-        </button>
-
-    </div>
-
-
-    <!-- MESSAGES -->
-
-    <main
-        id="chatMessages"
-        class="chat-messages"
-    ></main>
-
-
-    <!-- MESSAGE COMPOSER -->
-
-    <div class="message-composer">
-
-        <button
-            id="emojiBtn"
-            class="composer-button"
-        >
-            ☺
-        </button>
-
-        <textarea
-            id="messageInput"
-            rows="1"
-            placeholder="Message..."
-            maxlength="4000"
-        ></textarea>
-
-        <button
-            id="sendMessageBtn"
-            class="send-button"
-            aria-label="Send"
-        >
-            <svg viewBox="0 0 24 24">
-                <path d="M22 2L11 13"/>
-                <path d="M22 2l-7 20-4-9-9-4z"/>
-            </svg>
-        </button>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     CALL SCREEN
-========================================================== -->
-
-<div id="callScreen" class="call-screen hidden">
-
-    <div class="call-background"></div>
-
-    <div class="call-content">
-
-        <img
-            id="callAvatar"
-            class="call-avatar"
-            src=""
-            alt=""
-        >
-
-        <h2 id="callName">
-            Iqranix Member
-        </h2>
-
-        <p id="callStatus">
-            Calling...
-        </p>
-
-        <div class="remote-video-wrapper">
-
-            <video
-                id="remoteVideo"
-                autoplay
-                playsinline
-            ></video>
-
-            <div
-                id="audioCallAvatar"
-                class="audio-call-avatar"
-            ></div>
+            <button
+                id="sendBtn"
+                class="send-button"
+                type="button"
+            >
+                ↑
+            </button>
 
         </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         CALL SCREEN
+    ================================================== -->
+
+    <section
+        id="callScreen"
+        class="call-screen"
+    >
+
+        <video
+            id="remoteVideo"
+            class="remote-video"
+            autoplay
+            playsinline
+        ></video>
+
+
+        <div
+            id="audioCallBackground"
+            class="audio-call-background"
+        >
+
+            <img
+                id="callAvatar"
+                src=""
+                alt=""
+            >
+
+            <h2 id="callName">
+                Iqranix Member
+            </h2>
+
+            <p id="callStatus">
+                Calling...
+            </p>
+
+        </div>
+
 
         <video
             id="localVideo"
@@ -321,117 +351,143 @@
             playsinline
         ></video>
 
+
+        <div class="call-top">
+
+            <span id="callType">
+                Video call
+            </span>
+
+            <span id="peerIdDisplay"></span>
+
+        </div>
+
+
         <div class="call-controls">
 
-            <button
-                id="muteCallButton"
-                class="call-control"
-            >
-                🎤
+            <button id="muteBtn">
+                🎙
+            </button>
+
+            <button id="cameraBtn">
+                ▣
+            </button>
+
+            <button id="speakerBtn">
+                🔊
             </button>
 
             <button
-                id="cameraCallButton"
-                class="call-control"
-            >
-                📷
-            </button>
-
-            <button
-                id="endCallButton"
-                class="call-control end-call"
+                id="endCallBtn"
+                class="end-call"
             >
                 ☎
             </button>
 
         </div>
 
-    </div>
-
-</div>
+    </section>
 
 
-<!-- =========================================================
-     INCOMING CALL
-========================================================== -->
 
-<div
-    id="incomingCall"
-    class="incoming-call hidden"
->
+    <!-- =================================================
+         INCOMING CALL
+    ================================================== -->
 
-    <div class="incoming-card">
+    <div
+        id="incomingCall"
+        class="incoming-overlay"
+    >
 
-        <img
-            id="incomingAvatar"
-            class="incoming-avatar"
-            src=""
-            alt=""
-        >
+        <div class="incoming-card">
 
-        <h2 id="incomingName">
-            Iqranix Member
-        </h2>
+            <div class="incoming-ring">
+                📞
+            </div>
 
-        <p id="incomingType">
-            Incoming call
-        </p>
-
-        <div class="incoming-buttons">
-
-            <button
-                id="rejectCallButton"
-                class="reject-call"
+            <img
+                id="incomingAvatar"
+                src=""
+                alt=""
             >
-                ☎
-            </button>
 
-            <button
-                id="acceptCallButton"
-                class="accept-call"
-            >
-                ☎
-            </button>
+            <h2 id="incomingName">
+                Iqranix Member
+            </h2>
+
+            <p id="incomingCallType">
+                Incoming call
+            </p>
+
+
+            <div class="incoming-buttons">
+
+                <button
+                    id="rejectCallBtn"
+                    class="reject"
+                >
+                    ✕
+                </button>
+
+                <button
+                    id="acceptCallBtn"
+                    class="accept"
+                >
+                    ☎
+                </button>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
 
-<!-- PROFILE POPUP -->
+    <!-- =================================================
+         START CHAT MODAL
+    ================================================== -->
 
-<div
-    id="profilePopup"
-    class="profile-popup hidden"
->
+    <div
+        id="newChatModal"
+        class="modal"
+    >
 
-    <div class="profile-card">
+        <div class="modal-card">
 
-        <button
-            id="closeProfilePopup"
-            class="close-profile"
-        >
-            ×
-        </button>
+            <button
+                id="closeModal"
+                class="modal-close"
+            >
+                ×
+            </button>
 
-        <img
-            id="profilePopupAvatar"
-            src=""
-            alt=""
-        >
+            <div class="modal-icon">
+                💬
+            </div>
 
-        <h2 id="profilePopupName">
-            Iqranix Member
-        </h2>
+            <h2>New conversation</h2>
 
-        <p id="profilePopupUsername">
-            @username
-        </p>
+            <p>
+                Enter the username or Peer ID of the person you want to contact.
+            </p>
 
-        <div class="profile-line">
-            Iqranix member
+
+            <input
+                id="peerIdInput"
+                type="text"
+                placeholder="Enter Peer ID"
+                autocomplete="off"
+            >
+
+
+            <button
+                id="connectPeerBtn"
+                class="primary-button"
+            >
+                Continue
+            </button>
+
         </div>
 
     </div>
