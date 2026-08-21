@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
     <meta name="theme-color" content="#0B6E4F">
 
@@ -17,285 +13,104 @@
     <!-- PeerJS -->
     <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
 
-    <script type="module" src="messages.js"></script>
+    <script src="messages.js" defer></script>
 </head>
 
 <body>
 
 <div class="app">
 
-    <!-- =================================================
-         MESSAGES PAGE
-    ================================================== -->
+    <!-- HEADER -->
+    <header class="header">
 
-    <section id="messagesPage" class="page active">
+        <button id="backBtn" class="back-btn">‹</button>
 
-        <header class="main-header">
+        <div>
+            <h1>Messages</h1>
+            <p>Stay connected</p>
+        </div>
+
+        <div class="header-icon">✦</div>
+
+    </header>
+
+
+    <!-- CONNECTION STATUS -->
+    <section class="status-card">
+
+        <div class="status-row">
+
+            <span id="statusDot" class="status-dot"></span>
 
             <div>
-                <h1>Messages</h1>
-                <p>Stay connected</p>
+                <strong id="connectionStatus">
+                    Connecting...
+                </strong>
+
+                <small id="connectionInfo">
+                    Connecting to calling service
+                </small>
             </div>
 
-            <button id="newChatBtn" class="header-button">
-                ＋
-            </button>
-
-        </header>
-
-
-        <!-- SEARCH -->
-
-        <div class="search-wrapper">
-
-            <span>⌕</span>
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Search username..."
-                autocomplete="off"
-            >
-
-            <button id="clearSearch" class="clear-button">
-                ×
-            </button>
-
         </div>
-
-
-        <!-- TABS -->
-
-        <div class="tabs">
-
-            <button class="tab active">
-                All
-            </button>
-
-            <button class="tab">
-                Unread
-            </button>
-
-            <button class="tab">
-                Requests
-            </button>
-
-        </div>
-
-
-        <!-- CONVERSATIONS -->
-
-        <main id="conversationList" class="conversation-list">
-
-            <div class="empty-state">
-
-                <div class="empty-icon">
-                    💬
-                </div>
-
-                <h2>No conversations yet</h2>
-
-                <p>
-                    Start a conversation with another Iqranix member.
-                </p>
-
-                <button id="startChatBtn">
-                    Start a conversation
-                </button>
-
-            </div>
-
-        </main>
 
     </section>
 
 
+    <!-- MY PEER ID -->
+    <section class="peer-card">
 
-    <!-- =================================================
-         CHAT PAGE
-    ================================================== -->
+        <div class="peer-title">
+            <span>☎</span>
 
-    <section id="chatPage" class="page chat-page">
-
-        <header class="chat-header">
-
-            <button id="backChat" class="back-button">
-                ‹
-            </button>
-
-
-            <div class="chat-user">
-
-                <div class="avatar-container">
-
-                    <img
-                        id="chatAvatar"
-                        src=""
-                        alt=""
-                    >
-
-                    <span class="online-dot"></span>
-
-                </div>
-
-                <div>
-
-                    <strong id="chatName">
-                        Iqranix Member
-                    </strong>
-
-                    <small id="chatUsername">
-                        @member
-                    </small>
-
-                </div>
-
+            <div>
+                <h2>Your Call ID</h2>
+                <p>Share this ID with the person you want to call.</p>
             </div>
+        </div>
 
 
-            <div class="call-buttons">
+        <div class="peer-id-area">
 
-                <button
-                    id="audioCallBtn"
-                    title="Audio call"
-                >
-                    ☎
-                </button>
+            <strong id="myPeerId">
+                Generating ID...
+            </strong>
 
-                <button
-                    id="videoCallBtn"
-                    title="Video call"
-                >
-                    ▣
-                </button>
-
-                <button id="chatMoreBtn">
-                    ⋮
-                </button>
-
-            </div>
-
-        </header>
-
-
-
-        <!-- MESSAGES -->
-
-        <main
-            id="chatMessages"
-            class="chat-messages"
-        >
-
-            <div class="chat-start">
-
-                <div class="chat-start-avatar">
-                    💚
-                </div>
-
-                <h3>Start chatting</h3>
-
-                <p>
-                    Messages between you and this member will appear here.
-                </p>
-
-            </div>
-
-        </main>
-
-
-
-        <!-- ATTACHMENT MENU -->
-
-        <div
-            id="attachmentMenu"
-            class="attachment-menu"
-        >
-
-            <button id="chooseImage">
-                <span>🖼️</span>
-                Photo
-            </button>
-
-            <button id="chooseFile">
-                <span>📎</span>
-                File
+            <button id="copyIdBtn">
+                Copy
             </button>
 
         </div>
 
+    </section>
+
+
+    <!-- CALL SOMEONE -->
+    <section class="call-card">
+
+        <h2>Call someone</h2>
+
+        <p class="card-description">
+            Enter their Call ID below.
+        </p>
 
         <input
-            id="imageInput"
-            type="file"
-            accept="image/*"
-            hidden
+            id="remotePeerId"
+            type="text"
+            autocomplete="off"
+            placeholder="Enter friend's Call ID"
         >
 
+        <div class="call-buttons">
 
-        <!-- EMOJI PANEL -->
-
-        <div
-            id="emojiPanel"
-            class="emoji-panel"
-        >
-
-            <button>😀</button>
-            <button>😂</button>
-            <button>😍</button>
-            <button>🥰</button>
-            <button>😊</button>
-            <button>❤️</button>
-            <button>🤲</button>
-            <button>🕌</button>
-            <button>☪️</button>
-            <button>✨</button>
-            <button>👍</button>
-            <button>🙏</button>
-
-        </div>
-
-
-
-        <!-- COMPOSER -->
-
-        <div
-            id="composer"
-            class="composer"
-        >
-
-            <button
-                id="attachBtn"
-                class="composer-button"
-                type="button"
-            >
-                ＋
+            <button id="audioCallBtn" class="audio-btn">
+                ☎
+                <span>Audio Call</span>
             </button>
 
-
-            <textarea
-                id="messageInput"
-                rows="1"
-                maxlength="4000"
-                placeholder="Message..."
-                autocomplete="off"
-            ></textarea>
-
-
-            <button
-                id="emojiBtn"
-                class="composer-button"
-                type="button"
-            >
-                ☺
-            </button>
-
-
-            <button
-                id="sendBtn"
-                class="send-button"
-                type="button"
-            >
-                ↑
+            <button id="videoCallBtn" class="video-btn">
+                ▣
+                <span>Video Call</span>
             </button>
 
         </div>
@@ -303,62 +118,56 @@
     </section>
 
 
+    <!-- CALL SCREEN -->
+    <section id="callScreen" class="call-screen hidden">
 
-    <!-- =================================================
-         CALL SCREEN
-    ================================================== -->
+        <div class="call-header">
 
-    <section
-        id="callScreen"
-        class="call-screen"
-    >
+            <div>
+                <strong id="callType">
+                    Video Call
+                </strong>
 
-        <video
-            id="remoteVideo"
-            class="remote-video"
-            autoplay
-            playsinline
-        ></video>
-
-
-        <div
-            id="audioCallBackground"
-            class="audio-call-background"
-        >
-
-            <img
-                id="callAvatar"
-                src=""
-                alt=""
-            >
-
-            <h2 id="callName">
-                Iqranix Member
-            </h2>
-
-            <p id="callStatus">
-                Calling...
-            </p>
+                <small id="callStatus">
+                    Connecting...
+                </small>
+            </div>
 
         </div>
 
 
-        <video
-            id="localVideo"
-            class="local-video"
-            autoplay
-            muted
-            playsinline
-        ></video>
+        <div class="video-container">
+
+            <video
+                id="remoteVideo"
+                autoplay
+                playsinline
+            ></video>
+
+            <div id="videoPlaceholder" class="video-placeholder">
+                <div class="placeholder-icon">◉</div>
+                <span>Waiting for video...</span>
+            </div>
+
+            <video
+                id="localVideo"
+                autoplay
+                muted
+                playsinline
+            ></video>
+
+        </div>
 
 
-        <div class="call-top">
+        <div class="audio-avatar">
 
-            <span id="callType">
-                Video call
-            </span>
+            <div class="avatar-circle">
+                ☪
+            </div>
 
-            <span id="peerIdDisplay"></span>
+            <h2 id="callingName">
+                Iqranix Member
+            </h2>
 
         </div>
 
@@ -367,21 +176,22 @@
 
             <button id="muteBtn">
                 🎙
+                <small>Mute</small>
             </button>
 
             <button id="cameraBtn">
                 ▣
+                <small>Camera</small>
             </button>
 
             <button id="speakerBtn">
                 🔊
+                <small>Speaker</small>
             </button>
 
-            <button
-                id="endCallBtn"
-                class="end-call"
-            >
+            <button id="endCallBtn" class="end-btn">
                 ☎
+                <small>End</small>
             </button>
 
         </div>
@@ -389,50 +199,28 @@
     </section>
 
 
-
-    <!-- =================================================
-         INCOMING CALL
-    ================================================== -->
-
-    <div
-        id="incomingCall"
-        class="incoming-overlay"
-    >
+    <!-- INCOMING CALL -->
+    <div id="incomingCall" class="incoming hidden">
 
         <div class="incoming-card">
 
-            <div class="incoming-ring">
-                📞
+            <div class="incoming-icon">
+                ☪
             </div>
 
-            <img
-                id="incomingAvatar"
-                src=""
-                alt=""
-            >
+            <h2>Incoming Call</h2>
 
-            <h2 id="incomingName">
-                Iqranix Member
-            </h2>
-
-            <p id="incomingCallType">
-                Incoming call
+            <p id="incomingPeer">
+                Someone is calling you
             </p>
-
 
             <div class="incoming-buttons">
 
-                <button
-                    id="rejectCallBtn"
-                    class="reject"
-                >
+                <button id="rejectBtn" class="reject-btn">
                     ✕
                 </button>
 
-                <button
-                    id="acceptCallBtn"
-                    class="accept"
-                >
+                <button id="acceptBtn" class="accept-btn">
                     ☎
                 </button>
 
@@ -443,53 +231,9 @@
     </div>
 
 
-
-    <!-- =================================================
-         START CHAT MODAL
-    ================================================== -->
-
-    <div
-        id="newChatModal"
-        class="modal"
-    >
-
-        <div class="modal-card">
-
-            <button
-                id="closeModal"
-                class="modal-close"
-            >
-                ×
-            </button>
-
-            <div class="modal-icon">
-                💬
-            </div>
-
-            <h2>New conversation</h2>
-
-            <p>
-                Enter the username or Peer ID of the person you want to contact.
-            </p>
-
-
-            <input
-                id="peerIdInput"
-                type="text"
-                placeholder="Enter Peer ID"
-                autocomplete="off"
-            >
-
-
-            <button
-                id="connectPeerBtn"
-                class="primary-button"
-            >
-                Continue
-            </button>
-
-        </div>
-
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+        <span id="toastText"></span>
     </div>
 
 </div>
