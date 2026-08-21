@@ -4,112 +4,24 @@
 ========================================================= */
 
 
-/* =========================================================
+/* ---------------------------------------------------------
    ELEMENTS
-========================================================= */
+--------------------------------------------------------- */
 
-const messagesPage =
-    document.getElementById("messagesPage");
+const myPeerId = document.getElementById("myPeerId");
+const remotePeerId = document.getElementById("remotePeerId");
 
-const chatPage =
-    document.getElementById("chatPage");
+const connectionStatus =
+    document.getElementById("connectionStatus");
 
-const newChatBtn =
-    document.getElementById("newChatBtn");
+const connectionInfo =
+    document.getElementById("connectionInfo");
 
-const startChatBtn =
-    document.getElementById("startChatBtn");
+const statusDot =
+    document.getElementById("statusDot");
 
-const newChatModal =
-    document.getElementById("newChatModal");
-
-const closeModal =
-    document.getElementById("closeModal");
-
-const peerIdInput =
-    document.getElementById("peerIdInput");
-
-const connectPeerBtn =
-    document.getElementById("connectPeerBtn");
-
-const backChat =
-    document.getElementById("backChat");
-
-const messageInput =
-    document.getElementById("messageInput");
-
-const sendBtn =
-    document.getElementById("sendBtn");
-
-const chatMessages =
-    document.getElementById("chatMessages");
-
-const attachBtn =
-    document.getElementById("attachBtn");
-
-const attachmentMenu =
-    document.getElementById("attachmentMenu");
-
-const chooseImage =
-    document.getElementById("chooseImage");
-
-const imageInput =
-    document.getElementById("imageInput");
-
-const emojiBtn =
-    document.getElementById("emojiBtn");
-
-const emojiPanel =
-    document.getElementById("emojiPanel");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const clearSearch =
-    document.getElementById("clearSearch");
-
-
-/* =========================================================
-   CHAT USER
-========================================================= */
-
-const chatName =
-    document.getElementById("chatName");
-
-const chatUsername =
-    document.getElementById("chatUsername");
-
-const chatAvatar =
-    document.getElementById("chatAvatar");
-
-
-/* =========================================================
-   CALL ELEMENTS
-========================================================= */
-
-const callScreen =
-    document.getElementById("callScreen");
-
-const remoteVideo =
-    document.getElementById("remoteVideo");
-
-const localVideo =
-    document.getElementById("localVideo");
-
-const audioCallBackground =
-    document.getElementById("audioCallBackground");
-
-const callAvatar =
-    document.getElementById("callAvatar");
-
-const callName =
-    document.getElementById("callName");
-
-const callStatus =
-    document.getElementById("callStatus");
-
-const callType =
-    document.getElementById("callType");
+const copyIdBtn =
+    document.getElementById("copyIdBtn");
 
 const audioCallBtn =
     document.getElementById("audioCallBtn");
@@ -117,8 +29,26 @@ const audioCallBtn =
 const videoCallBtn =
     document.getElementById("videoCallBtn");
 
-const endCallBtn =
-    document.getElementById("endCallBtn");
+const callScreen =
+    document.getElementById("callScreen");
+
+const callType =
+    document.getElementById("callType");
+
+const callStatus =
+    document.getElementById("callStatus");
+
+const remoteVideo =
+    document.getElementById("remoteVideo");
+
+const localVideo =
+    document.getElementById("localVideo");
+
+const videoPlaceholder =
+    document.getElementById("videoPlaceholder");
+
+const audioAvatar =
+    document.querySelector(".audio-avatar");
 
 const muteBtn =
     document.getElementById("muteBtn");
@@ -126,36 +56,34 @@ const muteBtn =
 const cameraBtn =
     document.getElementById("cameraBtn");
 
-const speakerBtn =
-    document.getElementById("speakerBtn");
-
-
-/* =========================================================
-   INCOMING CALL
-========================================================= */
+const endCallBtn =
+    document.getElementById("endCallBtn");
 
 const incomingCall =
     document.getElementById("incomingCall");
 
-const incomingName =
-    document.getElementById("incomingName");
+const incomingPeer =
+    document.getElementById("incomingPeer");
 
-const incomingCallType =
-    document.getElementById("incomingCallType");
+const acceptBtn =
+    document.getElementById("acceptBtn");
 
-const incomingAvatar =
-    document.getElementById("incomingAvatar");
+const rejectBtn =
+    document.getElementById("rejectBtn");
 
-const acceptCallBtn =
-    document.getElementById("acceptCallBtn");
+const toast =
+    document.getElementById("toast");
 
-const rejectCallBtn =
-    document.getElementById("rejectCallBtn");
+const toastText =
+    document.getElementById("toastText");
+
+const backBtn =
+    document.getElementById("backBtn");
 
 
-/* =========================================================
-   STATE
-========================================================= */
+/* ---------------------------------------------------------
+   VARIABLES
+--------------------------------------------------------- */
 
 let peer = null;
 
@@ -163,11 +91,7 @@ let localStream = null;
 
 let currentCall = null;
 
-let incomingCallObject = null;
-
-let currentConnection = null;
-
-let currentPeerId = null;
+let pendingCall = null;
 
 let currentCallMode = "video";
 
@@ -176,540 +100,444 @@ let microphoneEnabled = true;
 let cameraEnabled = true;
 
 
-/* =========================================================
-   DEFAULT AVATAR
-========================================================= */
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
 
-const DEFAULT_AVATAR =
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(`
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="200"
-             height="200"
-             viewBox="0 0 200 200">
+function showToast(message) {
 
-            <rect width="200" height="200"
-                  fill="#E9F6F0"/>
+    toastText.textContent = message;
 
-            <circle cx="100"
-                    cy="76"
-                    r="38"
-                    fill="#0B6E4F"/>
+    toast.classList.add("show");
 
-            <path
-                d="M35 180
-                   C40 130 160 130 165 180"
-                fill="#0B6E4F"/>
-        </svg>
-    `);
+    clearTimeout(window.toastTimer);
+
+    window.toastTimer = setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+}
 
 
-/* =========================================================
-   INITIAL UI
-========================================================= */
+/* ---------------------------------------------------------
+   STATUS
+--------------------------------------------------------- */
 
-chatAvatar.src = DEFAULT_AVATAR;
+function setStatus(text, info, state = "normal") {
 
-callAvatar.src = DEFAULT_AVATAR;
+    connectionStatus.textContent = text;
 
-incomingAvatar.src = DEFAULT_AVATAR;
+    connectionInfo.textContent = info;
+
+    statusDot.classList.remove(
+        "online",
+        "error"
+    );
+
+    if (state === "online") {
+        statusDot.classList.add("online");
+    }
+
+    if (state === "error") {
+        statusDot.classList.add("error");
+    }
+}
 
 
-/* =========================================================
-   PEERJS
-========================================================= */
+/* ---------------------------------------------------------
+   CAMERA + MICROPHONE
+--------------------------------------------------------- */
 
-function initializePeer() {
+async function getMedia(videoRequired = true) {
+
+    try {
+
+        const stream =
+            await navigator.mediaDevices.getUserMedia({
+
+                audio: true,
+
+                video: videoRequired
+
+            });
+
+        return stream;
+
+    } catch (error) {
+
+        console.error(
+            "Media permission error:",
+            error
+        );
+
+        if (error.name === "NotAllowedError") {
+
+            showToast(
+                "Camera or microphone permission was denied."
+            );
+
+        } else {
+
+            showToast(
+                "Camera or microphone is unavailable."
+            );
+        }
+
+        throw error;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   CREATE PEER
+--------------------------------------------------------- */
+
+function createPeer() {
 
     if (typeof Peer === "undefined") {
 
-        console.error(
-            "PeerJS failed to load."
+        setStatus(
+            "PeerJS failed",
+            "PeerJS library could not load.",
+            "error"
+        );
+
+        showToast(
+            "PeerJS could not load."
         );
 
         return;
-
     }
 
+
+    /*
+       PeerJS's public cloud signaling server
+       automatically creates the ID.
+    */
 
     peer = new Peer();
 
 
-    peer.on("open", id => {
+    /* PEER OPEN */
 
-        currentPeerId = id;
+    peer.on("open", (id) => {
 
         console.log(
-            "Your Peer ID:",
+            "My Peer ID:",
             id
         );
 
-        localStorage.setItem(
-            "iqranix_peer_id",
-            id
+        myPeerId.textContent = id;
+
+        setStatus(
+            "Ready",
+            "Your calling ID is ready.",
+            "online"
         );
 
     });
 
 
-    peer.on("error", error => {
+    /* INCOMING CALL */
+
+    peer.on("call", async (call) => {
+
+        console.log(
+            "Incoming call:",
+            call.peer
+        );
+
+        pendingCall = call;
+
+        incomingPeer.textContent =
+            "Call from " + call.peer;
+
+        incomingCall.classList.remove("hidden");
+
+    });
+
+
+    /* CONNECTION ERROR */
+
+    peer.on("error", (error) => {
 
         console.error(
             "PeerJS error:",
             error
         );
 
+        setStatus(
+            "Connection problem",
+            error.message || "PeerJS error",
+            "error"
+        );
+
+        showToast(
+            error.message || "Calling connection failed."
+        );
+
+    });
+
+
+    /* DISCONNECTED */
+
+    peer.on("disconnected", () => {
+
+        setStatus(
+            "Disconnected",
+            "Trying to reconnect..."
+        );
+
+    });
+
+
+    /* CLOSE */
+
+    peer.on("close", () => {
+
+        setStatus(
+            "Offline",
+            "Calling connection closed.",
+            "error"
+        );
+
+    });
+
+}
+
+
+/* ---------------------------------------------------------
+   COPY MY ID
+--------------------------------------------------------- */
+
+copyIdBtn.addEventListener(
+    "click",
+    async () => {
+
+        const id =
+            myPeerId.textContent.trim();
+
         if (
-            error.type ===
-            "peer-unavailable"
+            !id ||
+            id === "Generating ID..." ||
+            id === "Connecting..."
         ) {
 
-            alert(
-                "That Peer ID could not be found."
+            showToast(
+                "Your Call ID is not ready yet."
+            );
+
+            return;
+        }
+
+        try {
+
+            await navigator.clipboard.writeText(id);
+
+            showToast(
+                "Call ID copied."
+            );
+
+        } catch {
+
+            showToast(
+                "Copy failed. Press and hold the ID to copy it."
             );
 
         }
 
-    });
-
-
-    /*
-     * INCOMING CALL
-     */
-
-    peer.on("call", call => {
-
-        incomingCallObject = call;
-
-        const metadata =
-            call.metadata || {};
-
-        const type =
-            metadata.type || "video";
-
-        const name =
-            metadata.name ||
-            "Iqranix Member";
-
-
-        incomingName.textContent =
-            name;
-
-        incomingCallType.textContent =
-            type === "audio"
-                ? "Incoming audio call"
-                : "Incoming video call";
-
-
-        incomingAvatar.src =
-            metadata.avatar ||
-            DEFAULT_AVATAR;
-
-
-        incomingCall.classList.add(
-            "show"
-        );
-
-    });
-
-
-    /*
-     * DATA CONNECTION
-     */
-
-    peer.on("connection", connection => {
-
-        connection.on("open", () => {
-
-            currentConnection =
-                connection;
-
-            console.log(
-                "Data connection established."
-            );
-
-        });
-
-
-        connection.on("data", data => {
-
-            handleIncomingData(data);
-
-        });
-
-    });
-
-}
-
-
-/* =========================================================
-   REQUEST MICROPHONE
-========================================================= */
-
-async function getAudioStream() {
-
-    try {
-
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: false
-            });
-
-        return stream;
-
-    } catch (error) {
-
-        console.error(
-            "Microphone permission error:",
-            error
-        );
-
-        throw error;
-
     }
-
-}
-
-
-/* =========================================================
-   REQUEST CAMERA + MICROPHONE
-========================================================= */
-
-async function getVideoStream() {
-
-    try {
-
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                video: {
-                    facingMode: "user"
-                },
-                audio: true
-            });
-
-        return stream;
-
-    } catch (error) {
-
-        console.error(
-            "Camera/microphone error:",
-            error
-        );
-
-        throw error;
-
-    }
-
-}
+);
 
 
-/* =========================================================
+/* ---------------------------------------------------------
    START AUDIO CALL
-========================================================= */
+--------------------------------------------------------- */
 
-async function startAudioCall() {
-
-    if (!currentPeerId) {
-
-        alert(
-            "Your calling connection is still starting. Please wait a moment."
-        );
-
-        return;
-
-    }
+audioCallBtn.addEventListener(
+    "click",
+    () => startCall("audio")
+);
 
 
-    const target =
-        peerIdInput.value.trim() ||
-        currentPeerIdForChat();
-
-
-    if (!target) {
-
-        openNewChatModal();
-
-        return;
-
-    }
-
-
-    try {
-
-        localStream =
-            await getAudioStream();
-
-        currentCallMode =
-            "audio";
-
-
-        localVideo.srcObject = null;
-
-        audioCallBackground.classList.add(
-            "show"
-        );
-
-        callType.textContent =
-            "Audio call";
-
-        callStatus.textContent =
-            "Calling...";
-
-
-        showCallScreen();
-
-
-        currentCall =
-            peer.call(
-                target,
-                localStream,
-                {
-                    metadata: {
-                        type: "audio",
-                        name:
-                            chatName.textContent,
-                        avatar:
-                            chatAvatar.src
-                    }
-                }
-            );
-
-
-        setupCall(currentCall);
-
-    } catch (error) {
-
-        alert(
-            "Microphone permission is required for an audio call."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
+/* ---------------------------------------------------------
    START VIDEO CALL
-========================================================= */
+--------------------------------------------------------- */
 
-async function startVideoCall() {
+videoCallBtn.addEventListener(
+    "click",
+    () => startCall("video")
+);
 
-    if (!currentPeerId) {
 
-        alert(
-            "Your calling connection is still starting. Please wait a moment."
-        );
+/* ---------------------------------------------------------
+   START CALL
+--------------------------------------------------------- */
 
-        return;
-
-    }
-
+async function startCall(mode) {
 
     const target =
-        currentPeerIdForChat();
-
+        remotePeerId.value.trim();
 
     if (!target) {
 
-        openNewChatModal();
+        showToast(
+            "Enter the other person's Call ID."
+        );
 
         return;
-
     }
+
+
+    if (!peer || peer.destroyed) {
+
+        showToast(
+            "Calling service is not ready."
+        );
+
+        return;
+    }
+
+
+    if (target === myPeerId.textContent.trim()) {
+
+        showToast(
+            "You cannot call yourself."
+        );
+
+        return;
+    }
+
+
+    currentCallMode = mode;
 
 
     try {
 
-        localStream =
-            await getVideoStream();
+        /*
+          For audio calls we only request
+          microphone.
 
-        currentCallMode =
-            "video";
+          For video calls we request both.
+        */
+
+        localStream =
+            await getMedia(
+                mode === "video"
+            );
 
 
         localVideo.srcObject =
             localStream;
 
 
-        audioCallBackground.classList.remove(
-            "show"
+        openCallScreen(
+            mode,
+            "Calling..."
         );
 
 
-        callType.textContent =
-            "Video call";
-
-        callStatus.textContent =
-            "Calling...";
-
-
-        showCallScreen();
-
-
-        currentCall =
+        const call =
             peer.call(
                 target,
                 localStream,
                 {
                     metadata: {
-                        type: "video",
-                        name:
-                            chatName.textContent,
-                        avatar:
-                            chatAvatar.src
+                        type: mode
                     }
                 }
             );
 
 
-        setupCall(currentCall);
+        currentCall = call;
+
+
+        callStatus.textContent =
+            "Calling " + target + "...";
+
+
+        attachCallListeners(call);
 
     } catch (error) {
 
-        alert(
-            "Camera and microphone permission is required for a video call."
-        );
+        console.error(error);
+
+        closeCall();
 
     }
 
 }
 
 
-/* =========================================================
-   SETUP CALL
-========================================================= */
+/* ---------------------------------------------------------
+   ACCEPT INCOMING CALL
+--------------------------------------------------------- */
 
-function setupCall(call) {
-
-    if (!call) return;
-
-
-    currentCall = call;
-
-
-    call.on("stream", remoteStream => {
-
-        remoteVideo.srcObject =
-            remoteStream;
-
-        callStatus.textContent =
-            "Connected";
-
-    });
-
-
-    call.on("close", () => {
-
-        endCurrentCall(false);
-
-    });
-
-
-    call.on("error", error => {
-
-        console.error(
-            "Call error:",
-            error
-        );
-
-        endCurrentCall(false);
-
-    });
-
-}
-
-
-/* =========================================================
-   ACCEPT CALL
-========================================================= */
-
-acceptCallBtn.addEventListener(
+acceptBtn.addEventListener(
     "click",
     async () => {
 
-        if (!incomingCallObject) return;
+        if (!pendingCall) return;
 
 
         const call =
-            incomingCallObject;
+            pendingCall;
 
-        const metadata =
-            call.metadata || {};
+        pendingCall = null;
 
-        const type =
-            metadata.type || "video";
+        incomingCall.classList.add("hidden");
+
+
+        currentCallMode =
+            call.metadata?.type || "video";
 
 
         try {
 
-            if (type === "audio") {
-
-                localStream =
-                    await getAudioStream();
-
-                currentCallMode =
-                    "audio";
-
-                localVideo.srcObject =
-                    null;
-
-                audioCallBackground.classList.add(
-                    "show"
+            localStream =
+                await getMedia(
+                    currentCallMode === "video"
                 );
 
-            } else {
 
-                localStream =
-                    await getVideoStream();
-
-                currentCallMode =
-                    "video";
-
-                localVideo.srcObject =
-                    localStream;
-
-                audioCallBackground.classList.remove(
-                    "show"
-                );
-
-            }
+            localVideo.srcObject =
+                localStream;
 
 
-            incomingCall.classList.remove(
-                "show"
-            );
-
-
-            callType.textContent =
-                type === "audio"
-                    ? "Audio call"
-                    : "Video call";
-
-
-            callStatus.textContent =
-                "Connecting...";
-
-
-            showCallScreen();
-
+            /*
+              Answer the caller.
+            */
 
             call.answer(
                 localStream
             );
 
 
-            setupCall(call);
+            currentCall =
+                call;
 
 
-            incomingCallObject =
-                null;
+            openCallScreen(
+                currentCallMode,
+                "Connecting..."
+            );
+
+
+            attachCallListeners(
+                call
+            );
+
 
         } catch (error) {
 
-            alert(
-                "Camera or microphone permission was not granted."
+            console.error(error);
+
+            showToast(
+                "Could not access microphone/camera."
             );
+
+            call.close();
 
         }
 
@@ -717,127 +545,163 @@ acceptCallBtn.addEventListener(
 );
 
 
-/* =========================================================
-   REJECT CALL
-========================================================= */
+/* ---------------------------------------------------------
+   REJECT
+--------------------------------------------------------- */
 
-rejectCallBtn.addEventListener(
+rejectBtn.addEventListener(
     "click",
     () => {
 
-        if (incomingCallObject) {
+        if (pendingCall) {
 
-            incomingCallObject.close();
+            pendingCall.close();
 
-            incomingCallObject =
-                null;
+            pendingCall = null;
 
         }
 
-        incomingCall.classList.remove(
-            "show"
+        incomingCall.classList.add(
+            "hidden"
         );
 
     }
 );
 
 
-/* =========================================================
-   END CALL
-========================================================= */
+/* ---------------------------------------------------------
+   CALL LISTENERS
+--------------------------------------------------------- */
 
-endCallBtn.addEventListener(
-    "click",
-    () => {
+function attachCallListeners(call) {
 
-        endCurrentCall(true);
+    call.on(
+        "stream",
+        (remoteStream) => {
 
-    }
-);
+            console.log(
+                "Remote stream received"
+            );
 
-
-function endCurrentCall(closePeerCall = true) {
-
-    if (
-        closePeerCall &&
-        currentCall
-    ) {
-
-        try {
-
-            currentCall.close();
-
-        } catch {}
-
-    }
+            remoteVideo.srcObject =
+                remoteStream;
 
 
-    if (localStream) {
-
-        localStream
-            .getTracks()
-            .forEach(track => {
-
-                track.stop();
-
-            });
-
-    }
+            videoPlaceholder.classList.add(
+                "hidden"
+            );
 
 
-    if (remoteVideo) {
+            callStatus.textContent =
+                "Connected";
 
-        remoteVideo.srcObject =
-            null;
-
-    }
-
-
-    if (localVideo) {
-
-        localVideo.srcObject =
-            null;
-
-    }
+        }
+    );
 
 
-    localStream =
-        null;
+    call.on(
+        "close",
+        () => {
 
-    currentCall =
-        null;
+            console.log(
+                "Call closed"
+            );
+
+            closeCall();
+
+        }
+    );
 
 
-    hideCallScreen();
+    call.on(
+        "error",
+        (error) => {
 
-}
+            console.error(
+                "Call error:",
+                error
+            );
 
+            showToast(
+                "Call connection failed."
+            );
 
-/* =========================================================
-   CALL SCREEN
-========================================================= */
+            closeCall();
 
-function showCallScreen() {
-
-    callScreen.classList.add(
-        "show"
+        }
     );
 
 }
 
 
-function hideCallScreen() {
+/* ---------------------------------------------------------
+   OPEN CALL SCREEN
+--------------------------------------------------------- */
+
+function openCallScreen(
+    mode,
+    status
+) {
 
     callScreen.classList.remove(
-        "show"
+        "hidden"
     );
+
+
+    callType.textContent =
+        mode === "video"
+            ? "Video Call"
+            : "Audio Call";
+
+
+    callStatus.textContent =
+        status;
+
+
+    if (mode === "video") {
+
+        remoteVideo.style.display =
+            "block";
+
+        localVideo.style.display =
+            "block";
+
+        videoPlaceholder.classList.remove(
+            "hidden"
+        );
+
+        audioAvatar.style.display =
+            "none";
+
+        cameraBtn.style.display =
+            "flex";
+
+    } else {
+
+        remoteVideo.style.display =
+            "none";
+
+        localVideo.style.display =
+            "none";
+
+        videoPlaceholder.classList.add(
+            "hidden"
+        );
+
+        audioAvatar.style.display =
+            "flex";
+
+        cameraBtn.style.display =
+            "none";
+
+    }
 
 }
 
 
-/* =========================================================
-   MUTE
-========================================================= */
+/* ---------------------------------------------------------
+   MUTE MICROPHONE
+--------------------------------------------------------- */
 
 muteBtn.addEventListener(
     "click",
@@ -846,22 +710,36 @@ muteBtn.addEventListener(
         if (!localStream) return;
 
 
-        const audioTracks =
+        const tracks =
             localStream.getAudioTracks();
 
 
-        audioTracks.forEach(track => {
-
-            track.enabled =
-                !track.enabled;
-
-            microphoneEnabled =
-                track.enabled;
-
-        });
+        if (!tracks.length) return;
 
 
-        muteBtn.textContent =
+        microphoneEnabled =
+            !microphoneEnabled;
+
+
+        tracks.forEach(
+            track => {
+
+                track.enabled =
+                    microphoneEnabled;
+
+            }
+        );
+
+
+        muteBtn.querySelector(
+            "small"
+        ).textContent =
+            microphoneEnabled
+                ? "Mute"
+                : "Unmute";
+
+
+        muteBtn.firstChild.textContent =
             microphoneEnabled
                 ? "🎙"
                 : "🔇";
@@ -870,9 +748,9 @@ muteBtn.addEventListener(
 );
 
 
-/* =========================================================
-   CAMERA
-========================================================= */
+/* ---------------------------------------------------------
+   CAMERA TOGGLE
+--------------------------------------------------------- */
 
 cameraBtn.addEventListener(
     "click",
@@ -881,939 +759,169 @@ cameraBtn.addEventListener(
         if (!localStream) return;
 
 
-        const videoTracks =
+        const tracks =
             localStream.getVideoTracks();
 
 
-        if (!videoTracks.length) {
-
-            return;
-
-        }
+        if (!tracks.length) return;
 
 
-        videoTracks.forEach(track => {
-
-            track.enabled =
-                !track.enabled;
-
-            cameraEnabled =
-                track.enabled;
-
-        });
+        cameraEnabled =
+            !cameraEnabled;
 
 
-        cameraBtn.textContent =
-            cameraEnabled
-                ? "▣"
-                : "🚫";
+        tracks.forEach(
+            track => {
 
-    }
-);
+                track.enabled =
+                    cameraEnabled;
 
-
-/* =========================================================
-   SPEAKER
-========================================================= */
-
-speakerBtn.addEventListener(
-    "click",
-    () => {
-
-        remoteVideo.muted =
-            !remoteVideo.muted;
-
-
-        speakerBtn.textContent =
-            remoteVideo.muted
-                ? "🔇"
-                : "🔊";
-
-    }
-);
-
-
-/* =========================================================
-   CHAT CONNECTION
-========================================================= */
-
-function connectToPeer(peerId) {
-
-    if (!peer) {
-
-        alert(
-            "Calling system is still loading."
-        );
-
-        return;
-
-    }
-
-
-    if (!peerId) return;
-
-
-    const connection =
-        peer.connect(
-            peerId,
-            {
-                reliable: true
             }
         );
 
 
-    connection.on("open", () => {
+        cameraBtn.querySelector(
+            "small"
+        ).textContent =
+            cameraEnabled
+                ? "Camera"
+                : "Camera off";
 
-        currentConnection =
-            connection;
+    }
+);
+
+
+/* ---------------------------------------------------------
+   END CALL
+--------------------------------------------------------- */
+
+endCallBtn.addEventListener(
+    "click",
+    () => {
+
+        if (currentCall) {
+
+            currentCall.close();
+
+        }
+
+        closeCall();
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   CLOSE CALL
+--------------------------------------------------------- */
+
+function closeCall() {
+
+    if (localStream) {
+
+        localStream.getTracks().forEach(
+            track => track.stop()
+        );
+
+    }
+
+
+    localStream = null;
+
+    remoteVideo.srcObject = null;
+
+    localVideo.srcObject = null;
+
+    currentCall = null;
+
+    microphoneEnabled = true;
+
+    cameraEnabled = true;
+
+
+    callScreen.classList.add(
+        "hidden"
+    );
+
+
+    callStatus.textContent =
+        "Ready";
+
+}
+
+
+/* ---------------------------------------------------------
+   BACK BUTTON
+--------------------------------------------------------- */
+
+backBtn.addEventListener(
+    "click",
+    () => {
+
+        if (
+            !callScreen.classList.contains(
+                "hidden"
+            )
+        ) {
+
+            closeCall();
+
+            return;
+        }
+
+        history.back();
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   PAGE LOAD
+--------------------------------------------------------- */
+
+window.addEventListener(
+    "load",
+    () => {
 
         console.log(
-            "Connected to:",
-            peerId
+            "Iqranix Messages starting..."
         );
 
-        addSystemMessage(
-            "Connected."
+        setStatus(
+            "Connecting...",
+            "Creating your Call ID..."
         );
 
-    });
 
-
-    connection.on("data", data => {
-
-        handleIncomingData(data);
-
-    });
-
-
-    connection.on("close", () => {
-
-        currentConnection =
-            null;
-
-    });
-
-
-    connection.on("error", error => {
-
-        console.error(
-            error
-        );
-
-    });
-
-}
-
-
-/* =========================================================
-   SEND MESSAGE
-========================================================= */
-
-function sendMessage() {
-
-    const text =
-        messageInput.value.trim();
-
-
-    if (!text) return;
-
-
-    addMessage(
-        text,
-        "sent"
-    );
-
-
-    if (currentConnection) {
-
-        currentConnection.send({
-
-            type: "text",
-
-            text: text,
-
-            time:
-                Date.now()
-
-        });
-
-    } else {
-
-        addSystemMessage(
-            "Message shown locally. Connect to the other member's Peer ID to send it."
-        );
-
-    }
-
-
-    messageInput.value = "";
-
-    autoResizeTextarea();
-
-    scrollToBottom();
-
-}
-
-
-/* =========================================================
-   RECEIVE DATA
-========================================================= */
-
-function handleIncomingData(data) {
-
-    if (!data) return;
-
-
-    if (
-        typeof data === "object" &&
-        data.type === "text"
-    ) {
-
-        addMessage(
-            data.text,
-            "received",
-            data.time
-        );
-
-    }
-
-
-    if (
-        typeof data === "object" &&
-        data.type === "image"
-    ) {
-
-        addImageMessage(
-            data.data,
-            "received"
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   MESSAGE UI
-========================================================= */
-
-function addMessage(
-    text,
-    direction,
-    timestamp = Date.now()
-) {
-
-    const empty =
-        chatMessages.querySelector(
-            ".chat-start"
-        );
-
-    if (empty) {
-
-        empty.remove();
-
-    }
-
-
-    const bubble =
-        document.createElement(
-            "div"
-        );
-
-    bubble.className =
-        `message ${direction}`;
-
-
-    const content =
-        document.createElement(
-            "div"
-        );
-
-    content.textContent =
-        text;
-
-
-    const time =
-        document.createElement(
-            "span"
-        );
-
-    time.className =
-        "message-time";
-
-
-    time.textContent =
-        new Date(timestamp)
-            .toLocaleTimeString(
-                [],
-                {
-                    hour: "2-digit",
-                    minute: "2-digit"
-                }
-            );
-
-
-    bubble.appendChild(
-        content
-    );
-
-    bubble.appendChild(
-        time
-    );
-
-
-    chatMessages.appendChild(
-        bubble
-    );
-
-
-    scrollToBottom();
-
-}
-
-
-/* =========================================================
-   IMAGE MESSAGE
-========================================================= */
-
-function addImageMessage(
-    src,
-    direction
-) {
-
-    const bubble =
-        document.createElement(
-            "div"
-        );
-
-    bubble.className =
-        `message ${direction}`;
-
-
-    const image =
-        document.createElement(
-            "img"
-        );
-
-    image.src =
-        src;
-
-    image.style.width =
-        "220px";
-
-    image.style.maxWidth =
-        "100%";
-
-    image.style.borderRadius =
-        "14px";
-
-
-    bubble.appendChild(
-        image
-    );
-
-
-    chatMessages.appendChild(
-        bubble
-    );
-
-
-    scrollToBottom();
-
-}
-
-
-/* =========================================================
-   SYSTEM MESSAGE
-========================================================= */
-
-function addSystemMessage(text) {
-
-    const element =
-        document.createElement(
-            "div"
-        );
-
-    element.style.textAlign =
-        "center";
-
-    element.style.fontSize =
-        "12px";
-
-    element.style.color =
-        "#718078";
-
-    element.style.padding =
-        "8px";
-
-
-    element.textContent =
-        text;
-
-
-    chatMessages.appendChild(
-        element
-    );
-
-}
-
-
-/* =========================================================
-   IMAGE SELECTION
-========================================================= */
-
-chooseImage.addEventListener(
-    "click",
-    () => {
-
-        imageInput.click();
+        createPeer();
 
     }
 );
 
 
-imageInput.addEventListener(
-    "change",
+/* ---------------------------------------------------------
+   PAGE CLOSE
+--------------------------------------------------------- */
+
+window.addEventListener(
+    "beforeunload",
     () => {
 
-        const file =
-            imageInput.files[0];
+        if (localStream) {
 
-        if (!file) return;
-
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            event => {
-
-                const imageData =
-                    event.target.result;
-
-
-                /*
-                 * Show immediately.
-                 */
-
-                addImageMessage(
-                    imageData,
-                    "sent"
+            localStream
+                .getTracks()
+                .forEach(
+                    track => track.stop()
                 );
 
+        }
 
-                /*
-                 * Send through PeerJS.
-                 *
-                 * This is intended for testing.
-                 * Large images should eventually
-                 * use Firebase Storage.
-                 */
+        if (peer) {
 
-                if (currentConnection) {
-
-                    currentConnection.send({
-
-                        type: "image",
-
-                        data: imageData
-
-                    });
-
-                }
-
-
-                imageInput.value = "";
-
-            };
-
-
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* =========================================================
-   ATTACHMENT MENU
-========================================================= */
-
-attachBtn.addEventListener(
-    "click",
-    () => {
-
-        emojiPanel.classList.remove(
-            "show"
-        );
-
-        attachmentMenu.classList.toggle(
-            "show"
-        );
-
-    }
-);
-
-
-/* =========================================================
-   EMOJI
-========================================================= */
-
-emojiBtn.addEventListener(
-    "click",
-    () => {
-
-        attachmentMenu.classList.remove(
-            "show"
-        );
-
-        emojiPanel.classList.toggle(
-            "show"
-        );
-
-    }
-);
-
-
-emojiPanel
-    .querySelectorAll("button")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                insertEmoji(
-                    button.textContent
-                );
-
-            }
-        );
-
-    });
-
-
-function insertEmoji(emoji) {
-
-    const start =
-        messageInput.selectionStart;
-
-    const end =
-        messageInput.selectionEnd;
-
-    const text =
-        messageInput.value;
-
-
-    messageInput.value =
-        text.substring(
-            0,
-            start
-        ) +
-        emoji +
-        text.substring(
-            end
-        );
-
-
-    messageInput.focus();
-
-
-    messageInput.selectionStart =
-        start + emoji.length;
-
-    messageInput.selectionEnd =
-        start + emoji.length;
-
-
-    autoResizeTextarea();
-
-}
-
-
-/* =========================================================
-   SEND BUTTON
-========================================================= */
-
-sendBtn.addEventListener(
-    "click",
-    sendMessage
-);
-
-
-/* =========================================================
-   ENTER TO SEND
-========================================================= */
-
-messageInput.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Enter" &&
-            !event.shiftKey
-        ) {
-
-            event.preventDefault();
-
-            sendMessage();
+            peer.destroy();
 
         }
 
     }
 );
-
-
-/* =========================================================
-   AUTO RESIZE TEXTAREA
-========================================================= */
-
-function autoResizeTextarea() {
-
-    messageInput.style.height =
-        "auto";
-
-
-    const height =
-        Math.min(
-            messageInput.scrollHeight,
-            130
-        );
-
-
-    messageInput.style.height =
-        `${height}px`;
-
-}
-
-
-messageInput.addEventListener(
-    "input",
-    autoResizeTextarea
-);
-
-
-/* =========================================================
-   KEYBOARD FIX
-   The composer follows the visual viewport.
-========================================================= */
-
-function handleKeyboard() {
-
-    if (!window.visualViewport) return;
-
-
-    const viewport =
-        window.visualViewport;
-
-
-    function update() {
-
-        const keyboardHeight =
-            Math.max(
-                0,
-                window.innerHeight -
-                viewport.height -
-                viewport.offsetTop
-            );
-
-
-        /*
-         * Move the composer upward
-         * with the keyboard.
-         */
-
-        const composer =
-            document.getElementById(
-                "composer"
-            );
-
-
-        if (composer) {
-
-            composer.style.transform =
-                keyboardHeight > 0
-                    ? `translateY(-${keyboardHeight}px)`
-                    : "translateY(0)";
-
-        }
-
-
-        /*
-         * Keep newest message visible.
-         */
-
-        if (
-            document.activeElement ===
-            messageInput
-        ) {
-
-            requestAnimationFrame(
-                scrollToBottom
-            );
-
-        }
-
-    }
-
-
-    viewport.addEventListener(
-        "resize",
-        update
-    );
-
-
-    viewport.addEventListener(
-        "scroll",
-        update
-    );
-
-
-    update();
-
-}
-
-
-handleKeyboard();
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
-
-function scrollToBottom() {
-
-    requestAnimationFrame(
-        () => {
-
-            chatMessages.scrollTop =
-                chatMessages.scrollHeight;
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   OPEN CHAT
-========================================================= */
-
-function openChat(peerId) {
-
-    currentPeerId =
-        peerId;
-
-
-    messagesPage.classList.remove(
-        "active"
-    );
-
-    chatPage.classList.add(
-        "active"
-    );
-
-
-    chatName.textContent =
-        "Iqranix Member";
-
-    chatUsername.textContent =
-        `@${peerId.slice(0, 12)}`;
-
-
-    chatAvatar.src =
-        DEFAULT_AVATAR;
-
-
-    if (peerId) {
-
-        connectToPeer(
-            peerId
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   CURRENT CHAT PEER
-========================================================= */
-
-function currentPeerIdForChat() {
-
-    return currentPeerId;
-
-}
-
-
-/* =========================================================
-   BACK
-========================================================= */
-
-backChat.addEventListener(
-    "click",
-    () => {
-
-        chatPage.classList.remove(
-            "active"
-        );
-
-        messagesPage.classList.add(
-            "active"
-        );
-
-        if (currentConnection) {
-
-            try {
-
-                currentConnection.close();
-
-            } catch {}
-
-        }
-
-        currentConnection =
-            null;
-
-    }
-);
-
-
-/* =========================================================
-   NEW CHAT MODAL
-========================================================= */
-
-function openNewChatModal() {
-
-    newChatModal.classList.add(
-        "show"
-    );
-
-}
-
-
-function closeNewChatModal() {
-
-    newChatModal.classList.remove(
-        "show"
-    );
-
-}
-
-
-newChatBtn.addEventListener(
-    "click",
-    openNewChatModal
-);
-
-
-startChatBtn.addEventListener(
-    "click",
-    openNewChatModal
-);
-
-
-closeModal.addEventListener(
-    "click",
-    closeNewChatModal
-);
-
-
-connectPeerBtn.addEventListener(
-    "click",
-    () => {
-
-        const id =
-            peerIdInput.value.trim();
-
-
-        if (!id) {
-
-            alert(
-                "Enter the other person's Peer ID."
-            );
-
-            return;
-
-        }
-
-
-        closeNewChatModal();
-
-        openChat(id);
-
-    }
-);
-
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        clearSearch.style.display =
-            searchInput.value
-                ? "block"
-                : "none";
-
-    }
-);
-
-
-clearSearch.addEventListener(
-    "click",
-    () => {
-
-        searchInput.value = "";
-
-        clearSearch.style.display =
-            "none";
-
-        searchInput.focus();
-
-    }
-);
-
-
-/* =========================================================
-   CALL BUTTONS
-========================================================= */
-
-audioCallBtn.addEventListener(
-    "click",
-    startAudioCall
-);
-
-
-videoCallBtn.addEventListener(
-    "click",
-    startVideoCall
-);
-
-
-/* =========================================================
-   START
-========================================================= */
-
-initializePeer();
-
-
-/* =========================================================
-   DISPLAY YOUR PEER ID
-========================================================= */
-
-setTimeout(() => {
-
-    if (currentPeerId) {
-
-        addSystemMessage(
-            `Your calling ID: ${currentPeerId}`
-        );
-
-    }
-
-}, 3000);
