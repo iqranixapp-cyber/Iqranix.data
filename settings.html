@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0B6E4F"
+    >
+
+    <meta
+        name="description"
+        content="Iqranix Settings — Customize your Islamic companion."
+    >
+
+    <title>Settings • Iqranix</title>
+
+    <!-- Fonts -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Settings CSS -->
+
+    <link
+        rel="stylesheet"
+        href="settings.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="settings-app">
+
+
+    <!-- ==========================================
+         TOP NAVIGATION
+    =========================================== -->
+
+    <header class="settings-header">
+
+        <a
+            href="index.html"
+            class="back-button"
+            aria-label="Back to home"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+
+        <div class="header-title">
+
+            <span>PERSONALISE</span>
+
+            <h1>Settings</h1>
+
+        </div>
+
+
+        <div class="header-symbol">
+            <i class="fa-solid fa-sliders"></i>
+        </div>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         PROFILE / ACCOUNT HERO
+    =========================================== -->
+
+    <section class="account-hero">
+
+        <div class="account-glow"></div>
+
+        <div class="account-avatar">
+            <i class="fa-solid fa-user"></i>
+        </div>
+
+
+        <div class="account-information">
+
+            <span>
+                YOUR IQRANIX EXPERIENCE
+            </span>
+
+            <h2>
+                Make Iqranix yours.
+            </h2>
+
+            <p>
+                Personalise your worship tools,
+                Quran experience, notifications and
+                preferences.
+            </p>
+
+        </div>
+
+
+        <a
+            href="profile.html"
+            class="profile-arrow"
+            aria-label="Open profile"
+        >
+            <i class="fa-solid fa-chevron-right"></i>
+        </a>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         APPEARANCE
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon appearance">
+                <i class="fa-solid fa-palette"></i>
+            </div>
+
+            <div>
+                <span>PERSONALISATION</span>
+                <h2>Appearance</h2>
+            </div>
+
+        </div>
+
+
+        <div class="settings-list">
+
+
+            <!-- DARK MODE -->
+
+            <div class="setting-row">
+
+                <div class="row-icon">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <div class="row-content">
+
+                    <strong>
+                        Dark Mode
+                    </strong>
+
+                    <span>
+                        Use the comfortable dark Iqranix theme.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="darkMode"
+                        checked
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- FONT SIZE -->
+
+            <div class="setting-row stacked">
+
+                <div class="row-top">
+
+                    <div class="row-icon">
+                        <i class="fa-solid fa-text-height"></i>
+                    </div>
+
+                    <div class="row-content">
+
+                        <strong>
+                            Quran Font Size
+                        </strong>
+
+                        <span>
+                            Choose the reading size that feels
+                            comfortable for you.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <select id="fontSize">
+
+                    <option value="small">
+                        Small
+                    </option>
+
+                    <option value="medium" selected>
+                        Medium
+                    </option>
+
+                    <option value="large">
+                        Large
+                    </option>
+
+                    <option value="extra-large">
+                        Extra Large
+                    </option>
+
+                </select>
+
+
+                <small id="fontSizeStatus">
+                    Current size: Medium
+                </small>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         QURAN
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon quran">
+                <i class="fa-solid fa-book-quran"></i>
+            </div>
+
+            <div>
+                <span>HOLY QURAN</span>
+                <h2>Quran Experience</h2>
+            </div>
+
+        </div>
+
+
+        <div class="settings-list">
+
+
+            <div class="setting-row stacked">
+
+                <div class="row-top">
+
+                    <div class="row-icon">
+                        <i class="fa-solid fa-microphone"></i>
+                    </div>
+
+                    <div class="row-content">
+
+                        <strong>
+                            Default Reciter
+                        </strong>
+
+                        <span>
+                            Choose your preferred Quran reciter.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <select id="defaultReciter">
+
+                    <option value="Mishary Alafasy">
+                        Mishary Alafasy
+                    </option>
+
+                    <option value="Abdul Basit">
+                        Abdul Basit
+                    </option>
+
+                    <option value="Maher Al Muaiqly">
+                        Maher Al Muaiqly
+                    </option>
+
+                    <option value="Yasser Al Dosari">
+                        Yasser Al Dosari
+                    </option>
+
+                    <option value="Saad Al Ghamdi">
+                        Saad Al Ghamdi
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TRANSLATION -->
+
+            <div class="setting-row">
+
+                <div class="row-icon">
+                    <i class="fa-solid fa-language"></i>
+                </div>
+
+                <div class="row-content">
+
+                    <strong>
+                        Show Translation
+                    </strong>
+
+                    <span>
+                        Display translation automatically while reading.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="translationDefault"
+                        checked
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- AUTOPLAY -->
+
+            <div class="setting-row">
+
+                <div class="row-icon">
+                    <i class="fa-solid fa-forward-step"></i>
+                </div>
+
+                <div class="row-content">
+
+                    <strong>
+                        Auto Play Next Surah
+                    </strong>
+
+                    <span>
+                        Continue recitation automatically.
+                    </span>
+
+                </div>
+
+
+                <label class="toggle">
+
+                    <input
+                        type="checkbox"
+                        id="autoPlay"
+                    >
+
+                    <span></span>
+
+                </label>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         PRAYER
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon prayer">
+                <i class="fa-solid fa-kaaba"></i>
+            </div>
+
+            <div>
+                <span>SALAH</span>
+                <h2>Prayer Settings</h2>
+            </div>
+
+        </div>
+
+
+        <div class="navigation-list">
+
+
+            <a href="location-permission.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <strong>Location Permission</strong>
+                    <span>Use your location for prayer times.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="qibla-calibration.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-compass"></i>
+                </div>
+
+                <div>
+                    <strong>Qibla Calibration</strong>
+                    <span>Improve compass accuracy.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="calculation-method.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <div>
+                    <strong>Calculation Method</strong>
+                    <span>Choose your prayer calculation method.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="madhhab.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-mosque"></i>
+                </div>
+
+                <div>
+                    <strong>Madhhab</strong>
+                    <span>Configure Asr calculation preferences.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="prayer-adjustments.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+                    <strong>Prayer Time Adjustments</strong>
+                    <span>Fine-tune individual prayer times.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="notifications.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+                    <strong>Adhan & Notifications</strong>
+                    <span>Manage prayer reminders.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="adhan-volume.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-volume-high"></i>
+                </div>
+
+                <div>
+                    <strong>Adhan Volume</strong>
+                    <span>Adjust Adhan volume preferences.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="vibration-settings.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                </div>
+
+                <div>
+                    <strong>Vibration Settings</strong>
+                    <span>Configure vibration behaviour.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="high-latitude.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+
+                <div>
+                    <strong>High Latitude Method</strong>
+                    <span>Configure high-latitude prayer calculations.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="prayer-preferences.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-sliders"></i>
+                </div>
+
+                <div>
+                    <strong>Prayer Preferences</strong>
+                    <span>Manage your prayer experience.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         NOTIFICATIONS
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon notification">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+
+            <div>
+                <span>STAY CONNECTED</span>
+                <h2>Notifications</h2>
+            </div>
+
+        </div>
+
+
+        <a
+            href="notifications.html"
+            class="feature-link"
+        >
+
+            <div class="feature-link-icon">
+                <i class="fa-solid fa-bell"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    Notification Centre
+                </strong>
+
+                <span>
+                    Prayer alerts, reminders and other Iqranix notifications.
+                </span>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         INFORMATION
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon information">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+
+            <div>
+                <span>IQRANIX</span>
+                <h2>Information & Support</h2>
+            </div>
+
+        </div>
+
+
+        <div class="navigation-list">
+
+
+            <a href="about.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-mosque"></i>
+                </div>
+
+                <div>
+                    <strong>About Iqranix</strong>
+                    <span>Our mission, vision and story.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="privacy.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+                    <strong>Privacy Policy</strong>
+                    <span>How we approach privacy and data.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="terms.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-file-contract"></i>
+                </div>
+
+                <div>
+                    <strong>Terms & Conditions</strong>
+                    <span>The rules governing use of Iqranix.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="disclaimer.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+                    <strong>Disclaimer</strong>
+                    <span>Important information about our content.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="faq.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+
+                <div>
+                    <strong>Frequently Asked Questions</strong>
+                    <span>Find answers to common questions.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+
+            <a href="contact.html">
+
+                <div class="nav-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <div>
+                    <strong>Contact Support</strong>
+                    <span>Get in touch with the Iqranix team.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         MORE
+    =========================================== -->
+
+    <section class="settings-section">
+
+        <div class="section-heading">
+
+            <div class="section-icon more">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+
+            <div>
+                <span>MORE</span>
+                <h2>Iqranix</h2>
+            </div>
+
+        </div>
+
+
+        <div class="action-list">
+
+
+            <button
+                type="button"
+                id="shareApp"
+            >
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </div>
+
+                <div>
+                    <strong>Share Iqranix</strong>
+                    <span>Invite someone to benefit.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+
+            <button
+                type="button"
+                id="checkUpdates"
+            >
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-rotate"></i>
+                </div>
+
+                <div>
+                    <strong>Check for Updates</strong>
+                    <span>Check whether a newer version is available.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+
+            <button
+                type="button"
+                id="resetSettings"
+                class="danger-action"
+            >
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                </div>
+
+                <div>
+                    <strong>Reset Settings</strong>
+                    <span>Restore your Iqranix preferences to default.</span>
+                </div>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         VERSION / FOOTER
+    =========================================== -->
+
+    <footer class="settings-footer">
+
+        <div class="footer-logo">
+
+            <div class="footer-logo-mark">
+                <i class="fa-solid fa-moon"></i>
+            </div>
+
+            <strong>
+                IQRANIX
+            </strong>
+
+        </div>
+
+
+        <p>
+            Faith • Knowledge • Excellence
+        </p>
+
+
+        <span>
+            Version <strong id="appVersion">1.0.0</strong>
+        </span>
+
+
+        <small>
+            © 2026 Iqranix. All Rights Reserved.
+        </small>
+
+    </footer>
+
+
+</div>
+
+
+<!-- Toast -->
+
+<div
+    id="iqranix-toast"
+    class="toast"
+></div>
+
+
+<script src="settings.js"></script>
+
+</body>
+
+</html>
