@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#07130f">
+
+    <meta name="description"
+          content="IQRANIX Discover — Explore Islamic history, scholars, hadith, sacred places, civilizations and knowledge.">
+
+    <title>IQRANIX • Discover</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="discover.css">
+</head>
+
+<body>
+
+<div class="discover-app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+
+        <button class="circle-button" id="backBtn" aria-label="Back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="brand">
+            <div class="brand-mark">﷽</div>
+
+            <div>
+                <strong>IQRA<span>NIX</span></strong>
+                <small>DISCOVER</small>
+            </div>
+        </div>
+
+        <button class="circle-button" id="searchBtn" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </header>
+
+
+    <!-- SEARCH -->
+    <section class="search-panel" id="searchSection">
+
+        <div class="search-input-wrap">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Search Islamic knowledge..."
+                autocomplete="off"
+            >
+
+            <button id="clearSearch" aria-label="Clear search">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-image"></div>
+        <div class="hero-shade"></div>
+        <div class="hero-glow"></div>
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                <span></span>
+                KNOWLEDGE • HERITAGE • DISCOVERY
+            </div>
+
+            <h1>
+                Discover the
+                <em>legacy</em>
+                of Islam.
+            </h1>
+
+            <p>
+                Journey through centuries of knowledge,
+                remarkable people, sacred places and
+                civilizations that shaped the Muslim world.
+            </p>
+
+            <button class="gold-button" id="heroExplore">
+                <span>Begin exploring</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </div>
+
+        <div class="hero-seal">
+            <span>﷽</span>
+        </div>
+
+        <div class="hero-bottom">
+            <span>SCROLL TO EXPLORE</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+
+    </section>
+
+
+    <!-- INTRO -->
+    <section class="intro">
+
+        <div class="eyebrow dark">
+            THE WORLD OF ISLAM
+        </div>
+
+        <h2>
+            Learn.
+            <span>Reflect.</span>
+            Discover.
+        </h2>
+
+        <p>
+            A carefully curated journey through Islamic
+            history, scholarship, heritage and knowledge.
+        </p>
+
+    </section>
+
+
+    <!-- FEATURED -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <div>
+                <span>FEATURED</span>
+                <h2>Stories that shaped history</h2>
+            </div>
+
+            <div class="section-number">01</div>
+
+        </div>
+
+
+        <div class="featured-grid">
+
+            <article
+                class="feature-card history-card"
+                data-page="history.html"
+                data-keywords="history islamic history caliphate rashidun umayyad abbasid ottoman dynasties wars events"
+            >
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="feature-content">
+
+                    <span class="card-tag">HERITAGE</span>
+
+                    <h3>Islamic<br>History</h3>
+
+                    <p>
+                        Explore the people, dynasties,
+                        events and turning points that
+                        shaped Islamic history.
+                    </p>
+
+                    <div class="card-link">
+                        Explore history
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+
+                </div>
+
+                <div class="number-badge">01</div>
+
+            </article>
+
+
+            <article
+                class="feature-card scholars-card"
+                data-page="scholars.html"
+                data-keywords="scholars ibn sina al khwarizmi al biruni ibn battuta scientists doctors mathematicians"
+            >
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="feature-content">
+
+                    <span class="card-tag">MINDS OF ISLAM</span>
+
+                    <h3>Muslim<br>Scholars</h3>
+
+                    <p>
+                        Meet thinkers, scientists,
+                        physicians, mathematicians
+                        and historians.
+                    </p>
+
+                    <div class="card-link">
+                        Meet the scholars
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+
+                </div>
+
+                <div class="number-badge">02</div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- DISCOVER -->
+    <section class="section" id="discoverCards">
+
+        <div class="section-title">
+
+            <div>
+                <span>DISCOVER</span>
+                <h2>Choose your journey</h2>
+            </div>
+
+            <div class="section-number">02</div>
+
+        </div>
+
+
+        <div class="discover-grid">
+
+
+            <article class="discover-card mosque-card"
+                     data-page="mosques.html"
+                     data-keywords="mosque masjid nearby gps location prayer jamaah">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-mosque"></i>
+                    </div>
+
+                    <span>NEAR YOU</span>
+                    <h3>Nearby Mosques</h3>
+                    <p>Find mosques and masjids around you.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card hadith-card"
+                     data-page="hadith.html"
+                     data-keywords="hadith nabawi qudsi prophet sunnah sayings bukhari muslim">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-scroll"></i>
+                    </div>
+
+                    <span>PROPHETIC GUIDANCE</span>
+                    <h3>Hadith</h3>
+                    <p>Reflect upon prophetic guidance.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card names-card"
+                     data-page="islamic-names.html"
+                     data-keywords="islamic names muslim names boys girls baby names arabic meanings">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-feather-pointed"></i>
+                    </div>
+
+                    <span>MEANINGS & ORIGINS</span>
+                    <h3>Islamic Names</h3>
+                    <p>Beautiful names and their meanings.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card civilizations-card"
+                     data-page="civilizations.html"
+                     data-keywords="civilizations andalusia abbasid ottoman mali fatimid mamluk persia africa">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+
+                    <span>ACROSS THE WORLD</span>
+                    <h3>Islamic Civilizations</h3>
+                    <p>From Andalusia to Africa and beyond.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card sacred-card"
+                     data-page="sacred-places.html"
+                     data-keywords="kaaba makkah madinah al aqsa jerusalem sacred places islamic heritage">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-kaaba"></i>
+                    </div>
+
+                    <span>SACRED HERITAGE</span>
+                    <h3>Sacred Places</h3>
+                    <p>Places deeply connected to Islamic history.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card books-card"
+                     data-page="islamic-books.html"
+                     data-keywords="islamic books classical literature authors scholars fiqh tafsir philosophy">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+                    <span>CLASSICAL KNOWLEDGE</span>
+                    <h3>Islamic Books</h3>
+                    <p>Influential books and intellectual works.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card calendar-card"
+                     data-page="islamic-calendar.html"
+                     data-keywords="hijri calendar islamic months ramadan muharram shawwal dhul hijjah">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+
+                    <span>TIME & TRADITION</span>
+                    <h3>Islamic Calendar</h3>
+                    <p>Explore Hijri months and occasions.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card knowledge-card"
+                     data-page="islamic-knowledge.html"
+                     data-keywords="islamic knowledge facts science inventions mathematics medicine astronomy learning">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+
+                    <span>LEARN</span>
+                    <h3>Islamic Knowledge</h3>
+                    <p>Facts, inventions, lessons and ideas.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card ringtones-card"
+                     data-page="ringtones.html"
+                     data-keywords="islamic ringtones ringtone phone sounds notification audio">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+
+                    <span>LISTEN & PERSONALIZE</span>
+                    <h3>Islamic Ringtones</h3>
+                    <p>Beautiful sounds for your phone.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+
+            <article class="discover-card nasheeds-card"
+                     data-page="nasheeds.html"
+                     data-keywords="nasheeds nasheed islamic audio spiritual vocals muslim uplifting">
+
+                <div class="card-image"></div>
+                <div class="card-gradient"></div>
+
+                <div class="discover-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-headphones"></i>
+                    </div>
+
+                    <span>ISLAMIC AUDIO</span>
+                    <h3>Nasheeds</h3>
+                    <p>Inspiring and uplifting Islamic audio.</p>
+                </div>
+
+                <div class="round-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- DAILY DISCOVERY -->
+    <section class="daily-card">
+
+        <div class="daily-image"></div>
+        <div class="daily-overlay"></div>
+
+        <div class="daily-decoration">﷽</div>
+
+        <div class="daily-content">
+
+            <span>TODAY'S DISCOVERY</span>
+
+            <h2>
+                One beautiful
+                discovery every day.
+            </h2>
+
+            <p>
+                Learn something meaningful from
+                Islamic history, scholarship,
+                civilization or heritage.
+            </p>
+
+            <button id="dailyDiscoveryBtn" class="gold-button">
+                <span>Discover today</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH RESULTS -->
+    <section class="search-results" id="searchResults" hidden>
+
+        <div class="section-title">
+            <div>
+                <span>SEARCH</span>
+                <h2>Results</h2>
+            </div>
+        </div>
+
+        <div id="searchResultsGrid" class="results-grid"></div>
+
+        <div id="noResults" class="no-results">
+
+            <i class="fa-solid fa-compass"></i>
+
+            <h3>Nothing found</h3>
+
+            <p>Try another Islamic topic.</p>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav">
+
+        <a href="index.html" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="community.html" class="nav-item">
+            <i class="fa-solid fa-users"></i>
+            <span>Community</span>
+        </a>
+
+        <a href="discover.html" class="nav-item active">
+            <div class="nav-orb">
+                <i class="fa-solid fa-compass"></i>
+            </div>
+            <span>Discover</span>
+        </a>
+
+        <a href="quran.html" class="nav-item">
+            <i class="fa-solid fa-book-quran"></i>
+            <span>Quran</span>
+        </a>
+
+        <a href="profile.html" class="nav-item">
+            <i class="fa-regular fa-user"></i>
+            <span>Profile</span>
+        </a>
+
+    </nav>
+
+</div>
+
+<script src="discover.js"></script>
+
+</body>
+</html>
