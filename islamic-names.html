@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="theme-color" content="#0b6e4f">
+
+    <title>Islamic Names • Iqranix</title>
+
+    <link rel="stylesheet" href="islamic-names.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- =========================================
+         HOME
+    ========================================== -->
+
+    <section id="homePage" class="page">
+
+        <header class="top-header">
+
+            <button class="icon-button" id="homeBackButton">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+
+            <div class="header-title">
+                <span class="small-title">IQRANIX</span>
+                <h1>Islamic Names</h1>
+            </div>
+
+            <div class="header-symbol">
+                <i class="fa-solid fa-star-and-crescent"></i>
+            </div>
+
+        </header>
+
+
+        <main class="home-content">
+
+            <div class="hero">
+
+                <div class="hero-icon">
+                    <i class="fa-solid fa-book-quran"></i>
+                </div>
+
+                <h2>Beautiful Islamic Names</h2>
+
+                <p>
+                    Discover meaningful names for boys and girls,
+                    with their beautiful meanings.
+                </p>
+
+            </div>
+
+
+            <div class="section-heading">
+
+                <span>Choose a collection</span>
+
+                <small>
+                    <span id="totalNames">0</span> names
+                </small>
+
+            </div>
+
+
+            <!-- BOYS CARD -->
+
+            <button class="collection-card boys-card"
+                    id="boysCard">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-child"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <span class="card-label">
+                        COLLECTION
+                    </span>
+
+                    <h3>Islamic Boys' Names</h3>
+
+                    <p>
+                        Strong, noble and meaningful names
+                    </p>
+
+                    <strong>
+                        <span id="boysCount">0</span> Names
+                    </strong>
+
+                </div>
+
+                <div class="card-arrow">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+            </button>
+
+
+            <!-- GIRLS CARD -->
+
+            <button class="collection-card girls-card"
+                    id="girlsCard">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-child-dress"></i>
+                </div>
+
+                <div class="card-content">
+
+                    <span class="card-label">
+                        COLLECTION
+                    </span>
+
+                    <h3>Islamic Girls' Names</h3>
+
+                    <p>
+                        Elegant, beautiful and meaningful names
+                    </p>
+
+                    <strong>
+                        <span id="girlsCount">0</span> Names
+                    </strong>
+
+                </div>
+
+                <div class="card-arrow">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+
+            </button>
+
+
+            <div class="quote-card">
+
+                <i class="fa-solid fa-quote-left"></i>
+
+                <p>
+                    "And He taught Adam the names of all things."
+                </p>
+
+                <span>
+                    Qur'an 2:31
+                </span>
+
+            </div>
+
+        </main>
+
+    </section>
+
+
+
+    <!-- =========================================
+         COLLECTION PAGE
+    ========================================== -->
+
+    <section id="collectionPage" class="page hidden">
+
+        <header class="collection-header">
+
+            <button class="icon-button"
+                    id="backButton">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+            </button>
+
+            <div class="collection-heading">
+
+                <span id="collectionType">
+                    BOYS
+                </span>
+
+                <h1 id="collectionTitle">
+                    Islamic Boys' Names
+                </h1>
+
+            </div>
+
+            <button class="icon-button"
+                    id="printTopButton">
+
+                <i class="fa-solid fa-print"></i>
+
+            </button>
+
+        </header>
+
+
+        <main class="collection-content">
+
+
+            <!-- COLLECTION HERO -->
+
+            <div class="collection-hero"
+                 id="collectionHero">
+
+                <div class="collection-hero-icon"
+                     id="collectionIcon">
+
+                    <i class="fa-solid fa-child"></i>
+
+                </div>
+
+                <div>
+
+                    <span id="collectionSubtitle">
+                        BEAUTIFUL NAMES
+                    </span>
+
+                    <h2 id="collectionNumber">
+                        0 Names
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-wrapper">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search name or meaning..."
+                    autocomplete="off"
+                >
+
+                <button id="clearButton"
+                        class="clear-button hidden">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- RESULTS -->
+
+            <div class="results-bar">
+
+                <span>
+                    Showing
+                    <strong id="resultCount">0</strong>
+                    names
+                </span>
+
+                <span id="collectionCount">
+                    0 names
+                </span>
+
+            </div>
+
+
+            <!-- NAMES -->
+
+            <div id="namesList"
+                 class="names-list">
+            </div>
+
+
+            <!-- EMPTY -->
+
+            <div id="emptyState"
+                 class="empty-state hidden">
+
+                <div>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+
+                <h3>No names found</h3>
+
+                <p>
+                    Try searching for another name or meaning.
+                </p>
+
+            </div>
+
+
+            <!-- PRINT -->
+
+            <button class="print-button"
+                    id="printButton">
+
+                <i class="fa-solid fa-print"></i>
+
+                <span>Print Names</span>
+
+            </button>
+
+
+            <div class="bottom-note">
+
+                <i class="fa-solid fa-moon"></i>
+
+                <span>
+                    May Allah bless every beautiful name
+                    and the person who carries it.
+                </span>
+
+            </div>
+
+        </main>
+
+    </section>
+
+</div>
+
+
+<script src="islamic-names.js"></script>
+
+</body>
+</html>
