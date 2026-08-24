@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#06130F"
+    >
+
+    <meta
+        name="description"
+        content="Sign in to Iqranix — Your Complete Islamic Companion"
+    >
+
+    <title>Sign In • Iqranix</title>
+
+    <link
+        rel="icon"
+        href="logo.png"
+    >
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Login CSS -->
+
+    <link
+        rel="stylesheet"
+        href="login.css"
+    >
+
+</head>
+
+
+<body>
+
+<main class="login-page">
+
+    <!-- Background decoration -->
+
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+
+    <!-- MAIN AUTH CARD -->
+
+    <section class="login-card">
+
+
+        <!-- =================================================
+             LOGIN SIDE
+        ================================================== -->
+
+        <div class="login-side">
+
+            <div class="login-content">
+
+
+                <!-- BRAND -->
+
+                <div class="brand">
+
+                    <div class="logo-wrapper">
+
+                        <img
+                            src="logo.png"
+                            alt="Iqranix"
+                            class="logo"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="brand-mini">
+                            IQRANIX
+                        </span>
+
+                        <h1>
+                            Welcome back.
+                        </h1>
+
+                        <p>
+                            Continue your journey with Iqranix.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    id="google-login"
+                    class="google-button"
+                    type="button"
+                >
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Continue with Google
+                    </span>
+
+                </button>
+
+
+                <!-- DIVIDER -->
+
+                <div class="divider">
+
+                    <span>OR CONTINUE WITH EMAIL</span>
+
+                </div>
+
+
+                <!-- LOGIN FORM -->
+
+                <form
+                    id="login-form"
+                    novalidate
+                >
+
+
+                    <div class="field">
+
+                        <label for="email">
+                            Email address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-regular fa-envelope"></i>
+
+                            <input
+                                id="email"
+                                type="email"
+                                autocomplete="email"
+                                placeholder="you@example.com"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                id="password"
+                                type="password"
+                                autocomplete="current-password"
+                                placeholder="Enter your password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="password-row">
+
+                        <span class="secure-note">
+
+                            <i class="fa-solid fa-shield-halved"></i>
+
+                            Secure sign in
+
+                        </span>
+
+
+                        <button
+                            id="forgot-password"
+                            class="forgot-button"
+                            type="button"
+                        >
+                            Forgot password?
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        id="login-btn"
+                        class="primary-button"
+                        type="submit"
+                    >
+
+                        <span>
+                            Sign In
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- CREATE ACCOUNT -->
+
+                <div class="signup-row">
+
+                    <span>
+                        New to Iqranix?
+                    </span>
+
+                    <button
+                        id="signup-btn"
+                        class="signup-button"
+                        type="button"
+                    >
+                        Create an account
+                    </button>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div
+                    id="message"
+                    class="message"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- FOOTER -->
+
+                <p class="footer-text">
+
+                    By continuing, you agree to use
+                    Iqranix responsibly.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             WELCOME SIDE
+        ================================================== -->
+
+        <aside class="welcome-side">
+
+
+            <!-- Decorative glow -->
+
+            <div class="welcome-glow"></div>
+
+
+            <!-- Islamic pattern -->
+
+            <div class="pattern pattern-one"></div>
+            <div class="pattern pattern-two"></div>
+
+
+            <!-- Crescent -->
+
+            <div class="crescent">
+
+                <div class="crescent-cut"></div>
+
+            </div>
+
+
+            <!-- Welcome content -->
+
+            <div class="welcome-content">
+
+                <span class="welcome-label">
+                    YOUR ISLAMIC COMPANION
+                </span>
+
+
+                <h2>
+
+                    Grow your
+                    <em>iman.</em>
+
+                </h2>
+
+
+                <p>
+                    Qur'an, prayer, dhikr, knowledge,
+                    community and more — all in one
+                    beautiful place.
+                </p>
+
+
+                <div class="welcome-line"></div>
+
+
+                <div class="welcome-quote">
+
+                    <i class="fa-solid fa-star-and-crescent"></i>
+
+                    <span>
+                        Learn • Reflect • Grow
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Bottom brand -->
+
+            <div class="welcome-bottom">
+
+                <div class="mini-mark">
+                    I
+                </div>
+
+                <span>
+                    Iqranix
+                </span>
+
+            </div>
+
+
+        </aside>
+
+
+    </section>
+
+
+    <!-- Small page branding -->
+
+    <div class="page-brand">
+
+        <span class="status-dot"></span>
+
+        IQRANIX
+
+        <span class="page-brand-separator">•</span>
+
+        Your Complete Islamic Companion
+
+    </div>
+
+
+</main>
+
+
+<!-- Firebase / Login -->
+
+<script
+    type="module"
+    src="login.js"
+></script>
+
+</body>
+
+</html>

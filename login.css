@@ -1,0 +1,1449 @@
+/* ============================================================
+   IQRANIX — PREMIUM AUTHENTICATION DESIGN
+============================================================ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --green: #0B6E4F;
+    --green-dark: #064532;
+    --green-deep: #03291f;
+
+    --cream: #f7f4eb;
+    --cream-dark: #eae5d8;
+
+    --text: #18231e;
+    --muted: #7c837d;
+
+    --gold: #c9a75d;
+}
+
+
+/* ============================================================
+   BODY
+============================================================ */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 12% 15%,
+            rgba(11,110,79,.20),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 88% 85%,
+            rgba(8,82,59,.25),
+            transparent 30%
+        ),
+        #06120e;
+
+    overflow-x: hidden;
+}
+
+
+/* ============================================================
+   PAGE
+============================================================ */
+
+.login-page {
+
+    position: relative;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 45px 22px;
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   BACKGROUND ORBS
+============================================================ */
+
+.background-orb {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(2px);
+
+    opacity: .7;
+}
+
+.orb-one {
+
+    width: 420px;
+    height: 420px;
+
+    top: -260px;
+    left: -180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(11,110,79,.22),
+            transparent 70%
+        );
+}
+
+.orb-two {
+
+    width: 500px;
+    height: 500px;
+
+    right: -280px;
+    bottom: -300px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(7,76,55,.35),
+            transparent 70%
+        );
+}
+
+
+/* ============================================================
+   AUTH CARD
+============================================================ */
+
+.login-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1040px, 100%);
+
+    min-height: 620px;
+
+    display: grid;
+
+    grid-template-columns: 52% 48%;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background: var(--cream);
+
+    box-shadow:
+        0 45px 100px rgba(0,0,0,.48),
+        0 10px 35px rgba(0,0,0,.25);
+
+    animation:
+        card-in .8s cubic-bezier(.16,1,.3,1);
+}
+
+
+/* ============================================================
+   LOGIN SIDE
+============================================================ */
+
+.login-side {
+
+    position: relative;
+
+    z-index: 5;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(255,255,255,.8),
+            transparent 30%
+        ),
+        var(--cream);
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* ============================================================
+   LOGIN CONTENT
+============================================================ */
+
+.login-content {
+
+    width: 100%;
+
+    max-width: 450px;
+
+    padding: 55px 65px;
+}
+
+
+/* ============================================================
+   BRAND
+============================================================ */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 32px;
+}
+
+.logo-wrapper {
+
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 17px;
+
+    background: white;
+
+    box-shadow:
+        0 9px 25px rgba(0,0,0,.09);
+}
+
+.logo {
+
+    width: 45px;
+    height: 45px;
+
+    object-fit: contain;
+}
+
+.brand-mini {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--green);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+}
+
+.brand h1 {
+
+    font-size: 29px;
+
+    line-height: 1.05;
+
+    letter-spacing: -1px;
+
+    color: #18231e;
+}
+
+.brand p {
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 500;
+}
+
+
+/* ============================================================
+   GOOGLE
+============================================================ */
+
+.google-button {
+
+    width: 100%;
+    height: 51px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+
+    border: 1px solid #ddd8cd;
+
+    border-radius: 13px;
+
+    background: rgba(255,255,255,.65);
+
+    color: #28312d;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.google-button:hover {
+
+    transform: translateY(-2px);
+
+    background: white;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+}
+
+.google-button:active {
+
+    transform: scale(.98);
+}
+
+.google-button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+.google-icon {
+
+    width: 25px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    background: white;
+
+    color: #4285F4;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.12);
+}
+
+
+/* ============================================================
+   DIVIDER
+============================================================ */
+
+.divider {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 24px 0;
+}
+
+.divider::before,
+.divider::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #ded9cf;
+}
+
+.divider span {
+
+    color: #aaa69d;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   FORM
+============================================================ */
+
+.field {
+
+    margin-bottom: 15px;
+}
+
+.field label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #58615c;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.input-wrapper {
+
+    position: relative;
+}
+
+.input-wrapper > i {
+
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #8c938d;
+
+    font-size: 13px;
+
+    pointer-events: none;
+}
+
+.input-wrapper input {
+
+    width: 100%;
+
+    height: 51px;
+
+    padding:
+        0 14px
+        0 39px;
+
+    border: 1px solid #ddd9cf;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    background:
+        rgba(255,255,255,.48);
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.input-wrapper input::placeholder {
+
+    color: #aaa69e;
+}
+
+.input-wrapper input:focus {
+
+    border-color: var(--green);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px rgba(11,110,79,.08);
+}
+
+
+/* ============================================================
+   PASSWORD ROW
+============================================================ */
+
+.password-row {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 3px 0 15px;
+}
+
+.secure-note {
+
+    color: #89918b;
+
+    font-size: 9px;
+
+    font-weight: 600;
+}
+
+.secure-note i {
+
+    margin-right: 4px;
+
+    color: var(--green);
+}
+
+.forgot-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #8d7040;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.forgot-button:hover {
+
+    color: var(--green);
+}
+
+.forgot-button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   SIGN IN
+============================================================ */
+
+.primary-button {
+
+    width: 100%;
+
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0B6E4F,
+            #07543d
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(11,110,79,.24);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.primary-button i {
+
+    font-size: 11px;
+
+    transition:
+        transform .2s ease;
+}
+
+.primary-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 32px rgba(11,110,79,.30);
+}
+
+.primary-button:hover i {
+
+    transform: translateX(4px);
+}
+
+.primary-button:active {
+
+    transform: scale(.98);
+}
+
+.primary-button:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ============================================================
+   SIGNUP
+============================================================ */
+
+.signup-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    margin-top: 20px;
+
+    color: #8a8d87;
+
+    font-size: 10px;
+}
+
+.signup-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--green);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.signup-button:hover {
+
+    text-decoration: underline;
+}
+
+.signup-button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+}
+
+
+/* ============================================================
+   MESSAGE
+============================================================ */
+
+.message {
+
+    display: none;
+
+    margin-top: 16px;
+
+    padding: 11px 13px;
+
+    border-radius: 11px;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.message.success {
+
+    display: block;
+
+    color: #07563e;
+
+    background: #e5f4ed;
+
+    border: 1px solid #c9e5d9;
+}
+
+.message.error {
+
+    display: block;
+
+    color: #9e3e3e;
+
+    background: #fff0f0;
+
+    border: 1px solid #efd0d0;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.footer-text {
+
+    margin-top: 20px;
+
+    color: #aaa69e;
+
+    font-size: 8px;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+
+/* ============================================================
+   WELCOME SIDE
+============================================================ */
+
+.welcome-side {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 70% 20%,
+            rgba(55,181,138,.18),
+            transparent 28%
+        ),
+        linear-gradient(
+            145deg,
+            #0d7354,
+            #064b37 65%,
+            #032e22
+        );
+
+    color: white;
+}
+
+
+/* ============================================================
+   ANGLED DIVISION
+============================================================ */
+
+.welcome-side::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -75px;
+    top: -10%;
+
+    width: 150px;
+    height: 120%;
+
+    background: var(--cream);
+
+    transform: skewX(13deg);
+
+    z-index: 3;
+}
+
+
+/* ============================================================
+   GLOW
+============================================================ */
+
+.welcome-glow {
+
+    position: absolute;
+
+    width: 330px;
+    height: 330px;
+
+    top: -90px;
+    right: -70px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.12),
+            transparent 68%
+        );
+
+    filter: blur(5px);
+}
+
+
+/* ============================================================
+   PATTERN
+============================================================ */
+
+.pattern {
+
+    position: absolute;
+
+    width: 250px;
+    height: 250px;
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    transform: rotate(45deg);
+}
+
+.pattern-one {
+
+    right: -100px;
+    bottom: -90px;
+}
+
+.pattern-two {
+
+    right: -50px;
+    bottom: -140px;
+
+    width: 330px;
+    height: 330px;
+}
+
+
+/* ============================================================
+   CRESCENT
+============================================================ */
+
+.crescent {
+
+    position: absolute;
+
+    right: 55px;
+    top: 48px;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,.90);
+
+    box-shadow:
+        0 0 40px rgba(255,255,255,.08);
+
+    animation:
+        float 5s ease-in-out infinite;
+}
+
+.crescent-cut {
+
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    top: -10px;
+    left: 22px;
+
+    border-radius: 50%;
+
+    background: #0b6349;
+}
+
+
+/* ============================================================
+   WELCOME CONTENT
+============================================================ */
+
+.welcome-content {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 70%;
+
+    margin-left: 12%;
+
+    margin-top: 25px;
+}
+
+.welcome-label {
+
+    display: inline-block;
+
+    margin-bottom: 15px;
+
+    color: #d6bd7c;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+.welcome-content h2 {
+
+    max-width: 330px;
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: clamp(36px, 4vw, 54px);
+
+    line-height: 1.02;
+
+    font-weight: 500;
+
+    letter-spacing: -1.5px;
+}
+
+.welcome-content h2 em {
+
+    color: #e2c579;
+
+    font-style: italic;
+}
+
+.welcome-content p {
+
+    max-width: 290px;
+
+    margin-top: 20px;
+
+    color: rgba(255,255,255,.68);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+.welcome-line {
+
+    width: 45px;
+
+    height: 2px;
+
+    margin-top: 25px;
+
+    background: #c9a75d;
+}
+
+.welcome-quote {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 16px;
+
+    color: rgba(255,255,255,.72);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+.welcome-quote i {
+
+    color: #d7b968;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   BOTTOM BRAND
+============================================================ */
+
+.welcome-bottom {
+
+    position: absolute;
+
+    z-index: 5;
+
+    left: 12%;
+
+    bottom: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    color: rgba(255,255,255,.65);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.mini-mark {
+
+    width: 25px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 8px;
+
+    background: rgba(255,255,255,.12);
+
+    color: white;
+
+    font-weight: 800;
+}
+
+
+/* ============================================================
+   PAGE BRAND
+============================================================ */
+
+.page-brand {
+
+    position: absolute;
+
+    z-index: 3;
+
+    bottom: 15px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(255,255,255,.38);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    white-space: nowrap;
+}
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 5px;
+    height: 5px;
+
+    margin-right: 5px;
+
+    border-radius: 50%;
+
+    background: #1db982;
+
+    box-shadow:
+        0 0 8px #1db982;
+}
+
+.page-brand-separator {
+
+    margin: 0 5px;
+
+    color: rgba(255,255,255,.18);
+}
+
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+
+@keyframes card-in {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-9px)
+            rotate(4deg);
+
+    }
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 800px) {
+
+    .login-page {
+
+        padding: 25px 15px 45px;
+    }
+
+    .login-card {
+
+        grid-template-columns: 1fr;
+
+        max-width: 520px;
+
+        min-height: auto;
+    }
+
+    .login-content {
+
+        max-width: none;
+
+        padding: 45px 45px 35px;
+    }
+
+    .welcome-side {
+
+        min-height: 260px;
+    }
+
+    .welcome-side::before {
+
+        display: none;
+    }
+
+    .welcome-content {
+
+        width: 80%;
+
+        margin: 0;
+
+        padding-top: 25px;
+    }
+
+    .welcome-content h2 {
+
+        font-size: 38px;
+    }
+
+    .welcome-bottom {
+
+        left: 10%;
+
+        bottom: 22px;
+    }
+
+    .crescent {
+
+        right: 35px;
+
+        top: 30px;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 520px) {
+
+    .login-page {
+
+        align-items: flex-start;
+
+        padding:
+            max(15px, env(safe-area-inset-top))
+            12px
+            40px;
+    }
+
+    .login-card {
+
+        width: 100%;
+
+        border-radius: 24px;
+    }
+
+    .login-content {
+
+        padding: 32px 23px 28px;
+    }
+
+    .brand {
+
+        gap: 13px;
+
+        margin-bottom: 25px;
+    }
+
+    .logo-wrapper {
+
+        width: 50px;
+        height: 50px;
+
+        border-radius: 15px;
+    }
+
+    .logo {
+
+        width: 39px;
+        height: 39px;
+    }
+
+    .brand h1 {
+
+        font-size: 24px;
+    }
+
+    .brand p {
+
+        font-size: 10px;
+    }
+
+    .google-button {
+
+        height: 50px;
+    }
+
+    .divider {
+
+        margin: 20px 0;
+    }
+
+    .input-wrapper input {
+
+        height: 49px;
+    }
+
+    .password-row {
+
+        margin-bottom: 14px;
+    }
+
+    .secure-note {
+
+        font-size: 8px;
+    }
+
+    .forgot-button {
+
+        font-size: 9px;
+    }
+
+    .signup-row {
+
+        flex-wrap: wrap;
+    }
+
+    .welcome-side {
+
+        min-height: 245px;
+    }
+
+    .welcome-content {
+
+        width: 75%;
+
+        margin-left: -5%;
+    }
+
+    .welcome-content h2 {
+
+        font-size: 34px;
+    }
+
+    .welcome-content p {
+
+        margin-top: 12px;
+
+        font-size: 10px;
+
+        line-height: 1.5;
+    }
+
+    .welcome-label {
+
+        font-size: 7px;
+
+        letter-spacing: 2px;
+    }
+
+    .crescent {
+
+        width: 55px;
+        height: 55px;
+
+        right: 25px;
+        top: 25px;
+    }
+
+    .crescent-cut {
+
+        width: 49px;
+        height: 49px;
+
+        left: 16px;
+        top: -7px;
+
+        background: #07523d;
+    }
+
+    .page-brand {
+
+        display: none;
+    }
+}
+
+
+/* ============================================================
+   SMALL PHONES
+============================================================ */
+
+@media (max-width: 360px) {
+
+    .login-content {
+
+        padding: 28px 18px;
+    }
+
+    .brand h1 {
+
+        font-size: 22px;
+    }
+
+    .brand p {
+
+        font-size: 9px;
+    }
+
+    .welcome-side {
+
+        min-height: 225px;
+    }
+
+    .welcome-content h2 {
+
+        font-size: 30px;
+    }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+============================================================ */
+
+button:focus-visible,
+input:focus-visible {
+
+    outline:
+        3px solid
+        rgba(11,110,79,.22);
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: .01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: .01ms !important;
+    }
+}
