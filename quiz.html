@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0B6E4F"
+    >
+
+    <meta
+        name="description"
+        content="Iqranix Islamic Knowledge Challenge"
+    >
+
+    <title>Islamic Quiz • Iqranix</title>
+
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <link
+        rel="stylesheet"
+        href="quiz.css"
+    >
+
+    <script
+        src="quiz.js"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="quiz-app">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="top-header">
+
+        <button
+            class="header-button"
+            id="backButton"
+            aria-label="Go back"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                <span>إ</span>
+            </div>
+
+            <div>
+                <strong>Iqranix</strong>
+                <small>Islamic Knowledge</small>
+            </div>
+
+        </div>
+
+
+        <button
+            class="header-button"
+            id="historyButton"
+            aria-label="History"
+        >
+            <i class="fa-solid fa-chart-simple"></i>
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HOME
+    ====================================================== -->
+
+    <main
+        class="screen active"
+        id="homeScreen"
+    >
+
+        <section class="hero">
+
+            <div class="hero-glow"></div>
+
+            <div class="crescent">
+
+                <div class="moon"></div>
+
+                <span class="star star-one">✦</span>
+                <span class="star star-two">✦</span>
+                <span class="star star-three">✦</span>
+
+            </div>
+
+
+            <span class="hero-label">
+                IQRANIX CHALLENGE
+            </span>
+
+
+            <h1>
+                Test your
+                <span>Islamic knowledge.</span>
+            </h1>
+
+
+            <p>
+                Three stages. Increasing difficulty.
+                Only those who truly master one stage
+                can move to the next.
+            </p>
+
+
+            <div class="hero-rule">
+
+                <span></span>
+                <i class="fa-solid fa-star-and-crescent"></i>
+                <span></span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STAGE PROGRESSION
+        ================================================== -->
+
+        <section class="progress-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <small>YOUR JOURNEY</small>
+
+                    <h2>
+                        Three stages
+                    </h2>
+
+                </div>
+
+                <div class="unlock-rule">
+                    90% TO ADVANCE
+                </div>
+
+            </div>
+
+
+            <div class="stage-road">
+
+
+                <!-- FOUNDATION -->
+
+                <button
+                    class="stage-card unlocked"
+                    data-stage="foundation"
+                    id="foundationCard"
+                >
+
+                    <div class="stage-number">
+                        01
+                    </div>
+
+
+                    <div class="stage-symbol foundation-symbol">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+
+
+                    <div class="stage-content">
+
+                        <div class="stage-top">
+
+                            <span>
+                                FOUNDATION
+                            </span>
+
+                            <i
+                                class="stage-lock fa-solid fa-lock-open"
+                            ></i>
+
+                        </div>
+
+
+                        <h3>
+                            The Foundation
+                        </h3>
+
+
+                        <p>
+                            Difficult questions that build
+                            serious Islamic knowledge.
+                        </p>
+
+
+                        <div class="stage-meta">
+
+                            <span>
+                                <i class="fa-solid fa-circle-question"></i>
+                                20 Questions
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-bolt"></i>
+                                Difficult
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-chevron-right stage-arrow"></i>
+
+                </button>
+
+
+
+                <div class="road-line">
+                    <span></span>
+                </div>
+
+
+
+                <!-- ADVANCED -->
+
+                <button
+                    class="stage-card locked"
+                    data-stage="advanced"
+                    id="advancedCard"
+                >
+
+                    <div class="stage-number">
+                        02
+                    </div>
+
+
+                    <div class="stage-symbol advanced-symbol">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+
+
+                    <div class="stage-content">
+
+                        <div class="stage-top">
+
+                            <span>
+                                ADVANCED
+                            </span>
+
+                            <i
+                                class="stage-lock fa-solid fa-lock"
+                            ></i>
+
+                        </div>
+
+
+                        <h3>
+                            The Seeker
+                        </h3>
+
+
+                        <p>
+                            Deeper questions requiring
+                            stronger recall and understanding.
+                        </p>
+
+
+                        <div class="stage-meta">
+
+                            <span>
+                                <i class="fa-solid fa-circle-question"></i>
+                                20 Questions
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-fire"></i>
+                                Very Hard
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-lock stage-arrow"></i>
+
+                </button>
+
+
+
+                <div class="road-line">
+                    <span></span>
+                </div>
+
+
+
+                <!-- EXPERT -->
+
+                <button
+                    class="stage-card locked"
+                    data-stage="expert"
+                    id="expertCard"
+                >
+
+                    <div class="stage-number">
+                        03
+                    </div>
+
+
+                    <div class="stage-symbol expert-symbol">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+
+
+                    <div class="stage-content">
+
+                        <div class="stage-top">
+
+                            <span>
+                                EXPERT
+                            </span>
+
+                            <i
+                                class="stage-lock fa-solid fa-lock"
+                            ></i>
+
+                        </div>
+
+
+                        <h3>
+                            The Scholar's Challenge
+                        </h3>
+
+
+                        <p>
+                            Complex questions where small
+                            details matter.
+                        </p>
+
+
+                        <div class="stage-meta">
+
+                            <span>
+                                <i class="fa-solid fa-circle-question"></i>
+                                20 Questions
+                            </span>
+
+                            <span>
+                                <i class="fa-solid fa-skull-crossbones"></i>
+                                Expert
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <i class="fa-solid fa-lock stage-arrow"></i>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             REQUIREMENT
+        ================================================== -->
+
+        <section class="requirement-card">
+
+            <div class="requirement-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+
+                <strong>
+                    No shortcuts
+                </strong>
+
+                <p>
+                    Score at least <b>90%</b> in a stage
+                    to unlock the next one.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <section class="stats-row">
+
+            <div class="stat">
+
+                <strong id="completedCount">
+                    0
+                </strong>
+
+                <span>
+                    Completed
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong id="bestScore">
+                    0%
+                </strong>
+
+                <span>
+                    Best Score
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <strong id="unlockedCount">
+                    1
+                </strong>
+
+                <span>
+                    Stages
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <p class="bismillah">
+            <i class="fa-solid fa-heart"></i>
+            Bismillah — seek knowledge with sincerity.
+        </p>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         QUIZ SCREEN
+    ====================================================== -->
+
+    <main
+        class="screen quiz-screen"
+        id="questionScreen"
+    >
+
+        <div class="quiz-top">
+
+            <button
+                class="quit-button"
+                id="quitButton"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <div class="quiz-stage">
+
+                <small id="quizStageLabel">
+                    FOUNDATION
+                </small>
+
+                <strong id="quizStageTitle">
+                    The Foundation
+                </strong>
+
+            </div>
+
+
+            <div class="score-pill">
+
+                <i class="fa-solid fa-star"></i>
+
+                <span id="liveScore">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-wrap">
+
+            <div class="progress-info">
+
+                <span>
+                    QUESTION
+                    <b id="currentQuestion">
+                        1
+                    </b>
+                    /
+                    <b id="totalQuestions">
+                        20
+                    </b>
+                </span>
+
+                <span id="progressPercent">
+                    0%
+                </span>
+
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div
+                    id="progressBar"
+                    class="progress-fill"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="question-category">
+
+            <i class="fa-solid fa-star-and-crescent"></i>
+
+            <span>
+                ISLAMIC KNOWLEDGE
+            </span>
+
+        </div>
+
+
+        <section class="question-card">
+
+            <div class="question-decoration">
+                <span>۞</span>
+            </div>
+
+
+            <span class="question-label">
+                QUESTION
+            </span>
+
+
+            <h2 id="questionText">
+                Loading...
+            </h2>
+
+
+            <p>
+                Choose the most accurate answer.
+            </p>
+
+        </section>
+
+
+        <section
+            class="answers"
+            id="answersContainer"
+        ></section>
+
+
+        <section
+            class="answer-feedback"
+            id="answerFeedback"
+            hidden
+        >
+
+            <div
+                class="feedback-icon"
+                id="feedbackIcon"
+            >
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+
+            <div>
+
+                <strong id="feedbackTitle">
+                    Correct
+                </strong>
+
+                <p id="feedbackText"></p>
+
+            </div>
+
+        </section>
+
+
+        <button
+            class="next-button"
+            id="nextButton"
+            disabled
+        >
+
+            <span>
+                Check Answer
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RESULTS
+    ====================================================== -->
+
+    <main
+        class="screen"
+        id="resultsScreen"
+    >
+
+        <section class="results-hero">
+
+            <div class="result-symbol" id="resultSymbol">
+                <i class="fa-solid fa-trophy"></i>
+            </div>
+
+            <small id="resultStage">
+                FOUNDATION COMPLETE
+            </small>
+
+            <h1 id="resultHeading">
+                Alhamdulillah!
+            </h1>
+
+            <p id="resultMessage">
+                Your stage is complete.
+            </p>
+
+        </section>
+
+
+        <section class="result-score-card">
+
+            <div class="percentage">
+
+                <strong id="finalPercentage">
+                    0%
+                </strong>
+
+                <span>
+                    SCORE
+                </span>
+
+            </div>
+
+
+            <div class="result-numbers">
+
+                <div>
+
+                    <i class="fa-solid fa-check"></i>
+
+                    <strong id="correctAnswers">
+                        0
+                    </strong>
+
+                    <span>
+                        Correct
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                    <strong id="wrongAnswers">
+                        0
+                    </strong>
+
+                    <span>
+                        Wrong
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section
+            class="unlock-result"
+            id="unlockResult"
+        >
+
+            <div class="unlock-icon">
+                <i class="fa-solid fa-lock-open"></i>
+            </div>
+
+            <div>
+
+                <small>
+                    STAGE UNLOCKED
+                </small>
+
+                <strong id="unlockTitle">
+                    Advanced
+                </strong>
+
+                <p id="unlockDescription">
+                    You may now continue to the next stage.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section
+            class="locked-result"
+            id="lockedResult"
+            hidden
+        >
+
+            <div class="unlock-icon">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <div>
+
+                <small>
+                    STAGE LOCKED
+                </small>
+
+                <strong>
+                    90% Required
+                </strong>
+
+                <p>
+                    You need at least 90% to unlock
+                    the next stage. Try again.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <div class="result-actions">
+
+            <button
+                class="primary-action"
+                id="nextStageButton"
+            >
+
+                <span>
+                    Continue
+                </span>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <button
+                class="secondary-action"
+                id="retryButton"
+            >
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Try Again
+
+            </button>
+
+
+            <button
+                class="secondary-action"
+                id="homeButton"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                Quiz Home
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         HISTORY
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="historyModal"
+        hidden
+    >
+
+        <div
+            class="modal-backdrop"
+            id="historyBackdrop"
+        ></div>
+
+
+        <section class="history-card">
+
+            <button
+                class="close-modal"
+                id="closeHistory"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+
+            <small>
+                YOUR PROGRESS
+            </small>
+
+            <h2>
+                Quiz History
+            </h2>
+
+
+            <div class="history-summary">
+
+                <div>
+
+                    <strong id="historyCompleted">
+                        0
+                    </strong>
+
+                    <span>
+                        Attempts
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong id="historyBest">
+                        0%
+                    </strong>
+
+                    <span>
+                        Best
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="historyList"
+                class="history-list"
+            ></div>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         TOAST
+    ====================================================== -->
+
+    <div
+        class="toast"
+        id="toast"
+    >
+
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span id="toastText">
+            Stage locked.
+        </span>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
