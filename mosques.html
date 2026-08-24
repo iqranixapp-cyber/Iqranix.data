@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0B6E4F"
+    >
+
+    <title>Mosques • Iqranix</title>
+
+    <link
+        rel="stylesheet"
+        href="mosques.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="mosques-page">
+
+    <!-- =====================================================
+         GOOGLE MAP
+    ====================================================== -->
+
+    <div
+        id="map"
+        class="map"
+    ></div>
+
+
+    <!-- =====================================================
+         IQranix BORDER
+    ====================================================== -->
+
+    <div class="iqranix-border"></div>
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="top-bar">
+
+        <button
+            id="backButton"
+            class="icon-button"
+            aria-label="Go back"
+        >
+            ‹
+        </button>
+
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🕌
+            </div>
+
+            <div>
+
+                <h1>Iqranix</h1>
+
+                <p>Nearby Mosques</p>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="locateButton"
+            class="icon-button"
+            aria-label="My location"
+        >
+            ◎
+        </button>
+
+    </header>
+
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
+    <div class="search-panel">
+
+        <div class="search-box">
+
+            <span class="search-symbol">
+                🔎
+            </span>
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Search mosques or places..."
+                autocomplete="off"
+            >
+
+            <button
+                id="clearSearch"
+                class="clear-button hidden"
+                aria-label="Clear search"
+            >
+                ×
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATUS
+    ====================================================== -->
+
+    <div
+        id="statusMessage"
+        class="status-message"
+    >
+        Finding nearby mosques...
+    </div>
+
+
+    <!-- =====================================================
+         PIN MODE MESSAGE
+    ====================================================== -->
+
+    <div
+        id="pinModeMessage"
+        class="pin-mode-message hidden"
+    >
+
+        <div class="pin-mode-icon">
+            📍
+        </div>
+
+        <div class="pin-mode-text">
+
+            <strong>
+                Pin a Mosque
+            </strong>
+
+            <span>
+                Tap anywhere on the map to place the mosque.
+            </span>
+
+        </div>
+
+        <button
+            id="cancelPinButton"
+            class="cancel-pin"
+        >
+            Cancel
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOSQUE INFO CARD
+    ====================================================== -->
+
+    <section
+        id="mosqueInfo"
+        class="mosque-info hidden"
+    >
+
+        <button
+            id="closeInfoButton"
+            class="close-info"
+        >
+            ×
+        </button>
+
+
+        <div class="mosque-info-icon">
+            🕌
+        </div>
+
+
+        <div class="mosque-info-content">
+
+            <span class="info-label">
+                MOSQUE
+            </span>
+
+            <h2 id="infoName">
+                Mosque
+            </h2>
+
+            <p id="infoAddress">
+                Address unavailable
+            </p>
+
+            <p
+                id="infoDistance"
+                class="distance"
+            ></p>
+
+
+            <div class="info-actions">
+
+                <button
+                    id="directionsButton"
+                    class="primary-action"
+                >
+                    Directions
+                </button>
+
+                <button
+                    id="saveMosqueButton"
+                    class="secondary-action"
+                >
+                    Save
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PIN MOSQUE PANEL
+    ====================================================== -->
+
+    <section
+        id="pinPanel"
+        class="pin-panel hidden"
+    >
+
+        <div class="panel-header">
+
+            <div>
+
+                <span class="panel-label">
+                    COMMUNITY MAP
+                </span>
+
+                <h2>
+                    Add a Mosque
+                </h2>
+
+            </div>
+
+            <button
+                id="closePinPanel"
+                class="panel-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <label>
+            Mosque name
+        </label>
+
+        <input
+            id="mosqueNameInput"
+            type="text"
+            placeholder="e.g. Masjid Al-Noor"
+            maxlength="100"
+        >
+
+
+        <label>
+            Description
+        </label>
+
+        <textarea
+            id="mosqueDescriptionInput"
+            placeholder="Optional information about the mosque..."
+            maxlength="300"
+        ></textarea>
+
+
+        <div class="coordinates-box">
+
+            <span>
+                Latitude
+            </span>
+
+            <strong id="pinLatitude">
+                —
+            </strong>
+
+            <span>
+                Longitude
+            </span>
+
+            <strong id="pinLongitude">
+                —
+            </strong>
+
+        </div>
+
+
+        <button
+            id="savePinButton"
+            class="save-pin-button"
+        >
+            Save Mosque Pin
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         BOTTOM CONTROLS
+    ====================================================== -->
+
+    <nav class="bottom-controls">
+
+        <button
+            id="nearbyButton"
+            class="bottom-button active"
+        >
+
+            <span>
+                🕌
+            </span>
+
+            <small>
+                Nearby
+            </small>
+
+        </button>
+
+
+        <button
+            id="myLocationButton"
+            class="bottom-button"
+        >
+
+            <span>
+                ◎
+            </span>
+
+            <small>
+                Location
+            </small>
+
+        </button>
+
+
+        <button
+            id="pinMosqueButton"
+            class="bottom-button pin-button"
+        >
+
+            <span>
+                📍
+            </span>
+
+            <small>
+                Pin Mosque
+            </small>
+
+        </button>
+
+    </nav>
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+        id="loadingOverlay"
+        class="loading-overlay"
+    >
+
+        <div class="loader"></div>
+
+        <strong>
+            Loading Iqranix Maps
+        </strong>
+
+        <span>
+            Connecting to Google Maps...
+        </span>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     GOOGLE MAPS
+     
+     IMPORTANT:
+     Replace YOUR_GOOGLE_MAPS_API_KEY
+     with your actual API key.
+========================================================= -->
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOdt4War2lOiPhexdee6jMCrBYRhRpklY&libraries=places&callback=initMap"
+    async
+    defer
+></script>
+
+
+<script src="mosques.js"></script>
+
+</body>
+
+</html>
