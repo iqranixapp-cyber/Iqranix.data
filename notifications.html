@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#0B6E4F"
+    >
+
+    <meta
+        name="description"
+        content="Manage Iqranix prayer notifications, Adhan and Islamic prayer reminders."
+    >
+
+    <title>Notifications & Adhan — Iqranix</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="notifications.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="notifications-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="notifications-topbar">
+
+        <a
+            href="index.html"
+            class="back-button"
+            aria-label="Back to home"
+        >
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+
+        <div class="page-title">
+
+            <span>IQRANIX</span>
+
+            <h1>
+                Notifications
+            </h1>
+
+        </div>
+
+
+        <div class="top-icon">
+            <i class="fa-regular fa-bell"></i>
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="notification-hero">
+
+        <div class="hero-pattern"></div>
+
+        <div class="hero-icon">
+            <i class="fa-solid fa-bell"></i>
+        </div>
+
+        <div class="hero-content">
+
+            <span class="hero-label">
+                PRAYER REMINDERS
+            </span>
+
+            <h2>
+                Never Miss a Prayer
+            </h2>
+
+            <p>
+                Iqranix can remind you when each prayer begins
+                and display an Islamic reminder connected to it.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         NOTIFICATION PERMISSION
+    ====================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-heading">
+
+            <div class="heading-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+
+                <span class="small-label">
+                    NOTIFICATION ACCESS
+                </span>
+
+                <h2>
+                    Notifications
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="permission-row">
+
+            <div class="permission-info">
+
+                <strong>
+                    Prayer notifications
+                </strong>
+
+                <span id="notification-status">
+                    Checking permission...
+                </span>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="action-button"
+                id="notification-permission-button"
+            >
+                Allow
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRAYER NOTIFICATIONS
+    ====================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-heading">
+
+            <div class="heading-icon green">
+                <i class="fa-solid fa-mosque"></i>
+            </div>
+
+            <div>
+
+                <span class="small-label">
+                    DAILY SALAH
+                </span>
+
+                <h2>
+                    Prayer Notifications
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="master-toggle-row">
+
+            <div>
+
+                <strong>
+                    Prayer-time reminders
+                </strong>
+
+                <span>
+                    Receive a notification when each prayer begins.
+                </span>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="prayer-notifications-toggle"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ADHAN
+    ====================================================== -->
+
+    <section class="settings-card">
+
+        <div class="card-heading">
+
+            <div class="heading-icon gold">
+                <i class="fa-solid fa-volume-high"></i>
+            </div>
+
+            <div>
+
+                <span class="small-label">
+                    AUDIO
+                </span>
+
+                <h2>
+                    Adhan
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="master-toggle-row">
+
+            <div>
+
+                <strong>
+                    Play Adhan at prayer time
+                </strong>
+
+                <span>
+                    Use your selected Adhan when a prayer begins.
+                </span>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="adhan-toggle"
+                    checked
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+
+        <div class="adhan-selector">
+
+            <label for="adhan-select">
+                Adhan Recitation
+            </label>
+
+
+            <div class="select-wrapper">
+
+                <select id="adhan-select">
+
+                    <option value="default">
+                        Default Adhan
+                    </option>
+
+                    <option value="madinah">
+                        Madinah Adhan
+                    </option>
+
+                    <option value="makkah">
+                        Makkah Adhan
+                    </option>
+
+                    <option value="al-aqsa">
+                        Al-Aqsa Adhan
+                    </option>
+
+                    <option value="abdulbasit">
+                        Abdul Basit Adhan
+                    </option>
+
+                    <option value="fajr">
+                        Fajr Adhan
+                    </option>
+
+                </select>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="preview-button"
+                id="preview-adhan"
+            >
+
+                <i class="fa-solid fa-play"></i>
+
+                Preview Adhan
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRAYER REMINDER SETTINGS
+    ====================================================== -->
+
+    <section class="prayer-section">
+
+        <div class="section-title">
+
+            <span class="small-label">
+                PRAYER BY PRAYER
+            </span>
+
+            <h2>
+                Reminder Messages
+            </h2>
+
+            <p>
+                Choose whether Iqranix should show an Islamic
+                reminder when each prayer begins.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             FAJR
+        ================================================== -->
+
+        <article
+            class="prayer-reminder-card"
+            data-prayer="fajr"
+        >
+
+            <div class="prayer-header">
+
+                <div class="prayer-symbol fajr">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+
+
+                <div class="prayer-name">
+
+                    <span>
+                        FAJR
+                    </span>
+
+                    <strong>
+                        فجر
+                    </strong>
+
+                </div>
+
+
+                <label class="switch small-switch">
+
+                    <input
+                        type="checkbox"
+                        class="prayer-toggle"
+                        data-prayer="fajr"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="reminder-content">
+
+                <div
+                    class="arabic-text"
+                    dir="rtl"
+                >
+                    وَقُرْآنَ الْفَجْرِ ۖ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا
+                </div>
+
+
+                <p class="translation">
+                    “And the recitation of dawn. Indeed,
+                    the recitation of dawn is ever witnessed.”
+                </p>
+
+
+                <span class="source">
+                    Qur'an 17:78
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             DHUHR
+        ================================================== -->
+
+        <article
+            class="prayer-reminder-card"
+            data-prayer="dhuhr"
+        >
+
+            <div class="prayer-header">
+
+                <div class="prayer-symbol dhuhr">
+                    <i class="fa-solid fa-sun"></i>
+                </div>
+
+
+                <div class="prayer-name">
+
+                    <span>
+                        DHUHR
+                    </span>
+
+                    <strong>
+                        ظهر
+                    </strong>
+
+                </div>
+
+
+                <label class="switch small-switch">
+
+                    <input
+                        type="checkbox"
+                        class="prayer-toggle"
+                        data-prayer="dhuhr"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="reminder-content">
+
+                <div
+                    class="arabic-text"
+                    dir="rtl"
+                >
+                    أَقِمِ الصَّلَاةَ لِدُلُوكِ الشَّمْسِ إِلَىٰ غَسَقِ اللَّيْلِ
+                </div>
+
+
+                <p class="translation">
+                    “Establish prayer at the decline of the sun
+                    until the darkness of the night.”
+                </p>
+
+
+                <span class="source">
+                    Qur'an 17:78
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ASR
+        ================================================== -->
+
+        <article
+            class="prayer-reminder-card"
+            data-prayer="asr"
+        >
+
+            <div class="prayer-header">
+
+                <div class="prayer-symbol asr">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                </div>
+
+
+                <div class="prayer-name">
+
+                    <span>
+                        ASR
+                    </span>
+
+                    <strong>
+                        عصر
+                    </strong>
+
+                </div>
+
+
+                <label class="switch small-switch">
+
+                    <input
+                        type="checkbox"
+                        class="prayer-toggle"
+                        data-prayer="asr"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="reminder-content">
+
+                <div
+                    class="arabic-text"
+                    dir="rtl"
+                >
+                    حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ
+                </div>
+
+
+                <p class="translation">
+                    “Guard strictly the prayers, especially
+                    the middle prayer, and stand before Allah
+                    devoutly obedient.”
+                </p>
+
+
+                <span class="source">
+                    Qur'an 2:238
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             MAGHRIB
+        ================================================== -->
+
+        <article
+            class="prayer-reminder-card"
+            data-prayer="maghrib"
+        >
+
+            <div class="prayer-header">
+
+                <div class="prayer-symbol maghrib">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                </div>
+
+
+                <div class="prayer-name">
+
+                    <span>
+                        MAGHRIB
+                    </span>
+
+                    <strong>
+                        مغرب
+                    </strong>
+
+                </div>
+
+
+                <label class="switch small-switch">
+
+                    <input
+                        type="checkbox"
+                        class="prayer-toggle"
+                        data-prayer="maghrib"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="reminder-content">
+
+                <div
+                    class="arabic-text"
+                    dir="rtl"
+                >
+                    لَا تَزَالُ أُمَّتِي بِخَيْرٍ مَا عَجَّلُوا الْمَغْرِبَ
+                </div>
+
+
+                <p class="translation">
+                    “My Ummah will continue to be upon good
+                    as long as they hasten the Maghrib prayer.”
+                </p>
+
+
+                <span class="source">
+                    Hadith — Sahih al-Bukhari & Sahih Muslim
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- =================================================
+             ISHA
+        ================================================== -->
+
+        <article
+            class="prayer-reminder-card"
+            data-prayer="isha"
+        >
+
+            <div class="prayer-header">
+
+                <div class="prayer-symbol isha">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+
+                <div class="prayer-name">
+
+                    <span>
+                        ISHA
+                    </span>
+
+                    <strong>
+                        عشاء
+                    </strong>
+
+                </div>
+
+
+                <label class="switch small-switch">
+
+                    <input
+                        type="checkbox"
+                        class="prayer-toggle"
+                        data-prayer="isha"
+                        checked
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <div class="reminder-content">
+
+                <div
+                    class="arabic-text"
+                    dir="rtl"
+                >
+                    لَوْلَا أَنْ أَشُقَّ عَلَى أُمَّتِي لَأَمَرْتُهُمْ أَنْ يُؤَخِّرُوا الْعِشَاءَ إِلَىٰ ثُلُثِ اللَّيْلِ أَوْ نِصْفِهِ
+                </div>
+
+
+                <p class="translation">
+                    “Were it not that it would be difficult
+                    for my Ummah, I would have commanded them
+                    to delay the Isha prayer until a third or
+                    half of the night.”
+                </p>
+
+
+                <span class="source">
+                    Hadith — Sahih al-Bukhari & Sahih Muslim
+                </span>
+
+            </div>
+
+        </article>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         NEXT PRAYER
+    ====================================================== -->
+
+    <section class="next-notification-card">
+
+        <div class="next-icon">
+            <i class="fa-regular fa-clock"></i>
+        </div>
+
+
+        <div>
+
+            <span class="small-label">
+                NEXT REMINDER
+            </span>
+
+            <h2 id="next-prayer-name">
+                Calculating...
+            </h2>
+
+            <p id="next-prayer-time">
+                Waiting for prayer times...
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SCHEDULER STATUS
+    ====================================================== -->
+
+    <section class="scheduler-card">
+
+        <div class="scheduler-icon">
+            <i class="fa-solid fa-calendar-check"></i>
+        </div>
+
+
+        <div class="scheduler-content">
+
+            <span class="small-label">
+                PRAYER SCHEDULER
+            </span>
+
+            <h2>
+                Reminder Schedule
+            </h2>
+
+            <p id="scheduler-status">
+                Your prayer schedule has not been prepared yet.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFORMATION
+    ======================================================

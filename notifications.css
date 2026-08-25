@@ -1,0 +1,1507 @@
+/* =========================================================
+   IQRANIX — NOTIFICATIONS & ADHAN
+   Design: Iqranix Green / Gold
+========================================================= */
+
+:root {
+    --green-dark: #071a14;
+    --green: #0B6E4F;
+    --green-light: #13956c;
+    --green-soft: #e9f6f1;
+
+    --gold: #d6b45c;
+    --gold-light: #e7cf87;
+
+    --white: #ffffff;
+    --page: #f5f8f6;
+
+    --text: #15221d;
+    --muted: #718078;
+
+    --border: rgba(11, 110, 79, 0.10);
+
+    --shadow:
+        0 12px 35px rgba(0, 0, 0, 0.07);
+
+    --radius: 22px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+
+    background: var(--page);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    padding-bottom: 40px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+select {
+    font: inherit;
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+========================================================= */
+
+.notifications-page {
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding-bottom: 40px;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.notifications-topbar {
+
+    min-height: 76px;
+
+    padding:
+        14px 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        44px
+        1fr
+        44px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: var(--white);
+
+    border-bottom:
+        1px solid var(--border);
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+
+/* Back */
+
+.back-button,
+.top-icon {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button {
+
+    background: #f2f6f4;
+
+    color: var(--green);
+
+    transition: .2s ease;
+}
+
+.back-button:hover {
+
+    background: var(--green-soft);
+
+    transform: translateY(-1px);
+}
+
+
+/* Top icon */
+
+.top-icon {
+
+    background: var(--green);
+
+    color: white;
+
+    justify-self: end;
+}
+
+
+/* Page title */
+
+.page-title {
+
+    text-align: center;
+}
+
+.page-title span {
+
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    color: var(--green);
+}
+
+.page-title h1 {
+
+    margin-top: 2px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 20px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.notification-hero {
+
+    margin: 18px;
+
+    padding: 30px 25px;
+
+    min-height: 190px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            120deg,
+            var(--green-dark),
+            var(--green)
+        );
+
+    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(7, 26, 20, .16);
+}
+
+
+/* Decorative circles */
+
+.hero-pattern {
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    right: -100px;
+    top: -120px;
+
+    background:
+        rgba(255,255,255,.055);
+
+    box-shadow:
+        -80px 110px 0
+        rgba(255,255,255,.025);
+}
+
+
+/* Hero icon */
+
+.hero-icon {
+
+    width: 68px;
+    height: 68px;
+
+    flex-shrink: 0;
+
+    border-radius: 21px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255,255,255,.10);
+
+    color: var(--gold-light);
+
+    font-size: 27px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+/* Hero content */
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 580px;
+}
+
+.hero-label {
+
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color:
+        rgba(255,255,255,.68);
+}
+
+.hero-content h2 {
+
+    margin-top: 7px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size:
+        clamp(25px, 5vw, 35px);
+
+    line-height: 1.15;
+}
+
+.hero-content p {
+
+    margin-top: 10px;
+
+    max-width: 520px;
+
+    color:
+        rgba(255,255,255,.73);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SETTINGS CARD
+========================================================= */
+
+.settings-card {
+
+    margin: 20px 18px;
+
+    padding: 22px;
+
+    background: var(--white);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    border:
+        1px solid var(--border);
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.card-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 20px;
+}
+
+.heading-icon {
+
+    width: 46px;
+    height: 46px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #edf3f0;
+
+    color: var(--green);
+
+    flex-shrink: 0;
+}
+
+.heading-icon.green {
+
+    background:
+        var(--green-soft);
+
+    color: var(--green);
+}
+
+.heading-icon.gold {
+
+    background:
+        #fff5dc;
+
+    color:
+        #b78b2f;
+}
+
+
+/* Heading text */
+
+.small-label {
+
+    display: block;
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+
+    color: var(--muted);
+}
+
+.card-heading h2 {
+
+    margin-top: 4px;
+
+    font-size: 18px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   PERMISSION
+========================================================= */
+
+.permission-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-top: 16px;
+
+    border-top:
+        1px solid #edf1ef;
+}
+
+.permission-info {
+
+    min-width: 0;
+}
+
+.permission-info strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+.permission-info span {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ACTION BUTTON
+========================================================= */
+
+.action-button {
+
+    border: 0;
+
+    border-radius: 12px;
+
+    padding: 10px 15px;
+
+    background: var(--green);
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: .2s ease;
+}
+
+.action-button:hover {
+
+    background: var(--green-light);
+
+    transform: translateY(-1px);
+}
+
+.action-button:disabled {
+
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   MASTER TOGGLE
+========================================================= */
+
+.master-toggle-row {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-top: 17px;
+
+    border-top:
+        1px solid #edf1ef;
+}
+
+.master-toggle-row > div:first-child {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+.master-toggle-row strong {
+
+    display: block;
+
+    font-size: 13px;
+}
+
+.master-toggle-row span:not(.slider) {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.switch {
+
+    position: relative;
+
+    display: inline-block;
+
+    width: 48px;
+
+    height: 27px;
+
+    flex-shrink: 0;
+}
+
+.switch input {
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    cursor: pointer;
+
+    background: #dce4e0;
+
+    border-radius: 999px;
+
+    transition: .25s ease;
+}
+
+.slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 21px;
+    height: 21px;
+
+    left: 3px;
+    top: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 2px 5px
+        rgba(0,0,0,.16);
+
+    transition: .25s ease;
+}
+
+.switch input:checked + .slider {
+
+    background: var(--green);
+}
+
+.switch input:checked + .slider::before {
+
+    transform:
+        translateX(21px);
+}
+
+
+/* =========================================================
+   ADHAN SELECTOR
+========================================================= */
+
+.adhan-selector {
+
+    margin-top: 20px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #edf1ef;
+}
+
+.adhan-selector > label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    color: var(--text);
+}
+
+
+/* Select */
+
+.select-wrapper {
+
+    position: relative;
+}
+
+.select-wrapper select {
+
+    width: 100%;
+
+    appearance: none;
+
+    border: 1px solid #dfe8e4;
+
+    border-radius: 13px;
+
+    padding: 13px 42px 13px 14px;
+
+    background: #f8faf9;
+
+    color: var(--text);
+
+    outline: none;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+.select-wrapper select:focus {
+
+    border-color: var(--green);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(11,110,79,.08);
+}
+
+.select-wrapper > i {
+
+    position: absolute;
+
+    right: 15px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    pointer-events: none;
+
+    color: var(--green);
+
+    font-size: 11px;
+}
+
+
+/* Preview */
+
+.preview-button {
+
+    margin-top: 11px;
+
+    border: 1px solid
+        rgba(11,110,79,.15);
+
+    background:
+        var(--green-soft);
+
+    color: var(--green);
+
+    padding: 10px 14px;
+
+    border-radius: 12px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.preview-button:hover {
+
+    background: #dff1e9;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PRAYER SECTION
+========================================================= */
+
+.prayer-section {
+
+    margin: 28px 18px;
+}
+
+.section-title {
+
+    margin-bottom: 15px;
+}
+
+.section-title h2 {
+
+    margin-top: 5px;
+
+    font-size: 21px;
+}
+
+.section-title p {
+
+    margin-top: 6px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.65;
+
+    max-width: 600px;
+}
+
+
+/* =========================================================
+   PRAYER REMINDER CARD
+========================================================= */
+
+.prayer-reminder-card {
+
+    margin-bottom: 14px;
+
+    background: white;
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--border);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.prayer-reminder-card:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 15px 38px
+        rgba(0,0,0,.09);
+}
+
+
+/* Prayer header */
+
+.prayer-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 17px 18px;
+
+    border-bottom:
+        1px solid #edf1ef;
+}
+
+.prayer-symbol {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    font-size: 17px;
+}
+
+
+/* Prayer colors */
+
+.prayer-symbol.fajr {
+
+    background: #fff3d9;
+
+    color: #b98523;
+}
+
+.prayer-symbol.dhuhr {
+
+    background: #eaf5ef;
+
+    color: var(--green);
+}
+
+.prayer-symbol.asr {
+
+    background: #eaf2ff;
+
+    color: #5075b7;
+}
+
+.prayer-symbol.maghrib {
+
+    background: #fff0e5;
+
+    color: #d76b35;
+}
+
+.prayer-symbol.isha {
+
+    background: #eeeaff;
+
+    color: #6655a5;
+}
+
+
+/* Prayer name */
+
+.prayer-name {
+
+    flex: 1;
+}
+
+.prayer-name span {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.prayer-name strong {
+
+    display: block;
+
+    margin-top: 2px;
+
+    font-family:
+        "Playfair Display",
+        serif;
+
+    font-size: 18px;
+}
+
+
+/* Small switch */
+
+.small-switch {
+
+    width: 43px;
+
+    height: 24px;
+}
+
+.small-switch .slider::before {
+
+    width: 18px;
+    height: 18px;
+
+    top: 3px;
+    left: 3px;
+}
+
+.small-switch input:checked + .slider::before {
+
+    transform:
+        translateX(19px);
+}
+
+
+/* =========================================================
+   REMINDER CONTENT
+========================================================= */
+
+.reminder-content {
+
+    padding: 20px;
+}
+
+.arabic-text {
+
+    font-family:
+        "Amiri",
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(20px, 4vw, 27px);
+
+    line-height: 2;
+
+    color: var(--green-dark);
+
+    text-align: right;
+
+    direction: rtl;
+}
+
+.translation {
+
+    margin-top: 13px;
+
+    color: #53615a;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+.source {
+
+    display: inline-block;
+
+    margin-top: 11px;
+
+    padding: 5px 9px;
+
+    border-radius: 8px;
+
+    background: var(--green-soft);
+
+    color: var(--green);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   NEXT NOTIFICATION
+========================================================= */
+
+.next-notification-card,
+.scheduler-card {
+
+    margin: 20px 18px;
+
+    padding: 20px;
+
+    border-radius: var(--radius);
+
+    background: white;
+
+    box-shadow: var(--shadow);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border:
+        1px solid var(--border);
+}
+
+
+/* Next icon */
+
+.next-icon,
+.scheduler-icon {
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--green-soft);
+
+    color: var(--green);
+
+    font-size: 19px;
+}
+
+
+/* Next text */
+
+.next-notification-card h2,
+.scheduler-card h2 {
+
+    margin-top: 4px;
+
+    font-size: 17px;
+}
+
+.next-notification-card p,
+.scheduler-card p {
+
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SCHEDULER
+========================================================= */
+
+.scheduler-card {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4faf7,
+            #ffffff
+        );
+}
+
+.scheduler-content {
+
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
+
+.info-box {
+
+    margin: 20px 18px;
+
+    padding: 16px;
+
+    border-radius: 16px;
+
+    background: #edf6f2;
+
+    border:
+        1px solid
+        rgba(11,110,79,.09);
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+}
+
+.info-box > i {
+
+    color: var(--green);
+
+    margin-top: 2px;
+}
+
+.info-box p {
+
+    color: #52645b;
+
+    font-size: 10px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+.save-container {
+
+    margin: 25px 18px 10px;
+}
+
+.save-button {
+
+    width: 100%;
+
+    border: 0;
+
+    padding: 15px 18px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--green),
+            var(--green-light)
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px
+        rgba(11,110,79,.18);
+
+    transition: .2s ease;
+}
+
+.save-button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(11,110,79,.22);
+}
+
+.save-button:active {
+
+    transform: scale(.99);
+}
+
+
+/* =========================================================
+   DISABLED STATES
+========================================================= */
+
+.settings-card.disabled,
+.prayer-reminder-card.disabled {
+
+    opacity: .55;
+}
+
+.adhan-selector.disabled {
+
+    opacity: .5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   STATUS STATES
+========================================================= */
+
+.status-success {
+
+    color: var(--green) !important;
+
+    font-weight: 700;
+}
+
+.status-warning {
+
+    color: #b37a20 !important;
+
+    font-weight: 700;
+}
+
+.status-error {
+
+    color: #c34e4e !important;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SAVE FEEDBACK
+========================================================= */
+
+.save-button.saved {
+
+    background:
+        linear-gradient(
+            135deg,
+            #08734f,
+            #0b8d63
+        );
+}
+
+.save-button.saved i {
+
+    margin-right: 4px;
+}
+
+
+/* =========================================================
+   DESKTOP
+========================================================= */
+
+@media (min-width: 700px) {
+
+    .notifications-page {
+
+        padding-bottom: 60px;
+    }
+
+    .notification-hero {
+
+        min-height: 215px;
+
+        padding: 38px;
+    }
+
+    .settings-card {
+
+        padding: 25px;
+    }
+
+    .prayer-reminder-card {
+
+        margin-bottom: 17px;
+    }
+
+    .reminder-content {
+
+        padding: 23px 25px;
+    }
+
+    .arabic-text {
+
+        font-size: 28px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .notifications-topbar {
+
+        padding:
+            12px 15px;
+    }
+
+    .notification-hero {
+
+        margin: 14px;
+
+        padding: 25px 20px;
+
+        align-items: flex-start;
+
+        min-height: 210px;
+    }
+
+    .hero-icon {
+
+        width: 54px;
+        height: 54px;
+
+        border-radius: 16px;
+
+        font-size: 21px;
+    }
+
+    .hero-content h2 {
+
+        font-size: 25px;
+    }
+
+    .hero-content p {
+
+        font-size: 11px;
+    }
+
+    .settings-card {
+
+        margin:
+            16px 14px;
+
+        padding: 18px;
+    }
+
+    .permission-row {
+
+        align-items: flex-start;
+    }
+
+    .master-toggle-row {
+
+        align-items: flex-start;
+    }
+
+    .prayer-section {
+
+        margin:
+            24px 14px;
+    }
+
+    .next-notification-card,
+    .scheduler-card,
+    .info-box {
+
+        margin:
+            16px 14px;
+    }
+
+    .save-container {
+
+        margin:
+            22px 14px 10px;
+    }
+
+    .prayer-header {
+
+        padding:
+            15px;
+    }
+
+    .reminder-content {
+
+        padding:
+            17px;
+    }
+
+    .arabic-text {
+
+        font-size: 21px;
+
+        line-height: 2.05;
+    }
+
+    .translation {
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .page-title h1 {
+
+        font-size: 18px;
+    }
+
+    .notification-hero {
+
+        gap: 13px;
+    }
+
+    .hero-icon {
+
+        width: 48px;
+        height: 48px;
+    }
+
+    .hero-content h2 {
+
+        font-size: 22px;
+    }
+
+    .hero-content p {
+
+        font-size: 10px;
+    }
+
+    .card-heading h2 {
+
+        font-size: 16px;
+    }
+
+    .permission-row {
+
+        flex-direction: column;
+    }
+
+    .action-button {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        scroll-behavior: auto !important;
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+}
